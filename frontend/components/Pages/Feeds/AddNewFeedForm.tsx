@@ -60,10 +60,11 @@ const AddNewFeedForm = () => {
       <Box p={4} shadow="lg" rounded="lg">
         <Stack spacing={4}>
           <FormControl isRequired>
-            <FormLabel htmlFor="body">What's on your mind?</FormLabel>
+            <FormLabel htmlFor="body">Add organisation</FormLabel>
             <Textarea
               id="body"
               value={body}
+              placeholder="Name"
               onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
                 setBody(e.currentTarget.value)
               }
@@ -77,7 +78,7 @@ const AddNewFeedForm = () => {
               isLoading={insertFeedFetching}
               isDisabled={!body.trim()}
             >
-              Post
+              Add
             </Button>
           </FormControl>
         </Stack>

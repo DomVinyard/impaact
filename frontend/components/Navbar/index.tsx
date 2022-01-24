@@ -23,7 +23,7 @@ const Navbar: NextComponentType = () => {
   const linksForAllUsers = [
     {
       id: "home",
-      label: "Home",
+      label: "PPS",
       href: "/",
     },
   ];
@@ -83,17 +83,6 @@ const Navbar: NextComponentType = () => {
     );
   };
 
-  const themeToggleButtonNode = () => {
-    return (
-      <IconButton
-        aria-label="Toggle theme"
-        fontSize="20px"
-        icon={colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
-        onClick={handleToggleTheme}
-      />
-    );
-  };
-
   return (
     <Box>
       <Box p={4} shadow="lg" pos="relative">
@@ -130,7 +119,6 @@ const Navbar: NextComponentType = () => {
             </Box>
             <Box>
               <Stack isInline spacing={4} align="center">
-                {themeToggleButtonNode()}
                 {signInButtonNode()}
                 {signOutButtonNode()}
               </Stack>

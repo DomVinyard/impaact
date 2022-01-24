@@ -28,7 +28,7 @@ const IndexPageComponent: FC<IProps> = ({ statusCode }) => {
         alignItems="center"
       >
         <Stack spacing={4} maxW="xl" mx="auto">
-          <Heading textAlign="center">Nextjs Hasura Boilerplate</Heading>
+          <Heading textAlign="center">PPS</Heading>
           <Text fontSize="xl" lineHeight="tall" textAlign="center">
             {statusCode
               ? `An error ${statusCode} occurred on server`

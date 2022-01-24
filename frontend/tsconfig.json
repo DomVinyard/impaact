@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -15,15 +19,36 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "*": ["/*"],
-      "components/*": ["components/*"],
-      "lib/*": ["lib/*"],
-      "pages/*": ["pages/*"],
-      "types/*": ["types/*"],
-      "configs/*": ["configs/*"],
-      "generated-graphql": ["generated/graphql"]
-    }
+      "*": [
+        "/*"
+      ],
+      "components/*": [
+        "components/*"
+      ],
+      "lib/*": [
+        "lib/*"
+      ],
+      "pages/*": [
+        "pages/*"
+      ],
+      "types/*": [
+        "types/*"
+      ],
+      "configs/*": [
+        "configs/*"
+      ],
+      "generated-graphql": [
+        "generated/graphql"
+      ]
+    },
+    "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
