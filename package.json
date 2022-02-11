@@ -1,8 +1,8 @@
 {
-  "name": "nextjs-hasura-boilerplate-frontend",
-  "description": "Boilerplate for building applications using Hasura and Next.js",
+  "name": "impaact",
+  "description": "Impact Review",
   "license": "MIT",
-  "author": "Nirmalya Ghosh <nirmalya.email@gmail.com>",
+  "author": "Dom Vinyard <i@dom.vin>",
   "scripts": {
     "bootstrap": "node scripts/generate-keys.ts && yarn install && cd frontend && yarn install",
     "dev": "docker-compose up -d",
