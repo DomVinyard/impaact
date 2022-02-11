@@ -1,3 +1,11 @@
+## [0.4.3](https://github.com/DomVinyard/impaact/compare/0.4.2...0.4.3) (2022-02-11)
+
+
+### Bug Fixes
+
+* fixes bootstrap script ([4c6c7b1](https://github.com/DomVinyard/impaact/commit/4c6c7b1a0566eeed2ff4d59811d67f8ac6b77da9))
+* fixes component design ([901603c](https://github.com/DomVinyard/impaact/commit/901603cc28546ce6be54701c6eab7e1ecd38ad9f))
+
 ## [0.4.2](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.4.1...0.4.2) (2021-07-19)
 
 ## [0.4.1](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.4.0...0.4.1) (2021-07-16)
