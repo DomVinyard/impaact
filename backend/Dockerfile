@@ -1,3 +1,4 @@
+FROM --platform=linux/amd64 node:10-alpine
 FROM fedormelexin/graphql-engine-arm64:v2.0.1.cli-migrations-v3
 
 # Copy migrations directory

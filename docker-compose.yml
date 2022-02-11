@@ -6,7 +6,7 @@ services:
     image: nhb-backend
     build:
       context: ./backend
-    platform: linux/x86_64
+    platform: linux/arm64
     depends_on:
       db:
         condition: service_healthy
