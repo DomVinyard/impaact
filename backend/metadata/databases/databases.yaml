@@ -2,7 +2,7 @@
   kind: postgres
   configuration:
     connection_info:
-      database_url: postgresql://user:password@db:5432/database
+      database_url: ${PG_DATABASE_URL}
       isolation_level: read-committed
       pool_settings:
         connection_lifetime: 600
