@@ -1,4 +1,4 @@
-subscription fetchFeedsSubscription {
+query fetchFeeds {
   feeds(order_by: { created_at: desc }) {
     id
     created_at

@@ -2,12 +2,12 @@ import { Box, Stack } from "@chakra-ui/react";
 import Loader from "components/Loader";
 import AddNewFeedForm from "components/Pages/Feeds/AddNewFeedForm";
 import Feed from "components/Pages/Feeds/Feed";
-import { useFetchFeedsSubscription } from "generated-graphql";
+import { useFetchFeedsQuery } from "generated-graphql";
 import React from "react";
 import IFeed from "types/feed";
 
 const FeedsPageComponent = () => {
-  const { data } = useFetchFeedsSubscription();
+  const { data } = useFetchFeedsQuery();
 
   if (!data) {
     return <Loader />;

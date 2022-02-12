@@ -1,3 +1,3 @@
-- vercel
-- hasura cloud
+- vercel (www.impact.ooo)
+- hasura cloud (api.impact.ooo)
 - elephant sql
