@@ -1,4 +1,4 @@
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -6,7 +6,17 @@ import {
   Link as _Link,
   Stack,
   useColorMode,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Image,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
 } from "@chakra-ui/react";
+import styled from "@emotion/styled";
 import { NextComponentType } from "next";
 import { signIn, signOut, useSession } from "next-auth/client";
 import Link from "next/link";
@@ -15,6 +25,7 @@ import React from "react";
 const Navbar: NextComponentType = () => {
   const [session] = useSession();
   const { colorMode, toggleColorMode } = useColorMode();
+  console.log({ session });
 
   const handleToggleTheme = () => {
     toggleColorMode();
@@ -31,12 +42,12 @@ const Navbar: NextComponentType = () => {
   const linksForAuthenticatedUsers = [
     {
       id: "feeds",
-      label: "Feeds",
+      label: "My Organisations",
       href: "/feeds",
     },
     {
       id: "myAccount",
-      label: "My Account",
+      label: "Settings",
       href: "/my-account",
     },
   ];
@@ -105,22 +116,42 @@ const Navbar: NextComponentType = () => {
                     </Box>
                   );
                 })}
-                {session &&
-                  linksForAuthenticatedUsers.map((link) => {
-                    return (
-                      <Box key={link.id}>
-                        <Link href={link.href}>
-                          <_Link>{link.label}</_Link>
-                        </Link>
-                      </Box>
-                    );
-                  })}
               </Stack>
             </Box>
             <Box>
               <Stack isInline spacing={4} align="center">
                 {signInButtonNode()}
-                {signOutButtonNode()}
+                <Menu>
+                  {session && (
+                    <MenuButton
+                      background={"none"}
+                      as={Button}
+                      rightIcon={
+                        <ChevronDownIcon transform={"translateX(-6px)"} />
+                      }
+                    >
+                      <Avatar src={session.user.image} alt="avatar" />
+                    </MenuButton>
+                  )}
+                  <MenuList>
+                    {linksForAuthenticatedUsers.map((link) => (
+                      <MenuItem as="a" key={link.id} href={link.href}>
+                        {link.label}
+                      </MenuItem>
+                    ))}
+                    <MenuDivider />
+                    <MenuItem
+                      as="a"
+                      href="/api/auth/signout"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        signOut();
+                      }}
+                    >
+                      Logout
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
               </Stack>
             </Box>
           </Stack>
@@ -129,5 +160,10 @@ const Navbar: NextComponentType = () => {
     </Box>
   );
 };
+
+const Avatar = styled(Image)`
+  height: 32px;
+  border-radius: 100%;
+`;
 
 export default Navbar;

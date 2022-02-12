@@ -1847,7 +1847,22 @@ export type InsertFeedMutationVariables = Exact<{
 
 export type InsertFeedMutation = {
   __typename?: "mutation_root";
-  insert_feeds_one?: { __typename?: "feeds"; id: any } | undefined;
+  insert_feeds_one?:
+    | {
+        __typename?: "feeds";
+        id: any;
+        created_at: string;
+        body: string;
+        author?:
+          | {
+              __typename?: "users";
+              id: any;
+              name?: string | undefined;
+              image?: string | undefined;
+            }
+          | undefined;
+      }
+    | undefined;
 };
 
 export type UpdateUserMutationVariables = Exact<{
@@ -1926,6 +1941,13 @@ export const InsertFeedDocument = gql`
   mutation insertFeed($author_id: uuid!, $body: String) {
     insert_feeds_one(object: { author_id: $author_id, body: $body }) {
       id
+      created_at
+      body
+      author {
+        id
+        name
+        image
+      }
     }
   }
 `;

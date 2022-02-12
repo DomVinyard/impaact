@@ -18,10 +18,8 @@ import React, { ChangeEvent, useState } from "react";
 const AddNewFeedForm = () => {
   const [body, setBody] = useState("");
   const [session] = useSession();
-  const [
-    insertFeed,
-    { loading: insertFeedFetching, error: insertFeedError },
-  ] = useInsertFeedMutation();
+  const [insertFeed, { loading: insertFeedFetching, error: insertFeedError }] =
+    useInsertFeedMutation();
 
   if (!session) {
     return (
@@ -38,6 +36,7 @@ const AddNewFeedForm = () => {
     });
 
     setBody("");
+    window.location.reload();
   };
 
   const errorNode = () => {
@@ -60,7 +59,7 @@ const AddNewFeedForm = () => {
       <Box p={4} shadow="lg" rounded="lg">
         <Stack spacing={4}>
           <FormControl isRequired>
-            <FormLabel htmlFor="body">Add organisation</FormLabel>
+            <FormLabel htmlFor="body">Add feed</FormLabel>
             <Textarea
               id="body"
               value={body}
