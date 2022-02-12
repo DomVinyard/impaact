@@ -18,7 +18,7 @@ const IndexPage: NextPage<IProps> = ({ session }) => {
   return (
     <>
       <Head>
-        <title>Index Page</title>
+        <title>Impact</title>
       </Head>
       <Page />
     </>

@@ -42,7 +42,7 @@ const Navbar: NextComponentType = () => {
   const linksForAuthenticatedUsers = [
     {
       id: "feeds",
-      label: "My Organisations",
+      label: "Your Organisations",
       href: "/feeds",
     },
     {
@@ -56,7 +56,6 @@ const Navbar: NextComponentType = () => {
     if (session) {
       return false;
     }
-
     return (
       <Box>
         <Link href="/api/auth/signin">
@@ -73,30 +72,9 @@ const Navbar: NextComponentType = () => {
     );
   };
 
-  const signOutButtonNode = () => {
-    if (!session) {
-      return false;
-    }
-
-    return (
-      <Box>
-        <Link href="/api/auth/signout">
-          <Button
-            onClick={(e) => {
-              e.preventDefault();
-              signOut();
-            }}
-          >
-            Sign Out
-          </Button>
-        </Link>
-      </Box>
-    );
-  };
-
   return (
     <Box>
-      <Box p={4} shadow="lg" pos="relative">
+      <Box p={1} shadow="sm" pos="relative" background={"#222"}>
         <Box maxW="xl" mx="auto" w="full">
           <Stack
             isInline
@@ -106,16 +84,15 @@ const Navbar: NextComponentType = () => {
             w="full"
           >
             <Box>
-              <Stack isInline spacing={4} align="center" fontWeight="semibold">
-                {linksForAllUsers.map((link) => {
-                  return (
-                    <Box key={link.id}>
-                      <Link href={link.href}>
-                        <_Link>{link.label}</_Link>
-                      </Link>
-                    </Box>
-                  );
-                })}
+              <Stack
+                as="a"
+                isInline
+                spacing={4}
+                align="center"
+                fontWeight="semibold"
+                href={"/"}
+              >
+                <Image src="images/logo.png" alt="PPS" height={6} />
               </Stack>
             </Box>
             <Box>
@@ -126,8 +103,14 @@ const Navbar: NextComponentType = () => {
                     <MenuButton
                       background={"none"}
                       as={Button}
+                      pr={"8px"}
+                      _hover={{ bg: "#555" }}
+                      _active={{ bg: "#555" }}
                       rightIcon={
-                        <ChevronDownIcon transform={"translateX(-6px)"} />
+                        <ChevronDownIcon
+                          transform={"translateX(-6px)"}
+                          color="#fff"
+                        />
                       }
                     >
                       <Avatar src={session.user.image} alt="avatar" />
