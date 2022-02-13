@@ -3,11 +3,13 @@ import {
   Box,
   Button,
   Flex,
+  Heading,
   Input,
   InputGroup,
   InputLeftElement,
   Stack,
 } from "@chakra-ui/react";
+import Content from "components/Layout/Content";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
 import React from "react";
@@ -32,7 +34,7 @@ export const SearchBar = ({ value, onChange, onSubmit, mini }) => {
         color={"white"}
         backgroundColor={mini ? "#333" : "auto"}
         _hover={{ backgroundColor: mini ? "#555" : "none" }}
-        placeholder={mini ? "Search" : "Search charities, foundations, orgs"}
+        placeholder={mini ? "Search" : "Search charity or organisation"}
         autoFocus={!mini}
         maxWidth={440}
         value={value}
@@ -62,68 +64,88 @@ const IndexPageComponent = () => {
   >();
 
   return (
-    <Stack style={{ background: "#040d21" }}>
-      <Box width="100%" position={"absolute"} zIndex={1}>
-        <Box
-          p={3}
-          mx={2}
-          pt={{ base: 12, md: 12, lg: 20 }}
-          maxWidth={1200}
-          m="0 auto"
-          color={"#fff"}
-          fontSize={{ base: "38px", md: "42px", lg: "60px" }}
-          fontFamily={"Montserrat"}
-          fontWeight={700}
-        >
-          <Stack lineHeight={"1"}>
-            <Box>The power of</Box>
-            <Box>positive change</Box>
-            <Box pt={5}>
-              <SearchBar
-                value={query}
-                onChange={(e) => {
-                  const pressAt = new Date();
-                  const newQuery = e.target.value;
-                  newQuery.length > query.length &&
-                    setLatestKeypress(new Date());
-                  setQuery(e.target.value);
-                }}
-                onSubmit={() => {
-                  const cachedQuery = query;
-                  setQuery("");
-                  location.assign("/search?q=" + cachedQuery);
-                }}
-              />
-            </Box>
-          </Stack>
+    <>
+      <Stack style={{ background: "#040d21" }}>
+        <Box width="100%" position={"absolute"} zIndex={1}>
+          <Box
+            p={3}
+            mx={2}
+            pt={{ base: 12, md: 12, lg: 20 }}
+            maxWidth={1200}
+            m="0 auto"
+            color={"#fff"}
+            fontSize={{ base: "38px", md: "42px", lg: "60px" }}
+            fontFamily={"Montserrat"}
+            fontWeight={700}
+          >
+            <Stack lineHeight={"1"}>
+              <Box>The power of</Box>
+              <Box>positive change</Box>
+              <Box pt={5}>
+                <SearchBar
+                  value={query}
+                  onChange={(e) => {
+                    const pressAt = new Date();
+                    const newQuery = e.target.value;
+                    newQuery.length > query.length &&
+                      setLatestKeypress(new Date());
+                    setQuery(e.target.value);
+                  }}
+                  onSubmit={() => {
+                    const cachedQuery = query;
+                    setQuery("");
+                    location.assign("/search?q=" + cachedQuery);
+                  }}
+                />
+              </Box>
+            </Stack>
+          </Box>
         </Box>
-      </Box>
-      <img
-        src="https://github.githubassets.com/images/modules/site/home/hero-glow.svg"
-        alt="Glowing universe"
-        style={{ position: "absolute" }}
-      ></img>
-      <Flex display={{ base: "none", md: "block" }}>
-        <Canvas
-          style={{ height: "80vh", width: "100%" }}
-          colorManagement
-          camera={{ position: [0, 0, 5] }}
+        <img
+          src="https://github.githubassets.com/images/modules/site/home/hero-glow.svg"
+          alt="Glowing universe"
+          style={{ position: "absolute" }}
+        ></img>
+        <>
+          <Flex display={{ base: "none", md: "block" }}>
+            <Canvas
+              style={{ height: "80vh", width: "100%" }}
+              colorManagement
+              camera={{ position: [0, 0, 5] }}
+            >
+              <Lights />
+              <Model latestKeypress={latestKeypress} />
+            </Canvas>
+          </Flex>
+          <Flex display={{ base: "block", md: "none" }}>
+            <Canvas
+              style={{ height: "80vh", width: "100%" }}
+              colorManagement
+              camera={{ position: [0, 1, 5] }}
+            >
+              <Lights />
+              <Model latestKeypress={latestKeypress} />
+            </Canvas>
+          </Flex>
+        </>
+      </Stack>
+      <Content>
+        <Heading mt={20} size={"xl"} color={"#64a3cb"}>
+          FEATURED
+        </Heading>
+
+        <Flex
+          fontSize={{ base: "1.5rem", md: "1.75rem", lg: "2rem" }}
+          fontFamily={"Montserrat"}
+          fontWeight={600}
+          opacity={0.4}
+          mt={4}
+          mb={400}
         >
-          <Lights />
-          <Model latestKeypress={latestKeypress} />
-        </Canvas>
-      </Flex>
-      <Flex display={{ base: "block", md: "none" }}>
-        <Canvas
-          style={{ height: "80vh", width: "100%" }}
-          colorManagement
-          camera={{ position: [0, 1, 5] }}
-        >
-          <Lights />
-          <Model latestKeypress={latestKeypress} />
-        </Canvas>
-      </Flex>
-    </Stack>
+          No featured organisations
+        </Flex>
+      </Content>
+    </>
   );
 };
 
