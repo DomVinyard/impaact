@@ -60,12 +60,32 @@ const Navbar: NextComponentType = () => {
       <Box>
         <Link href="/api/auth/signin">
           <Button
+            background={"none"}
+            _hover={{ bg: "#555" }}
+            _active={{ bg: "#555" }}
+            color="#fff"
             onClick={(e) => {
               e.preventDefault();
               signIn();
             }}
           >
             Sign In
+          </Button>
+        </Link>
+        <Link href="/api/auth/signin">
+          <Button
+            background={"none"}
+            variant="outline"
+            paddingY={1}
+            _hover={{ bg: "#555" }}
+            _active={{ bg: "#555" }}
+            color="#fff"
+            onClick={(e) => {
+              e.preventDefault();
+              signIn();
+            }}
+          >
+            Sign Up
           </Button>
         </Link>
       </Box>
