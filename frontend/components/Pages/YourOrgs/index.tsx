@@ -1,4 +1,5 @@
 import { Box, Stack } from "@chakra-ui/react";
+import Content from "components/Layout/Content";
 import Loader from "components/Loader";
 import AddNewFeedForm from "components/Pages/Feeds/AddNewFeedForm";
 import Feed from "components/Pages/Feeds/Feed";
@@ -15,7 +16,9 @@ const FeedsPageComponent = () => {
 
   return (
     <Stack spacing={8}>
-      <h1>Your orgs</h1>
+      <Content>
+        <h1>Your orgs</h1>
+      </Content>
       {/* {data.feeds.map((feed: IFeed, index: number) => {
         return (
           <Box key={index}>

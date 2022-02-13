@@ -1,6 +1,7 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
+  Button,
   Flex,
   Input,
   InputGroup,
@@ -18,6 +19,12 @@ const IndexPageComponent = () => {
   const [query, setQuery] = React.useState("");
   const [keyPresses, setKeyPresses] = React.useState([]);
 
+  const doSearch = () => {
+    const cachedQuery = query;
+    setQuery("");
+    location.assign("/search?q=" + cachedQuery);
+  };
+
   return (
     <Stack style={{ background: "#040d21" }}>
       <Box width="100%" position={"absolute"} zIndex={1}>
@@ -28,12 +35,12 @@ const IndexPageComponent = () => {
           maxWidth={1200}
           m="0 auto"
           color={"#fff"}
-          fontSize={{ base: "36px", md: "42px", lg: "60px" }}
+          fontSize={{ base: "38px", md: "42px", lg: "60px" }}
           fontFamily={"Montserrat"}
-          fontWeight={800}
+          fontWeight={700}
         >
           <Stack lineHeight={"1"}>
-            <Box>The home of</Box>
+            <Box>The power of</Box>
             <Box>positive change</Box>
             <Box pt={5}>
               <InputGroup>
@@ -44,24 +51,35 @@ const IndexPageComponent = () => {
                 />
                 <Input
                   size="lg"
-                  placeholder="Search organisations"
+                  placeholder="Search charities, foundations, orgs"
                   autoFocus
-                  maxWidth={400}
+                  maxWidth={440}
                   value={query}
-                  onChange={(e) => {
-                    setQuery(e.target.value);
+                  onKeyDown={(e) => {
                     if (e.key !== "Backspace") {
                       setKeyPresses([new Date(), ...keyPresses].slice(0, 10));
                     }
                   }}
+                  onChange={(e) => {
+                    setQuery(e.target.value);
+                  }}
                   onKeyPress={(e) => {
                     if (e.key === "Enter") {
-                      const cachedQuery = query;
-                      setQuery("");
-                      location.assign("/search?q=" + cachedQuery);
+                      doSearch();
                     }
                   }}
                 />
+                <Button
+                  marginLeft={4}
+                  size="lg"
+                  backgroundColor={"#8f17c7"}
+                  _hover={{ backgroundColor: "#cc2def" }}
+                  _disabled={{ opacity: 0 }}
+                  disabled={query.length === 0}
+                  onClick={doSearch}
+                >
+                  Search
+                </Button>
               </InputGroup>
             </Box>
           </Stack>

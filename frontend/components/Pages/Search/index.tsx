@@ -3,6 +3,7 @@ import { signIn, signOut, useSession } from "next-auth/client";
 import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/router";
+import Content from "components/Layout/Content";
 
 const SearchPageComponent = () => {
   const [session] = useSession();
@@ -12,9 +13,18 @@ const SearchPageComponent = () => {
   const { q } = router.query;
 
   return (
-    <Stack>
-      <Flex>0 results for "{q}"</Flex>
-    </Stack>
+    <Content>
+      <Stack>
+        <Flex
+          fontSize={{ base: "1.5rem", md: "1.75rem", lg: "2rem" }}
+          fontFamily={"Montserrat"}
+          fontWeight={600}
+          opacity={0.4}
+        >
+          0 results for "{q}"
+        </Flex>
+      </Stack>
+    </Content>
   );
 };
 
