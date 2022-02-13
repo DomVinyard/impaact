@@ -1,17 +1,13 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
-  Button,
   Flex,
-  FormControl,
-  Heading,
   Input,
   InputGroup,
   InputLeftElement,
   Stack,
-  Text,
 } from "@chakra-ui/react";
-import { signIn, signOut, useSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import Link from "next/link";
 import React from "react";
 import { Canvas } from "react-three-fiber";
@@ -19,10 +15,8 @@ import Lights from "./components/Light";
 import Model from "./components/Model";
 
 const IndexPageComponent = () => {
-  const [session] = useSession();
-  const heightOfNavbar: string = "74px";
-  const containerPadding: string = "1rem";
   const [query, setQuery] = React.useState("");
+  const [keyPresses, setKeyPresses] = React.useState([]);
 
   return (
     <Stack style={{ background: "#040d21" }}>
@@ -30,11 +24,11 @@ const IndexPageComponent = () => {
         <Box
           p={3}
           mx={2}
-          pt={8}
+          pt={{ base: 12, md: 12, lg: 20 }}
           maxWidth={1200}
           m="0 auto"
           color={"#fff"}
-          fontSize={48}
+          fontSize={{ base: "36px", md: "42px", lg: "60px" }}
           fontFamily={"Montserrat"}
           fontWeight={800}
         >
@@ -54,7 +48,12 @@ const IndexPageComponent = () => {
                   autoFocus
                   maxWidth={400}
                   value={query}
-                  onChange={(e) => setQuery(e.target.value)}
+                  onChange={(e) => {
+                    setQuery(e.target.value);
+                    if (e.key !== "Backspace") {
+                      setKeyPresses([new Date(), ...keyPresses].slice(0, 10));
+                    }
+                  }}
                   onKeyPress={(e) => {
                     if (e.key === "Enter") {
                       const cachedQuery = query;
@@ -73,7 +72,7 @@ const IndexPageComponent = () => {
         alt="Glowing universe"
         style={{ position: "absolute" }}
       ></img>
-      <Flex>
+      <Flex display={{ base: "none", md: "block" }}>
         <Canvas
           style={{ height: "80vh", width: "100%" }}
           colorManagement
@@ -81,6 +80,16 @@ const IndexPageComponent = () => {
         >
           <Lights />
           <Model />
+        </Canvas>
+      </Flex>
+      <Flex display={{ base: "block", md: "none" }}>
+        <Canvas
+          style={{ height: "80vh", width: "100%" }}
+          colorManagement
+          camera={{ position: [0, 1, 5] }}
+        >
+          <Lights />
+          <Model keyPresses={keyPresses} />
         </Canvas>
       </Flex>
     </Stack>

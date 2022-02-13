@@ -22,15 +22,15 @@ const Navbar: NextComponentType = () => {
 
   const linksForAuthenticatedUsers = [
     {
-      id: "feeds",
+      id: "your-orgs",
       label: "Your Organisations",
-      href: "/feeds",
+      href: "/your-orgs",
     },
-    {
-      id: "myAccount",
-      label: "Settings",
-      href: "/my-account",
-    },
+    // {
+    //   id: "myAccount",
+    //   label: "Settings",
+    //   href: "/my-account",
+    // },
   ];
 
   const signInButtonNode = () => {

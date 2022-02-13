@@ -5,6 +5,7 @@ import { Html } from "drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Object3D } from "three/src/core/Object3D"; //Object3D types
 import { AnimationClip } from "three/src/animation/AnimationClip"; //Animation types
+// import { useInterval } from "usehooks-ts";
 
 interface group {
   current: {
@@ -24,7 +25,11 @@ interface actions {
   };
 }
 
-const Model = () => {
+const baseSpeed = 0.001;
+const incrementSpeed = 0.0005;
+const maxSpeed = 0.01;
+
+const Model = ({ keyPresses }) => {
   /* Refs */
   const group: group = useRef();
   const actions: actions = useRef();
@@ -32,9 +37,17 @@ const Model = () => {
   /* State */
   const [model, setModel] = useState<Object3D | null>(null);
   const [animation, setAnimation] = useState<AnimationClip[] | null>(null);
+  const [rotateAt, setRotateAt] = useState(baseSpeed);
 
   /* Mixer */
   const [mixer] = useState(() => new THREE.AnimationMixer(null));
+
+  useEffect(() => {
+    setRotateAt((rotateAt) => Math.min(maxSpeed, rotateAt + incrementSpeed));
+    setTimeout(() => {
+      setRotateAt((rotateAt) => Math.max(baseSpeed, rotateAt - incrementSpeed));
+    }, Math.random() * 1000);
+  }, [keyPresses]);
 
   /* Load model */
   useEffect(() => {
@@ -48,22 +61,22 @@ const Model = () => {
   }, []);
 
   /* Set animation */
-  useEffect(() => {
-    // if (animation && typeof group.current != "undefined") {
-    //   actions.current = {
-    //     idle: mixer.clipAction(animation[0], group.current as Object3D),
-    //   };
-    //   actions.current.idle.play();
-    //   return () => animation.forEach((clip) => mixer.uncacheClip(clip));
-    // }
-  }, [animation]);
+  // useEffect(() => {
+  //   // if (animation && typeof group.current != "undefined") {
+  //   //   actions.current = {
+  //   //     idle: mixer.clipAction(animation[0], group.current as Object3D),
+  //   //   };
+  //   //   actions.current.idle.play();
+  //   //   return () => animation.forEach((clip) => mixer.uncacheClip(clip));
+  //   // }
+  // }, [animation]);
 
   /* Animation update */
   useFrame((_, delta) => mixer.update(delta));
   /* Rotation */
   useFrame(() => {
     if (typeof group.current != "undefined")
-      return (group.current.rotation.y += 0.001);
+      return (group.current.rotation.y += rotateAt);
   });
 
   return (

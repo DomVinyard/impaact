@@ -5,7 +5,7 @@
   "author": "Dom Vinyard <i@dom.vin>",
   "scripts": {
     "bootstrap": "node scripts/generate-keys.ts && yarn install && cd frontend && yarn install",
-    "dev": "docker-compose up -d",
+    "dev": "docker-compose up",
     "release": "release-it"
   },
   "devDependencies": {
