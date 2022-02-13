@@ -26,7 +26,7 @@ const IndexPageComponent = () => {
 
   return (
     <Stack style={{ background: "#040d21" }}>
-      <Box width="100%" position={"absolute"} zIndex={99}>
+      <Box width="100%" position={"absolute"} zIndex={1}>
         <Box
           p={3}
           mx={2}

@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import Page from "components/Pages/Dashboard/index";
+// import Page from "components/Pages/Dashboard/index";
 import { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/client";
 import AccessDeniedIndicator from "components/AccessDeniedIndicator";
@@ -21,7 +21,7 @@ const IndexPage: NextPage<IProps> = ({ session }) => {
       <Head>
         <title>Impact</title>
       </Head>
-      <Page />
+      <Landing />
     </>
   );
 };

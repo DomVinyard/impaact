@@ -119,7 +119,7 @@ const Navbar: NextComponentType = () => {
                       <Avatar src={session.user.image} alt="avatar" />
                     </MenuButton>
                   )}
-                  <MenuList>
+                  <MenuList zIndex={2}>
                     {linksForAuthenticatedUsers.map((link) => (
                       <MenuItem as="a" key={link.id} href={link.href}>
                         {link.label}
