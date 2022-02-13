@@ -10,15 +10,22 @@ import {
   MenuItem,
   Image,
   MenuDivider,
+  Flex,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { NextComponentType } from "next";
 import { signIn, signOut, useSession } from "next-auth/client";
 import Link from "next/link";
 import React from "react";
+import { useRouter } from "next/router";
+import { SearchBar } from "components/Pages/Landing";
 
 const Navbar: NextComponentType = () => {
   const [session] = useSession();
+  const router = useRouter();
+  console.log({ router });
+  const { q } = router.query;
+  const [query, setQuery] = React.useState(q);
 
   const linksForAuthenticatedUsers = [
     {
@@ -85,7 +92,7 @@ const Navbar: NextComponentType = () => {
             w="full"
             alignItems="center"
           >
-            <Box>
+            <Flex>
               <Stack
                 as="a"
                 isInline
@@ -94,9 +101,29 @@ const Navbar: NextComponentType = () => {
                 fontWeight="semibold"
                 href={"/"}
               >
-                <Image src="images/logo.png" alt="PPS" height={6} pl={"8px"} />
+                <Image
+                  src="images/logo.png"
+                  alt="PPS"
+                  height={"27px"}
+                  width={"36px"}
+                  minW={"36px"}
+                  maxW={"36px"}
+                  pl={"8px"}
+                />
               </Stack>
-            </Box>
+              {router.pathname !== "/" && (
+                <SearchBar
+                  mini
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  onSubmit={() => {
+                    const cachedQuery = query;
+                    setQuery("");
+                    location.assign("/search?q=" + cachedQuery);
+                  }}
+                />
+              )}
+            </Flex>
             <Box>
               <Stack isInline spacing={4} align="center">
                 {signInButtonNode()}

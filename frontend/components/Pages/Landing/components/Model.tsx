@@ -29,7 +29,7 @@ const baseSpeed = 0.001;
 const incrementSpeed = 0.001;
 const maxSpeed = 0.01;
 
-const Model = ({ keyPresses }) => {
+const Model = ({ latestKeypress }) => {
   /* Refs */
   const group: group = useRef();
   const actions: actions = useRef();
@@ -43,12 +43,12 @@ const Model = ({ keyPresses }) => {
   const [mixer] = useState(() => new THREE.AnimationMixer(null));
 
   useEffect(() => {
-    if (!keyPresses?.length) return;
+    if (!latestKeypress) return;
     setRotateAt((rotateAt) => Math.min(maxSpeed, rotateAt + incrementSpeed));
     setTimeout(() => {
       setRotateAt((rotateAt) => Math.max(baseSpeed, rotateAt - incrementSpeed));
     }, Math.random() * 3000);
-  }, [keyPresses]);
+  }, [latestKeypress]);
 
   /* Load model */
   useEffect(() => {

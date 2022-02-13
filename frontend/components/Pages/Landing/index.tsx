@@ -15,15 +15,51 @@ import { Canvas } from "react-three-fiber";
 import Lights from "./components/Light";
 import Model from "./components/Model";
 
+export const SearchBar = ({ value, onChange, onSubmit, mini }) => {
+  return (
+    <InputGroup>
+      {!mini && (
+        <InputLeftElement
+          pointerEvents="none"
+          top={1}
+          children={<SearchIcon color="gray.300" />}
+        />
+      )}
+      <Input
+        variant={mini ? "filled" : "outline"}
+        size={mini ? "sm" : "lg"}
+        marginLeft={mini ? 2 : 0}
+        color={"white"}
+        backgroundColor={mini ? "#333" : "auto"}
+        _hover={{ backgroundColor: mini ? "#555" : "none" }}
+        placeholder={mini ? "Search" : "Search charities, foundations, orgs"}
+        autoFocus={!mini}
+        maxWidth={440}
+        value={value}
+        onChange={onChange}
+        onKeyPress={(e) => e.key === "Enter" && onSubmit()}
+      />
+      <Button
+        marginLeft={mini ? 1 : 4}
+        size={mini ? "sm" : "lg"}
+        backgroundColor={mini ? "#222" : "#8f17c7"}
+        _hover={{ backgroundColor: "#cc2def" }}
+        _disabled={{ opacity: 0 }}
+        disabled={value?.length === 0}
+        onClick={onSubmit}
+      >
+        {!mini && "Search"}
+        {mini && <SearchIcon color="white" />}
+      </Button>
+    </InputGroup>
+  );
+};
+
 const IndexPageComponent = () => {
   const [query, setQuery] = React.useState("");
-  const [keyPresses, setKeyPresses] = React.useState([]);
-
-  const doSearch = () => {
-    const cachedQuery = query;
-    setQuery("");
-    location.assign("/search?q=" + cachedQuery);
-  };
+  const [latestKeypress, setLatestKeypress] = React.useState<
+    Date | undefined
+  >();
 
   return (
     <Stack style={{ background: "#040d21" }}>
@@ -43,44 +79,21 @@ const IndexPageComponent = () => {
             <Box>The power of</Box>
             <Box>positive change</Box>
             <Box pt={5}>
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents="none"
-                  top={1}
-                  children={<SearchIcon color="gray.300" />}
-                />
-                <Input
-                  size="lg"
-                  placeholder="Search charities, foundations, orgs"
-                  autoFocus
-                  maxWidth={440}
-                  value={query}
-                  onKeyDown={(e) => {
-                    if (e.key !== "Backspace") {
-                      setKeyPresses([new Date(), ...keyPresses].slice(0, 10));
-                    }
-                  }}
-                  onChange={(e) => {
-                    setQuery(e.target.value);
-                  }}
-                  onKeyPress={(e) => {
-                    if (e.key === "Enter") {
-                      doSearch();
-                    }
-                  }}
-                />
-                <Button
-                  marginLeft={4}
-                  size="lg"
-                  backgroundColor={"#8f17c7"}
-                  _hover={{ backgroundColor: "#cc2def" }}
-                  _disabled={{ opacity: 0 }}
-                  disabled={query.length === 0}
-                  onClick={doSearch}
-                >
-                  Search
-                </Button>
-              </InputGroup>
+              <SearchBar
+                value={query}
+                onChange={(e) => {
+                  const pressAt = new Date();
+                  const newQuery = e.target.value;
+                  newQuery.length > query.length &&
+                    setLatestKeypress(new Date());
+                  setQuery(e.target.value);
+                }}
+                onSubmit={() => {
+                  const cachedQuery = query;
+                  setQuery("");
+                  location.assign("/search?q=" + cachedQuery);
+                }}
+              />
             </Box>
           </Stack>
         </Box>
@@ -97,7 +110,7 @@ const IndexPageComponent = () => {
           camera={{ position: [0, 0, 5] }}
         >
           <Lights />
-          <Model />
+          <Model latestKeypress={latestKeypress} />
         </Canvas>
       </Flex>
       <Flex display={{ base: "block", md: "none" }}>
@@ -107,7 +120,7 @@ const IndexPageComponent = () => {
           camera={{ position: [0, 1, 5] }}
         >
           <Lights />
-          <Model keyPresses={keyPresses} />
+          <Model latestKeypress={latestKeypress} />
         </Canvas>
       </Flex>
     </Stack>
