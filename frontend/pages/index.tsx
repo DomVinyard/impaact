@@ -1,38 +1,17 @@
 import React from "react";
-import Head from "next/head";
-import Page from "components/Pages/Index/index";
-import { GetServerSideProps, NextPage } from "next";
-import { getSession } from "next-auth/client";
-import AccessDeniedIndicator from "components/AccessDeniedIndicator";
-import ISession from "types/session";
+import { Canvas } from "react-three-fiber";
+import Lights from "../3d/Light";
+import Model from "../3d/Model";
 
-interface IProps {
-  session: ISession;
-}
-
-const IndexPage: NextPage<IProps> = ({ session }) => {
-  if (!session) {
-    return <AccessDeniedIndicator />;
-  }
-
+const App = () => {
   return (
     <>
-      <Head>
-        <title>Impact</title>
-      </Head>
-      <Page />
+      <Canvas colorManagement camera={{ position: [0, 0, 5] }}>
+        <Lights />
+        <Model />
+      </Canvas>
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const session = await getSession({ req });
-
-  return {
-    props: {
-      session,
-    },
-  };
-};
-
-export default IndexPage;
+export default App;
