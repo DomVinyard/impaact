@@ -42,8 +42,8 @@ const Navbar: NextComponentType = () => {
         <Link href="/api/auth/signin">
           <Button
             background={"none"}
-            _hover={{ bg: "#555" }}
-            _active={{ bg: "#555" }}
+            _hover={{ bg: "none" }}
+            _active={{ bg: "none" }}
             color="#fff"
             onClick={(e) => {
               e.preventDefault();
@@ -66,7 +66,7 @@ const Navbar: NextComponentType = () => {
               signIn();
             }}
           >
-            Sign Up
+            Add your organisation
           </Button>
         </Link>
       </Box>
