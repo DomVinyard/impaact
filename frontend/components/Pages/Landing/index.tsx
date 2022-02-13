@@ -8,6 +8,7 @@ import {
   InputGroup,
   InputLeftElement,
   Stack,
+  Text,
 } from "@chakra-ui/react";
 import Content from "components/Layout/Content";
 import { useSession } from "next-auth/client";
@@ -19,7 +20,11 @@ import Model from "./components/Model";
 
 export const SearchBar = ({ value, onChange, onSubmit, mini }) => {
   return (
-    <InputGroup>
+    <InputGroup
+      alignSelf={{ base: "center", md: "left" }}
+      maxW={{ base: 400, md: 800 }}
+      margin={{ base: "auto", md: 0 }}
+    >
       {!mini && (
         <InputLeftElement
           pointerEvents="none"
@@ -42,6 +47,7 @@ export const SearchBar = ({ value, onChange, onSubmit, mini }) => {
         onKeyPress={(e) => e.key === "Enter" && onSubmit()}
       />
       <Button
+        display={{ base: "none", md: "block" }}
         marginLeft={mini ? 1 : 4}
         size={mini ? "sm" : "lg"}
         backgroundColor={mini ? "#222" : "#8f17c7"}
@@ -70,7 +76,8 @@ const IndexPageComponent = () => {
           <Box
             p={3}
             mx={2}
-            pt={{ base: 12, md: 12, lg: 20 }}
+            pt={{ base: 100, md: 20 }}
+            textAlign={{ base: "center", md: "left" }}
             maxWidth={1200}
             m="0 auto"
             color={"#fff"}
@@ -129,22 +136,24 @@ const IndexPageComponent = () => {
           </Flex>
         </>
       </Stack>
-      <Content>
-        <Heading mt={20} size={"xl"} color={"#64a3cb"}>
-          FEATURED
-        </Heading>
+      <Box textAlign={{ base: "center", md: "left" }}>
+        <Content>
+          <Heading mt={{ base: 10, md: 20 }} size={"xl"} color={"#64a3cb"}>
+            FEATURED
+          </Heading>
 
-        <Flex
-          fontSize={{ base: "1.5rem", md: "1.75rem", lg: "2rem" }}
-          fontFamily={"Montserrat"}
-          fontWeight={600}
-          opacity={0.4}
-          mt={4}
-          mb={400}
-        >
-          No featured organisations
-        </Flex>
-      </Content>
+          <Text
+            fontSize={{ base: "1.5rem", md: "1.75rem", lg: "2rem" }}
+            fontFamily={"Montserrat"}
+            fontWeight={600}
+            opacity={0.4}
+            mt={4}
+            mb={400}
+          >
+            No featured organisations
+          </Text>
+        </Content>
+      </Box>
     </>
   );
 };
