@@ -95,7 +95,7 @@ const Navbar: NextComponentType = () => {
   return (
     <Box>
       <Box p={1} shadow="sm" pos="relative" background={"#222"}>
-        <Box maxW="xl" mx="auto" w="full">
+        <Box mx={2} maxWidth={1200} m="0 auto">
           <Stack
             isInline
             spacing={4}
