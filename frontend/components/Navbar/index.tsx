@@ -1,19 +1,14 @@
-import { ChevronDownIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
-  IconButton,
   Link as _Link,
   Stack,
-  useColorMode,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
   Image,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
   MenuDivider,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
@@ -24,20 +19,6 @@ import React from "react";
 
 const Navbar: NextComponentType = () => {
   const [session] = useSession();
-  const { colorMode, toggleColorMode } = useColorMode();
-  console.log({ session });
-
-  const handleToggleTheme = () => {
-    toggleColorMode();
-  };
-
-  const linksForAllUsers = [
-    {
-      id: "home",
-      label: "PPS",
-      href: "/",
-    },
-  ];
 
   const linksForAuthenticatedUsers = [
     {
@@ -94,7 +75,7 @@ const Navbar: NextComponentType = () => {
 
   return (
     <Box>
-      <Box p={1} shadow="sm" pos="relative" background={"#222"}>
+      <Box p={3} shadow="sm" pos="relative" background={"#222"}>
         <Box mx={2} maxWidth={1200} m="0 auto">
           <Stack
             isInline
@@ -102,6 +83,7 @@ const Navbar: NextComponentType = () => {
             align="center"
             justifyContent="space-between"
             w="full"
+            alignItems="center"
           >
             <Box>
               <Stack
@@ -112,7 +94,7 @@ const Navbar: NextComponentType = () => {
                 fontWeight="semibold"
                 href={"/"}
               >
-                <Image src="images/logo.png" alt="PPS" height={6} />
+                <Image src="images/logo.png" alt="PPS" height={6} pl={"8px"} />
               </Stack>
             </Box>
             <Box>
@@ -122,10 +104,11 @@ const Navbar: NextComponentType = () => {
                   {session && (
                     <MenuButton
                       background={"none"}
-                      as={Button}
-                      pr={"8px"}
                       _hover={{ bg: "#555" }}
                       _active={{ bg: "#555" }}
+                      as={Button}
+                      pl={"10px"}
+                      pr={"0px"}
                       rightIcon={
                         <ChevronDownIcon
                           transform={"translateX(-6px)"}
