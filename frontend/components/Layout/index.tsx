@@ -6,9 +6,9 @@ const Layout: FC = ({ children }) => {
   return (
     <ChakraProvider theme={theme}>
       <Navbar />
-      <Box maxW="xl" mx="auto" w="full" py={8}>
-        {children}
-      </Box>
+      {/* <Box maxW="xl" mx="auto" w="full" py={8}> */}
+      {children}
+      {/* </Box> */}
     </ChakraProvider>
   );
 };

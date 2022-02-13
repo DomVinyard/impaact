@@ -12,11 +12,16 @@ const IndexPageComponent = () => {
   const containerPadding: string = "1rem";
 
   return (
-    <Stack>
+    <Stack style={{ background: "#040d21" }}>
+      <img
+        src="https://github.githubassets.com/images/modules/site/home/hero-glow.svg"
+        alt="Glowing universe"
+        style={{ position: "absolute" }}
+      ></img>
       <Flex>
         left
         <Canvas
-          style={{ height: "100vh", width: "100%" }}
+          style={{ height: "80vh", width: "100%" }}
           colorManagement
           camera={{ position: [0, 0, 5] }}
         >

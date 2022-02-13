@@ -63,13 +63,13 @@ const Model = () => {
   /* Rotation */
   useFrame(() => {
     if (typeof group.current != "undefined")
-      return (group.current.rotation.z += 0.001);
+      return (group.current.rotation.y += 0.001);
   });
 
   return (
     <>
       {model ? (
-        <group ref={group} position={[0, 0, 0]} dispose={null}>
+        <group ref={group} position={[0, -1, 2.6]} dispose={null}>
           <primitive ref={group} name="Object_0" object={model} />
         </group>
       ) : (
