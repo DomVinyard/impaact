@@ -13,17 +13,7 @@ const IndexPageComponent = () => {
 
   return (
     <Stack>
-      <Flex>
-        left
-        <Canvas
-          style={{ height: "100vh", width: "100%" }}
-          colorManagement
-          camera={{ position: [0, 0, 5] }}
-        >
-          <Lights />
-          <Model />
-        </Canvas>
-      </Flex>
+      <Flex>dashboard</Flex>
     </Stack>
   );
 };
