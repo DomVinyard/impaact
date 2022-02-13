@@ -12,11 +12,6 @@ module.exports = withTM({
         loader: "file-loader",
       },
     });
-    config.module.rules.push({
-      type: "javascript/auto",
-      test: /\.mjs$/,
-      include: /node_modules/,
-    });
 
     return config;
   },
