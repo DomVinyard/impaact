@@ -106,7 +106,7 @@ const Navbar: NextComponentType = () => {
                 href={"/"}
               >
                 <Image
-                  src="images/logo.png"
+                  src="/images/logo.png"
                   alt="PPS"
                   height={"27px"}
                   width={"36px"}

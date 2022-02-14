@@ -1,8 +1,7 @@
 import { Box, Stack } from "@chakra-ui/react";
 import Loader from "components/Loader";
 import OrgsList from "components/OrgList";
-import AddNewOrgForm from "components/Pages/Orgs/AddNewOrgForm";
-import Org from "components/Pages/Orgs/Org";
+import AddNewOrgForm from "components/Pages/MyOrgs/AddNewOrgForm";
 import { useMyOrgsQuery } from "generated-graphql";
 import { getSession } from "next-auth/client";
 import React from "react";

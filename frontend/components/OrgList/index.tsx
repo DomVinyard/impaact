@@ -1,7 +1,6 @@
-import { Box, Stack } from "@chakra-ui/react";
+import { Box, Stack, Text } from "@chakra-ui/react";
 import Loader from "components/Loader";
-import AddNewOrgForm from "components/Pages/Orgs/AddNewOrgForm";
-import Org from "components/Pages/Orgs/Org";
+import AddNewOrgForm from "components/Pages/MyOrgs/AddNewOrgForm";
 import React from "react";
 import IOrg from "types/org";
 
@@ -10,8 +9,14 @@ const OrgsList = ({ orgs }) => {
     <Stack spacing={8}>
       {orgs?.map((org: IOrg, index: number) => {
         return (
-          <Box key={index}>
-            <Org org={org} />
+          <Box as="a" key={index} href={`/org/${org.id}`}>
+            <Box shadow="lg" rounded="lg">
+              <Stack spacing={0}>
+                <Text fontSize="md" p={4}>
+                  {org.name}
+                </Text>
+              </Stack>
+            </Box>
           </Box>
         );
       })}

@@ -1648,6 +1648,20 @@ export type UpdateUserMutation = {
     | undefined;
 };
 
+export type FetchOrgQueryVariables = Exact<{
+  id?: InputMaybe<Scalars["uuid"]>;
+}>;
+
+export type FetchOrgQuery = {
+  __typename?: "query_root";
+  orgs: Array<{
+    __typename?: "orgs";
+    id: any;
+    created_at: string;
+    name: string;
+  }>;
+};
+
 export type FetchOrgsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type FetchOrgsQuery = {
@@ -1914,6 +1928,107 @@ export type UpdateUserMutationResult =
 export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<
   UpdateUserMutation,
   UpdateUserMutationVariables
+>;
+export const FetchOrgDocument = gql`
+  query fetchOrg($id: uuid) {
+    orgs(where: { id: { _eq: $id } }) {
+      id
+      created_at
+      name
+    }
+  }
+`;
+export type FetchOrgComponentProps = Omit<
+  ApolloReactComponents.QueryComponentOptions<
+    FetchOrgQuery,
+    FetchOrgQueryVariables
+  >,
+  "query"
+>;
+
+export const FetchOrgComponent = (props: FetchOrgComponentProps) => (
+  <ApolloReactComponents.Query<FetchOrgQuery, FetchOrgQueryVariables>
+    query={FetchOrgDocument}
+    {...props}
+  />
+);
+
+export type FetchOrgProps<
+  TChildProps = {},
+  TDataName extends string = "data"
+> = {
+  [key in TDataName]: ApolloReactHoc.DataValue<
+    FetchOrgQuery,
+    FetchOrgQueryVariables
+  >;
+} & TChildProps;
+export function withFetchOrg<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = "data"
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    FetchOrgQuery,
+    FetchOrgQueryVariables,
+    FetchOrgProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    FetchOrgQuery,
+    FetchOrgQueryVariables,
+    FetchOrgProps<TChildProps, TDataName>
+  >(FetchOrgDocument, {
+    alias: "fetchOrg",
+    ...operationOptions,
+  });
+}
+
+/**
+ * __useFetchOrgQuery__
+ *
+ * To run a query within a React component, call `useFetchOrgQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchOrgQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFetchOrgQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useFetchOrgQuery(
+  baseOptions?: Apollo.QueryHookOptions<FetchOrgQuery, FetchOrgQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<FetchOrgQuery, FetchOrgQueryVariables>(
+    FetchOrgDocument,
+    options
+  );
+}
+export function useFetchOrgLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    FetchOrgQuery,
+    FetchOrgQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<FetchOrgQuery, FetchOrgQueryVariables>(
+    FetchOrgDocument,
+    options
+  );
+}
+export type FetchOrgQueryHookResult = ReturnType<typeof useFetchOrgQuery>;
+export type FetchOrgLazyQueryHookResult = ReturnType<
+  typeof useFetchOrgLazyQuery
+>;
+export type FetchOrgQueryResult = Apollo.QueryResult<
+  FetchOrgQuery,
+  FetchOrgQueryVariables
 >;
 export const FetchOrgsDocument = gql`
   query fetchOrgs {
