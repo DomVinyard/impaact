@@ -90,6 +90,7 @@ const IndexPageComponent = () => {
               <Box>positive change</Box>
               <Box pt={5}>
                 <SearchBar
+                  mini={false}
                   value={query}
                   onChange={(e) => {
                     const pressAt = new Date();
