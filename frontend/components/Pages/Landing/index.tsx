@@ -76,7 +76,7 @@ const IndexPageComponent = () => {
           <Box
             p={3}
             mx={2}
-            pt={{ base: 100, md: 20 }}
+            pt={{ base: 90, md: 20 }}
             textAlign={{ base: "center", md: "left" }}
             maxWidth={1200}
             m="0 auto"
@@ -129,7 +129,7 @@ const IndexPageComponent = () => {
             <Canvas
               style={{ height: "80vh", width: "100%" }}
               colorManagement
-              camera={{ position: [0, 1.5, 5] }}
+              camera={{ position: [0, 1.75, 5] }}
             >
               <Lights />
               <Model latestKeypress={latestKeypress} />
