@@ -9,6 +9,7 @@ import ISession from "types/session";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const { session }: { session: ISession } = pageProps;
+  console.log({ session });
   const apolloClient = useApollo(pageProps.initialApolloState, session?.token);
 
   return (

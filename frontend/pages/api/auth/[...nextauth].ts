@@ -40,7 +40,7 @@ const options = {
         email: token.email,
         picture: token.picture,
         "https://hasura.io/jwt/claims": {
-          "x-hasura-allowed-roles": ["admin", "user"],
+          "x-hasura-allowed-roles": ["admin", "user", "public"],
           "x-hasura-default-role": "user",
           "x-hasura-role": "user",
           "x-hasura-user-id": token.id,

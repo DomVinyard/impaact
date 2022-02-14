@@ -11,24 +11,24 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import AccessDeniedIndicator from "components/AccessDeniedIndicator";
-import { useInsertFeedMutation } from "generated-graphql";
+import { useInsertOrgMutation } from "generated-graphql";
 import { useSession } from "next-auth/client";
 import React, { ChangeEvent, useState } from "react";
 
-const AddNewFeedForm = () => {
+const AddNewOrgForm = () => {
   const [body, setBody] = useState("");
   const [session] = useSession();
-  const [insertFeed, { loading: insertFeedFetching, error: insertFeedError }] =
-    useInsertFeedMutation();
+  const [insertOrg, { loading: insertOrgFetching, error: insertOrgError }] =
+    useInsertOrgMutation();
 
   if (!session) {
     return (
-      <AccessDeniedIndicator message="You need to be signed in to add a new feed!" />
+      <AccessDeniedIndicator message="You need to be signed in to add a new org!" />
     );
   }
 
   const handleSubmit = async () => {
-    await insertFeed({
+    await insertOrg({
       variables: {
         author_id: session.id,
         body,
@@ -40,14 +40,14 @@ const AddNewFeedForm = () => {
   };
 
   const errorNode = () => {
-    if (!insertFeedError) {
+    if (!insertOrgError) {
       return false;
     }
 
     return (
       <Alert status="error">
         <AlertIcon />
-        <AlertTitle>{insertFeedError}</AlertTitle>
+        <AlertTitle>{insertOrgError}</AlertTitle>
         <CloseButton position="absolute" right="8px" top="8px" />
       </Alert>
     );
@@ -59,7 +59,7 @@ const AddNewFeedForm = () => {
       <Box p={4} shadow="lg" rounded="lg">
         <Stack spacing={4}>
           <FormControl isRequired>
-            <FormLabel htmlFor="body">Add feed</FormLabel>
+            <FormLabel htmlFor="body">Add org</FormLabel>
             <Textarea
               id="body"
               value={body}
@@ -67,14 +67,14 @@ const AddNewFeedForm = () => {
               onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
                 setBody(e.currentTarget.value)
               }
-              isDisabled={insertFeedFetching}
+              isDisabled={insertOrgFetching}
             />
           </FormControl>
           <FormControl>
             <Button
               loadingText="Posting..."
               onClick={handleSubmit}
-              isLoading={insertFeedFetching}
+              isLoading={insertOrgFetching}
               isDisabled={!body.trim()}
             >
               Add
@@ -86,4 +86,4 @@ const AddNewFeedForm = () => {
   );
 };
 
-export default AddNewFeedForm;
+export default AddNewOrgForm;

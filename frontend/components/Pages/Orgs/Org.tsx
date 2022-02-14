@@ -1,13 +1,13 @@
 import { Avatar, Box, Stack, Text } from "@chakra-ui/react";
 import timeFromNow from "lib/timeFromNow";
 import React, { FC } from "react";
-import IFeed from "types/feed";
+import IOrg from "types/org";
 
 interface IProps {
-  feed: IFeed;
+  org: IOrg;
 }
 
-const Feed: FC<IProps> = ({ feed }) => {
+const Org: FC<IProps> = ({ org }) => {
   const authorNode = () => {
     return (
       <Stack
@@ -17,10 +17,10 @@ const Feed: FC<IProps> = ({ feed }) => {
         p={4}
         borderBottomWidth={1}
       >
-        <Avatar name={feed.author.name} src={feed.author.image} />
+        {/* <Avatar name={org.author.name} src={org.author.image} /> */}
         <Stack>
-          <Text fontWeight="bold">{feed.author.name}</Text>
-          <Text>{timeFromNow(feed.created_at)}</Text>
+          {/* <Text fontWeight="bold">{org.author.name}</Text> */}
+          {/* <Text>{timeFromNow(org.created_at)}</Text> */}
         </Stack>
       </Stack>
     );
@@ -29,7 +29,7 @@ const Feed: FC<IProps> = ({ feed }) => {
   const bodyNode = () => {
     return (
       <Text fontSize="md" p={4}>
-        {feed.body}
+        {org.body}
       </Text>
     );
   };
@@ -44,4 +44,4 @@ const Feed: FC<IProps> = ({ feed }) => {
   );
 };
 
-export default Feed;
+export default Org;

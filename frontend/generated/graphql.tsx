@@ -292,188 +292,6 @@ export enum Accounts_Update_Column {
   UserId = "user_id",
 }
 
-/** columns and relationships of "feeds" */
-export type Feeds = {
-  __typename?: "feeds";
-  /** An object relationship */
-  author?: Maybe<Users>;
-  author_id: Scalars["uuid"];
-  body: Scalars["String"];
-  created_at: Scalars["timestamptz"];
-  id: Scalars["uuid"];
-  updated_at: Scalars["timestamptz"];
-};
-
-/** aggregated selection of "feeds" */
-export type Feeds_Aggregate = {
-  __typename?: "feeds_aggregate";
-  aggregate?: Maybe<Feeds_Aggregate_Fields>;
-  nodes: Array<Feeds>;
-};
-
-/** aggregate fields of "feeds" */
-export type Feeds_Aggregate_Fields = {
-  __typename?: "feeds_aggregate_fields";
-  count: Scalars["Int"];
-  max?: Maybe<Feeds_Max_Fields>;
-  min?: Maybe<Feeds_Min_Fields>;
-};
-
-/** aggregate fields of "feeds" */
-export type Feeds_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Feeds_Select_Column>>;
-  distinct?: InputMaybe<Scalars["Boolean"]>;
-};
-
-/** order by aggregate values of table "feeds" */
-export type Feeds_Aggregate_Order_By = {
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Feeds_Max_Order_By>;
-  min?: InputMaybe<Feeds_Min_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "feeds" */
-export type Feeds_Arr_Rel_Insert_Input = {
-  data: Array<Feeds_Insert_Input>;
-  /** on conflict condition */
-  on_conflict?: InputMaybe<Feeds_On_Conflict>;
-};
-
-/** Boolean expression to filter rows from the table "feeds". All fields are combined with a logical 'AND'. */
-export type Feeds_Bool_Exp = {
-  _and?: InputMaybe<Array<Feeds_Bool_Exp>>;
-  _not?: InputMaybe<Feeds_Bool_Exp>;
-  _or?: InputMaybe<Array<Feeds_Bool_Exp>>;
-  author?: InputMaybe<Users_Bool_Exp>;
-  author_id?: InputMaybe<Uuid_Comparison_Exp>;
-  body?: InputMaybe<String_Comparison_Exp>;
-  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
-  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "feeds" */
-export enum Feeds_Constraint {
-  /** unique or primary key constraint */
-  FeedsPkey = "feeds_pkey",
-}
-
-/** input type for inserting data into table "feeds" */
-export type Feeds_Insert_Input = {
-  author?: InputMaybe<Users_Obj_Rel_Insert_Input>;
-  author_id?: InputMaybe<Scalars["uuid"]>;
-  body?: InputMaybe<Scalars["String"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]>;
-  id?: InputMaybe<Scalars["uuid"]>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]>;
-};
-
-/** aggregate max on columns */
-export type Feeds_Max_Fields = {
-  __typename?: "feeds_max_fields";
-  author_id?: Maybe<Scalars["uuid"]>;
-  body?: Maybe<Scalars["String"]>;
-  created_at?: Maybe<Scalars["timestamptz"]>;
-  id?: Maybe<Scalars["uuid"]>;
-  updated_at?: Maybe<Scalars["timestamptz"]>;
-};
-
-/** order by max() on columns of table "feeds" */
-export type Feeds_Max_Order_By = {
-  author_id?: InputMaybe<Order_By>;
-  body?: InputMaybe<Order_By>;
-  created_at?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-};
-
-/** aggregate min on columns */
-export type Feeds_Min_Fields = {
-  __typename?: "feeds_min_fields";
-  author_id?: Maybe<Scalars["uuid"]>;
-  body?: Maybe<Scalars["String"]>;
-  created_at?: Maybe<Scalars["timestamptz"]>;
-  id?: Maybe<Scalars["uuid"]>;
-  updated_at?: Maybe<Scalars["timestamptz"]>;
-};
-
-/** order by min() on columns of table "feeds" */
-export type Feeds_Min_Order_By = {
-  author_id?: InputMaybe<Order_By>;
-  body?: InputMaybe<Order_By>;
-  created_at?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-};
-
-/** response of any mutation on the table "feeds" */
-export type Feeds_Mutation_Response = {
-  __typename?: "feeds_mutation_response";
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars["Int"];
-  /** data from the rows affected by the mutation */
-  returning: Array<Feeds>;
-};
-
-/** on conflict condition type for table "feeds" */
-export type Feeds_On_Conflict = {
-  constraint: Feeds_Constraint;
-  update_columns?: Array<Feeds_Update_Column>;
-  where?: InputMaybe<Feeds_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "feeds". */
-export type Feeds_Order_By = {
-  author?: InputMaybe<Users_Order_By>;
-  author_id?: InputMaybe<Order_By>;
-  body?: InputMaybe<Order_By>;
-  created_at?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: feeds */
-export type Feeds_Pk_Columns_Input = {
-  id: Scalars["uuid"];
-};
-
-/** select columns of table "feeds" */
-export enum Feeds_Select_Column {
-  /** column name */
-  AuthorId = "author_id",
-  /** column name */
-  Body = "body",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  UpdatedAt = "updated_at",
-}
-
-/** input type for updating data in table "feeds" */
-export type Feeds_Set_Input = {
-  author_id?: InputMaybe<Scalars["uuid"]>;
-  body?: InputMaybe<Scalars["String"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]>;
-  id?: InputMaybe<Scalars["uuid"]>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]>;
-};
-
-/** update columns of table "feeds" */
-export enum Feeds_Update_Column {
-  /** column name */
-  AuthorId = "author_id",
-  /** column name */
-  Body = "body",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  UpdatedAt = "updated_at",
-}
-
 /** mutation root */
 export type Mutation_Root = {
   __typename?: "mutation_root";
@@ -481,18 +299,14 @@ export type Mutation_Root = {
   delete_accounts?: Maybe<Accounts_Mutation_Response>;
   /** delete single row from the table: "accounts" */
   delete_accounts_by_pk?: Maybe<Accounts>;
-  /** delete data from the table: "feeds" */
-  delete_feeds?: Maybe<Feeds_Mutation_Response>;
-  /** delete single row from the table: "feeds" */
-  delete_feeds_by_pk?: Maybe<Feeds>;
+  /** delete data from the table: "orgs" */
+  delete_orgs?: Maybe<Orgs_Mutation_Response>;
+  /** delete single row from the table: "orgs" */
+  delete_orgs_by_pk?: Maybe<Orgs>;
   /** delete data from the table: "sessions" */
   delete_sessions?: Maybe<Sessions_Mutation_Response>;
   /** delete single row from the table: "sessions" */
   delete_sessions_by_pk?: Maybe<Sessions>;
-  /** delete data from the table: "test" */
-  delete_test?: Maybe<Test_Mutation_Response>;
-  /** delete single row from the table: "test" */
-  delete_test_by_pk?: Maybe<Test>;
   /** delete data from the table: "users" */
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
@@ -505,18 +319,14 @@ export type Mutation_Root = {
   insert_accounts?: Maybe<Accounts_Mutation_Response>;
   /** insert a single row into the table: "accounts" */
   insert_accounts_one?: Maybe<Accounts>;
-  /** insert data into the table: "feeds" */
-  insert_feeds?: Maybe<Feeds_Mutation_Response>;
-  /** insert a single row into the table: "feeds" */
-  insert_feeds_one?: Maybe<Feeds>;
+  /** insert data into the table: "orgs" */
+  insert_orgs?: Maybe<Orgs_Mutation_Response>;
+  /** insert a single row into the table: "orgs" */
+  insert_orgs_one?: Maybe<Orgs>;
   /** insert data into the table: "sessions" */
   insert_sessions?: Maybe<Sessions_Mutation_Response>;
   /** insert a single row into the table: "sessions" */
   insert_sessions_one?: Maybe<Sessions>;
-  /** insert data into the table: "test" */
-  insert_test?: Maybe<Test_Mutation_Response>;
-  /** insert a single row into the table: "test" */
-  insert_test_one?: Maybe<Test>;
   /** insert data into the table: "users" */
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
@@ -529,18 +339,14 @@ export type Mutation_Root = {
   update_accounts?: Maybe<Accounts_Mutation_Response>;
   /** update single row of the table: "accounts" */
   update_accounts_by_pk?: Maybe<Accounts>;
-  /** update data of the table: "feeds" */
-  update_feeds?: Maybe<Feeds_Mutation_Response>;
-  /** update single row of the table: "feeds" */
-  update_feeds_by_pk?: Maybe<Feeds>;
+  /** update data of the table: "orgs" */
+  update_orgs?: Maybe<Orgs_Mutation_Response>;
+  /** update single row of the table: "orgs" */
+  update_orgs_by_pk?: Maybe<Orgs>;
   /** update data of the table: "sessions" */
   update_sessions?: Maybe<Sessions_Mutation_Response>;
   /** update single row of the table: "sessions" */
   update_sessions_by_pk?: Maybe<Sessions>;
-  /** update data of the table: "test" */
-  update_test?: Maybe<Test_Mutation_Response>;
-  /** update single row of the table: "test" */
-  update_test_by_pk?: Maybe<Test>;
   /** update data of the table: "users" */
   update_users?: Maybe<Users_Mutation_Response>;
   /** update single row of the table: "users" */
@@ -562,12 +368,12 @@ export type Mutation_RootDelete_Accounts_By_PkArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootDelete_FeedsArgs = {
-  where: Feeds_Bool_Exp;
+export type Mutation_RootDelete_OrgsArgs = {
+  where: Orgs_Bool_Exp;
 };
 
 /** mutation root */
-export type Mutation_RootDelete_Feeds_By_PkArgs = {
+export type Mutation_RootDelete_Orgs_By_PkArgs = {
   id: Scalars["uuid"];
 };
 
@@ -579,16 +385,6 @@ export type Mutation_RootDelete_SessionsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Sessions_By_PkArgs = {
   id: Scalars["uuid"];
-};
-
-/** mutation root */
-export type Mutation_RootDelete_TestArgs = {
-  where: Test_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Test_By_PkArgs = {
-  id: Scalars["Int"];
 };
 
 /** mutation root */
@@ -624,15 +420,15 @@ export type Mutation_RootInsert_Accounts_OneArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootInsert_FeedsArgs = {
-  objects: Array<Feeds_Insert_Input>;
-  on_conflict?: InputMaybe<Feeds_On_Conflict>;
+export type Mutation_RootInsert_OrgsArgs = {
+  objects: Array<Orgs_Insert_Input>;
+  on_conflict?: InputMaybe<Orgs_On_Conflict>;
 };
 
 /** mutation root */
-export type Mutation_RootInsert_Feeds_OneArgs = {
-  object: Feeds_Insert_Input;
-  on_conflict?: InputMaybe<Feeds_On_Conflict>;
+export type Mutation_RootInsert_Orgs_OneArgs = {
+  object: Orgs_Insert_Input;
+  on_conflict?: InputMaybe<Orgs_On_Conflict>;
 };
 
 /** mutation root */
@@ -645,18 +441,6 @@ export type Mutation_RootInsert_SessionsArgs = {
 export type Mutation_RootInsert_Sessions_OneArgs = {
   object: Sessions_Insert_Input;
   on_conflict?: InputMaybe<Sessions_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_TestArgs = {
-  objects: Array<Test_Insert_Input>;
-  on_conflict?: InputMaybe<Test_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Test_OneArgs = {
-  object: Test_Insert_Input;
-  on_conflict?: InputMaybe<Test_On_Conflict>;
 };
 
 /** mutation root */
@@ -696,15 +480,15 @@ export type Mutation_RootUpdate_Accounts_By_PkArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootUpdate_FeedsArgs = {
-  _set?: InputMaybe<Feeds_Set_Input>;
-  where: Feeds_Bool_Exp;
+export type Mutation_RootUpdate_OrgsArgs = {
+  _set?: InputMaybe<Orgs_Set_Input>;
+  where: Orgs_Bool_Exp;
 };
 
 /** mutation root */
-export type Mutation_RootUpdate_Feeds_By_PkArgs = {
-  _set?: InputMaybe<Feeds_Set_Input>;
-  pk_columns: Feeds_Pk_Columns_Input;
+export type Mutation_RootUpdate_Orgs_By_PkArgs = {
+  _set?: InputMaybe<Orgs_Set_Input>;
+  pk_columns: Orgs_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -719,20 +503,6 @@ export type Mutation_RootUpdate_Sessions_By_PkArgs = {
   _inc?: InputMaybe<Sessions_Inc_Input>;
   _set?: InputMaybe<Sessions_Set_Input>;
   pk_columns: Sessions_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_TestArgs = {
-  _inc?: InputMaybe<Test_Inc_Input>;
-  _set?: InputMaybe<Test_Set_Input>;
-  where: Test_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Test_By_PkArgs = {
-  _inc?: InputMaybe<Test_Inc_Input>;
-  _set?: InputMaybe<Test_Set_Input>;
-  pk_columns: Test_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -775,6 +545,188 @@ export enum Order_By {
   DescNullsLast = "desc_nulls_last",
 }
 
+/** columns and relationships of "orgs" */
+export type Orgs = {
+  __typename?: "orgs";
+  /** An object relationship */
+  author?: Maybe<Users>;
+  author_id: Scalars["uuid"];
+  body: Scalars["String"];
+  created_at: Scalars["timestamptz"];
+  id: Scalars["uuid"];
+  updated_at: Scalars["timestamptz"];
+};
+
+/** aggregated selection of "orgs" */
+export type Orgs_Aggregate = {
+  __typename?: "orgs_aggregate";
+  aggregate?: Maybe<Orgs_Aggregate_Fields>;
+  nodes: Array<Orgs>;
+};
+
+/** aggregate fields of "orgs" */
+export type Orgs_Aggregate_Fields = {
+  __typename?: "orgs_aggregate_fields";
+  count: Scalars["Int"];
+  max?: Maybe<Orgs_Max_Fields>;
+  min?: Maybe<Orgs_Min_Fields>;
+};
+
+/** aggregate fields of "orgs" */
+export type Orgs_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Orgs_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]>;
+};
+
+/** order by aggregate values of table "orgs" */
+export type Orgs_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Orgs_Max_Order_By>;
+  min?: InputMaybe<Orgs_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "orgs" */
+export type Orgs_Arr_Rel_Insert_Input = {
+  data: Array<Orgs_Insert_Input>;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<Orgs_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "orgs". All fields are combined with a logical 'AND'. */
+export type Orgs_Bool_Exp = {
+  _and?: InputMaybe<Array<Orgs_Bool_Exp>>;
+  _not?: InputMaybe<Orgs_Bool_Exp>;
+  _or?: InputMaybe<Array<Orgs_Bool_Exp>>;
+  author?: InputMaybe<Users_Bool_Exp>;
+  author_id?: InputMaybe<Uuid_Comparison_Exp>;
+  body?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "orgs" */
+export enum Orgs_Constraint {
+  /** unique or primary key constraint */
+  OrgsPkey = "orgs_pkey",
+}
+
+/** input type for inserting data into table "orgs" */
+export type Orgs_Insert_Input = {
+  author?: InputMaybe<Users_Obj_Rel_Insert_Input>;
+  author_id?: InputMaybe<Scalars["uuid"]>;
+  body?: InputMaybe<Scalars["String"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]>;
+  id?: InputMaybe<Scalars["uuid"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]>;
+};
+
+/** aggregate max on columns */
+export type Orgs_Max_Fields = {
+  __typename?: "orgs_max_fields";
+  author_id?: Maybe<Scalars["uuid"]>;
+  body?: Maybe<Scalars["String"]>;
+  created_at?: Maybe<Scalars["timestamptz"]>;
+  id?: Maybe<Scalars["uuid"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]>;
+};
+
+/** order by max() on columns of table "orgs" */
+export type Orgs_Max_Order_By = {
+  author_id?: InputMaybe<Order_By>;
+  body?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Orgs_Min_Fields = {
+  __typename?: "orgs_min_fields";
+  author_id?: Maybe<Scalars["uuid"]>;
+  body?: Maybe<Scalars["String"]>;
+  created_at?: Maybe<Scalars["timestamptz"]>;
+  id?: Maybe<Scalars["uuid"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]>;
+};
+
+/** order by min() on columns of table "orgs" */
+export type Orgs_Min_Order_By = {
+  author_id?: InputMaybe<Order_By>;
+  body?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "orgs" */
+export type Orgs_Mutation_Response = {
+  __typename?: "orgs_mutation_response";
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"];
+  /** data from the rows affected by the mutation */
+  returning: Array<Orgs>;
+};
+
+/** on conflict condition type for table "orgs" */
+export type Orgs_On_Conflict = {
+  constraint: Orgs_Constraint;
+  update_columns?: Array<Orgs_Update_Column>;
+  where?: InputMaybe<Orgs_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "orgs". */
+export type Orgs_Order_By = {
+  author?: InputMaybe<Users_Order_By>;
+  author_id?: InputMaybe<Order_By>;
+  body?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: orgs */
+export type Orgs_Pk_Columns_Input = {
+  id: Scalars["uuid"];
+};
+
+/** select columns of table "orgs" */
+export enum Orgs_Select_Column {
+  /** column name */
+  AuthorId = "author_id",
+  /** column name */
+  Body = "body",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+/** input type for updating data in table "orgs" */
+export type Orgs_Set_Input = {
+  author_id?: InputMaybe<Scalars["uuid"]>;
+  body?: InputMaybe<Scalars["String"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]>;
+  id?: InputMaybe<Scalars["uuid"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]>;
+};
+
+/** update columns of table "orgs" */
+export enum Orgs_Update_Column {
+  /** column name */
+  AuthorId = "author_id",
+  /** column name */
+  Body = "body",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
 export type Query_Root = {
   __typename?: "query_root";
   /** fetch data from the table: "accounts" */
@@ -783,24 +735,18 @@ export type Query_Root = {
   accounts_aggregate: Accounts_Aggregate;
   /** fetch data from the table: "accounts" using primary key columns */
   accounts_by_pk?: Maybe<Accounts>;
-  /** An array relationship */
-  feeds: Array<Feeds>;
+  /** fetch data from the table: "orgs" */
+  orgs: Array<Orgs>;
   /** An aggregate relationship */
-  feeds_aggregate: Feeds_Aggregate;
-  /** fetch data from the table: "feeds" using primary key columns */
-  feeds_by_pk?: Maybe<Feeds>;
+  orgs_aggregate: Orgs_Aggregate;
+  /** fetch data from the table: "orgs" using primary key columns */
+  orgs_by_pk?: Maybe<Orgs>;
   /** fetch data from the table: "sessions" */
   sessions: Array<Sessions>;
   /** fetch aggregated fields from the table: "sessions" */
   sessions_aggregate: Sessions_Aggregate;
   /** fetch data from the table: "sessions" using primary key columns */
   sessions_by_pk?: Maybe<Sessions>;
-  /** fetch data from the table: "test" */
-  test: Array<Test>;
-  /** fetch aggregated fields from the table: "test" */
-  test_aggregate: Test_Aggregate;
-  /** fetch data from the table: "test" using primary key columns */
-  test_by_pk?: Maybe<Test>;
   /** fetch data from the table: "users" */
   users: Array<Users>;
   /** fetch aggregated fields from the table: "users" */
@@ -835,23 +781,23 @@ export type Query_RootAccounts_By_PkArgs = {
   id: Scalars["uuid"];
 };
 
-export type Query_RootFeedsArgs = {
-  distinct_on?: InputMaybe<Array<Feeds_Select_Column>>;
+export type Query_RootOrgsArgs = {
+  distinct_on?: InputMaybe<Array<Orgs_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]>;
   offset?: InputMaybe<Scalars["Int"]>;
-  order_by?: InputMaybe<Array<Feeds_Order_By>>;
-  where?: InputMaybe<Feeds_Bool_Exp>;
+  order_by?: InputMaybe<Array<Orgs_Order_By>>;
+  where?: InputMaybe<Orgs_Bool_Exp>;
 };
 
-export type Query_RootFeeds_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Feeds_Select_Column>>;
+export type Query_RootOrgs_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Orgs_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]>;
   offset?: InputMaybe<Scalars["Int"]>;
-  order_by?: InputMaybe<Array<Feeds_Order_By>>;
-  where?: InputMaybe<Feeds_Bool_Exp>;
+  order_by?: InputMaybe<Array<Orgs_Order_By>>;
+  where?: InputMaybe<Orgs_Bool_Exp>;
 };
 
-export type Query_RootFeeds_By_PkArgs = {
+export type Query_RootOrgs_By_PkArgs = {
   id: Scalars["uuid"];
 };
 
@@ -873,26 +819,6 @@ export type Query_RootSessions_AggregateArgs = {
 
 export type Query_RootSessions_By_PkArgs = {
   id: Scalars["uuid"];
-};
-
-export type Query_RootTestArgs = {
-  distinct_on?: InputMaybe<Array<Test_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
-  order_by?: InputMaybe<Array<Test_Order_By>>;
-  where?: InputMaybe<Test_Bool_Exp>;
-};
-
-export type Query_RootTest_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Test_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
-  order_by?: InputMaybe<Array<Test_Order_By>>;
-  where?: InputMaybe<Test_Bool_Exp>;
-};
-
-export type Query_RootTest_By_PkArgs = {
-  id: Scalars["Int"];
 };
 
 export type Query_RootUsersArgs = {
@@ -1171,12 +1097,12 @@ export type Subscription_Root = {
   accounts_aggregate: Accounts_Aggregate;
   /** fetch data from the table: "accounts" using primary key columns */
   accounts_by_pk?: Maybe<Accounts>;
-  /** An array relationship */
-  feeds: Array<Feeds>;
+  /** fetch data from the table: "orgs" */
+  orgs: Array<Orgs>;
   /** An aggregate relationship */
-  feeds_aggregate: Feeds_Aggregate;
-  /** fetch data from the table: "feeds" using primary key columns */
-  feeds_by_pk?: Maybe<Feeds>;
+  orgs_aggregate: Orgs_Aggregate;
+  /** fetch data from the table: "orgs" using primary key columns */
+  orgs_by_pk?: Maybe<Orgs>;
   /** fetch data from the table: "sessions" */
   sessions: Array<Sessions>;
   /** fetch aggregated fields from the table: "sessions" */
@@ -1217,23 +1143,23 @@ export type Subscription_RootAccounts_By_PkArgs = {
   id: Scalars["uuid"];
 };
 
-export type Subscription_RootFeedsArgs = {
-  distinct_on?: InputMaybe<Array<Feeds_Select_Column>>;
+export type Subscription_RootOrgsArgs = {
+  distinct_on?: InputMaybe<Array<Orgs_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]>;
   offset?: InputMaybe<Scalars["Int"]>;
-  order_by?: InputMaybe<Array<Feeds_Order_By>>;
-  where?: InputMaybe<Feeds_Bool_Exp>;
+  order_by?: InputMaybe<Array<Orgs_Order_By>>;
+  where?: InputMaybe<Orgs_Bool_Exp>;
 };
 
-export type Subscription_RootFeeds_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Feeds_Select_Column>>;
+export type Subscription_RootOrgs_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Orgs_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]>;
   offset?: InputMaybe<Scalars["Int"]>;
-  order_by?: InputMaybe<Array<Feeds_Order_By>>;
-  where?: InputMaybe<Feeds_Bool_Exp>;
+  order_by?: InputMaybe<Array<Orgs_Order_By>>;
+  where?: InputMaybe<Orgs_Bool_Exp>;
 };
 
-export type Subscription_RootFeeds_By_PkArgs = {
+export type Subscription_RootOrgs_By_PkArgs = {
   id: Scalars["uuid"];
 };
 
@@ -1297,168 +1223,6 @@ export type Subscription_RootVerification_Requests_By_PkArgs = {
   id: Scalars["uuid"];
 };
 
-/** columns and relationships of "test" */
-export type Test = {
-  __typename?: "test";
-  id: Scalars["Int"];
-};
-
-/** aggregated selection of "test" */
-export type Test_Aggregate = {
-  __typename?: "test_aggregate";
-  aggregate?: Maybe<Test_Aggregate_Fields>;
-  nodes: Array<Test>;
-};
-
-/** aggregate fields of "test" */
-export type Test_Aggregate_Fields = {
-  __typename?: "test_aggregate_fields";
-  avg?: Maybe<Test_Avg_Fields>;
-  count: Scalars["Int"];
-  max?: Maybe<Test_Max_Fields>;
-  min?: Maybe<Test_Min_Fields>;
-  stddev?: Maybe<Test_Stddev_Fields>;
-  stddev_pop?: Maybe<Test_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Test_Stddev_Samp_Fields>;
-  sum?: Maybe<Test_Sum_Fields>;
-  var_pop?: Maybe<Test_Var_Pop_Fields>;
-  var_samp?: Maybe<Test_Var_Samp_Fields>;
-  variance?: Maybe<Test_Variance_Fields>;
-};
-
-/** aggregate fields of "test" */
-export type Test_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Test_Select_Column>>;
-  distinct?: InputMaybe<Scalars["Boolean"]>;
-};
-
-/** aggregate avg on columns */
-export type Test_Avg_Fields = {
-  __typename?: "test_avg_fields";
-  id?: Maybe<Scalars["Float"]>;
-};
-
-/** Boolean expression to filter rows from the table "test". All fields are combined with a logical 'AND'. */
-export type Test_Bool_Exp = {
-  _and?: InputMaybe<Array<Test_Bool_Exp>>;
-  _not?: InputMaybe<Test_Bool_Exp>;
-  _or?: InputMaybe<Array<Test_Bool_Exp>>;
-  id?: InputMaybe<Int_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "test" */
-export enum Test_Constraint {
-  /** unique or primary key constraint */
-  TestPkey = "test_pkey",
-}
-
-/** input type for incrementing numeric columns in table "test" */
-export type Test_Inc_Input = {
-  id?: InputMaybe<Scalars["Int"]>;
-};
-
-/** input type for inserting data into table "test" */
-export type Test_Insert_Input = {
-  id?: InputMaybe<Scalars["Int"]>;
-};
-
-/** aggregate max on columns */
-export type Test_Max_Fields = {
-  __typename?: "test_max_fields";
-  id?: Maybe<Scalars["Int"]>;
-};
-
-/** aggregate min on columns */
-export type Test_Min_Fields = {
-  __typename?: "test_min_fields";
-  id?: Maybe<Scalars["Int"]>;
-};
-
-/** response of any mutation on the table "test" */
-export type Test_Mutation_Response = {
-  __typename?: "test_mutation_response";
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars["Int"];
-  /** data from the rows affected by the mutation */
-  returning: Array<Test>;
-};
-
-/** on conflict condition type for table "test" */
-export type Test_On_Conflict = {
-  constraint: Test_Constraint;
-  update_columns?: Array<Test_Update_Column>;
-  where?: InputMaybe<Test_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "test". */
-export type Test_Order_By = {
-  id?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: test */
-export type Test_Pk_Columns_Input = {
-  id: Scalars["Int"];
-};
-
-/** select columns of table "test" */
-export enum Test_Select_Column {
-  /** column name */
-  Id = "id",
-}
-
-/** input type for updating data in table "test" */
-export type Test_Set_Input = {
-  id?: InputMaybe<Scalars["Int"]>;
-};
-
-/** aggregate stddev on columns */
-export type Test_Stddev_Fields = {
-  __typename?: "test_stddev_fields";
-  id?: Maybe<Scalars["Float"]>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Test_Stddev_Pop_Fields = {
-  __typename?: "test_stddev_pop_fields";
-  id?: Maybe<Scalars["Float"]>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Test_Stddev_Samp_Fields = {
-  __typename?: "test_stddev_samp_fields";
-  id?: Maybe<Scalars["Float"]>;
-};
-
-/** aggregate sum on columns */
-export type Test_Sum_Fields = {
-  __typename?: "test_sum_fields";
-  id?: Maybe<Scalars["Int"]>;
-};
-
-/** update columns of table "test" */
-export enum Test_Update_Column {
-  /** column name */
-  Id = "id",
-}
-
-/** aggregate var_pop on columns */
-export type Test_Var_Pop_Fields = {
-  __typename?: "test_var_pop_fields";
-  id?: Maybe<Scalars["Float"]>;
-};
-
-/** aggregate var_samp on columns */
-export type Test_Var_Samp_Fields = {
-  __typename?: "test_var_samp_fields";
-  id?: Maybe<Scalars["Float"]>;
-};
-
-/** aggregate variance on columns */
-export type Test_Variance_Fields = {
-  __typename?: "test_variance_fields";
-  id?: Maybe<Scalars["Float"]>;
-};
-
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
 export type Timestamptz_Comparison_Exp = {
   _eq?: InputMaybe<Scalars["timestamptz"]>;
@@ -1478,32 +1242,32 @@ export type Users = {
   created_at: Scalars["timestamptz"];
   email: Scalars["String"];
   email_verified?: Maybe<Scalars["timestamptz"]>;
-  /** An array relationship */
-  feeds: Array<Feeds>;
-  /** An aggregate relationship */
-  feeds_aggregate: Feeds_Aggregate;
   id: Scalars["uuid"];
   image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
+  /** fetch data from the table: "orgs" */
+  orgs: Array<Orgs>;
+  /** An aggregate relationship */
+  orgs_aggregate: Orgs_Aggregate;
   updated_at: Scalars["timestamptz"];
 };
 
 /** columns and relationships of "users" */
-export type UsersFeedsArgs = {
-  distinct_on?: InputMaybe<Array<Feeds_Select_Column>>;
+export type UsersOrgsArgs = {
+  distinct_on?: InputMaybe<Array<Orgs_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]>;
   offset?: InputMaybe<Scalars["Int"]>;
-  order_by?: InputMaybe<Array<Feeds_Order_By>>;
-  where?: InputMaybe<Feeds_Bool_Exp>;
+  order_by?: InputMaybe<Array<Orgs_Order_By>>;
+  where?: InputMaybe<Orgs_Bool_Exp>;
 };
 
 /** columns and relationships of "users" */
-export type UsersFeeds_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Feeds_Select_Column>>;
+export type UsersOrgs_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Orgs_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]>;
   offset?: InputMaybe<Scalars["Int"]>;
-  order_by?: InputMaybe<Array<Feeds_Order_By>>;
-  where?: InputMaybe<Feeds_Bool_Exp>;
+  order_by?: InputMaybe<Array<Orgs_Order_By>>;
+  where?: InputMaybe<Orgs_Bool_Exp>;
 };
 
 /** aggregated selection of "users" */
@@ -1535,10 +1299,10 @@ export type Users_Bool_Exp = {
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   email?: InputMaybe<String_Comparison_Exp>;
   email_verified?: InputMaybe<Timestamptz_Comparison_Exp>;
-  feeds?: InputMaybe<Feeds_Bool_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   image?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  orgs?: InputMaybe<Orgs_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -1553,10 +1317,10 @@ export type Users_Insert_Input = {
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   email?: InputMaybe<Scalars["String"]>;
   email_verified?: InputMaybe<Scalars["timestamptz"]>;
-  feeds?: InputMaybe<Feeds_Arr_Rel_Insert_Input>;
   id?: InputMaybe<Scalars["uuid"]>;
   image?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
+  orgs?: InputMaybe<Orgs_Arr_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
 };
 
@@ -1612,10 +1376,10 @@ export type Users_Order_By = {
   created_at?: InputMaybe<Order_By>;
   email?: InputMaybe<Order_By>;
   email_verified?: InputMaybe<Order_By>;
-  feeds_aggregate?: InputMaybe<Feeds_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  orgs_aggregate?: InputMaybe<Orgs_Aggregate_Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
@@ -1840,16 +1604,16 @@ export enum Verification_Requests_Update_Column {
   UpdatedAt = "updated_at",
 }
 
-export type InsertFeedMutationVariables = Exact<{
+export type InsertOrgMutationVariables = Exact<{
   author_id: Scalars["uuid"];
   body?: InputMaybe<Scalars["String"]>;
 }>;
 
-export type InsertFeedMutation = {
+export type InsertOrgMutation = {
   __typename?: "mutation_root";
-  insert_feeds_one?:
+  insert_orgs_one?:
     | {
-        __typename?: "feeds";
+        __typename?: "orgs";
         id: any;
         created_at: string;
         body: string;
@@ -1884,23 +1648,15 @@ export type UpdateUserMutation = {
     | undefined;
 };
 
-export type FetchFeedsQueryVariables = Exact<{ [key: string]: never }>;
+export type FetchOrgsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type FetchFeedsQuery = {
+export type FetchOrgsQuery = {
   __typename?: "query_root";
-  feeds: Array<{
-    __typename?: "feeds";
+  orgs: Array<{
+    __typename?: "orgs";
     id: any;
     created_at: string;
     body: string;
-    author?:
-      | {
-          __typename?: "users";
-          id: any;
-          name?: string | undefined;
-          image?: string | undefined;
-        }
-      | undefined;
   }>;
 };
 
@@ -1915,31 +1671,38 @@ export type FetchUserQuery = {
     | undefined;
 };
 
-export type FetchFeedsSubscriptionSubscriptionVariables = Exact<{
-  [key: string]: never;
+export type MyOrgsQueryVariables = Exact<{
+  userId: Scalars["uuid"];
 }>;
 
-export type FetchFeedsSubscriptionSubscription = {
-  __typename?: "subscription_root";
-  feeds: Array<{
-    __typename?: "feeds";
-    id: any;
-    created_at: string;
-    body: string;
-    author?:
-      | {
-          __typename?: "users";
+export type MyOrgsQuery = {
+  __typename?: "query_root";
+  users_by_pk?:
+    | {
+        __typename?: "users";
+        id: any;
+        name?: string | undefined;
+        orgs: Array<{
+          __typename?: "orgs";
           id: any;
-          name?: string | undefined;
-          image?: string | undefined;
-        }
-      | undefined;
-  }>;
+          created_at: string;
+          body: string;
+          author?:
+            | {
+                __typename?: "users";
+                id: any;
+                name?: string | undefined;
+                image?: string | undefined;
+              }
+            | undefined;
+        }>;
+      }
+    | undefined;
 };
 
-export const InsertFeedDocument = gql`
-  mutation insertFeed($author_id: uuid!, $body: String) {
-    insert_feeds_one(object: { author_id: $author_id, body: $body }) {
+export const InsertOrgDocument = gql`
+  mutation insertOrg($author_id: uuid!, $body: String) {
+    insert_orgs_one(object: { author_id: $author_id, body: $body }) {
       id
       created_at
       body
@@ -1951,98 +1714,94 @@ export const InsertFeedDocument = gql`
     }
   }
 `;
-export type InsertFeedMutationFn = Apollo.MutationFunction<
-  InsertFeedMutation,
-  InsertFeedMutationVariables
+export type InsertOrgMutationFn = Apollo.MutationFunction<
+  InsertOrgMutation,
+  InsertOrgMutationVariables
 >;
-export type InsertFeedComponentProps = Omit<
+export type InsertOrgComponentProps = Omit<
   ApolloReactComponents.MutationComponentOptions<
-    InsertFeedMutation,
-    InsertFeedMutationVariables
+    InsertOrgMutation,
+    InsertOrgMutationVariables
   >,
   "mutation"
 >;
 
-export const InsertFeedComponent = (props: InsertFeedComponentProps) => (
-  <ApolloReactComponents.Mutation<
-    InsertFeedMutation,
-    InsertFeedMutationVariables
-  >
-    mutation={InsertFeedDocument}
+export const InsertOrgComponent = (props: InsertOrgComponentProps) => (
+  <ApolloReactComponents.Mutation<InsertOrgMutation, InsertOrgMutationVariables>
+    mutation={InsertOrgDocument}
     {...props}
   />
 );
 
-export type InsertFeedProps<
+export type InsertOrgProps<
   TChildProps = {},
   TDataName extends string = "mutate"
 > = {
   [key in TDataName]: Apollo.MutationFunction<
-    InsertFeedMutation,
-    InsertFeedMutationVariables
+    InsertOrgMutation,
+    InsertOrgMutationVariables
   >;
 } & TChildProps;
-export function withInsertFeed<
+export function withInsertOrg<
   TProps,
   TChildProps = {},
   TDataName extends string = "mutate"
 >(
   operationOptions?: ApolloReactHoc.OperationOption<
     TProps,
-    InsertFeedMutation,
-    InsertFeedMutationVariables,
-    InsertFeedProps<TChildProps, TDataName>
+    InsertOrgMutation,
+    InsertOrgMutationVariables,
+    InsertOrgProps<TChildProps, TDataName>
   >
 ) {
   return ApolloReactHoc.withMutation<
     TProps,
-    InsertFeedMutation,
-    InsertFeedMutationVariables,
-    InsertFeedProps<TChildProps, TDataName>
-  >(InsertFeedDocument, {
-    alias: "insertFeed",
+    InsertOrgMutation,
+    InsertOrgMutationVariables,
+    InsertOrgProps<TChildProps, TDataName>
+  >(InsertOrgDocument, {
+    alias: "insertOrg",
     ...operationOptions,
   });
 }
 
 /**
- * __useInsertFeedMutation__
+ * __useInsertOrgMutation__
  *
- * To run a mutation, you first call `useInsertFeedMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useInsertFeedMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useInsertOrgMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertOrgMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [insertFeedMutation, { data, loading, error }] = useInsertFeedMutation({
+ * const [insertOrgMutation, { data, loading, error }] = useInsertOrgMutation({
  *   variables: {
  *      author_id: // value for 'author_id'
  *      body: // value for 'body'
  *   },
  * });
  */
-export function useInsertFeedMutation(
+export function useInsertOrgMutation(
   baseOptions?: Apollo.MutationHookOptions<
-    InsertFeedMutation,
-    InsertFeedMutationVariables
+    InsertOrgMutation,
+    InsertOrgMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<InsertFeedMutation, InsertFeedMutationVariables>(
-    InsertFeedDocument,
+  return Apollo.useMutation<InsertOrgMutation, InsertOrgMutationVariables>(
+    InsertOrgDocument,
     options
   );
 }
-export type InsertFeedMutationHookResult = ReturnType<
-  typeof useInsertFeedMutation
+export type InsertOrgMutationHookResult = ReturnType<
+  typeof useInsertOrgMutation
 >;
-export type InsertFeedMutationResult =
-  Apollo.MutationResult<InsertFeedMutation>;
-export type InsertFeedMutationOptions = Apollo.BaseMutationOptions<
-  InsertFeedMutation,
-  InsertFeedMutationVariables
+export type InsertOrgMutationResult = Apollo.MutationResult<InsertOrgMutation>;
+export type InsertOrgMutationOptions = Apollo.BaseMutationOptions<
+  InsertOrgMutation,
+  InsertOrgMutationVariables
 >;
 export const UpdateUserDocument = gql`
   mutation updateUser($userId: uuid!, $name: String) {
@@ -2147,113 +1906,105 @@ export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<
   UpdateUserMutation,
   UpdateUserMutationVariables
 >;
-export const FetchFeedsDocument = gql`
-  query fetchFeeds {
-    feeds(order_by: { created_at: desc }) {
+export const FetchOrgsDocument = gql`
+  query fetchOrgs {
+    orgs(order_by: { created_at: desc }) {
       id
       created_at
       body
-      author {
-        id
-        name
-        image
-      }
     }
   }
 `;
-export type FetchFeedsComponentProps = Omit<
+export type FetchOrgsComponentProps = Omit<
   ApolloReactComponents.QueryComponentOptions<
-    FetchFeedsQuery,
-    FetchFeedsQueryVariables
+    FetchOrgsQuery,
+    FetchOrgsQueryVariables
   >,
   "query"
 >;
 
-export const FetchFeedsComponent = (props: FetchFeedsComponentProps) => (
-  <ApolloReactComponents.Query<FetchFeedsQuery, FetchFeedsQueryVariables>
-    query={FetchFeedsDocument}
+export const FetchOrgsComponent = (props: FetchOrgsComponentProps) => (
+  <ApolloReactComponents.Query<FetchOrgsQuery, FetchOrgsQueryVariables>
+    query={FetchOrgsDocument}
     {...props}
   />
 );
 
-export type FetchFeedsProps<
+export type FetchOrgsProps<
   TChildProps = {},
   TDataName extends string = "data"
 > = {
   [key in TDataName]: ApolloReactHoc.DataValue<
-    FetchFeedsQuery,
-    FetchFeedsQueryVariables
+    FetchOrgsQuery,
+    FetchOrgsQueryVariables
   >;
 } & TChildProps;
-export function withFetchFeeds<
+export function withFetchOrgs<
   TProps,
   TChildProps = {},
   TDataName extends string = "data"
 >(
   operationOptions?: ApolloReactHoc.OperationOption<
     TProps,
-    FetchFeedsQuery,
-    FetchFeedsQueryVariables,
-    FetchFeedsProps<TChildProps, TDataName>
+    FetchOrgsQuery,
+    FetchOrgsQueryVariables,
+    FetchOrgsProps<TChildProps, TDataName>
   >
 ) {
   return ApolloReactHoc.withQuery<
     TProps,
-    FetchFeedsQuery,
-    FetchFeedsQueryVariables,
-    FetchFeedsProps<TChildProps, TDataName>
-  >(FetchFeedsDocument, {
-    alias: "fetchFeeds",
+    FetchOrgsQuery,
+    FetchOrgsQueryVariables,
+    FetchOrgsProps<TChildProps, TDataName>
+  >(FetchOrgsDocument, {
+    alias: "fetchOrgs",
     ...operationOptions,
   });
 }
 
 /**
- * __useFetchFeedsQuery__
+ * __useFetchOrgsQuery__
  *
- * To run a query within a React component, call `useFetchFeedsQuery` and pass it any options that fit your needs.
- * When your component renders, `useFetchFeedsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useFetchOrgsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchOrgsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useFetchFeedsQuery({
+ * const { data, loading, error } = useFetchOrgsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useFetchFeedsQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    FetchFeedsQuery,
-    FetchFeedsQueryVariables
-  >
+export function useFetchOrgsQuery(
+  baseOptions?: Apollo.QueryHookOptions<FetchOrgsQuery, FetchOrgsQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<FetchFeedsQuery, FetchFeedsQueryVariables>(
-    FetchFeedsDocument,
+  return Apollo.useQuery<FetchOrgsQuery, FetchOrgsQueryVariables>(
+    FetchOrgsDocument,
     options
   );
 }
-export function useFetchFeedsLazyQuery(
+export function useFetchOrgsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
-    FetchFeedsQuery,
-    FetchFeedsQueryVariables
+    FetchOrgsQuery,
+    FetchOrgsQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<FetchFeedsQuery, FetchFeedsQueryVariables>(
-    FetchFeedsDocument,
+  return Apollo.useLazyQuery<FetchOrgsQuery, FetchOrgsQueryVariables>(
+    FetchOrgsDocument,
     options
   );
 }
-export type FetchFeedsQueryHookResult = ReturnType<typeof useFetchFeedsQuery>;
-export type FetchFeedsLazyQueryHookResult = ReturnType<
-  typeof useFetchFeedsLazyQuery
+export type FetchOrgsQueryHookResult = ReturnType<typeof useFetchOrgsQuery>;
+export type FetchOrgsLazyQueryHookResult = ReturnType<
+  typeof useFetchOrgsLazyQuery
 >;
-export type FetchFeedsQueryResult = Apollo.QueryResult<
-  FetchFeedsQuery,
-  FetchFeedsQueryVariables
+export type FetchOrgsQueryResult = Apollo.QueryResult<
+  FetchOrgsQuery,
+  FetchOrgsQueryVariables
 >;
 export const FetchUserDocument = gql`
   query fetchUser($userId: uuid!) {
@@ -2356,104 +2107,109 @@ export type FetchUserQueryResult = Apollo.QueryResult<
   FetchUserQuery,
   FetchUserQueryVariables
 >;
-export const FetchFeedsSubscriptionDocument = gql`
-  subscription fetchFeedsSubscription {
-    feeds(order_by: { created_at: desc }) {
+export const MyOrgsDocument = gql`
+  query myOrgs($userId: uuid!) {
+    users_by_pk(id: $userId) {
       id
-      created_at
-      body
-      author {
+      name
+      orgs(order_by: { created_at: desc }) {
         id
-        name
-        image
+        created_at
+        body
+        author {
+          id
+          name
+          image
+        }
       }
     }
   }
 `;
-export type FetchFeedsSubscriptionComponentProps = Omit<
-  ApolloReactComponents.SubscriptionComponentOptions<
-    FetchFeedsSubscriptionSubscription,
-    FetchFeedsSubscriptionSubscriptionVariables
+export type MyOrgsComponentProps = Omit<
+  ApolloReactComponents.QueryComponentOptions<
+    MyOrgsQuery,
+    MyOrgsQueryVariables
   >,
-  "subscription"
->;
+  "query"
+> &
+  ({ variables: MyOrgsQueryVariables; skip?: boolean } | { skip: boolean });
 
-export const FetchFeedsSubscriptionComponent = (
-  props: FetchFeedsSubscriptionComponentProps
-) => (
-  <ApolloReactComponents.Subscription<
-    FetchFeedsSubscriptionSubscription,
-    FetchFeedsSubscriptionSubscriptionVariables
-  >
-    subscription={FetchFeedsSubscriptionDocument}
+export const MyOrgsComponent = (props: MyOrgsComponentProps) => (
+  <ApolloReactComponents.Query<MyOrgsQuery, MyOrgsQueryVariables>
+    query={MyOrgsDocument}
     {...props}
   />
 );
 
-export type FetchFeedsSubscriptionProps<
-  TChildProps = {},
-  TDataName extends string = "data"
-> = {
+export type MyOrgsProps<TChildProps = {}, TDataName extends string = "data"> = {
   [key in TDataName]: ApolloReactHoc.DataValue<
-    FetchFeedsSubscriptionSubscription,
-    FetchFeedsSubscriptionSubscriptionVariables
+    MyOrgsQuery,
+    MyOrgsQueryVariables
   >;
 } & TChildProps;
-export function withFetchFeedsSubscription<
+export function withMyOrgs<
   TProps,
   TChildProps = {},
   TDataName extends string = "data"
 >(
   operationOptions?: ApolloReactHoc.OperationOption<
     TProps,
-    FetchFeedsSubscriptionSubscription,
-    FetchFeedsSubscriptionSubscriptionVariables,
-    FetchFeedsSubscriptionProps<TChildProps, TDataName>
+    MyOrgsQuery,
+    MyOrgsQueryVariables,
+    MyOrgsProps<TChildProps, TDataName>
   >
 ) {
-  return ApolloReactHoc.withSubscription<
+  return ApolloReactHoc.withQuery<
     TProps,
-    FetchFeedsSubscriptionSubscription,
-    FetchFeedsSubscriptionSubscriptionVariables,
-    FetchFeedsSubscriptionProps<TChildProps, TDataName>
-  >(FetchFeedsSubscriptionDocument, {
-    alias: "fetchFeedsSubscription",
+    MyOrgsQuery,
+    MyOrgsQueryVariables,
+    MyOrgsProps<TChildProps, TDataName>
+  >(MyOrgsDocument, {
+    alias: "myOrgs",
     ...operationOptions,
   });
 }
 
 /**
- * __useFetchFeedsSubscriptionSubscription__
+ * __useMyOrgsQuery__
  *
- * To run a query within a React component, call `useFetchFeedsSubscriptionSubscription` and pass it any options that fit your needs.
- * When your component renders, `useFetchFeedsSubscriptionSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useMyOrgsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMyOrgsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
- * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useFetchFeedsSubscriptionSubscription({
+ * const { data, loading, error } = useMyOrgsQuery({
  *   variables: {
+ *      userId: // value for 'userId'
  *   },
  * });
  */
-export function useFetchFeedsSubscriptionSubscription(
-  baseOptions?: Apollo.SubscriptionHookOptions<
-    FetchFeedsSubscriptionSubscription,
-    FetchFeedsSubscriptionSubscriptionVariables
-  >
+export function useMyOrgsQuery(
+  baseOptions: Apollo.QueryHookOptions<MyOrgsQuery, MyOrgsQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useSubscription<
-    FetchFeedsSubscriptionSubscription,
-    FetchFeedsSubscriptionSubscriptionVariables
-  >(FetchFeedsSubscriptionDocument, options);
+  return Apollo.useQuery<MyOrgsQuery, MyOrgsQueryVariables>(
+    MyOrgsDocument,
+    options
+  );
 }
-export type FetchFeedsSubscriptionSubscriptionHookResult = ReturnType<
-  typeof useFetchFeedsSubscriptionSubscription
+export function useMyOrgsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<MyOrgsQuery, MyOrgsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<MyOrgsQuery, MyOrgsQueryVariables>(
+    MyOrgsDocument,
+    options
+  );
+}
+export type MyOrgsQueryHookResult = ReturnType<typeof useMyOrgsQuery>;
+export type MyOrgsLazyQueryHookResult = ReturnType<typeof useMyOrgsLazyQuery>;
+export type MyOrgsQueryResult = Apollo.QueryResult<
+  MyOrgsQuery,
+  MyOrgsQueryVariables
 >;
-export type FetchFeedsSubscriptionSubscriptionResult =
-  Apollo.SubscriptionResult<FetchFeedsSubscriptionSubscription>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -2583,27 +2339,27 @@ export type ResolversTypes = {
   accounts_select_column: Accounts_Select_Column;
   accounts_set_input: Accounts_Set_Input;
   accounts_update_column: Accounts_Update_Column;
-  feeds: ResolverTypeWrapper<Feeds>;
-  feeds_aggregate: ResolverTypeWrapper<Feeds_Aggregate>;
-  feeds_aggregate_fields: ResolverTypeWrapper<Feeds_Aggregate_Fields>;
-  feeds_aggregate_order_by: Feeds_Aggregate_Order_By;
-  feeds_arr_rel_insert_input: Feeds_Arr_Rel_Insert_Input;
-  feeds_bool_exp: Feeds_Bool_Exp;
-  feeds_constraint: Feeds_Constraint;
-  feeds_insert_input: Feeds_Insert_Input;
-  feeds_max_fields: ResolverTypeWrapper<Feeds_Max_Fields>;
-  feeds_max_order_by: Feeds_Max_Order_By;
-  feeds_min_fields: ResolverTypeWrapper<Feeds_Min_Fields>;
-  feeds_min_order_by: Feeds_Min_Order_By;
-  feeds_mutation_response: ResolverTypeWrapper<Feeds_Mutation_Response>;
-  feeds_on_conflict: Feeds_On_Conflict;
-  feeds_order_by: Feeds_Order_By;
-  feeds_pk_columns_input: Feeds_Pk_Columns_Input;
-  feeds_select_column: Feeds_Select_Column;
-  feeds_set_input: Feeds_Set_Input;
-  feeds_update_column: Feeds_Update_Column;
   mutation_root: ResolverTypeWrapper<{}>;
   order_by: Order_By;
+  orgs: ResolverTypeWrapper<Orgs>;
+  orgs_aggregate: ResolverTypeWrapper<Orgs_Aggregate>;
+  orgs_aggregate_fields: ResolverTypeWrapper<Orgs_Aggregate_Fields>;
+  orgs_aggregate_order_by: Orgs_Aggregate_Order_By;
+  orgs_arr_rel_insert_input: Orgs_Arr_Rel_Insert_Input;
+  orgs_bool_exp: Orgs_Bool_Exp;
+  orgs_constraint: Orgs_Constraint;
+  orgs_insert_input: Orgs_Insert_Input;
+  orgs_max_fields: ResolverTypeWrapper<Orgs_Max_Fields>;
+  orgs_max_order_by: Orgs_Max_Order_By;
+  orgs_min_fields: ResolverTypeWrapper<Orgs_Min_Fields>;
+  orgs_min_order_by: Orgs_Min_Order_By;
+  orgs_mutation_response: ResolverTypeWrapper<Orgs_Mutation_Response>;
+  orgs_on_conflict: Orgs_On_Conflict;
+  orgs_order_by: Orgs_Order_By;
+  orgs_pk_columns_input: Orgs_Pk_Columns_Input;
+  orgs_select_column: Orgs_Select_Column;
+  orgs_set_input: Orgs_Set_Input;
+  orgs_update_column: Orgs_Update_Column;
   query_root: ResolverTypeWrapper<{}>;
   sessions: ResolverTypeWrapper<Sessions>;
   sessions_aggregate: ResolverTypeWrapper<Sessions_Aggregate>;
@@ -2630,30 +2386,6 @@ export type ResolversTypes = {
   sessions_var_samp_fields: ResolverTypeWrapper<Sessions_Var_Samp_Fields>;
   sessions_variance_fields: ResolverTypeWrapper<Sessions_Variance_Fields>;
   subscription_root: ResolverTypeWrapper<{}>;
-  test: ResolverTypeWrapper<Test>;
-  test_aggregate: ResolverTypeWrapper<Test_Aggregate>;
-  test_aggregate_fields: ResolverTypeWrapper<Test_Aggregate_Fields>;
-  test_avg_fields: ResolverTypeWrapper<Test_Avg_Fields>;
-  test_bool_exp: Test_Bool_Exp;
-  test_constraint: Test_Constraint;
-  test_inc_input: Test_Inc_Input;
-  test_insert_input: Test_Insert_Input;
-  test_max_fields: ResolverTypeWrapper<Test_Max_Fields>;
-  test_min_fields: ResolverTypeWrapper<Test_Min_Fields>;
-  test_mutation_response: ResolverTypeWrapper<Test_Mutation_Response>;
-  test_on_conflict: Test_On_Conflict;
-  test_order_by: Test_Order_By;
-  test_pk_columns_input: Test_Pk_Columns_Input;
-  test_select_column: Test_Select_Column;
-  test_set_input: Test_Set_Input;
-  test_stddev_fields: ResolverTypeWrapper<Test_Stddev_Fields>;
-  test_stddev_pop_fields: ResolverTypeWrapper<Test_Stddev_Pop_Fields>;
-  test_stddev_samp_fields: ResolverTypeWrapper<Test_Stddev_Samp_Fields>;
-  test_sum_fields: ResolverTypeWrapper<Test_Sum_Fields>;
-  test_update_column: Test_Update_Column;
-  test_var_pop_fields: ResolverTypeWrapper<Test_Var_Pop_Fields>;
-  test_var_samp_fields: ResolverTypeWrapper<Test_Var_Samp_Fields>;
-  test_variance_fields: ResolverTypeWrapper<Test_Variance_Fields>;
   timestamptz: ResolverTypeWrapper<Scalars["timestamptz"]>;
   timestamptz_comparison_exp: Timestamptz_Comparison_Exp;
   users: ResolverTypeWrapper<Users>;
@@ -2711,23 +2443,23 @@ export type ResolversParentTypes = {
   accounts_order_by: Accounts_Order_By;
   accounts_pk_columns_input: Accounts_Pk_Columns_Input;
   accounts_set_input: Accounts_Set_Input;
-  feeds: Feeds;
-  feeds_aggregate: Feeds_Aggregate;
-  feeds_aggregate_fields: Feeds_Aggregate_Fields;
-  feeds_aggregate_order_by: Feeds_Aggregate_Order_By;
-  feeds_arr_rel_insert_input: Feeds_Arr_Rel_Insert_Input;
-  feeds_bool_exp: Feeds_Bool_Exp;
-  feeds_insert_input: Feeds_Insert_Input;
-  feeds_max_fields: Feeds_Max_Fields;
-  feeds_max_order_by: Feeds_Max_Order_By;
-  feeds_min_fields: Feeds_Min_Fields;
-  feeds_min_order_by: Feeds_Min_Order_By;
-  feeds_mutation_response: Feeds_Mutation_Response;
-  feeds_on_conflict: Feeds_On_Conflict;
-  feeds_order_by: Feeds_Order_By;
-  feeds_pk_columns_input: Feeds_Pk_Columns_Input;
-  feeds_set_input: Feeds_Set_Input;
   mutation_root: {};
+  orgs: Orgs;
+  orgs_aggregate: Orgs_Aggregate;
+  orgs_aggregate_fields: Orgs_Aggregate_Fields;
+  orgs_aggregate_order_by: Orgs_Aggregate_Order_By;
+  orgs_arr_rel_insert_input: Orgs_Arr_Rel_Insert_Input;
+  orgs_bool_exp: Orgs_Bool_Exp;
+  orgs_insert_input: Orgs_Insert_Input;
+  orgs_max_fields: Orgs_Max_Fields;
+  orgs_max_order_by: Orgs_Max_Order_By;
+  orgs_min_fields: Orgs_Min_Fields;
+  orgs_min_order_by: Orgs_Min_Order_By;
+  orgs_mutation_response: Orgs_Mutation_Response;
+  orgs_on_conflict: Orgs_On_Conflict;
+  orgs_order_by: Orgs_Order_By;
+  orgs_pk_columns_input: Orgs_Pk_Columns_Input;
+  orgs_set_input: Orgs_Set_Input;
   query_root: {};
   sessions: Sessions;
   sessions_aggregate: Sessions_Aggregate;
@@ -2751,27 +2483,6 @@ export type ResolversParentTypes = {
   sessions_var_samp_fields: Sessions_Var_Samp_Fields;
   sessions_variance_fields: Sessions_Variance_Fields;
   subscription_root: {};
-  test: Test;
-  test_aggregate: Test_Aggregate;
-  test_aggregate_fields: Test_Aggregate_Fields;
-  test_avg_fields: Test_Avg_Fields;
-  test_bool_exp: Test_Bool_Exp;
-  test_inc_input: Test_Inc_Input;
-  test_insert_input: Test_Insert_Input;
-  test_max_fields: Test_Max_Fields;
-  test_min_fields: Test_Min_Fields;
-  test_mutation_response: Test_Mutation_Response;
-  test_on_conflict: Test_On_Conflict;
-  test_order_by: Test_Order_By;
-  test_pk_columns_input: Test_Pk_Columns_Input;
-  test_set_input: Test_Set_Input;
-  test_stddev_fields: Test_Stddev_Fields;
-  test_stddev_pop_fields: Test_Stddev_Pop_Fields;
-  test_stddev_samp_fields: Test_Stddev_Samp_Fields;
-  test_sum_fields: Test_Sum_Fields;
-  test_var_pop_fields: Test_Var_Pop_Fields;
-  test_var_samp_fields: Test_Var_Samp_Fields;
-  test_variance_fields: Test_Variance_Fields;
   timestamptz: Scalars["timestamptz"];
   timestamptz_comparison_exp: Timestamptz_Comparison_Exp;
   users: Users;
@@ -3006,104 +2717,6 @@ export type Accounts_Mutation_ResponseResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FeedsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["feeds"] = ResolversParentTypes["feeds"]
-> = {
-  author?: Resolver<Maybe<ResolversTypes["users"]>, ParentType, ContextType>;
-  author_id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
-  body?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  created_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
-  updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Feeds_AggregateResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["feeds_aggregate"] = ResolversParentTypes["feeds_aggregate"]
-> = {
-  aggregate?: Resolver<
-    Maybe<ResolversTypes["feeds_aggregate_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  nodes?: Resolver<Array<ResolversTypes["feeds"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Feeds_Aggregate_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["feeds_aggregate_fields"] = ResolversParentTypes["feeds_aggregate_fields"]
-> = {
-  count?: Resolver<
-    ResolversTypes["Int"],
-    ParentType,
-    ContextType,
-    RequireFields<Feeds_Aggregate_FieldsCountArgs, never>
-  >;
-  max?: Resolver<
-    Maybe<ResolversTypes["feeds_max_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  min?: Resolver<
-    Maybe<ResolversTypes["feeds_min_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Feeds_Max_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["feeds_max_fields"] = ResolversParentTypes["feeds_max_fields"]
-> = {
-  author_id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
-  body?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
-  created_at?: Resolver<
-    Maybe<ResolversTypes["timestamptz"]>,
-    ParentType,
-    ContextType
-  >;
-  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
-  updated_at?: Resolver<
-    Maybe<ResolversTypes["timestamptz"]>,
-    ParentType,
-    ContextType
-  >;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Feeds_Min_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["feeds_min_fields"] = ResolversParentTypes["feeds_min_fields"]
-> = {
-  author_id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
-  body?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
-  created_at?: Resolver<
-    Maybe<ResolversTypes["timestamptz"]>,
-    ParentType,
-    ContextType
-  >;
-  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
-  updated_at?: Resolver<
-    Maybe<ResolversTypes["timestamptz"]>,
-    ParentType,
-    ContextType
-  >;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Feeds_Mutation_ResponseResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["feeds_mutation_response"] = ResolversParentTypes["feeds_mutation_response"]
-> = {
-  affected_rows?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
-  returning?: Resolver<Array<ResolversTypes["feeds"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
 export type Mutation_RootResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["mutation_root"] = ResolversParentTypes["mutation_root"]
@@ -3120,17 +2733,17 @@ export type Mutation_RootResolvers<
     ContextType,
     RequireFields<Mutation_RootDelete_Accounts_By_PkArgs, "id">
   >;
-  delete_feeds?: Resolver<
-    Maybe<ResolversTypes["feeds_mutation_response"]>,
+  delete_orgs?: Resolver<
+    Maybe<ResolversTypes["orgs_mutation_response"]>,
     ParentType,
     ContextType,
-    RequireFields<Mutation_RootDelete_FeedsArgs, "where">
+    RequireFields<Mutation_RootDelete_OrgsArgs, "where">
   >;
-  delete_feeds_by_pk?: Resolver<
-    Maybe<ResolversTypes["feeds"]>,
+  delete_orgs_by_pk?: Resolver<
+    Maybe<ResolversTypes["orgs"]>,
     ParentType,
     ContextType,
-    RequireFields<Mutation_RootDelete_Feeds_By_PkArgs, "id">
+    RequireFields<Mutation_RootDelete_Orgs_By_PkArgs, "id">
   >;
   delete_sessions?: Resolver<
     Maybe<ResolversTypes["sessions_mutation_response"]>,
@@ -3143,18 +2756,6 @@ export type Mutation_RootResolvers<
     ParentType,
     ContextType,
     RequireFields<Mutation_RootDelete_Sessions_By_PkArgs, "id">
-  >;
-  delete_test?: Resolver<
-    Maybe<ResolversTypes["test_mutation_response"]>,
-    ParentType,
-    ContextType,
-    RequireFields<Mutation_RootDelete_TestArgs, "where">
-  >;
-  delete_test_by_pk?: Resolver<
-    Maybe<ResolversTypes["test"]>,
-    ParentType,
-    ContextType,
-    RequireFields<Mutation_RootDelete_Test_By_PkArgs, "id">
   >;
   delete_users?: Resolver<
     Maybe<ResolversTypes["users_mutation_response"]>,
@@ -3192,17 +2793,17 @@ export type Mutation_RootResolvers<
     ContextType,
     RequireFields<Mutation_RootInsert_Accounts_OneArgs, "object">
   >;
-  insert_feeds?: Resolver<
-    Maybe<ResolversTypes["feeds_mutation_response"]>,
+  insert_orgs?: Resolver<
+    Maybe<ResolversTypes["orgs_mutation_response"]>,
     ParentType,
     ContextType,
-    RequireFields<Mutation_RootInsert_FeedsArgs, "objects">
+    RequireFields<Mutation_RootInsert_OrgsArgs, "objects">
   >;
-  insert_feeds_one?: Resolver<
-    Maybe<ResolversTypes["feeds"]>,
+  insert_orgs_one?: Resolver<
+    Maybe<ResolversTypes["orgs"]>,
     ParentType,
     ContextType,
-    RequireFields<Mutation_RootInsert_Feeds_OneArgs, "object">
+    RequireFields<Mutation_RootInsert_Orgs_OneArgs, "object">
   >;
   insert_sessions?: Resolver<
     Maybe<ResolversTypes["sessions_mutation_response"]>,
@@ -3215,18 +2816,6 @@ export type Mutation_RootResolvers<
     ParentType,
     ContextType,
     RequireFields<Mutation_RootInsert_Sessions_OneArgs, "object">
-  >;
-  insert_test?: Resolver<
-    Maybe<ResolversTypes["test_mutation_response"]>,
-    ParentType,
-    ContextType,
-    RequireFields<Mutation_RootInsert_TestArgs, "objects">
-  >;
-  insert_test_one?: Resolver<
-    Maybe<ResolversTypes["test"]>,
-    ParentType,
-    ContextType,
-    RequireFields<Mutation_RootInsert_Test_OneArgs, "object">
   >;
   insert_users?: Resolver<
     Maybe<ResolversTypes["users_mutation_response"]>,
@@ -3264,17 +2853,17 @@ export type Mutation_RootResolvers<
     ContextType,
     RequireFields<Mutation_RootUpdate_Accounts_By_PkArgs, "pk_columns">
   >;
-  update_feeds?: Resolver<
-    Maybe<ResolversTypes["feeds_mutation_response"]>,
+  update_orgs?: Resolver<
+    Maybe<ResolversTypes["orgs_mutation_response"]>,
     ParentType,
     ContextType,
-    RequireFields<Mutation_RootUpdate_FeedsArgs, "where">
+    RequireFields<Mutation_RootUpdate_OrgsArgs, "where">
   >;
-  update_feeds_by_pk?: Resolver<
-    Maybe<ResolversTypes["feeds"]>,
+  update_orgs_by_pk?: Resolver<
+    Maybe<ResolversTypes["orgs"]>,
     ParentType,
     ContextType,
-    RequireFields<Mutation_RootUpdate_Feeds_By_PkArgs, "pk_columns">
+    RequireFields<Mutation_RootUpdate_Orgs_By_PkArgs, "pk_columns">
   >;
   update_sessions?: Resolver<
     Maybe<ResolversTypes["sessions_mutation_response"]>,
@@ -3287,18 +2876,6 @@ export type Mutation_RootResolvers<
     ParentType,
     ContextType,
     RequireFields<Mutation_RootUpdate_Sessions_By_PkArgs, "pk_columns">
-  >;
-  update_test?: Resolver<
-    Maybe<ResolversTypes["test_mutation_response"]>,
-    ParentType,
-    ContextType,
-    RequireFields<Mutation_RootUpdate_TestArgs, "where">
-  >;
-  update_test_by_pk?: Resolver<
-    Maybe<ResolversTypes["test"]>,
-    ParentType,
-    ContextType,
-    RequireFields<Mutation_RootUpdate_Test_By_PkArgs, "pk_columns">
   >;
   update_users?: Resolver<
     Maybe<ResolversTypes["users_mutation_response"]>,
@@ -3329,6 +2906,104 @@ export type Mutation_RootResolvers<
   >;
 };
 
+export type OrgsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["orgs"] = ResolversParentTypes["orgs"]
+> = {
+  author?: Resolver<Maybe<ResolversTypes["users"]>, ParentType, ContextType>;
+  author_id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  body?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  created_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Orgs_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["orgs_aggregate"] = ResolversParentTypes["orgs_aggregate"]
+> = {
+  aggregate?: Resolver<
+    Maybe<ResolversTypes["orgs_aggregate_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  nodes?: Resolver<Array<ResolversTypes["orgs"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Orgs_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["orgs_aggregate_fields"] = ResolversParentTypes["orgs_aggregate_fields"]
+> = {
+  count?: Resolver<
+    ResolversTypes["Int"],
+    ParentType,
+    ContextType,
+    RequireFields<Orgs_Aggregate_FieldsCountArgs, never>
+  >;
+  max?: Resolver<
+    Maybe<ResolversTypes["orgs_max_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  min?: Resolver<
+    Maybe<ResolversTypes["orgs_min_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Orgs_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["orgs_max_fields"] = ResolversParentTypes["orgs_max_fields"]
+> = {
+  author_id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  body?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  created_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  updated_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Orgs_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["orgs_min_fields"] = ResolversParentTypes["orgs_min_fields"]
+> = {
+  author_id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  body?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  created_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  updated_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Orgs_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["orgs_mutation_response"] = ResolversParentTypes["orgs_mutation_response"]
+> = {
+  affected_rows?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  returning?: Resolver<Array<ResolversTypes["orgs"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Query_RootResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["query_root"] = ResolversParentTypes["query_root"]
@@ -3351,23 +3026,23 @@ export type Query_RootResolvers<
     ContextType,
     RequireFields<Query_RootAccounts_By_PkArgs, "id">
   >;
-  feeds?: Resolver<
-    Array<ResolversTypes["feeds"]>,
+  orgs?: Resolver<
+    Array<ResolversTypes["orgs"]>,
     ParentType,
     ContextType,
-    RequireFields<Query_RootFeedsArgs, never>
+    RequireFields<Query_RootOrgsArgs, never>
   >;
-  feeds_aggregate?: Resolver<
-    ResolversTypes["feeds_aggregate"],
+  orgs_aggregate?: Resolver<
+    ResolversTypes["orgs_aggregate"],
     ParentType,
     ContextType,
-    RequireFields<Query_RootFeeds_AggregateArgs, never>
+    RequireFields<Query_RootOrgs_AggregateArgs, never>
   >;
-  feeds_by_pk?: Resolver<
-    Maybe<ResolversTypes["feeds"]>,
+  orgs_by_pk?: Resolver<
+    Maybe<ResolversTypes["orgs"]>,
     ParentType,
     ContextType,
-    RequireFields<Query_RootFeeds_By_PkArgs, "id">
+    RequireFields<Query_RootOrgs_By_PkArgs, "id">
   >;
   sessions?: Resolver<
     Array<ResolversTypes["sessions"]>,
@@ -3386,24 +3061,6 @@ export type Query_RootResolvers<
     ParentType,
     ContextType,
     RequireFields<Query_RootSessions_By_PkArgs, "id">
-  >;
-  test?: Resolver<
-    Array<ResolversTypes["test"]>,
-    ParentType,
-    ContextType,
-    RequireFields<Query_RootTestArgs, never>
-  >;
-  test_aggregate?: Resolver<
-    ResolversTypes["test_aggregate"],
-    ParentType,
-    ContextType,
-    RequireFields<Query_RootTest_AggregateArgs, never>
-  >;
-  test_by_pk?: Resolver<
-    Maybe<ResolversTypes["test"]>,
-    ParentType,
-    ContextType,
-    RequireFields<Query_RootTest_By_PkArgs, "id">
   >;
   users?: Resolver<
     Array<ResolversTypes["users"]>,
@@ -3703,26 +3360,26 @@ export type Subscription_RootResolvers<
     ContextType,
     RequireFields<Subscription_RootAccounts_By_PkArgs, "id">
   >;
-  feeds?: SubscriptionResolver<
-    Array<ResolversTypes["feeds"]>,
-    "feeds",
+  orgs?: SubscriptionResolver<
+    Array<ResolversTypes["orgs"]>,
+    "orgs",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootFeedsArgs, never>
+    RequireFields<Subscription_RootOrgsArgs, never>
   >;
-  feeds_aggregate?: SubscriptionResolver<
-    ResolversTypes["feeds_aggregate"],
-    "feeds_aggregate",
+  orgs_aggregate?: SubscriptionResolver<
+    ResolversTypes["orgs_aggregate"],
+    "orgs_aggregate",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootFeeds_AggregateArgs, never>
+    RequireFields<Subscription_RootOrgs_AggregateArgs, never>
   >;
-  feeds_by_pk?: SubscriptionResolver<
-    Maybe<ResolversTypes["feeds"]>,
-    "feeds_by_pk",
+  orgs_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes["orgs"]>,
+    "orgs_by_pk",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootFeeds_By_PkArgs, "id">
+    RequireFields<Subscription_RootOrgs_By_PkArgs, "id">
   >;
   sessions?: SubscriptionResolver<
     Array<ResolversTypes["sessions"]>,
@@ -3789,179 +3446,6 @@ export type Subscription_RootResolvers<
   >;
 };
 
-export type TestResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["test"] = ResolversParentTypes["test"]
-> = {
-  id?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Test_AggregateResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["test_aggregate"] = ResolversParentTypes["test_aggregate"]
-> = {
-  aggregate?: Resolver<
-    Maybe<ResolversTypes["test_aggregate_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  nodes?: Resolver<Array<ResolversTypes["test"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Test_Aggregate_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["test_aggregate_fields"] = ResolversParentTypes["test_aggregate_fields"]
-> = {
-  avg?: Resolver<
-    Maybe<ResolversTypes["test_avg_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  count?: Resolver<
-    ResolversTypes["Int"],
-    ParentType,
-    ContextType,
-    RequireFields<Test_Aggregate_FieldsCountArgs, never>
-  >;
-  max?: Resolver<
-    Maybe<ResolversTypes["test_max_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  min?: Resolver<
-    Maybe<ResolversTypes["test_min_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  stddev?: Resolver<
-    Maybe<ResolversTypes["test_stddev_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  stddev_pop?: Resolver<
-    Maybe<ResolversTypes["test_stddev_pop_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  stddev_samp?: Resolver<
-    Maybe<ResolversTypes["test_stddev_samp_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  sum?: Resolver<
-    Maybe<ResolversTypes["test_sum_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  var_pop?: Resolver<
-    Maybe<ResolversTypes["test_var_pop_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  var_samp?: Resolver<
-    Maybe<ResolversTypes["test_var_samp_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  variance?: Resolver<
-    Maybe<ResolversTypes["test_variance_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Test_Avg_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["test_avg_fields"] = ResolversParentTypes["test_avg_fields"]
-> = {
-  id?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Test_Max_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["test_max_fields"] = ResolversParentTypes["test_max_fields"]
-> = {
-  id?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Test_Min_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["test_min_fields"] = ResolversParentTypes["test_min_fields"]
-> = {
-  id?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Test_Mutation_ResponseResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["test_mutation_response"] = ResolversParentTypes["test_mutation_response"]
-> = {
-  affected_rows?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
-  returning?: Resolver<Array<ResolversTypes["test"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Test_Stddev_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["test_stddev_fields"] = ResolversParentTypes["test_stddev_fields"]
-> = {
-  id?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Test_Stddev_Pop_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["test_stddev_pop_fields"] = ResolversParentTypes["test_stddev_pop_fields"]
-> = {
-  id?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Test_Stddev_Samp_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["test_stddev_samp_fields"] = ResolversParentTypes["test_stddev_samp_fields"]
-> = {
-  id?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Test_Sum_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["test_sum_fields"] = ResolversParentTypes["test_sum_fields"]
-> = {
-  id?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Test_Var_Pop_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["test_var_pop_fields"] = ResolversParentTypes["test_var_pop_fields"]
-> = {
-  id?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Test_Var_Samp_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["test_var_samp_fields"] = ResolversParentTypes["test_var_samp_fields"]
-> = {
-  id?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Test_Variance_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["test_variance_fields"] = ResolversParentTypes["test_variance_fields"]
-> = {
-  id?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
 export interface TimestamptzScalarConfig
   extends GraphQLScalarTypeConfig<ResolversTypes["timestamptz"], any> {
   name: "timestamptz";
@@ -3978,21 +3462,21 @@ export type UsersResolvers<
     ParentType,
     ContextType
   >;
-  feeds?: Resolver<
-    Array<ResolversTypes["feeds"]>,
-    ParentType,
-    ContextType,
-    RequireFields<UsersFeedsArgs, never>
-  >;
-  feeds_aggregate?: Resolver<
-    ResolversTypes["feeds_aggregate"],
-    ParentType,
-    ContextType,
-    RequireFields<UsersFeeds_AggregateArgs, never>
-  >;
   id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  orgs?: Resolver<
+    Array<ResolversTypes["orgs"]>,
+    ParentType,
+    ContextType,
+    RequireFields<UsersOrgsArgs, never>
+  >;
+  orgs_aggregate?: Resolver<
+    ResolversTypes["orgs_aggregate"],
+    ParentType,
+    ContextType,
+    RequireFields<UsersOrgs_AggregateArgs, never>
+  >;
   updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -4230,13 +3714,13 @@ export type Resolvers<ContextType = any> = {
   accounts_max_fields?: Accounts_Max_FieldsResolvers<ContextType>;
   accounts_min_fields?: Accounts_Min_FieldsResolvers<ContextType>;
   accounts_mutation_response?: Accounts_Mutation_ResponseResolvers<ContextType>;
-  feeds?: FeedsResolvers<ContextType>;
-  feeds_aggregate?: Feeds_AggregateResolvers<ContextType>;
-  feeds_aggregate_fields?: Feeds_Aggregate_FieldsResolvers<ContextType>;
-  feeds_max_fields?: Feeds_Max_FieldsResolvers<ContextType>;
-  feeds_min_fields?: Feeds_Min_FieldsResolvers<ContextType>;
-  feeds_mutation_response?: Feeds_Mutation_ResponseResolvers<ContextType>;
   mutation_root?: Mutation_RootResolvers<ContextType>;
+  orgs?: OrgsResolvers<ContextType>;
+  orgs_aggregate?: Orgs_AggregateResolvers<ContextType>;
+  orgs_aggregate_fields?: Orgs_Aggregate_FieldsResolvers<ContextType>;
+  orgs_max_fields?: Orgs_Max_FieldsResolvers<ContextType>;
+  orgs_min_fields?: Orgs_Min_FieldsResolvers<ContextType>;
+  orgs_mutation_response?: Orgs_Mutation_ResponseResolvers<ContextType>;
   query_root?: Query_RootResolvers<ContextType>;
   sessions?: SessionsResolvers<ContextType>;
   sessions_aggregate?: Sessions_AggregateResolvers<ContextType>;
@@ -4253,20 +3737,6 @@ export type Resolvers<ContextType = any> = {
   sessions_var_samp_fields?: Sessions_Var_Samp_FieldsResolvers<ContextType>;
   sessions_variance_fields?: Sessions_Variance_FieldsResolvers<ContextType>;
   subscription_root?: Subscription_RootResolvers<ContextType>;
-  test?: TestResolvers<ContextType>;
-  test_aggregate?: Test_AggregateResolvers<ContextType>;
-  test_aggregate_fields?: Test_Aggregate_FieldsResolvers<ContextType>;
-  test_avg_fields?: Test_Avg_FieldsResolvers<ContextType>;
-  test_max_fields?: Test_Max_FieldsResolvers<ContextType>;
-  test_min_fields?: Test_Min_FieldsResolvers<ContextType>;
-  test_mutation_response?: Test_Mutation_ResponseResolvers<ContextType>;
-  test_stddev_fields?: Test_Stddev_FieldsResolvers<ContextType>;
-  test_stddev_pop_fields?: Test_Stddev_Pop_FieldsResolvers<ContextType>;
-  test_stddev_samp_fields?: Test_Stddev_Samp_FieldsResolvers<ContextType>;
-  test_sum_fields?: Test_Sum_FieldsResolvers<ContextType>;
-  test_var_pop_fields?: Test_Var_Pop_FieldsResolvers<ContextType>;
-  test_var_samp_fields?: Test_Var_Samp_FieldsResolvers<ContextType>;
-  test_variance_fields?: Test_Variance_FieldsResolvers<ContextType>;
   timestamptz?: GraphQLScalarType;
   users?: UsersResolvers<ContextType>;
   users_aggregate?: Users_AggregateResolvers<ContextType>;

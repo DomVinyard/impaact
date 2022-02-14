@@ -1,0 +1,12 @@
+mutation insertOrg($author_id: uuid!, $body: String) {
+  insert_orgs_one(object: { author_id: $author_id, body: $body }) {
+    id
+    created_at
+    body
+    author {
+      id
+      name
+      image
+    }
+  }
+}

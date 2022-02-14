@@ -11,6 +11,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import Content from "components/Layout/Content";
+import OrgsList from "components/OrgList";
+import { useFetchOrgsQuery } from "generated-graphql";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
 import React from "react";
@@ -46,7 +48,7 @@ export const SearchBar = ({ value, onChange, onSubmit, mini }) => {
         onChange={onChange}
         onKeyPress={(e) => e.key === "Enter" && onSubmit()}
         type="search"
-        enterkeyhint="search"
+        enterKeyHint="search"
       />
       <Button
         display={{ base: "none", md: "block" }}
@@ -70,6 +72,14 @@ const IndexPageComponent = () => {
   const [latestKeypress, setLatestKeypress] = React.useState<
     Date | undefined
   >();
+  const { data, error, loading } = useFetchOrgsQuery({
+    context: {
+      headers: {
+        "x-hasura-role": "public",
+      },
+    },
+  });
+  console.log({ data, error, loading });
 
   return (
     <>
@@ -145,16 +155,7 @@ const IndexPageComponent = () => {
             FEATURED
           </Heading>
 
-          <Text
-            fontSize={{ base: "1.5rem", md: "1.75rem", lg: "2rem" }}
-            fontFamily={"Montserrat"}
-            fontWeight={600}
-            opacity={0.4}
-            mt={4}
-            mb={400}
-          >
-            No featured organisations
-          </Text>
+          {<OrgsList orgs={data?.orgs} />}
         </Content>
       </Box>
     </>
