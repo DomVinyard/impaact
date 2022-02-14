@@ -86,9 +86,7 @@ const Model = ({ latestKeypress }) => {
         <group ref={group} position={[0, -1, 2.6]} dispose={null}>
           <primitive ref={group} name="Object_0" object={model} />
         </group>
-      ) : (
-        <Html>Loading...</Html>
-      )}
+      ) : null}
     </>
   );
 };

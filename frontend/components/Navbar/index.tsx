@@ -23,7 +23,6 @@ import { SearchBar } from "components/Pages/Landing";
 const Navbar: NextComponentType = () => {
   const [session] = useSession();
   const router = useRouter();
-  console.log({ router });
   const { q } = router.query;
   const [query, setQuery] = React.useState(q);
 
@@ -60,8 +59,13 @@ const Navbar: NextComponentType = () => {
             Sign In
           </Button>
         </Link>
+
         <Link href="/api/auth/signin">
           <Button
+            display={{
+              base: router.pathname === "/" ? "inline-block" : "none",
+              md: "inline-block",
+            }}
             background={"none"}
             variant="outline"
             paddingY={1}
