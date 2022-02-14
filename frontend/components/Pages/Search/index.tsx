@@ -21,7 +21,7 @@ const SearchPageComponent = () => {
   return (
     <Content>
       {<OrgsList orgs={data?.orgs} />}
-      {!data.orgs.length && (
+      {!data?.orgs.length && (
         <Stack>
           <Flex
             fontSize={{ base: "1.5rem", md: "1.75rem", lg: "2rem" }}
