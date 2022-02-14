@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { Canvas } from "react-three-fiber";
 
-const OrgPageComponent = ({ session }) => {
+const OrgPageComponent = () => {
   const router = useRouter();
   const { data, error, loading } = useFetchOrgQuery({
     variables: { id: router?.query.id },
