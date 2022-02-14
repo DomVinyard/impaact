@@ -124,7 +124,7 @@ const IndexPageComponent = () => {
               camera={{ position: [-1, -0.25, 4.5] }}
             >
               <Lights />
-              <Model latestKeypress={latestKeypress} />
+              <Model latestKeypress={latestKeypress} baseSpeed={0.001} />
             </Canvas>
           </Flex>
           <Flex display={{ base: "block", md: "none" }}>
@@ -134,7 +134,7 @@ const IndexPageComponent = () => {
               camera={{ position: [0, 1.75, 5] }}
             >
               <Lights />
-              <Model latestKeypress={latestKeypress} />
+              <Model latestKeypress={latestKeypress} baseSpeed={0.002} />
             </Canvas>
           </Flex>
         </>

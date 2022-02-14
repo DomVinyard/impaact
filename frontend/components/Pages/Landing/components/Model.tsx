@@ -25,11 +25,10 @@ interface actions {
   };
 }
 
-const baseSpeed = 0.001;
 const incrementSpeed = 0.001;
 const maxSpeed = 0.01;
 
-const Model = ({ latestKeypress }) => {
+const Model = ({ latestKeypress, baseSpeed = 0.001 }) => {
   /* Refs */
   const group: group = useRef();
   const actions: actions = useRef();
