@@ -17,12 +17,21 @@ insert_permissions:
       check: {}
       columns:
         - author_id
-        - body
+        - name
     role: user
 select_permissions:
   - permission:
       columns:
-        - body
+        - name
+        - created_at
+        - updated_at
+        - author_id
+        - id
+      filter: {}
+    role: user
+  - permission:
+      columns:
+        - name
         - created_at
         - updated_at
         - author_id

@@ -551,9 +551,9 @@ export type Orgs = {
   /** An object relationship */
   author?: Maybe<Users>;
   author_id: Scalars["uuid"];
-  body: Scalars["String"];
   created_at: Scalars["timestamptz"];
   id: Scalars["uuid"];
+  name: Scalars["String"];
   updated_at: Scalars["timestamptz"];
 };
 
@@ -599,9 +599,9 @@ export type Orgs_Bool_Exp = {
   _or?: InputMaybe<Array<Orgs_Bool_Exp>>;
   author?: InputMaybe<Users_Bool_Exp>;
   author_id?: InputMaybe<Uuid_Comparison_Exp>;
-  body?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -615,9 +615,9 @@ export enum Orgs_Constraint {
 export type Orgs_Insert_Input = {
   author?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   author_id?: InputMaybe<Scalars["uuid"]>;
-  body?: InputMaybe<Scalars["String"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   id?: InputMaybe<Scalars["uuid"]>;
+  name?: InputMaybe<Scalars["String"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
 };
 
@@ -625,18 +625,18 @@ export type Orgs_Insert_Input = {
 export type Orgs_Max_Fields = {
   __typename?: "orgs_max_fields";
   author_id?: Maybe<Scalars["uuid"]>;
-  body?: Maybe<Scalars["String"]>;
   created_at?: Maybe<Scalars["timestamptz"]>;
   id?: Maybe<Scalars["uuid"]>;
+  name?: Maybe<Scalars["String"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
 
 /** order by max() on columns of table "orgs" */
 export type Orgs_Max_Order_By = {
   author_id?: InputMaybe<Order_By>;
-  body?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
@@ -644,18 +644,18 @@ export type Orgs_Max_Order_By = {
 export type Orgs_Min_Fields = {
   __typename?: "orgs_min_fields";
   author_id?: Maybe<Scalars["uuid"]>;
-  body?: Maybe<Scalars["String"]>;
   created_at?: Maybe<Scalars["timestamptz"]>;
   id?: Maybe<Scalars["uuid"]>;
+  name?: Maybe<Scalars["String"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
 
 /** order by min() on columns of table "orgs" */
 export type Orgs_Min_Order_By = {
   author_id?: InputMaybe<Order_By>;
-  body?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
@@ -679,9 +679,9 @@ export type Orgs_On_Conflict = {
 export type Orgs_Order_By = {
   author?: InputMaybe<Users_Order_By>;
   author_id?: InputMaybe<Order_By>;
-  body?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
@@ -695,11 +695,11 @@ export enum Orgs_Select_Column {
   /** column name */
   AuthorId = "author_id",
   /** column name */
-  Body = "body",
-  /** column name */
   CreatedAt = "created_at",
   /** column name */
   Id = "id",
+  /** column name */
+  Name = "name",
   /** column name */
   UpdatedAt = "updated_at",
 }
@@ -707,9 +707,9 @@ export enum Orgs_Select_Column {
 /** input type for updating data in table "orgs" */
 export type Orgs_Set_Input = {
   author_id?: InputMaybe<Scalars["uuid"]>;
-  body?: InputMaybe<Scalars["String"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   id?: InputMaybe<Scalars["uuid"]>;
+  name?: InputMaybe<Scalars["String"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
 };
 
@@ -718,11 +718,11 @@ export enum Orgs_Update_Column {
   /** column name */
   AuthorId = "author_id",
   /** column name */
-  Body = "body",
-  /** column name */
   CreatedAt = "created_at",
   /** column name */
   Id = "id",
+  /** column name */
+  Name = "name",
   /** column name */
   UpdatedAt = "updated_at",
 }
@@ -1606,7 +1606,7 @@ export enum Verification_Requests_Update_Column {
 
 export type InsertOrgMutationVariables = Exact<{
   author_id: Scalars["uuid"];
-  body?: InputMaybe<Scalars["String"]>;
+  name?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type InsertOrgMutation = {
@@ -1616,7 +1616,7 @@ export type InsertOrgMutation = {
         __typename?: "orgs";
         id: any;
         created_at: string;
-        body: string;
+        name: string;
         author?:
           | {
               __typename?: "users";
@@ -1656,7 +1656,7 @@ export type FetchOrgsQuery = {
     __typename?: "orgs";
     id: any;
     created_at: string;
-    body: string;
+    name: string;
   }>;
 };
 
@@ -1686,7 +1686,7 @@ export type MyOrgsQuery = {
           __typename?: "orgs";
           id: any;
           created_at: string;
-          body: string;
+          name: string;
           author?:
             | {
                 __typename?: "users";
@@ -1700,12 +1700,21 @@ export type MyOrgsQuery = {
     | undefined;
 };
 
+export type SearchOrgsQueryVariables = Exact<{
+  q?: InputMaybe<Scalars["String"]>;
+}>;
+
+export type SearchOrgsQuery = {
+  __typename?: "query_root";
+  orgs: Array<{ __typename?: "orgs"; id: any; name: string }>;
+};
+
 export const InsertOrgDocument = gql`
-  mutation insertOrg($author_id: uuid!, $body: String) {
-    insert_orgs_one(object: { author_id: $author_id, body: $body }) {
+  mutation insertOrg($author_id: uuid!, $name: String) {
+    insert_orgs_one(object: { author_id: $author_id, name: $name }) {
       id
       created_at
-      body
+      name
       author {
         id
         name
@@ -1779,7 +1788,7 @@ export function withInsertOrg<
  * const [insertOrgMutation, { data, loading, error }] = useInsertOrgMutation({
  *   variables: {
  *      author_id: // value for 'author_id'
- *      body: // value for 'body'
+ *      name: // value for 'name'
  *   },
  * });
  */
@@ -1911,7 +1920,7 @@ export const FetchOrgsDocument = gql`
     orgs(order_by: { created_at: desc }) {
       id
       created_at
-      body
+      name
     }
   }
 `;
@@ -2115,7 +2124,7 @@ export const MyOrgsDocument = gql`
       orgs(order_by: { created_at: desc }) {
         id
         created_at
-        body
+        name
         author {
           id
           name
@@ -2209,6 +2218,109 @@ export type MyOrgsLazyQueryHookResult = ReturnType<typeof useMyOrgsLazyQuery>;
 export type MyOrgsQueryResult = Apollo.QueryResult<
   MyOrgsQuery,
   MyOrgsQueryVariables
+>;
+export const SearchOrgsDocument = gql`
+  query searchOrgs($q: String) {
+    orgs(where: { name: { _ilike: $q } }) {
+      id
+      name
+    }
+  }
+`;
+export type SearchOrgsComponentProps = Omit<
+  ApolloReactComponents.QueryComponentOptions<
+    SearchOrgsQuery,
+    SearchOrgsQueryVariables
+  >,
+  "query"
+>;
+
+export const SearchOrgsComponent = (props: SearchOrgsComponentProps) => (
+  <ApolloReactComponents.Query<SearchOrgsQuery, SearchOrgsQueryVariables>
+    query={SearchOrgsDocument}
+    {...props}
+  />
+);
+
+export type SearchOrgsProps<
+  TChildProps = {},
+  TDataName extends string = "data"
+> = {
+  [key in TDataName]: ApolloReactHoc.DataValue<
+    SearchOrgsQuery,
+    SearchOrgsQueryVariables
+  >;
+} & TChildProps;
+export function withSearchOrgs<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = "data"
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    SearchOrgsQuery,
+    SearchOrgsQueryVariables,
+    SearchOrgsProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    SearchOrgsQuery,
+    SearchOrgsQueryVariables,
+    SearchOrgsProps<TChildProps, TDataName>
+  >(SearchOrgsDocument, {
+    alias: "searchOrgs",
+    ...operationOptions,
+  });
+}
+
+/**
+ * __useSearchOrgsQuery__
+ *
+ * To run a query within a React component, call `useSearchOrgsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchOrgsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchOrgsQuery({
+ *   variables: {
+ *      q: // value for 'q'
+ *   },
+ * });
+ */
+export function useSearchOrgsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    SearchOrgsQuery,
+    SearchOrgsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<SearchOrgsQuery, SearchOrgsQueryVariables>(
+    SearchOrgsDocument,
+    options
+  );
+}
+export function useSearchOrgsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    SearchOrgsQuery,
+    SearchOrgsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<SearchOrgsQuery, SearchOrgsQueryVariables>(
+    SearchOrgsDocument,
+    options
+  );
+}
+export type SearchOrgsQueryHookResult = ReturnType<typeof useSearchOrgsQuery>;
+export type SearchOrgsLazyQueryHookResult = ReturnType<
+  typeof useSearchOrgsLazyQuery
+>;
+export type SearchOrgsQueryResult = Apollo.QueryResult<
+  SearchOrgsQuery,
+  SearchOrgsQueryVariables
 >;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -2912,9 +3024,9 @@ export type OrgsResolvers<
 > = {
   author?: Resolver<Maybe<ResolversTypes["users"]>, ParentType, ContextType>;
   author_id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
-  body?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
   id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -2960,13 +3072,13 @@ export type Orgs_Max_FieldsResolvers<
   ParentType extends ResolversParentTypes["orgs_max_fields"] = ResolversParentTypes["orgs_max_fields"]
 > = {
   author_id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
-  body?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   created_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,
     ParentType,
     ContextType
   >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   updated_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,
     ParentType,
@@ -2980,13 +3092,13 @@ export type Orgs_Min_FieldsResolvers<
   ParentType extends ResolversParentTypes["orgs_min_fields"] = ResolversParentTypes["orgs_min_fields"]
 > = {
   author_id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
-  body?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   created_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,
     ParentType,
     ContextType
   >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   updated_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,
     ParentType,

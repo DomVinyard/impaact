@@ -1,0 +1,6 @@
+query searchOrgs($q: String) {
+  orgs(where: { name: { _ilike: $q } }) {
+    id
+    name
+  }
+}

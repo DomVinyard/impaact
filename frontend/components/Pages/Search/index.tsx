@@ -4,6 +4,8 @@ import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/router";
 import Content from "components/Layout/Content";
+import { useSearchOrgsQuery } from "generated-graphql";
+import OrgsList from "components/OrgList";
 
 const SearchPageComponent = () => {
   const [session] = useSession();
@@ -12,18 +14,25 @@ const SearchPageComponent = () => {
   const router = useRouter();
   const { q } = router.query;
 
+  const { data, error, loading } = useSearchOrgsQuery({
+    variables: { q: `%${q}%` },
+  });
+
   return (
     <Content>
-      <Stack>
-        <Flex
-          fontSize={{ base: "1.5rem", md: "1.75rem", lg: "2rem" }}
-          fontFamily={"Montserrat"}
-          fontWeight={600}
-          opacity={0.4}
-        >
-          0 results for "{q}"
-        </Flex>
-      </Stack>
+      {<OrgsList orgs={data?.orgs} />}
+      {!data.orgs.length && (
+        <Stack>
+          <Flex
+            fontSize={{ base: "1.5rem", md: "1.75rem", lg: "2rem" }}
+            fontFamily={"Montserrat"}
+            fontWeight={600}
+            opacity={0.4}
+          >
+            0 results for "{q}"
+          </Flex>
+        </Stack>
+      )}
     </Content>
   );
 };
