@@ -144,7 +144,12 @@ const IndexPageComponent = () => {
       </Stack>
       <Box textAlign={{ base: "center", md: "left" }}>
         <Content>
-          <Heading mt={{ base: 10, md: 20 }} size={"xl"} color={"#64a3cb"}>
+          <Heading
+            mt={{ base: 10, md: 20 }}
+            size={"xl"}
+            color={"#64a3cb"}
+            mb={8}
+          >
             FEATURED
           </Heading>
 

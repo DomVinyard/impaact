@@ -1,4 +1,5 @@
 import { Box, Stack } from "@chakra-ui/react";
+import Content from "components/Layout/Content";
 import Loader from "components/Loader";
 import OrgsList from "components/OrgList";
 import AddNewOrgForm from "components/Pages/MyOrgs/AddNewOrgForm";
@@ -18,12 +19,14 @@ const OrgsPageComponent = ({ session }) => {
   }
 
   return (
-    <Stack spacing={8}>
-      <Box>
-        <AddNewOrgForm />
-      </Box>
-      {<OrgsList orgs={data.users_by_pk?.orgs} />}
-    </Stack>
+    <Content>
+      <Stack spacing={8}>
+        <Box>
+          <AddNewOrgForm />
+        </Box>
+        {<OrgsList orgs={data.users_by_pk?.orgs} />}
+      </Stack>
+    </Content>
   );
 };
 

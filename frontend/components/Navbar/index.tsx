@@ -116,16 +116,18 @@ const Navbar: NextComponentType = () => {
                 />
               </Stack>
               {router.pathname !== "/" && (
-                <SearchBar
-                  mini
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onSubmit={() => {
-                    const cachedQuery = query;
-                    setQuery("");
-                    location.assign("/search?q=" + cachedQuery);
-                  }}
-                />
+                <Box display={["base", "none", "md", "block"]}>
+                  <SearchBar
+                    mini
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onSubmit={() => {
+                      const cachedQuery = query;
+                      setQuery("");
+                      location.assign("/search?q=" + cachedQuery);
+                    }}
+                  />
+                </Box>
               )}
             </Flex>
             <Box>
