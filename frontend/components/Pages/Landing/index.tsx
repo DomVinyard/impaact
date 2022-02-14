@@ -45,6 +45,8 @@ export const SearchBar = ({ value, onChange, onSubmit, mini }) => {
         value={value}
         onChange={onChange}
         onKeyPress={(e) => e.key === "Enter" && onSubmit()}
+        type="search"
+        enterkeyhint="search"
       />
       <Button
         display={{ base: "none", md: "block" }}
