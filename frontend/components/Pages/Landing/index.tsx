@@ -128,7 +128,7 @@ const IndexPageComponent = () => {
             <Canvas
               style={{ height: "80vh", width: "100%" }}
               colorManagement
-              camera={{ position: [0, 1, 5] }}
+              camera={{ position: [0, 1.5, 5] }}
             >
               <Lights />
               <Model latestKeypress={latestKeypress} />
