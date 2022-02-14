@@ -1,8 +1,8 @@
-mutation insertOrg($author_id: uuid!, $body: String) {
-  insert_orgs_one(object: { author_id: $author_id, body: $body }) {
+mutation insertOrg($author_id: uuid!, $name: String) {
+  insert_orgs_one(object: { author_id: $author_id, name: $name }) {
     id
     created_at
-    body
+    name
     author {
       id
       name

@@ -26,10 +26,10 @@ const Org: FC<IProps> = ({ org }) => {
     );
   };
 
-  const bodyNode = () => {
+  const nameNode = () => {
     return (
       <Text fontSize="md" p={4}>
-        {org.body}
+        {org.name}
       </Text>
     );
   };
@@ -38,7 +38,7 @@ const Org: FC<IProps> = ({ org }) => {
     <Box shadow="lg" rounded="lg">
       <Stack spacing={0}>
         {authorNode()}
-        {bodyNode()}
+        {nameNode()}
       </Stack>
     </Box>
   );

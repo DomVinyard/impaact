@@ -16,7 +16,7 @@ import { useSession } from "next-auth/client";
 import React, { ChangeEvent, useState } from "react";
 
 const AddNewOrgForm = () => {
-  const [body, setBody] = useState("");
+  const [name, setName] = useState("");
   const [session] = useSession();
   const [insertOrg, { loading: insertOrgFetching, error: insertOrgError }] =
     useInsertOrgMutation();
@@ -31,11 +31,11 @@ const AddNewOrgForm = () => {
     await insertOrg({
       variables: {
         author_id: session.id,
-        body,
+        name,
       },
     });
 
-    setBody("");
+    setName("");
     window.location.reload();
   };
 
@@ -59,13 +59,13 @@ const AddNewOrgForm = () => {
       <Box p={4} shadow="lg" rounded="lg">
         <Stack spacing={4}>
           <FormControl isRequired>
-            <FormLabel htmlFor="body">Add org</FormLabel>
+            <FormLabel htmlFor="name">Add org</FormLabel>
             <Textarea
-              id="body"
-              value={body}
+              id="name"
+              value={name}
               placeholder="Name"
               onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-                setBody(e.currentTarget.value)
+                setName(e.currentTarget.value)
               }
               isDisabled={insertOrgFetching}
             />
@@ -75,7 +75,7 @@ const AddNewOrgForm = () => {
               loadingText="Posting..."
               onClick={handleSubmit}
               isLoading={insertOrgFetching}
-              isDisabled={!body.trim()}
+              isDisabled={!name.trim()}
             >
               Add
             </Button>

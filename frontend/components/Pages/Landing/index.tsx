@@ -72,13 +72,7 @@ const IndexPageComponent = () => {
   const [latestKeypress, setLatestKeypress] = React.useState<
     Date | undefined
   >();
-  const { data, error, loading } = useFetchOrgsQuery({
-    context: {
-      headers: {
-        "x-hasura-role": "public",
-      },
-    },
-  });
+  const { data, error, loading } = useFetchOrgsQuery();
   console.log({ data, error, loading });
 
   return (

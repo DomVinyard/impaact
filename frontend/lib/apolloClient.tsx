@@ -21,7 +21,9 @@ const createHttpLink = (token: string) => {
   const httpLink = new HttpLink({
     uri: getHttpUri(),
     credentials: "include",
-    headers: { Authorization: `Bearer ${token}` },
+    headers: !token
+      ? { "x-hasura-role": "public" }
+      : { Authorization: `Bearer ${token}` },
     fetch,
   });
   return httpLink;

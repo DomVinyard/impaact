@@ -4141,7 +4141,7 @@
             "deprecationReason": null
           },
           {
-            "name": "body",
+            "name": "name",
             "description": null,
             "args": [],
             "type": {
@@ -4518,7 +4518,7 @@
             "deprecationReason": null
           },
           {
-            "name": "body",
+            "name": "name",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -4618,7 +4618,7 @@
             "deprecationReason": null
           },
           {
-            "name": "body",
+            "name": "name",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -4688,7 +4688,7 @@
             "deprecationReason": null
           },
           {
-            "name": "body",
+            "name": "name",
             "description": null,
             "args": [],
             "type": {
@@ -4760,7 +4760,7 @@
             "deprecationReason": null
           },
           {
-            "name": "body",
+            "name": "name",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -4830,7 +4830,7 @@
             "deprecationReason": null
           },
           {
-            "name": "body",
+            "name": "name",
             "description": null,
             "args": [],
             "type": {
@@ -4902,7 +4902,7 @@
             "deprecationReason": null
           },
           {
-            "name": "body",
+            "name": "name",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -5099,7 +5099,7 @@
             "deprecationReason": null
           },
           {
-            "name": "body",
+            "name": "name",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -5193,7 +5193,7 @@
             "deprecationReason": null
           },
           {
-            "name": "body",
+            "name": "name",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -5238,7 +5238,7 @@
             "deprecationReason": null
           },
           {
-            "name": "body",
+            "name": "name",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -5305,7 +5305,7 @@
             "deprecationReason": null
           },
           {
-            "name": "body",
+            "name": "name",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -11759,9 +11759,7 @@
         "name": "cached",
         "description": "whether this query should be cached (Hasura Cloud only)",
         "isRepeatable": false,
-        "locations": [
-          "QUERY"
-        ],
+        "locations": ["QUERY"],
         "args": [
           {
             "name": "refresh",
@@ -11826,11 +11824,7 @@
         "name": "include",
         "description": "Directs the executor to include this field or fragment only when the `if` argument is true.",
         "isRepeatable": false,
-        "locations": [
-          "FIELD",
-          "FRAGMENT_SPREAD",
-          "INLINE_FRAGMENT"
-        ],
+        "locations": ["FIELD", "FRAGMENT_SPREAD", "INLINE_FRAGMENT"],
         "args": [
           {
             "name": "if",
@@ -11854,11 +11848,7 @@
         "name": "skip",
         "description": "Directs the executor to skip this field or fragment when the `if` argument is true.",
         "isRepeatable": false,
-        "locations": [
-          "FIELD",
-          "FRAGMENT_SPREAD",
-          "INLINE_FRAGMENT"
-        ],
+        "locations": ["FIELD", "FRAGMENT_SPREAD", "INLINE_FRAGMENT"],
         "args": [
           {
             "name": "if",
@@ -11882,9 +11872,7 @@
         "name": "specifiedBy",
         "description": "Exposes a URL that specifies the behavior of this scalar.",
         "isRepeatable": false,
-        "locations": [
-          "SCALAR"
-        ],
+        "locations": ["SCALAR"],
         "args": [
           {
             "name": "url",
