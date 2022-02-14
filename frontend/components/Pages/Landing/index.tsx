@@ -89,7 +89,7 @@ const IndexPageComponent = () => {
           >
             <Stack lineHeight={"1"}>
               <Box>The power of</Box>
-              <Box>positive change</Box>
+              <Box>positive impact</Box>
               <Box pt={5}>
                 <SearchBar
                   mini={false}
@@ -121,7 +121,7 @@ const IndexPageComponent = () => {
             <Canvas
               style={{ height: "80vh", width: "100%" }}
               colorManagement
-              camera={{ position: [0, 0, 5] }}
+              camera={{ position: [-1, -0.25, 4.5] }}
             >
               <Lights />
               <Model latestKeypress={latestKeypress} />
