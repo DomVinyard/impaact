@@ -1,4 +1,4 @@
-import { Box, Heading, Stack } from "@chakra-ui/react";
+import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 import Content from "components/Layout/Content";
 import Loader from "components/Loader";
 import AddNewFeedForm from "components/Pages/Feeds/AddNewFeedForm";
@@ -20,6 +20,17 @@ const FeedsPageComponent = () => {
         <Heading mt={20} size={"xl"} color={"#64a3cb"}>
           YOUR ORGANISATIONS
         </Heading>
+
+        <Text
+          fontSize={{ base: "1.5rem", md: "1.75rem", lg: "2rem" }}
+          fontFamily={"Montserrat"}
+          fontWeight={600}
+          opacity={0.4}
+          mt={4}
+          mb={400}
+        >
+          No organisations
+        </Text>
       </Content>
       {/* {data.feeds.map((feed: IFeed, index: number) => {
         return (
