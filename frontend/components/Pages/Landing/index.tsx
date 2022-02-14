@@ -73,7 +73,6 @@ const IndexPageComponent = () => {
     Date | undefined
   >();
   const { data, error, loading } = useFetchOrgsQuery();
-  console.log({ data, error, loading });
 
   return (
     <>
