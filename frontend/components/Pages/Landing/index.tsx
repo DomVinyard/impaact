@@ -105,7 +105,6 @@ export const SearchBar = ({
         }}
         // width={{ input: "100%", inputContainer: "100%" }}
         size={mini ? "sm" : "lg"}
-        marginLeft={mini ? 2 : 0}
         color={"white"}
         backgroundColor={mini ? "#333" : "auto"}
         _hover={{ backgroundColor: mini ? "#555" : "none" }}
