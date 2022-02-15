@@ -108,6 +108,7 @@ export const SearchBar = ({
             width: "100%",
             maxW: "440px",
             color: "black",
+            display: !value.length ? "none" : "block",
           }),
         }}
         // width={{ input: "100%", inputContainer: "100%" }}
@@ -157,7 +158,7 @@ const IndexPageComponent = () => {
       <Stack
         style={{
           background: "#040d21",
-          marginTop: isSearchFocusMobile ? -260 : 0,
+          marginTop: isSearchFocusMobile ? -245 : 0,
         }}
       >
         {isSearchFocusMobile && (
@@ -175,7 +176,7 @@ const IndexPageComponent = () => {
           <Box
             p={3}
             mx={2}
-            pt={{ base: 90, md: 20 }}
+            pt={{ base: "75px", md: 20 }}
             textAlign={{ base: "center", md: "left" }}
             maxWidth={1200}
             m="0 auto"
@@ -191,6 +192,7 @@ const IndexPageComponent = () => {
                 {isSearchFocusMobile && (
                   <Button
                     size={"lg"}
+                    width={1}
                     background={"none"}
                     colorScheme={"blue"}
                     onClick={() => {
