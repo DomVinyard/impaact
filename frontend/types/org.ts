@@ -5,4 +5,6 @@ export default interface IOrg {
   created_at: string;
   name: string;
   author: IUser;
+  slug: string;
+  description: string;
 }
