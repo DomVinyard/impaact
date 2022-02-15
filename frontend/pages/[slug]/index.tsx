@@ -31,20 +31,14 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
 }) => {
   const session = await getSession({ req });
-  console.log({ query });
-
   const apolloClient = initializeApollo({}, session?.token);
-
   const { data } = await apolloClient.query({
     query: FetchOrgDocument,
     variables: {
       id: query.slug,
     },
   });
-
-  const [org] = data.orgs;
-  console.log({ org });
-
+  const [org] = data?.orgs || [];
   return { props: { session, org } };
 };
 

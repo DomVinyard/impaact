@@ -1,4 +1,5 @@
-import { Box, Stack } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
+import { Box, Button, Stack } from "@chakra-ui/react";
 import Content from "components/Layout/Content";
 import Loader from "components/Loader";
 import OrgsList from "components/OrgList";
@@ -21,7 +22,14 @@ const OrgsPageComponent = ({ userId }) => {
     <Content>
       <Stack spacing={8}>
         <Box>
-          <a href={"/orgs/add"}>Add org</a>
+          <Button
+            leftIcon={<AddIcon />}
+            colorScheme="blue"
+            as="a"
+            href={"/orgs/add"}
+          >
+            Add Organisation
+          </Button>
         </Box>
         {<OrgsList orgs={data.users_by_pk?.orgs} />}
       </Stack>

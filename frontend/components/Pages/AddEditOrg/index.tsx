@@ -4,9 +4,11 @@ import {
   AlertTitle,
   Box,
   Button,
+  ButtonGroup,
   CloseButton,
   FormControl,
   FormLabel,
+  Heading,
   Input,
   Stack,
   Textarea,
@@ -22,6 +24,7 @@ import React, { ChangeEvent, useState } from "react";
 import Content from "components/Layout/Content";
 import { useFetchOrgQuery } from "generated-graphql";
 import { useRouter } from "next/router";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 const AddEditOrgForm = ({ org }) => {
   const [name, setName] = useState(org?.name || "");
@@ -80,7 +83,8 @@ const AddEditOrgForm = ({ org }) => {
       <Box p={4} shadow="lg" rounded="lg">
         <Stack spacing={4}>
           <FormControl isRequired>
-            {org && JSON.stringify(org)}
+            {org && <Heading>Edit Organisation</Heading>}
+            <FormLabel>Name</FormLabel>
             <Input
               id="name"
               value={name}
@@ -92,24 +96,28 @@ const AddEditOrgForm = ({ org }) => {
             />
           </FormControl>
           <FormControl>
-            <Button
-              loadingText="Posting..."
-              onClick={handleSubmit}
-              isLoading={isEditMode ? updateOrgFetching : insertOrgFetching}
-              isDisabled={!name.trim()}
-            >
-              {isEditMode ? "Save" : "Add"}
-            </Button>
-            {isEditMode && (
+            <ButtonGroup>
               <Button
-                onClick={async () => {
-                  await deleteOrg();
-                  window.location.href = "/orgs";
-                }}
+                loadingText="Posting..."
+                onClick={handleSubmit}
+                isLoading={isEditMode ? updateOrgFetching : insertOrgFetching}
+                isDisabled={!name.trim()}
               >
-                Delete org
+                {isEditMode ? "Save" : "Add"}
               </Button>
-            )}
+              {isEditMode && (
+                <Button
+                  colorScheme="red"
+                  leftIcon={<DeleteIcon />}
+                  onClick={async () => {
+                    await deleteOrg();
+                    window.location.href = "/orgs";
+                  }}
+                >
+                  Delete
+                </Button>
+              )}
+            </ButtonGroup>
           </FormControl>
         </Stack>
       </Box>

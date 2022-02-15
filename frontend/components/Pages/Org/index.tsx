@@ -1,4 +1,4 @@
-import { SearchIcon } from "@chakra-ui/icons";
+import { EditIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -20,14 +20,20 @@ import React from "react";
 import { Canvas } from "react-three-fiber";
 
 const OrgPageComponent = ({ org }) => {
-  console.log({ org });
   const router = useRouter();
   const [session] = useSession();
   return (
     <>
       <Box textAlign={{ base: "center", md: "left" }}>
         {session?.id === org?.author_id && (
-          <a href={`/${router?.query.slug}/edit`}>edit</a>
+          <Button
+            leftIcon={<EditIcon />}
+            colorScheme="blue"
+            as="a"
+            href={`/${router?.query.slug}/edit`}
+          >
+            Edit
+          </Button>
         )}
         <Content>{JSON.stringify(org)}</Content>
       </Box>
