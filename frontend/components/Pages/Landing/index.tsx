@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import Content from "components/Layout/Content";
 import OrgsList from "components/OrgList";
-import { useFetchOrgsQuery } from "generated-graphql";
+import { useFetchOrgsQuery, useSearchOrgsLazyQuery } from "generated-graphql";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
 import React, { useEffect } from "react";
@@ -36,6 +36,22 @@ export const SearchBar = ({
   onFocus,
   onBlur,
 }: any) => {
+  const [searchOrgs] = useSearchOrgsLazyQuery();
+
+  const getAsyncOptions = async (inputValue) => {
+    const data = await searchOrgs({ variables: { q: `%${inputValue}%` } });
+    console.log({ data });
+    return await [
+      {
+        label: "1",
+        value: "1",
+      },
+      {
+        label: "2",
+        value: "2",
+      },
+    ];
+  };
   return (
     <InputGroup
       alignSelf={{ base: "center", md: "left" }}
@@ -49,8 +65,12 @@ export const SearchBar = ({
           children={<SearchIcon color="gray.300" />}
         />
       )}
-      <Select
+      <AsyncSelect
         tagVariant={mini ? "filled" : "outline"}
+        loadOptions={(inputValue) => {
+          onChange(inputValue);
+          return getAsyncOptions(inputValue);
+        }}
         chakraStyles={{
           input: (provided) => ({
             width: "100%",
@@ -80,6 +100,7 @@ export const SearchBar = ({
             ...provided,
             width: "100%",
             maxW: "440px",
+            color: "black",
           }),
         }}
         // width={{ input: "100%", inputContainer: "100%" }}
@@ -185,12 +206,12 @@ const IndexPageComponent = () => {
                   value={query}
                   onFocus={() => isMobile && setIsSearchFocusMobile(true)}
                   // onBlur={() => isMobile && setIsSearchFocusMobile(false)}
-                  onChange={(e) => {
+                  onChange={(value) => {
                     const pressAt = new Date();
-                    const newQuery = e.target.value;
+                    const newQuery = value;
                     newQuery.length > query.length &&
                       setLatestKeypress(new Date());
-                    setQuery(e.target.value);
+                    setQuery(value);
                   }}
                   onSubmit={() => {
                     const cachedQuery = query;
@@ -199,18 +220,6 @@ const IndexPageComponent = () => {
                   }}
                 />
               </Flex>
-              {query.length && (
-                <Box
-                  background={"rgba(255,255,255,0.95)"}
-                  color={"black"}
-                  fontSize={14}
-                  maxW={568}
-                  borderRadius={6}
-                  p={2}
-                >
-                  results
-                </Box>
-              )}
             </Stack>
           </Box>
         </Box>
