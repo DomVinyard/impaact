@@ -26,6 +26,7 @@ const MyOrgBar = () => {
       href={`/${router?.query.slug}/edit`}
       w="160px"
       ml={"auto"}
+      mr={4}
     >
       Edit
     </Button>
@@ -37,20 +38,39 @@ const OrgPageComponent = ({ org }) => {
   const isMyOrg = session?.id === org?.author_id;
   return (
     <>
-      <Box textAlign={{ base: "center", md: "left" }}>
-        <Content>
+      <Box textAlign={{ base: "center", md: "left" }} pb={{ base: 0, md: 160 }}>
+        <Content isFull>
           <Stack>
             {isMyOrg && <MyOrgBar />}
             <Box maxW={760}>
-              <Heading mb={3} textAlign={"left"}>
-                {org.name}
-              </Heading>
-              {org.description && (
-                <Text fontSize={20} mb={3} textAlign={"left"}>
-                  {org.description}
-                </Text>
-              )}
-              <Code maxW={"100%"}>{JSON.stringify(org)}</Code>
+              <Stack px={{ base: 5, md: 0 }} mb={10} mt={4}>
+                <Heading fontWeight={700} size={"2xl"} textAlign={"left"}>
+                  {org.name}
+                </Heading>
+                {org.description && (
+                  <Box
+                    fontSize={{ base: 21, md: 24 }}
+                    lineHeight={1.3}
+                    textAlign={"left"}
+                    pt={4}
+                  >
+                    <Text>{org.description}</Text>
+                  </Box>
+                )}
+              </Stack>
+              <Box height={160} p={4} color={"#777"} background={"#eee"}>
+                Photo/Map
+              </Box>
+              <Box height={400} p={4} color={"#777"} background={"#ddd"}>
+                Impact
+              </Box>
+              <Box height={200} p={4} color={"#777"} background={"#ccc"}>
+                Operations
+              </Box>
+              <Box height={200} p={4} color={"#777"} background={"#bbb"}>
+                Financial
+              </Box>
+              {/* <Code maxW={"100%"}>{JSON.stringify(org)}</Code> */}
             </Box>
           </Stack>
         </Content>

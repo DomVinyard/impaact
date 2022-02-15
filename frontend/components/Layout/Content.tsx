@@ -2,9 +2,15 @@ import { Box, ChakraProvider, theme, VStack } from "@chakra-ui/react";
 import Navbar from "components/Navbar";
 import React, { FC } from "react";
 
-const Content: FC = ({ children }) => {
+const Content: FC = ({ children, isFull }: any) => {
   return (
-    <Box maxW="1200" mx="auto" w="95%" py={8} px={2}>
+    <Box
+      maxW="1200"
+      mx="auto"
+      w={!isFull ? "95%" : { base: "100%", md: "95%" }}
+      py={8}
+      px={isFull ? 0 : { base: 2, md: 0 }}
+    >
       {children}
     </Box>
   );
