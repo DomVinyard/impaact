@@ -60,7 +60,7 @@ const AddEditOrgForm = ({ org }) => {
       });
     }
     setName("");
-    window.location.reload();
+    window.location.href = "/orgs";
   };
 
   const errorNode = () => {
@@ -83,12 +83,14 @@ const AddEditOrgForm = ({ org }) => {
       <Box p={4} shadow="lg" rounded="lg">
         <Stack spacing={4}>
           <FormControl isRequired>
-            {org && <Heading>Edit Organisation</Heading>}
+            <Heading mt={6} mb={6}>
+              {org ? "Edit Organisation" : "Add Organisation"}
+            </Heading>
             <FormLabel>Name</FormLabel>
             <Input
               id="name"
               value={name}
-              placeholder="Name"
+              placeholder="My organisation"
               onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
                 setName(e.currentTarget.value)
               }
@@ -135,7 +137,11 @@ const AddEditOrgPage = () => {
   if (loading) {
     return <div>loading</div>;
   }
-  return <AddEditOrgForm org={org} />;
+  return (
+    <Content>
+      <AddEditOrgForm org={org} />
+    </Content>
+  );
 };
 
 export default AddEditOrgPage;

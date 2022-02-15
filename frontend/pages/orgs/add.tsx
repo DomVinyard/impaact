@@ -18,7 +18,7 @@ const OrgsPage: FC<IProps> = ({ session }) => {
   return (
     <>
       <Head>
-        <title>Add Org</title>
+        <title>Add Organisation</title>
       </Head>
       <Page />
     </>

@@ -2,6 +2,7 @@ import { EditIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
+  Code,
   Flex,
   Heading,
   Input,
@@ -11,31 +12,43 @@ import {
   Text,
 } from "@chakra-ui/react";
 import Content from "components/Layout/Content";
-import OrgsList from "components/OrgList";
-import { useFetchOrgQuery } from "generated-graphql";
 import { useSession } from "next-auth/client";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import { Canvas } from "react-three-fiber";
+
+const MyOrgBar = () => {
+  const router = useRouter();
+  return (
+    <Button
+      leftIcon={<EditIcon />}
+      colorScheme="gray"
+      as="a"
+      href={`/${router?.query.slug}/edit`}
+      w="160px"
+      ml={"auto"}
+    >
+      Edit
+    </Button>
+  );
+};
 
 const OrgPageComponent = ({ org }) => {
-  const router = useRouter();
   const [session] = useSession();
+  const isMyOrg = session?.id === org?.author_id;
   return (
     <>
       <Box textAlign={{ base: "center", md: "left" }}>
-        {session?.id === org?.author_id && (
-          <Button
-            leftIcon={<EditIcon />}
-            colorScheme="blue"
-            as="a"
-            href={`/${router?.query.slug}/edit`}
-          >
-            Edit
-          </Button>
-        )}
-        <Content>{JSON.stringify(org)}</Content>
+        <Content>
+          <Stack>
+            {isMyOrg && <MyOrgBar />}
+            <Box maxW={760}>
+              <Heading mb={3} textAlign={"left"}>
+                {org.name}
+              </Heading>
+              <Code maxW={"100%"}>{JSON.stringify(org)}</Code>
+            </Box>
+          </Stack>
+        </Content>
       </Box>
     </>
   );

@@ -11,11 +11,11 @@ interface IProps {
   session: ISession;
 }
 
-const OrgPage: NextPage<IProps> = ({ session }) => {
+const EditOrgPage: NextPage<IProps> = ({ session }) => {
   return (
     <>
       <Head>
-        <title>Org</title>
+        <title>Edit Organisation</title>
       </Head>
       <AddEditOrg />
     </>
@@ -32,4 +32,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   };
 };
 
-export default OrgPage;
+export default EditOrgPage;
