@@ -37,19 +37,19 @@ export const SearchBar = ({
   onBlur,
 }: any) => {
   const [searchOrgs] = useSearchOrgsLazyQuery();
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
   const getAsyncOptions = async (inputValue) => {
-    const data = await searchOrgs({ variables: { q: `%${inputValue}%` } });
-    console.log({ data });
+    const { data } = await searchOrgs({ variables: { q: `%${inputValue}%` } });
     return await [
       {
-        label: "1",
-        value: "1",
+        label: `Search for "${inputValue}"`,
+        value: "@search",
       },
-      {
-        label: "2",
-        value: "2",
-      },
+      ...data?.orgs?.map((org) => ({
+        label: org.name,
+        value: org.slug,
+      })),
     ];
   };
   return (
@@ -67,6 +67,13 @@ export const SearchBar = ({
       )}
       <AsyncSelect
         tagVariant={mini ? "subtle" : "outline"}
+        onChange={(option) => {
+          if (option.value === "@search") {
+            location.href = `/search?q=${value}`;
+          } else {
+            location.href = `/${option.value}`;
+          }
+        }}
         loadOptions={(inputValue) => {
           onChange(inputValue);
           return getAsyncOptions(inputValue);
@@ -106,10 +113,10 @@ export const SearchBar = ({
         // width={{ input: "100%", inputContainer: "100%" }}
         size={mini ? "sm" : "lg"}
         placeholder={mini ? "Search" : "Search charity or organisation"}
-        autoFocus={!mini}
+        autoFocus={!mini && !isMobile}
         // maxWidth={{ input: 440, inputContainer: 440 }}
         value={value}
-        onChange={onChange}
+        // onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
       />
