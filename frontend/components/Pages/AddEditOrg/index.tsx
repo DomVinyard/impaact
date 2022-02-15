@@ -28,6 +28,8 @@ import { DeleteIcon } from "@chakra-ui/icons";
 
 const AddEditOrgForm = ({ org }) => {
   const [name, setName] = useState(org?.name || "");
+  const [slug, setSlug] = useState(org?.slug || "");
+  const [description, setDescription] = useState(org?.description || "");
   const [session] = useSession();
   const isEditMode = !!org;
   const [insertOrg, { loading: insertOrgFetching, error: insertOrgError }] =
@@ -44,18 +46,23 @@ const AddEditOrgForm = ({ org }) => {
   }
 
   const handleSubmit = async () => {
+    const fields = {
+      name,
+      slug,
+      description,
+    };
     if (isEditMode) {
       await updateOrg({
         variables: {
           id: org.id,
-          name,
+          ...fields,
         },
       });
     } else {
       await insertOrg({
         variables: {
           author_id: session.id,
-          name,
+          ...fields,
         },
       });
     }
@@ -86,16 +93,42 @@ const AddEditOrgForm = ({ org }) => {
             <Heading mt={6} mb={6}>
               {org ? "Edit Organisation" : "Add Organisation"}
             </Heading>
-            <FormLabel>Name</FormLabel>
-            <Input
-              id="name"
-              value={name}
-              placeholder="My organisation"
-              onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-                setName(e.currentTarget.value)
-              }
-              isDisabled={isEditMode ? updateOrgFetching : insertOrgFetching}
-            />
+            <Box>
+              <FormLabel>Name</FormLabel>
+              <Input
+                id="name"
+                value={name}
+                placeholder="My organisation"
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setName(e.currentTarget.value)
+                }
+                isDisabled={isEditMode ? updateOrgFetching : insertOrgFetching}
+              />
+            </Box>
+            <Box>
+              <FormLabel>Slug</FormLabel>
+              <Input
+                id="slug"
+                value={slug}
+                placeholder="short-name"
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setSlug(e.currentTarget.value)
+                }
+                isDisabled={isEditMode ? updateOrgFetching : insertOrgFetching}
+              />
+            </Box>
+            <Box>
+              <FormLabel>Description</FormLabel>
+              <Textarea
+                id="description"
+                value={description}
+                placeholder="A short description of this organsiation"
+                onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+                  setDescription(e.currentTarget.value)
+                }
+                isDisabled={isEditMode ? updateOrgFetching : insertOrgFetching}
+              />
+            </Box>
           </FormControl>
           <FormControl>
             <ButtonGroup>
@@ -130,7 +163,7 @@ const AddEditOrgForm = ({ org }) => {
 const AddEditOrgPage = () => {
   const router = useRouter();
   const { data, error, loading } = useFetchOrgQuery({
-    variables: { id: router?.query.slug },
+    variables: { slug: router?.query.slug },
   });
   const [org] = data?.orgs || [];
 

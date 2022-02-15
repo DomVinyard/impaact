@@ -1658,7 +1658,9 @@ export type DeleteOrgMutation = {
 
 export type InsertOrgMutationVariables = Exact<{
   author_id: Scalars["uuid"];
-  name?: InputMaybe<Scalars["String"]>;
+  name: Scalars["String"];
+  slug: Scalars["String"];
+  description?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type InsertOrgMutation = {
@@ -1669,6 +1671,8 @@ export type InsertOrgMutation = {
         id: any;
         created_at: string;
         name: string;
+        slug: string;
+        description?: string | undefined;
         author?:
           | {
               __typename?: "users";
@@ -1684,6 +1688,8 @@ export type InsertOrgMutation = {
 export type UpdateOrgMutationVariables = Exact<{
   id: Scalars["uuid"];
   name?: InputMaybe<Scalars["String"]>;
+  slug: Scalars["String"];
+  description?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type UpdateOrgMutation = {
@@ -1694,6 +1700,8 @@ export type UpdateOrgMutation = {
         id: any;
         created_at: string;
         name: string;
+        slug: string;
+        description?: string | undefined;
         author?:
           | {
               __typename?: "users";
@@ -1736,6 +1744,9 @@ export type FetchOrgQuery = {
     id: any;
     created_at: string;
     name: string;
+    author_id: any;
+    slug: string;
+    description?: string | undefined;
   }>;
 };
 
@@ -1913,11 +1924,25 @@ export type DeleteOrgMutationOptions = Apollo.BaseMutationOptions<
   DeleteOrgMutationVariables
 >;
 export const InsertOrgDocument = gql`
-  mutation insertOrg($author_id: uuid!, $name: String) {
-    insert_orgs_one(object: { author_id: $author_id, name: $name }) {
+  mutation insertOrg(
+    $author_id: uuid!
+    $name: String!
+    $slug: String!
+    $description: String
+  ) {
+    insert_orgs_one(
+      object: {
+        author_id: $author_id
+        name: $name
+        slug: $slug
+        description: $description
+      }
+    ) {
       id
       created_at
       name
+      slug
+      description
       author {
         id
         name
@@ -1992,6 +2017,8 @@ export function withInsertOrg<
  *   variables: {
  *      author_id: // value for 'author_id'
  *      name: // value for 'name'
+ *      slug: // value for 'slug'
+ *      description: // value for 'description'
  *   },
  * });
  */
@@ -2016,11 +2043,21 @@ export type InsertOrgMutationOptions = Apollo.BaseMutationOptions<
   InsertOrgMutationVariables
 >;
 export const UpdateOrgDocument = gql`
-  mutation updateOrg($id: uuid!, $name: String) {
-    update_orgs_by_pk(_set: { name: $name }, pk_columns: { id: $id }) {
+  mutation updateOrg(
+    $id: uuid!
+    $name: String
+    $slug: String!
+    $description: String
+  ) {
+    update_orgs_by_pk(
+      _set: { name: $name, slug: $slug, description: $description }
+      pk_columns: { id: $id }
+    ) {
       id
       created_at
       name
+      slug
+      description
       author {
         id
         name
@@ -2095,6 +2132,8 @@ export function withUpdateOrg<
  *   variables: {
  *      id: // value for 'id'
  *      name: // value for 'name'
+ *      slug: // value for 'slug'
+ *      description: // value for 'description'
  *   },
  * });
  */
@@ -2227,6 +2266,9 @@ export const FetchOrgDocument = gql`
       id
       created_at
       name
+      author_id
+      slug
+      description
     }
   }
 `;

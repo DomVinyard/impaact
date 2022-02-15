@@ -1,8 +1,18 @@
-mutation updateOrg($id: uuid!, $name: String) {
-  update_orgs_by_pk(_set: { name: $name }, pk_columns: { id: $id }) {
+mutation updateOrg(
+  $id: uuid!
+  $name: String
+  $slug: String!
+  $description: String
+) {
+  update_orgs_by_pk(
+    _set: { name: $name, slug: $slug, description: $description }
+    pk_columns: { id: $id }
+  ) {
     id
     created_at
     name
+    slug
+    description
     author {
       id
       name

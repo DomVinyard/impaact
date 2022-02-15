@@ -3,5 +3,8 @@ query fetchOrg($slug: String) {
     id
     created_at
     name
+    author_id
+    slug
+    description
   }
 }

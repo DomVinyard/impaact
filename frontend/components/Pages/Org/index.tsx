@@ -46,9 +46,9 @@ const OrgPageComponent = ({ org }) => {
                 {org.name}
               </Heading>
               {org.description && (
-                <Heading size={"md"} mb={3} textAlign={"left"}>
+                <Text fontSize={20} mb={3} textAlign={"left"}>
                   {org.description}
-                </Heading>
+                </Text>
               )}
               <Code maxW={"100%"}>{JSON.stringify(org)}</Code>
             </Box>
