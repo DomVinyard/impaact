@@ -21,6 +21,22 @@ import { Canvas } from "react-three-fiber";
 import Lights from "./components/Light";
 import Model from "./components/Model";
 
+import { CUIAutoComplete } from "chakra-ui-autocomplete";
+
+export interface Item {
+  label: string;
+  value: string;
+}
+const countries = [
+  { value: "ghana", label: "Ghana" },
+  { value: "nigeria", label: "Nigeria" },
+  { value: "kenya", label: "Kenya" },
+  { value: "southAfrica", label: "South Africa" },
+  { value: "unitedStates", label: "United States" },
+  { value: "canada", label: "Canada" },
+  { value: "germany", label: "Germany" },
+];
+
 export const SearchBar = ({
   value,
   onChange,
@@ -29,6 +45,8 @@ export const SearchBar = ({
   onFocus,
   onBlur,
 }: any) => {
+  const [pickerItems, setPickerItems] = React.useState(countries);
+  const [selectedItems, setSelectedItems] = React.useState<Item[]>([]);
   return (
     <InputGroup
       alignSelf={{ base: "center", md: "left" }}
@@ -42,7 +60,19 @@ export const SearchBar = ({
           children={<SearchIcon color="gray.300" />}
         />
       )}
+
+      {/* <CUIAutoComplete
+        placeholder="Type a Country"
+        // onCreateItem={handleCreateItem}
+        items={pickerItems}
+        selectedItems={selectedItems}
+        // onSelectedItemsChange={(changes) =>
+        //   handleSelectedItemsChange(changes.selectedItems)
+        // }
+      /> */}
       <Input
+        // items={pickerItems}
+        // as={Input}
         variant={mini ? "filled" : "outline"}
         size={mini ? "sm" : "lg"}
         marginLeft={mini ? 2 : 0}
