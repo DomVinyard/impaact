@@ -2,6 +2,9 @@ const withTM = require("next-transpile-modules")([
   "three",
   "react-three-fiber",
   "drei",
+  "next-mui-helper",
+  // "@mui/material/TextField",
+  // "@mui/material/Autocomplete",
 ]);
 
 module.exports = withTM({
@@ -12,6 +15,11 @@ module.exports = withTM({
         loader: "file-loader",
       },
     });
+
+    // config.resolve.alias = {
+    //   ...config.resolve.alias,
+    //   "@mui/styled-engine": "@mui/styled-engine-sc",
+    // };
 
     return config;
   },

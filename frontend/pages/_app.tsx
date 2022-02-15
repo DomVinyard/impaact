@@ -6,6 +6,7 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
 import ISession from "types/session";
+import { withParts } from "next-mui-helper";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const { session }: { session: ISession } = pageProps;
@@ -34,4 +35,4 @@ const App = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default App;
+export default withParts()(App);

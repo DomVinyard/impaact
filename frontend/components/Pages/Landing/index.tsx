@@ -21,6 +21,49 @@ import { Canvas } from "react-three-fiber";
 import Lights from "./components/Light";
 import Model from "./components/Model";
 
+// import Button from "material-ui/Button";
+
+// import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+// import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import CircularProgress from "@mui/material/CircularProgress";
+
+function sleep(delay = 0) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+}
+const [open, setOpen] = React.useState(false);
+const [options, setOptions] = React.useState<any>([]);
+const loading = open && options.length === 0;
+
+React.useEffect(() => {
+  let active = true;
+
+  if (!loading) {
+    return undefined;
+  }
+
+  (async () => {
+    await sleep(1e3); // For demo purposes.
+
+    if (active) {
+      setOptions([...topFilms]);
+    }
+  })();
+
+  return () => {
+    active = false;
+  };
+}, [loading]);
+
+React.useEffect(() => {
+  if (!open) {
+    setOptions([]);
+  }
+}, [open]);
+
 export const SearchBar = ({
   value,
   onChange,
@@ -42,7 +85,39 @@ export const SearchBar = ({
           children={<SearchIcon color="gray.300" />}
         />
       )}
-      <Input
+      <Autocomplete
+        id="asynchronous-demo"
+        sx={{ width: 300 }}
+        open={open}
+        onOpen={() => {
+          setOpen(true);
+        }}
+        onClose={() => {
+          setOpen(false);
+        }}
+        isOptionEqualToValue={(option, value) => option?.title === value?.title}
+        getOptionLabel={(option) => option?.title}
+        options={options}
+        loading={loading}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Asynchronous"
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <React.Fragment>
+                  {loading ? (
+                    <CircularProgress color="inherit" size={20} />
+                  ) : null}
+                  {params.InputProps.endAdornment}
+                </React.Fragment>
+              ),
+            }}
+          />
+        )}
+      />
+      {/* <Input
         variant={mini ? "filled" : "outline"}
         size={mini ? "sm" : "lg"}
         marginLeft={mini ? 2 : 0}
@@ -59,7 +134,7 @@ export const SearchBar = ({
         onKeyPress={(e) => e.key === "Enter" && value?.length > 0 && onSubmit()}
         type="search"
         enterKeyHint="search"
-      />
+      /> */}
       <Button
         display={{ base: "none", md: "block" }}
         marginLeft={mini ? 1 : 4}
@@ -205,5 +280,15 @@ const IndexPageComponent = () => {
     </>
   );
 };
+
+const topFilms = [
+  { title: "The Shawshank Redemption", year: 1994 },
+  { title: "The Godfather", year: 1972 },
+  { title: "The Godfather: Part II", year: 1974 },
+  { title: "The Dark Knight", year: 2008 },
+  { title: "12 Angry Men", year: 1957 },
+  { title: "Schindler's List", year: 1993 },
+  { title: "Pulp Fiction", year: 1994 },
+];
 
 export default IndexPageComponent;
