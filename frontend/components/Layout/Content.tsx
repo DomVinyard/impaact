@@ -2,7 +2,7 @@ import { Box, ChakraProvider, theme, VStack } from "@chakra-ui/react";
 import Navbar from "components/Navbar";
 import React, { FC } from "react";
 
-const Content: FC = ({ children, isFull }: any) => {
+const Content: any = ({ children, isFull }) => {
   return (
     <Box
       maxW="1200"

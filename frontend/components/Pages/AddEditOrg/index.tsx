@@ -163,7 +163,7 @@ const AddEditOrgForm = ({ org }) => {
 const AddEditOrgPage = () => {
   const router = useRouter();
   const { data, error, loading } = useFetchOrgQuery({
-    variables: { slug: router?.query.slug },
+    variables: { slug: `${router?.query.slug}` },
   });
   const [org] = data?.orgs || [];
 
