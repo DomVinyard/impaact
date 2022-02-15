@@ -66,7 +66,7 @@ export const SearchBar = ({
         />
       )}
       <AsyncSelect
-        tagVariant={mini ? "filled" : "outline"}
+        tagVariant={mini ? "subtle" : "outline"}
         loadOptions={(inputValue) => {
           onChange(inputValue);
           return getAsyncOptions(inputValue);
