@@ -116,7 +116,7 @@ const Navbar: NextComponentType = () => {
                 />
               </Stack>
               {router.pathname !== "/" && (
-                <Box display={["base", "none", "md", "block"]}>
+                <Box display={{ base: "none", md: "block" }}>
                   <SearchBar
                     mini
                     value={query}

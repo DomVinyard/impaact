@@ -1,4 +1,4 @@
-import { SearchIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -9,18 +9,26 @@ import {
   InputLeftElement,
   Stack,
   Text,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import Content from "components/Layout/Content";
 import OrgsList from "components/OrgList";
 import { useFetchOrgsQuery } from "generated-graphql";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { Canvas } from "react-three-fiber";
 import Lights from "./components/Light";
 import Model from "./components/Model";
 
-export const SearchBar = ({ value, onChange, onSubmit, mini }) => {
+export const SearchBar = ({
+  value,
+  onChange,
+  onSubmit,
+  mini,
+  onFocus,
+  onBlur,
+}: any) => {
   return (
     <InputGroup
       alignSelf={{ base: "center", md: "left" }}
@@ -46,6 +54,8 @@ export const SearchBar = ({ value, onChange, onSubmit, mini }) => {
         maxWidth={440}
         value={value}
         onChange={onChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
         onKeyPress={(e) => e.key === "Enter" && value?.length > 0 && onSubmit()}
         type="search"
         enterKeyHint="search"
@@ -69,14 +79,38 @@ export const SearchBar = ({ value, onChange, onSubmit, mini }) => {
 
 const IndexPageComponent = () => {
   const [query, setQuery] = React.useState("");
+  const [isSearchFocusMobile, setIsSearchFocusMobile] = React.useState(false);
+  const isMobile = useBreakpointValue({ base: true, md: false });
   const [latestKeypress, setLatestKeypress] = React.useState<
     Date | undefined
   >();
   const { data, error, loading } = useFetchOrgsQuery();
 
+  // useEffect(() => {
+  //   if (isMobile && !isSearchFocusMobile) {
+  //     setLatestKeypress(new Date());
+  //   }
+  // }, [isMobile, isSearchFocusMobile]);
+
   return (
     <>
-      <Stack style={{ background: "#040d21" }}>
+      <Stack
+        style={{
+          background: "#040d21",
+          marginTop: isSearchFocusMobile ? -260 : 0,
+        }}
+      >
+        {isSearchFocusMobile && (
+          <Box
+            width="100vw"
+            position={"fixed"}
+            left={0}
+            top={0}
+            zIndex={1}
+            background={"#040d21"}
+            height={"100vh"}
+          ></Box>
+        )}
         <Box width="100%" position={"absolute"} zIndex={1}>
           <Box
             p={3}
@@ -93,10 +127,22 @@ const IndexPageComponent = () => {
             <Stack lineHeight={"1"}>
               <Box>The power of</Box>
               <Box>positive impact</Box>
-              <Box pt={5}>
+              <Flex pt={5}>
+                {isSearchFocusMobile && (
+                  <Button
+                    size={"lg"}
+                    background={"none"}
+                    colorScheme={"blue"}
+                    onClick={() => setIsSearchFocusMobile(false)}
+                  >
+                    <ArrowBackIcon color="gray.300" />
+                  </Button>
+                )}
                 <SearchBar
                   mini={false}
                   value={query}
+                  onFocus={() => isMobile && setIsSearchFocusMobile(true)}
+                  onBlur={() => isMobile && setIsSearchFocusMobile(false)}
                   onChange={(e) => {
                     const pressAt = new Date();
                     const newQuery = e.target.value;
@@ -110,7 +156,7 @@ const IndexPageComponent = () => {
                     location.assign("/search?q=" + cachedQuery);
                   }}
                 />
-              </Box>
+              </Flex>
             </Stack>
           </Box>
         </Box>

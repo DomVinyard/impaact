@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import Page from "components/Pages/Search/index";
+import Page from "components/Pages/Search";
 import { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/client";
 import AccessDeniedIndicator from "components/AccessDeniedIndicator";
