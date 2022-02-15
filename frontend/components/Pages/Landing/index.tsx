@@ -105,9 +105,6 @@ export const SearchBar = ({
         }}
         // width={{ input: "100%", inputContainer: "100%" }}
         size={mini ? "sm" : "lg"}
-        color={"white"}
-        backgroundColor={mini ? "#333" : "auto"}
-        _hover={{ backgroundColor: mini ? "#555" : "none" }}
         placeholder={mini ? "Search" : "Search charity or organisation"}
         autoFocus={!mini}
         // maxWidth={{ input: 440, inputContainer: 440 }}
@@ -115,9 +112,6 @@ export const SearchBar = ({
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
-        onKeyPress={(e) => e.key === "Enter" && value?.length > 0 && onSubmit()}
-        type="search"
-        enterKeyHint="search"
       />
       {/* <Button
         display={{ base: "none", md: "block" }}
