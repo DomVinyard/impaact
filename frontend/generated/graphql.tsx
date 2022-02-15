@@ -552,8 +552,10 @@ export type Orgs = {
   author?: Maybe<Users>;
   author_id: Scalars["uuid"];
   created_at: Scalars["timestamptz"];
+  description?: Maybe<Scalars["String"]>;
   id: Scalars["uuid"];
   name: Scalars["String"];
+  slug: Scalars["String"];
   updated_at: Scalars["timestamptz"];
 };
 
@@ -600,8 +602,10 @@ export type Orgs_Bool_Exp = {
   author?: InputMaybe<Users_Bool_Exp>;
   author_id?: InputMaybe<Uuid_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  description?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  slug?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -609,6 +613,8 @@ export type Orgs_Bool_Exp = {
 export enum Orgs_Constraint {
   /** unique or primary key constraint */
   OrgsPkey = "orgs_pkey",
+  /** unique or primary key constraint */
+  OrgsSlugKey = "orgs_slug_key",
 }
 
 /** input type for inserting data into table "orgs" */
@@ -616,8 +622,10 @@ export type Orgs_Insert_Input = {
   author?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   author_id?: InputMaybe<Scalars["uuid"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]>;
+  description?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["uuid"]>;
   name?: InputMaybe<Scalars["String"]>;
+  slug?: InputMaybe<Scalars["String"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
 };
 
@@ -626,8 +634,10 @@ export type Orgs_Max_Fields = {
   __typename?: "orgs_max_fields";
   author_id?: Maybe<Scalars["uuid"]>;
   created_at?: Maybe<Scalars["timestamptz"]>;
+  description?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["uuid"]>;
   name?: Maybe<Scalars["String"]>;
+  slug?: Maybe<Scalars["String"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
 
@@ -635,8 +645,10 @@ export type Orgs_Max_Fields = {
 export type Orgs_Max_Order_By = {
   author_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  slug?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
@@ -645,8 +657,10 @@ export type Orgs_Min_Fields = {
   __typename?: "orgs_min_fields";
   author_id?: Maybe<Scalars["uuid"]>;
   created_at?: Maybe<Scalars["timestamptz"]>;
+  description?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["uuid"]>;
   name?: Maybe<Scalars["String"]>;
+  slug?: Maybe<Scalars["String"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
 
@@ -654,8 +668,10 @@ export type Orgs_Min_Fields = {
 export type Orgs_Min_Order_By = {
   author_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  slug?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
@@ -680,8 +696,10 @@ export type Orgs_Order_By = {
   author?: InputMaybe<Users_Order_By>;
   author_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  slug?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
@@ -697,9 +715,13 @@ export enum Orgs_Select_Column {
   /** column name */
   CreatedAt = "created_at",
   /** column name */
+  Description = "description",
+  /** column name */
   Id = "id",
   /** column name */
   Name = "name",
+  /** column name */
+  Slug = "slug",
   /** column name */
   UpdatedAt = "updated_at",
 }
@@ -708,8 +730,10 @@ export enum Orgs_Select_Column {
 export type Orgs_Set_Input = {
   author_id?: InputMaybe<Scalars["uuid"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]>;
+  description?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["uuid"]>;
   name?: InputMaybe<Scalars["String"]>;
+  slug?: InputMaybe<Scalars["String"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
 };
 
@@ -720,9 +744,13 @@ export enum Orgs_Update_Column {
   /** column name */
   CreatedAt = "created_at",
   /** column name */
+  Description = "description",
+  /** column name */
   Id = "id",
   /** column name */
   Name = "name",
+  /** column name */
+  Slug = "slug",
   /** column name */
   UpdatedAt = "updated_at",
 }
@@ -1698,7 +1726,7 @@ export type UpdateUserMutation = {
 };
 
 export type FetchOrgQueryVariables = Exact<{
-  id?: InputMaybe<Scalars["uuid"]>;
+  slug?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type FetchOrgQuery = {
@@ -1708,7 +1736,6 @@ export type FetchOrgQuery = {
     id: any;
     created_at: string;
     name: string;
-    author_id: any;
   }>;
 };
 
@@ -1721,6 +1748,8 @@ export type FetchOrgsQuery = {
     id: any;
     created_at: string;
     name: string;
+    slug: string;
+    description?: string | undefined;
   }>;
 };
 
@@ -1751,6 +1780,8 @@ export type MyOrgsQuery = {
           id: any;
           created_at: string;
           name: string;
+          slug: string;
+          description?: string | undefined;
           author?:
             | {
                 __typename?: "users";
@@ -1770,7 +1801,13 @@ export type SearchOrgsQueryVariables = Exact<{
 
 export type SearchOrgsQuery = {
   __typename?: "query_root";
-  orgs: Array<{ __typename?: "orgs"; id: any; name: string }>;
+  orgs: Array<{
+    __typename?: "orgs";
+    id: any;
+    name: string;
+    slug: string;
+    description?: string | undefined;
+  }>;
 };
 
 export const DeleteOrgDocument = gql`
@@ -2185,12 +2222,11 @@ export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<
   UpdateUserMutationVariables
 >;
 export const FetchOrgDocument = gql`
-  query fetchOrg($id: uuid) {
-    orgs(where: { id: { _eq: $id } }) {
+  query fetchOrg($slug: String) {
+    orgs(where: { slug: { _eq: $slug } }) {
       id
       created_at
       name
-      author_id
     }
   }
 `;
@@ -2253,7 +2289,7 @@ export function withFetchOrg<
  * @example
  * const { data, loading, error } = useFetchOrgQuery({
  *   variables: {
- *      id: // value for 'id'
+ *      slug: // value for 'slug'
  *   },
  * });
  */
@@ -2292,6 +2328,8 @@ export const FetchOrgsDocument = gql`
       id
       created_at
       name
+      slug
+      description
     }
   }
 `;
@@ -2496,6 +2534,8 @@ export const MyOrgsDocument = gql`
         id
         created_at
         name
+        slug
+        description
         author {
           id
           name
@@ -2595,6 +2635,8 @@ export const SearchOrgsDocument = gql`
     orgs(where: { name: { _ilike: $q } }) {
       id
       name
+      slug
+      description
     }
   }
 `;
@@ -3396,8 +3438,14 @@ export type OrgsResolvers<
   author?: Resolver<Maybe<ResolversTypes["users"]>, ParentType, ContextType>;
   author_id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -3448,8 +3496,14 @@ export type Orgs_Max_FieldsResolvers<
     ParentType,
     ContextType
   >;
+  description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  slug?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   updated_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,
     ParentType,
@@ -3468,8 +3522,14 @@ export type Orgs_Min_FieldsResolvers<
     ParentType,
     ContextType
   >;
+  description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  slug?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   updated_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,
     ParentType,

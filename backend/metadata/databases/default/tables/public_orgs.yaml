@@ -18,11 +18,39 @@ insert_permissions:
       columns:
         - author_id
         - name
+        - slug
+        - description
     role: user
-update_permissions:
+select_permissions:
   - permission:
       columns:
         - name
+        - created_at
+        - updated_at
+        - author_id
+        - id
+        - slug
+        - description
+      filter: {}
+    role: public
+  - permission:
+      columns:
+        - name
+        - created_at
+        - updated_at
+        - author_id
+        - id
+        - slug
+        - description
+      filter: {}
+    role: user
+update_permissions:
+  - permission:
+      check: null
+      columns:
+        - name
+        - slug
+        - description
       filter:
         author_id:
           _eq: X-Hasura-User-Id
@@ -33,22 +61,3 @@ delete_permissions:
         author_id:
           _eq: X-Hasura-User-Id
     role: user
-select_permissions:
-  - permission:
-      columns:
-        - name
-        - created_at
-        - updated_at
-        - author_id
-        - id
-      filter: {}
-    role: user
-  - permission:
-      columns:
-        - name
-        - created_at
-        - updated_at
-        - author_id
-        - id
-      filter: {}
-    role: public

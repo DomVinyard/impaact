@@ -3,5 +3,7 @@ query fetchOrgs {
     id
     created_at
     name
+    slug
+    description
   }
 }

@@ -9,7 +9,7 @@ const OrgsList = ({ orgs }) => {
     <Stack spacing={8}>
       {orgs?.map((org: IOrg, index: number) => {
         return (
-          <Box as="a" key={index} href={`/${org.id}`}>
+          <Box as="a" key={index} href={`/${org.slug}`}>
             <Box shadow="lg" rounded="lg">
               <Stack spacing={0}>
                 <Text fontSize="md" p={4}>

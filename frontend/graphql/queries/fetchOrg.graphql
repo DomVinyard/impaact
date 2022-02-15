@@ -1,8 +1,7 @@
-query fetchOrg($id: uuid) {
-  orgs(where: { id: { _eq: $id } }) {
+query fetchOrg($slug: String) {
+  orgs(where: { slug: { _eq: $slug } }) {
     id
     created_at
     name
-    author_id
   }
 }

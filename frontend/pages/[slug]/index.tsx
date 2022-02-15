@@ -35,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const { data } = await apolloClient.query({
     query: FetchOrgDocument,
     variables: {
-      id: query.slug,
+      slug: query.slug,
     },
   });
   const [org] = data?.orgs || [];

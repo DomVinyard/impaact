@@ -6,6 +6,8 @@ query myOrgs($userId: uuid!) {
       id
       created_at
       name
+      slug
+      description
       author {
         id
         name
