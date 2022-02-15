@@ -1,6 +1,6 @@
 # FROM --platform=linux/amd64 node:10-alpine
-FROM hasura/graphql-engine:v2.0.1.cli-migrations-v3
-# FROM fedormelexin/graphql-engine-arm64:v2.0.3
+# FROM hasura/graphql-engine:v2.0.1.cli-migrations-v3
+FROM fedormelexin/graphql-engine-arm64:v2.0.3
 
 # Copy migrations directory
 COPY ./migrations /hasura-migrations

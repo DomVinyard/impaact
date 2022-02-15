@@ -133,7 +133,10 @@ const IndexPageComponent = () => {
                     size={"lg"}
                     background={"none"}
                     colorScheme={"blue"}
-                    onClick={() => setIsSearchFocusMobile(false)}
+                    onClick={() => {
+                      setQuery("");
+                      setIsSearchFocusMobile(false);
+                    }}
                   >
                     <ArrowBackIcon color="gray.300" />
                   </Button>
@@ -142,7 +145,7 @@ const IndexPageComponent = () => {
                   mini={false}
                   value={query}
                   onFocus={() => isMobile && setIsSearchFocusMobile(true)}
-                  onBlur={() => isMobile && setIsSearchFocusMobile(false)}
+                  // onBlur={() => isMobile && setIsSearchFocusMobile(false)}
                   onChange={(e) => {
                     const pressAt = new Date();
                     const newQuery = e.target.value;
@@ -157,6 +160,18 @@ const IndexPageComponent = () => {
                   }}
                 />
               </Flex>
+              {query.length && (
+                <Box
+                  background={"rgba(255,255,255,0.95)"}
+                  color={"black"}
+                  fontSize={14}
+                  maxW={568}
+                  borderRadius={6}
+                  p={2}
+                >
+                  results
+                </Box>
+              )}
             </Stack>
           </Box>
         </Box>
@@ -168,7 +183,7 @@ const IndexPageComponent = () => {
         <>
           <Flex display={{ base: "none", md: "block" }}>
             <Canvas
-              style={{ height: "80vh", width: "100%" }}
+              style={{ minHeight: "600px", height: "80vh", width: "100%" }}
               colorManagement
               camera={{ position: [-1, -0.25, 4.5] }}
             >
@@ -178,7 +193,7 @@ const IndexPageComponent = () => {
           </Flex>
           <Flex display={{ base: "block", md: "none" }}>
             <Canvas
-              style={{ height: "80vh", width: "100%" }}
+              style={{ minHeight: "600px", height: "80vh", width: "100%" }}
               colorManagement
               camera={{ position: [0, 1.75, 5] }}
             >
