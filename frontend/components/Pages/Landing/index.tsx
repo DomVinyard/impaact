@@ -20,6 +20,13 @@ import React, { useEffect } from "react";
 import { Canvas } from "react-three-fiber";
 import Lights from "./components/Light";
 import Model from "./components/Model";
+import {
+  AsyncCreatableSelect,
+  AsyncSelect,
+  CreatableSelect,
+  Select,
+} from "chakra-react-select";
+import { Query } from "@apollo/client/react/components";
 
 export const SearchBar = ({
   value,
@@ -42,8 +49,40 @@ export const SearchBar = ({
           children={<SearchIcon color="gray.300" />}
         />
       )}
-      <Input
-        variant={mini ? "filled" : "outline"}
+      <Select
+        tagVariant={mini ? "filled" : "outline"}
+        chakraStyles={{
+          input: (provided) => ({
+            width: "100%",
+            background: "none",
+            marginLeft: "1.5rem",
+            outline: "none",
+          }),
+          inputContainer: (provided) => ({
+            width: "100%",
+            maxW: "440px",
+            marginLeft: mini ? 2 : 0,
+          }),
+          container: (provided) => ({
+            width: "100%",
+            maxWidth: 440,
+          }),
+          placeholder: (provided) => ({
+            ...provided,
+            marginLeft: "1.5rem",
+          }),
+          dropdownIndicator: (provided) => ({
+            ...provided,
+            background: "none",
+            display: "none",
+          }),
+          menu: (provided) => ({
+            ...provided,
+            width: "100%",
+            maxW: "440px",
+          }),
+        }}
+        // width={{ input: "100%", inputContainer: "100%" }}
         size={mini ? "sm" : "lg"}
         marginLeft={mini ? 2 : 0}
         color={"white"}
@@ -51,7 +90,7 @@ export const SearchBar = ({
         _hover={{ backgroundColor: mini ? "#555" : "none" }}
         placeholder={mini ? "Search" : "Search charity or organisation"}
         autoFocus={!mini}
-        maxWidth={440}
+        // maxWidth={{ input: 440, inputContainer: 440 }}
         value={value}
         onChange={onChange}
         onFocus={onFocus}
@@ -60,7 +99,7 @@ export const SearchBar = ({
         type="search"
         enterKeyHint="search"
       />
-      <Button
+      {/* <Button
         display={{ base: "none", md: "block" }}
         marginLeft={mini ? 1 : 4}
         size={mini ? "sm" : "lg"}
@@ -72,7 +111,7 @@ export const SearchBar = ({
       >
         {!mini && "Search"}
         {mini && <SearchIcon color="white" />}
-      </Button>
+      </Button> */}
     </InputGroup>
   );
 };
