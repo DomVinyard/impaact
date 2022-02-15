@@ -67,7 +67,7 @@ const AddEditOrgForm = ({ org }) => {
       });
     }
     setName("");
-    window.location.href = "/orgs";
+    window.location.href = `/${slug}`;
   };
 
   const errorNode = () => {
