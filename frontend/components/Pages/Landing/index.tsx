@@ -35,6 +35,7 @@ export const SearchBar = ({
   mini,
   onFocus,
   onBlur,
+  isSearchFocusMobile,
 }: any) => {
   const [searchOrgs] = useSearchOrgsLazyQuery();
   const isMobile = useBreakpointValue({ base: true, md: false });
@@ -113,7 +114,11 @@ export const SearchBar = ({
         }}
         // width={{ input: "100%", inputContainer: "100%" }}
         size={mini ? "sm" : "lg"}
-        placeholder={mini ? "Search" : "Search charity or organisation"}
+        placeholder={
+          mini || (isMobile && isSearchFocusMobile)
+            ? "Search"
+            : "Search charity or organisation"
+        }
         autoFocus={!mini && !isMobile}
         // maxWidth={{ input: 440, inputContainer: 440 }}
         value={value}
@@ -192,7 +197,6 @@ const IndexPageComponent = () => {
                 {isSearchFocusMobile && (
                   <Button
                     size={"lg"}
-                    width={1}
                     background={"none"}
                     colorScheme={"blue"}
                     onClick={() => {
@@ -204,6 +208,7 @@ const IndexPageComponent = () => {
                   </Button>
                 )}
                 <SearchBar
+                  isSearchFocusMobile={isSearchFocusMobile}
                   mini={false}
                   value={query}
                   onFocus={() => isMobile && setIsSearchFocusMobile(true)}
