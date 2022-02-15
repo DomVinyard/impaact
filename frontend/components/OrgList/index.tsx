@@ -1,6 +1,5 @@
 import { Box, Stack, Text } from "@chakra-ui/react";
 import Loader from "components/Loader";
-import AddNewOrgForm from "components/Pages/MyOrgs/AddNewOrgForm";
 import React from "react";
 import IOrg from "types/org";
 
