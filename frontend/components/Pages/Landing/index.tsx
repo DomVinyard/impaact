@@ -158,7 +158,7 @@ const IndexPageComponent = () => {
       <Stack
         style={{
           background: "#040d21",
-          marginTop: isSearchFocusMobile ? -245 : 0,
+          marginTop: isSearchFocusMobile ? -235 : 0,
         }}
       >
         {isSearchFocusMobile && (
@@ -176,7 +176,7 @@ const IndexPageComponent = () => {
           <Box
             p={3}
             mx={2}
-            pt={{ base: "75px", md: 20 }}
+            pt={{ base: "65px", md: 20 }}
             textAlign={{ base: "center", md: "left" }}
             maxWidth={1200}
             m="0 auto"
