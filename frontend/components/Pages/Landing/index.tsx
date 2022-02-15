@@ -46,7 +46,7 @@ export const SearchBar = ({ value, onChange, onSubmit, mini }) => {
         maxWidth={440}
         value={value}
         onChange={onChange}
-        onKeyPress={(e) => e.key === "Enter" && onSubmit()}
+        onKeyPress={(e) => e.key === "Enter" && value?.length > 0 && onSubmit()}
         type="search"
         enterKeyHint="search"
       />
@@ -142,7 +142,7 @@ const IndexPageComponent = () => {
           </Flex>
         </>
       </Stack>
-      <Box textAlign={{ base: "center", md: "left" }}>
+      <Box mb={200} textAlign={{ base: "center", md: "left" }}>
         <Content>
           <Heading
             mt={{ base: 10, md: 20 }}

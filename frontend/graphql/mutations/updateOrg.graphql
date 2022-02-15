@@ -1,0 +1,12 @@
+mutation updateOrg($id: uuid!, $name: String) {
+  update_orgs_by_pk(_set: { name: $name }, pk_columns: { id: $id }) {
+    id
+    created_at
+    name
+    author {
+      id
+      name
+      image
+    }
+  }
+}

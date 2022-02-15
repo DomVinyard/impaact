@@ -20,7 +20,7 @@ const OrgsPage: FC<IProps> = ({ session }) => {
       <Head>
         <title>Your Organisations</title>
       </Head>
-      <Page session={session} />
+      <Page userId={session.id} />
     </>
   );
 };

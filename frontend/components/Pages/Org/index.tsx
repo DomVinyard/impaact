@@ -19,16 +19,17 @@ import { useRouter } from "next/router";
 import React from "react";
 import { Canvas } from "react-three-fiber";
 
-const OrgPageComponent = () => {
+const OrgPageComponent = ({ org }) => {
+  console.log({ org });
   const router = useRouter();
-  const { data, error, loading } = useFetchOrgQuery({
-    variables: { id: router?.query.id },
-  });
-
+  const [session] = useSession();
   return (
     <>
       <Box textAlign={{ base: "center", md: "left" }}>
-        <Content>{JSON.stringify(data)}</Content>
+        {session?.id === org?.author_id && (
+          <a href={`/${router?.query.slug}/edit`}>edit</a>
+        )}
+        <Content>{JSON.stringify(org)}</Content>
       </Box>
     </>
   );

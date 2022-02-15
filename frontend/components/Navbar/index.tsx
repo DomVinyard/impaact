@@ -28,9 +28,9 @@ const Navbar: NextComponentType = () => {
 
   const linksForAuthenticatedUsers = [
     {
-      id: "your-orgs",
+      id: "orgs",
       label: "Your Organisations",
-      href: "/your-orgs",
+      href: "/orgs",
     },
     // {
     //   id: "myAccount",

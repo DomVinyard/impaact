@@ -19,6 +19,20 @@ insert_permissions:
         - author_id
         - name
     role: user
+update_permissions:
+  - permission:
+      columns:
+        - name
+      filter:
+        author_id:
+          _eq: X-Hasura-User-Id
+    role: user
+delete_permissions:
+  - permission:
+      filter:
+        author_id:
+          _eq: X-Hasura-User-Id
+    role: user
 select_permissions:
   - permission:
       columns:

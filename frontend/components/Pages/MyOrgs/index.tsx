@@ -8,11 +8,10 @@ import { getSession } from "next-auth/client";
 import React from "react";
 import IOrg from "types/org";
 
-const OrgsPageComponent = ({ session }) => {
+const OrgsPageComponent = ({ userId }) => {
   const { data, error, loading } = useMyOrgsQuery({
-    variables: { userId: session?.id },
+    variables: { userId },
   });
-  console.log({ data, error, loading });
 
   if (!data) {
     return <Loader />;
@@ -22,7 +21,7 @@ const OrgsPageComponent = ({ session }) => {
     <Content>
       <Stack spacing={8}>
         <Box>
-          <AddNewOrgForm />
+          <a href={"/orgs/add"}>Add org</a>
         </Box>
         {<OrgsList orgs={data.users_by_pk?.orgs} />}
       </Stack>

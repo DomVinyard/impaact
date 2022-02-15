@@ -3,5 +3,6 @@ query fetchOrg($id: uuid) {
     id
     created_at
     name
+    author_id
   }
 }

@@ -5,7 +5,7 @@ import { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/client";
 import AccessDeniedIndicator from "components/AccessDeniedIndicator";
 import ISession from "types/session";
-import Org from "components/Pages/Org";
+import AddEditOrg from "components/Pages/AddEditOrg";
 
 interface IProps {
   session: ISession;
@@ -17,7 +17,7 @@ const OrgPage: NextPage<IProps> = ({ session }) => {
       <Head>
         <title>Org</title>
       </Head>
-      <Org />
+      <AddEditOrg />
     </>
   );
 };

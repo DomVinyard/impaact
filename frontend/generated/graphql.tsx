@@ -1604,6 +1604,30 @@ export enum Verification_Requests_Update_Column {
   UpdatedAt = "updated_at",
 }
 
+export type DeleteOrgMutationVariables = Exact<{
+  id: Scalars["uuid"];
+}>;
+
+export type DeleteOrgMutation = {
+  __typename?: "mutation_root";
+  delete_orgs_by_pk?:
+    | {
+        __typename?: "orgs";
+        id: any;
+        created_at: string;
+        name: string;
+        author?:
+          | {
+              __typename?: "users";
+              id: any;
+              name?: string | undefined;
+              image?: string | undefined;
+            }
+          | undefined;
+      }
+    | undefined;
+};
+
 export type InsertOrgMutationVariables = Exact<{
   author_id: Scalars["uuid"];
   name?: InputMaybe<Scalars["String"]>;
@@ -1612,6 +1636,31 @@ export type InsertOrgMutationVariables = Exact<{
 export type InsertOrgMutation = {
   __typename?: "mutation_root";
   insert_orgs_one?:
+    | {
+        __typename?: "orgs";
+        id: any;
+        created_at: string;
+        name: string;
+        author?:
+          | {
+              __typename?: "users";
+              id: any;
+              name?: string | undefined;
+              image?: string | undefined;
+            }
+          | undefined;
+      }
+    | undefined;
+};
+
+export type UpdateOrgMutationVariables = Exact<{
+  id: Scalars["uuid"];
+  name?: InputMaybe<Scalars["String"]>;
+}>;
+
+export type UpdateOrgMutation = {
+  __typename?: "mutation_root";
+  update_orgs_by_pk?:
     | {
         __typename?: "orgs";
         id: any;
@@ -1659,6 +1708,7 @@ export type FetchOrgQuery = {
     id: any;
     created_at: string;
     name: string;
+    author_id: any;
   }>;
 };
 
@@ -1723,6 +1773,108 @@ export type SearchOrgsQuery = {
   orgs: Array<{ __typename?: "orgs"; id: any; name: string }>;
 };
 
+export const DeleteOrgDocument = gql`
+  mutation deleteOrg($id: uuid!) {
+    delete_orgs_by_pk(id: $id) {
+      id
+      created_at
+      name
+      author {
+        id
+        name
+        image
+      }
+    }
+  }
+`;
+export type DeleteOrgMutationFn = Apollo.MutationFunction<
+  DeleteOrgMutation,
+  DeleteOrgMutationVariables
+>;
+export type DeleteOrgComponentProps = Omit<
+  ApolloReactComponents.MutationComponentOptions<
+    DeleteOrgMutation,
+    DeleteOrgMutationVariables
+  >,
+  "mutation"
+>;
+
+export const DeleteOrgComponent = (props: DeleteOrgComponentProps) => (
+  <ApolloReactComponents.Mutation<DeleteOrgMutation, DeleteOrgMutationVariables>
+    mutation={DeleteOrgDocument}
+    {...props}
+  />
+);
+
+export type DeleteOrgProps<
+  TChildProps = {},
+  TDataName extends string = "mutate"
+> = {
+  [key in TDataName]: Apollo.MutationFunction<
+    DeleteOrgMutation,
+    DeleteOrgMutationVariables
+  >;
+} & TChildProps;
+export function withDeleteOrg<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = "mutate"
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    DeleteOrgMutation,
+    DeleteOrgMutationVariables,
+    DeleteOrgProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    DeleteOrgMutation,
+    DeleteOrgMutationVariables,
+    DeleteOrgProps<TChildProps, TDataName>
+  >(DeleteOrgDocument, {
+    alias: "deleteOrg",
+    ...operationOptions,
+  });
+}
+
+/**
+ * __useDeleteOrgMutation__
+ *
+ * To run a mutation, you first call `useDeleteOrgMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOrgMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOrgMutation, { data, loading, error }] = useDeleteOrgMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteOrgMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DeleteOrgMutation,
+    DeleteOrgMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<DeleteOrgMutation, DeleteOrgMutationVariables>(
+    DeleteOrgDocument,
+    options
+  );
+}
+export type DeleteOrgMutationHookResult = ReturnType<
+  typeof useDeleteOrgMutation
+>;
+export type DeleteOrgMutationResult = Apollo.MutationResult<DeleteOrgMutation>;
+export type DeleteOrgMutationOptions = Apollo.BaseMutationOptions<
+  DeleteOrgMutation,
+  DeleteOrgMutationVariables
+>;
 export const InsertOrgDocument = gql`
   mutation insertOrg($author_id: uuid!, $name: String) {
     insert_orgs_one(object: { author_id: $author_id, name: $name }) {
@@ -1825,6 +1977,109 @@ export type InsertOrgMutationResult = Apollo.MutationResult<InsertOrgMutation>;
 export type InsertOrgMutationOptions = Apollo.BaseMutationOptions<
   InsertOrgMutation,
   InsertOrgMutationVariables
+>;
+export const UpdateOrgDocument = gql`
+  mutation updateOrg($id: uuid!, $name: String) {
+    update_orgs_by_pk(_set: { name: $name }, pk_columns: { id: $id }) {
+      id
+      created_at
+      name
+      author {
+        id
+        name
+        image
+      }
+    }
+  }
+`;
+export type UpdateOrgMutationFn = Apollo.MutationFunction<
+  UpdateOrgMutation,
+  UpdateOrgMutationVariables
+>;
+export type UpdateOrgComponentProps = Omit<
+  ApolloReactComponents.MutationComponentOptions<
+    UpdateOrgMutation,
+    UpdateOrgMutationVariables
+  >,
+  "mutation"
+>;
+
+export const UpdateOrgComponent = (props: UpdateOrgComponentProps) => (
+  <ApolloReactComponents.Mutation<UpdateOrgMutation, UpdateOrgMutationVariables>
+    mutation={UpdateOrgDocument}
+    {...props}
+  />
+);
+
+export type UpdateOrgProps<
+  TChildProps = {},
+  TDataName extends string = "mutate"
+> = {
+  [key in TDataName]: Apollo.MutationFunction<
+    UpdateOrgMutation,
+    UpdateOrgMutationVariables
+  >;
+} & TChildProps;
+export function withUpdateOrg<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = "mutate"
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    UpdateOrgMutation,
+    UpdateOrgMutationVariables,
+    UpdateOrgProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    UpdateOrgMutation,
+    UpdateOrgMutationVariables,
+    UpdateOrgProps<TChildProps, TDataName>
+  >(UpdateOrgDocument, {
+    alias: "updateOrg",
+    ...operationOptions,
+  });
+}
+
+/**
+ * __useUpdateOrgMutation__
+ *
+ * To run a mutation, you first call `useUpdateOrgMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOrgMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOrgMutation, { data, loading, error }] = useUpdateOrgMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      name: // value for 'name'
+ *   },
+ * });
+ */
+export function useUpdateOrgMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateOrgMutation,
+    UpdateOrgMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<UpdateOrgMutation, UpdateOrgMutationVariables>(
+    UpdateOrgDocument,
+    options
+  );
+}
+export type UpdateOrgMutationHookResult = ReturnType<
+  typeof useUpdateOrgMutation
+>;
+export type UpdateOrgMutationResult = Apollo.MutationResult<UpdateOrgMutation>;
+export type UpdateOrgMutationOptions = Apollo.BaseMutationOptions<
+  UpdateOrgMutation,
+  UpdateOrgMutationVariables
 >;
 export const UpdateUserDocument = gql`
   mutation updateUser($userId: uuid!, $name: String) {
@@ -1935,6 +2190,7 @@ export const FetchOrgDocument = gql`
       id
       created_at
       name
+      author_id
     }
   }
 `;
