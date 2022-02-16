@@ -85,6 +85,9 @@ export const SearchBar = ({
             background: "none",
             marginLeft: "1.5rem",
             outline: "none",
+            type: "search",
+            enterKeyHint: "search",
+            role: "search",
           }),
           inputContainer: (provided) => ({
             width: "100%",
@@ -125,6 +128,9 @@ export const SearchBar = ({
         // onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
+
+        // type="search"
+        // enterKeyHint="search"
       />
       {/* <Button
         display={{ base: "none", md: "block" }}
