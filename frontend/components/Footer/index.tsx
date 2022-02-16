@@ -64,7 +64,7 @@ const Footer: NextComponentType = () => {
               style={{ textDecoration: "underline" }}
               target="_blank"
             >
-              Insaan Group
+              Insaan
             </a>
             .
           </Text>
