@@ -1,31 +1,17 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Box,
-  Button,
   Link as _Link,
-  Stack,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Image,
-  MenuDivider,
   Text,
   Flex,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import styled from "@emotion/styled";
 import { NextComponentType } from "next";
-import { signIn, signOut, useSession } from "next-auth/client";
-import Link from "next/link";
+import { useSession } from "next-auth/client";
 import React from "react";
 import { useRouter } from "next/router";
-// import { SearchBar } from "components/Pages/Landing";
 
 const Footer: NextComponentType = () => {
-  const [session] = useSession();
-  const router = useRouter();
-
   const isMobile = useBreakpointValue({ base: true, md: false });
   const footerHeight = isMobile ? "50vh !important" : 200;
 
@@ -34,7 +20,6 @@ const Footer: NextComponentType = () => {
       <Box
         as={"footer"}
         px={3}
-        // shadow="sm"
         pos="absolute"
         background={"#040d21"}
         bottom={0}

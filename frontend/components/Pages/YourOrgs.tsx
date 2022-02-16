@@ -1,6 +1,6 @@
 import { AddIcon } from "@chakra-ui/icons";
 import { Box, Button, Stack } from "@chakra-ui/react";
-import Content from "components/Layout/Content";
+import Content from "components/Content";
 import Loader from "components/Loader";
 import OrgsList from "components/OrgList";
 import { useMyOrgsQuery } from "generated-graphql";

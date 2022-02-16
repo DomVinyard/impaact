@@ -1,11 +1,4 @@
-import {
-  Box,
-  ChakraProvider,
-  Stack,
-  theme,
-  toCSSObject,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, ChakraProvider, Stack, theme } from "@chakra-ui/react";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import React, { FC } from "react";

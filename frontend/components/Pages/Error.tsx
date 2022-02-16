@@ -6,7 +6,7 @@ interface IProps {
   statusCode: number;
 }
 
-const IndexPageComponent: FC<IProps> = ({ statusCode }) => {
+const ErrorPageComponent: FC<IProps> = ({ statusCode }) => {
   const heightOfNavbar: string = "74px";
   const containerPadding: string = "1rem";
 
@@ -45,4 +45,4 @@ const IndexPageComponent: FC<IProps> = ({ statusCode }) => {
   );
 };
 
-export default IndexPageComponent;
+export default ErrorPageComponent;

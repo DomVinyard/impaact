@@ -12,7 +12,6 @@ import {
   MenuDivider,
   Flex,
 } from "@chakra-ui/react";
-import styled from "@emotion/styled";
 import { NextComponentType } from "next";
 import { signIn, signOut, useSession } from "next-auth/client";
 import Link from "next/link";
@@ -25,39 +24,23 @@ const Navbar: NextComponentType = () => {
   const { q } = router.query;
   const [query, setQuery] = React.useState(q);
 
-  const linksForAuthenticatedUsers = [
-    {
-      id: "orgs",
-      label: "Your Organisations",
-      href: "/orgs",
-    },
-    // {
-    //   id: "myAccount",
-    //   label: "Settings",
-    //   href: "/my-account",
-    // },
-  ];
-
   const signInButtonNode = () => {
-    if (session) {
-      return false;
-    }
+    if (session) return false;
     return (
       <Box>
-        <Link href="/api/auth/signin">
-          <Button
-            background={"none"}
-            _hover={{ bg: "none" }}
-            _active={{ bg: "none" }}
-            color="#fff"
-            onClick={(e) => {
-              e.preventDefault();
-              signIn();
-            }}
-          >
-            Sign In
-          </Button>
-        </Link>
+        <Button
+          as="a"
+          href="/api/auth/signin"
+          background={"none"}
+          _hover={{ bg: "none" }}
+          _active={{ bg: "none" }}
+          color="#fff"
+          onClick={(e) => {
+            e.preventDefault();
+            signIn();
+          }}
+          children="Sign In"
+        />
 
         <Link href="/api/auth/signin">
           <Button
@@ -152,16 +135,18 @@ const Navbar: NextComponentType = () => {
                         />
                       }
                     >
-                      <Avatar src={session.user.image} alt="avatar" />
+                      <Image
+                        height="32px"
+                        borderRadius="100%"
+                        src={session.user.image}
+                        alt="avatar"
+                      />
                     </MenuButton>
                   )}
                   <MenuList zIndex={2}>
-                    {linksForAuthenticatedUsers.map((link) => (
-                      <MenuItem as="a" key={link.id} href={link.href}>
-                        {link.label}
-                      </MenuItem>
-                    ))}
-                    <MenuDivider />
+                    <MenuItem as="a" href="/orgs">
+                      Your Organisations
+                    </MenuItem>
                     <MenuItem
                       as="a"
                       href="/api/auth/signout"
@@ -182,10 +167,5 @@ const Navbar: NextComponentType = () => {
     </Box>
   );
 };
-
-const Avatar = styled(Image)`
-  height: 32px;
-  border-radius: 100%;
-`;
 
 export default Navbar;

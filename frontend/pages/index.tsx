@@ -5,7 +5,7 @@ import { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/client";
 import AccessDeniedIndicator from "components/AccessDeniedIndicator";
 import ISession from "types/session";
-import Landing from "components/Pages/Landing";
+import Landing from "components/Pages/Home";
 
 interface IProps {
   session: ISession;

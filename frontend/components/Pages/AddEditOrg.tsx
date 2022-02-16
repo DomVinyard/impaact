@@ -21,7 +21,7 @@ import {
 } from "generated-graphql";
 import { useSession } from "next-auth/client";
 import React, { ChangeEvent, useState } from "react";
-import Content from "components/Layout/Content";
+import Content from "components/Content";
 import { useFetchOrgQuery } from "generated-graphql";
 import { useRouter } from "next/router";
 import { DeleteIcon } from "@chakra-ui/icons";

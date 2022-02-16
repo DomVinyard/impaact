@@ -7,16 +7,14 @@ import {
   Stack,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import Content from "components/Layout/Content";
+import Content from "components/Content";
 import OrgsList from "components/OrgList";
 import { useFetchOrgsQuery } from "generated-graphql";
 import React from "react";
-import { Canvas } from "react-three-fiber";
-import Lights from "./components/Light";
-import Model from "./components/Model";
 import SearchBar from "components/SearchBar";
+import Globe from "components/Globe";
 
-const IndexPageComponent = () => {
+const HomePageComponent = () => {
   const [query, setQuery] = React.useState("");
   const [isSearchFocusMobile, setIsSearchFocusMobile] = React.useState(false);
   const isMobile = useBreakpointValue({ base: true, md: false });
@@ -42,7 +40,7 @@ const IndexPageComponent = () => {
             zIndex={1}
             background={"#040d21"}
             height={"100vh"}
-          ></Box>
+          />
         )}
         <Box width="100%" position={"absolute"} zIndex={1}>
           <Box
@@ -80,9 +78,7 @@ const IndexPageComponent = () => {
                   value={query}
                   onFocus={() => isMobile && setIsSearchFocusMobile(true)}
                   onChange={(value) => {
-                    const pressAt = new Date();
-                    const newQuery = value;
-                    newQuery.length > query.length &&
+                    value.length > query.length &&
                       setLatestKeypress(new Date());
                     setQuery(value);
                   }}
@@ -100,29 +96,8 @@ const IndexPageComponent = () => {
           src="https://github.githubassets.com/images/modules/site/home/hero-glow.svg"
           alt="Glowing universe"
           style={{ position: "absolute", pointerEvents: "none" }}
-        ></img>
-        <>
-          <Flex display={{ base: "none", md: "block" }}>
-            <Canvas
-              style={{ minHeight: "600px", height: "80vh", width: "100%" }}
-              colorManagement
-              camera={{ position: [-1, -0.25, 4.5] }}
-            >
-              <Lights />
-              <Model latestKeypress={latestKeypress} baseSpeed={0.001} />
-            </Canvas>
-          </Flex>
-          <Flex display={{ base: "block", md: "none" }}>
-            <Canvas
-              style={{ minHeight: "600px", height: "80vh", width: "100%" }}
-              colorManagement
-              camera={{ position: [0, 1.75, 5] }}
-            >
-              <Lights />
-              <Model latestKeypress={latestKeypress} baseSpeed={0.002} />
-            </Canvas>
-          </Flex>
-        </>
+        />
+        <Globe latestKeypress={latestKeypress} />
       </Stack>
       <Box mb={{ base: 20, md: 40 }} textAlign={{ base: "center", md: "left" }}>
         <Content>
@@ -165,4 +140,4 @@ const IndexPageComponent = () => {
   );
 };
 
-export default IndexPageComponent;
+export default HomePageComponent;

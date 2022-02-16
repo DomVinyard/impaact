@@ -1,17 +1,6 @@
-import { EditIcon, SearchIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  Code,
-  Flex,
-  Heading,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
-import Content from "components/Layout/Content";
+import { EditIcon } from "@chakra-ui/icons";
+import { Box, Button, Heading, Stack, Text } from "@chakra-ui/react";
+import Content from "components/Content";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React from "react";
@@ -74,7 +63,6 @@ const OrgPageComponent = ({ org }) => {
               <Box height={200} p={4} color={"#777"} background={"#bbb"}>
                 Financial
               </Box>
-              {/* <Code maxW={"100%"}>{JSON.stringify(org)}</Code> */}
             </Box>
           </Stack>
         </Content>
