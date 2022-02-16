@@ -3,7 +3,11 @@ import { Box, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import Link from "next/link";
 
-const ClosedComponent = () => {
+type Props = {
+  type: "invite" | "not-implemented";
+};
+
+const ClosedComponent = ({ type = "invite" }: Props) => {
   return (
     <>
       <Stack
@@ -27,17 +31,26 @@ const ClosedComponent = () => {
           width={"100%"}
         >
           <Stack lineHeight={"1"}>
-            <Box mt={"25vh"}>Invite only atm</Box>
-            <Link href={"mailto:i@dom.vin"}>
-              <Text
-                fontWeight={"normal"}
-                cursor={"pointer"}
-                fontSize={{ base: "16px", md: "20px" }}
-                pt={8}
-              >
-                Request access <ChevronRightIcon />
-              </Text>
-            </Link>
+            {type === "invite" && (
+              <>
+                <Box mt={"25vh"}>Invite only atm</Box>
+                <Link href={"mailto:i@dom.vin"}>
+                  <Text
+                    fontWeight={"normal"}
+                    cursor={"pointer"}
+                    fontSize={{ base: "16px", md: "20px" }}
+                    pt={8}
+                  >
+                    Request access <ChevronRightIcon />
+                  </Text>
+                </Link>
+              </>
+            )}
+            {type === "not-implemented" && (
+              <>
+                <Box mt={"25vh"}>Not implemented yet</Box>
+              </>
+            )}
           </Stack>
         </Box>
         <img

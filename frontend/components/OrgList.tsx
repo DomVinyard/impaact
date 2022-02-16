@@ -26,7 +26,9 @@ const OrgsList = ({ orgs, loading, variant = "mini" }: Props) => {
     <Stack gap={4}>
       {orgs?.map((org: IOrg, index: number) => (
         <Link key={index} href={`/${org.slug}`}>
-          <MiniOrg org={org} />
+          <Box height={"100%"} cursor={"pointer"}>
+            <MiniOrg org={org} />
+          </Box>
         </Link>
       ))}
     </Stack>

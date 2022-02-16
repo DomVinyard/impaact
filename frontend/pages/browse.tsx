@@ -6,6 +6,7 @@ import { getSession } from "next-auth/client";
 import AccessDeniedIndicator from "components/AccessDeniedIndicator";
 import ISession from "types/session";
 import Landing from "components/Pages/Home";
+import ClosedComponent from "components/Closed";
 
 interface IProps {
   session: ISession;
