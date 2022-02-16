@@ -1,13 +1,8 @@
 import React, { FC } from "react";
-import { Box, Heading, Stack, Text, Button, Flex } from "@chakra-ui/react";
-import Link from "next/link";
+import { Box, Heading } from "@chakra-ui/react";
 import Content from "components/Content";
 
-interface IProps {
-  statusCode: number;
-}
-
-const BrowsePageComponent: FC<IProps> = ({ statusCode }) => {
+const BrowsePageComponent: FC = () => {
   return (
     <Box>
       <Content>
