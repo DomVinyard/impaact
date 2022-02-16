@@ -26,10 +26,8 @@ const HomePageComponent = () => {
   return (
     <>
       <Stack
-        style={{
-          background: "brand.900",
-          marginTop: isSearchFocusMobile ? -235 : 0,
-        }}
+        background={"brand.900"}
+        marginTop={isSearchFocusMobile ? -235 : 0}
       >
         {isSearchFocusMobile && (
           <Box
