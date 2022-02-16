@@ -27,7 +27,7 @@ const HomePageComponent = () => {
     <>
       <Stack
         style={{
-          background: "#040d21",
+          background: "brand.900",
           marginTop: isSearchFocusMobile ? -235 : 0,
         }}
       >
@@ -38,7 +38,7 @@ const HomePageComponent = () => {
             left={0}
             top={0}
             zIndex={1}
-            background={"#040d21"}
+            background={"brand.900"}
             height={"100vh"}
           />
         )}
@@ -108,7 +108,7 @@ const HomePageComponent = () => {
               color={"#64a3cb"}
               mb={6}
             >
-              FEATURED
+              RECENTLY ADDED
             </Heading>
             {<OrgsList orgs={data?.orgs} loading={loading} />}
           </Box>
@@ -119,7 +119,7 @@ const HomePageComponent = () => {
               color={"#64a3cb"}
               mb={6}
             >
-              BROWSE GOALS
+              GLOBAL GOALS
             </Heading>
             <Box background={"#eee"} height={400}></Box>
           </Box>

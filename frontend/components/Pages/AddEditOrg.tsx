@@ -6,11 +6,13 @@ import {
   Button,
   ButtonGroup,
   CloseButton,
+  Flex,
   FormControl,
   FormLabel,
   Heading,
   Input,
   Stack,
+  Text,
   Textarea,
   useBreakpointValue,
 } from "@chakra-ui/react";
@@ -26,10 +28,14 @@ import Content from "components/Content";
 import { useFetchOrgQuery } from "generated-graphql";
 import { useRouter } from "next/router";
 import { DeleteIcon } from "@chakra-ui/icons";
+import slugify from "../../lib/slugify";
+import Loader from "components/Loader";
 
 const AddEditOrgForm = ({ org }) => {
   const [name, setName] = useState(org?.name || "");
   const [slug, setSlug] = useState(org?.slug || "");
+  const [isSubmitted, setIsSubmitted] = useState("");
+  const isMobile = useBreakpointValue({ base: true, md: false });
   const [description, setDescription] = useState(org?.description || "");
   const [session] = useSession();
   const isEditMode = !!org;
@@ -46,12 +52,22 @@ const AddEditOrgForm = ({ org }) => {
     );
   }
 
+  const isFetching =
+    insertOrgFetching || updateOrgFetching || deleteOrgFetching;
+
+  const handleDelete = async () => {
+    setIsSubmitted("deleting");
+    await deleteOrg();
+    window.location.href = "/orgs";
+  };
+
   const handleSubmit = async () => {
     const fields = {
       name,
       slug,
       description,
     };
+    setIsSubmitted(isEditMode ? "Editing" : "Adding");
     if (isEditMode) {
       await updateOrg({
         variables: {
@@ -85,13 +101,15 @@ const AddEditOrgForm = ({ org }) => {
     );
   };
 
+  if (isFetching || isSubmitted) return <Loader message={isSubmitted} />;
+
   return (
     <Stack spacing={4}>
       {errorNode()}
       <Box p={4} shadow="lg" rounded="lg">
         <Stack spacing={4}>
           <FormControl isRequired>
-            <Heading mt={6} mb={6}>
+            <Heading mt={6} mb={12}>
               {isEditMode ? "Edit" : "Add"} Organisation
             </Heading>
             <Box>
@@ -100,25 +118,20 @@ const AddEditOrgForm = ({ org }) => {
                 id="name"
                 value={name}
                 placeholder="My organisation"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setName(e.currentTarget.value)
-                }
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setName(e.currentTarget.value);
+                  setSlug(slugify(e.currentTarget.value));
+                }}
                 isDisabled={isEditMode ? updateOrgFetching : insertOrgFetching}
               />
             </Box>
-            <Box>
-              <FormLabel>Slug</FormLabel>
-              <Input
-                id="slug"
-                value={slug}
-                placeholder="short-name"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setSlug(e.currentTarget.value)
-                }
-                isDisabled={isEditMode ? updateOrgFetching : insertOrgFetching}
-              />
-            </Box>
-            <Box>
+            <Text color={"blue"} fontSize={12}>
+              <strong>Link:</strong>{" "}
+              <span>
+                https://impact.ooo/{slugify(`${name}`, { lower: true })}
+              </span>
+            </Text>
+            <Box my={6}>
               <FormLabel>Description</FormLabel>
               <Textarea
                 id="description"
@@ -132,28 +145,38 @@ const AddEditOrgForm = ({ org }) => {
             </Box>
           </FormControl>
           <FormControl>
-            <ButtonGroup>
-              <Button
-                loadingText="Posting..."
-                onClick={handleSubmit}
-                isLoading={isEditMode ? updateOrgFetching : insertOrgFetching}
-                isDisabled={!name.trim()}
-              >
-                {isEditMode ? "Save" : "Add"}
-              </Button>
-              {isEditMode && (
+            {/* <ButtonGroup> */}
+            <Flex mt={6} justifyContent={"space-between"}>
+              <ButtonGroup>
                 <Button
-                  colorScheme="red"
-                  leftIcon={<DeleteIcon />}
-                  onClick={async () => {
-                    await deleteOrg();
-                    window.location.href = "/orgs";
+                  onClick={() => {
+                    window.location.href = `/${slug}`;
                   }}
                 >
-                  Delete
+                  Cancel
+                </Button>
+                <Button
+                  loadingText="Posting..."
+                  colorScheme={"blue"}
+                  onClick={handleSubmit}
+                  isLoading={isEditMode ? updateOrgFetching : insertOrgFetching}
+                  isDisabled={!name.trim()}
+                >
+                  {isEditMode ? "Save" : "Add"}
+                </Button>
+              </ButtonGroup>
+              {isEditMode && (
+                <Button
+                  marginLeft={"auto"}
+                  colorScheme="red"
+                  leftIcon={<DeleteIcon />}
+                  onClick={handleDelete}
+                >
+                  Delete{!isMobile && " Organisation"}
                 </Button>
               )}
-            </ButtonGroup>
+            </Flex>
+            {/* </ButtonGroup> */}
           </FormControl>
         </Stack>
       </Box>
@@ -169,7 +192,7 @@ const AddEditOrgPage = () => {
   const [org] = data?.orgs || [];
 
   if (loading) {
-    return <div>loading</div>;
+    return <Loader />;
   }
   return (
     <Content>

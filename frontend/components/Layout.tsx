@@ -2,8 +2,18 @@ import { Box, ChakraProvider, Stack, theme } from "@chakra-ui/react";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import React, { FC } from "react";
+import { extendTheme } from "@chakra-ui/react";
 
 const Layout: FC = ({ children }) => {
+  // 2. Call `extendTheme` and pass your custom values
+  const theme = extendTheme({
+    colors: {
+      brand: {
+        900: "#040d21",
+      },
+    },
+  });
+
   theme.styles.global = {
     ...theme.styles.global,
     "body, html": {

@@ -1,16 +1,43 @@
 import React, { FC } from "react";
-import { Box, CircularProgress } from "@chakra-ui/react";
+import { Box, CircularProgress, Flex, Stack, Text } from "@chakra-ui/react";
 
 interface Props {
-  size?: string;
+  message?: string;
   thickness?: number;
 }
 
-const Loader: FC<Props> = ({ size = "50px", thickness = 0.15 }) => {
+const Loader: FC<Props> = ({ message, thickness = 0.15 }) => {
   return (
-    <Box w="full" textAlign="center" maxH="200px">
-      <CircularProgress isIndeterminate size={size} thickness={thickness} />
-    </Box>
+    <Stack
+      zIndex={99}
+      pos={"fixed"}
+      h="100vh"
+      top={0}
+      left={0}
+      w="100vw"
+      textAlign="center"
+      background={"brand.900"}
+      alignItems="center"
+      justifyContent={"center"}
+      position={"fixed"}
+    >
+      <CircularProgress
+        isIndeterminate
+        size={"60px"}
+        thickness={15}
+        ringColor={"brand.900"}
+      />
+      <Text
+        fontFamily={"Montserrat"}
+        opacity={0.5}
+        color={"white"}
+        fontSize={32}
+        fontWeight={800}
+        textTransform={"uppercase"}
+      >
+        {message || "loading"}
+      </Text>
+    </Stack>
   );
 };
 

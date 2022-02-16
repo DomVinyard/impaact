@@ -3,8 +3,13 @@ import Loader from "components/Loader";
 import React from "react";
 import IOrg from "types/org";
 
-const OrgsList = ({ orgs, loading }) => {
-  if (loading) return "loading";
+type Props = {
+  orgs: IOrg[];
+  loading: boolean;
+};
+
+const OrgsList = ({ orgs, loading }: Props) => {
+  if (loading) return <Text>loading</Text>;
   return (
     <Stack spacing={8}>
       {orgs?.map((org: IOrg, index: number) => {

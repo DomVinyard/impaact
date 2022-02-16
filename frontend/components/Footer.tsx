@@ -21,7 +21,7 @@ const Footer: NextComponentType = () => {
         as={"footer"}
         px={3}
         pos="absolute"
-        background={"#040d21"}
+        background={"brand.900"}
         bottom={0}
         width={"100%"}
       >
