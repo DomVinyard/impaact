@@ -12,6 +12,7 @@ import {
   MenuDivider,
   Text,
   Flex,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { NextComponentType } from "next";
@@ -21,12 +22,15 @@ import React from "react";
 import { useRouter } from "next/router";
 import { SearchBar } from "components/Pages/Landing";
 
-const Navbar: NextComponentType = () => {
+const Footer: NextComponentType = () => {
   const [session] = useSession();
   const router = useRouter();
 
+  const isMobile = useBreakpointValue({ base: true, md: false });
+  const footerHeight = isMobile ? "50vh" : 200;
+
   return (
-    <Box pt={200}>
+    <Box pt={footerHeight} mt={"0 !important"}>
       <Box
         as={"footer"}
         px={3}
@@ -41,7 +45,7 @@ const Navbar: NextComponentType = () => {
           mx={2}
           maxWidth={1200}
           m="0 auto"
-          height={200}
+          height={footerHeight}
           pb={5}
         >
           <Image
@@ -55,7 +59,8 @@ const Navbar: NextComponentType = () => {
             mr={2}
           />
           <Text color={"rgb(140, 140, 172)"}>
-            Impact PPS. Made with <span style={{ fontSize: 10 }}>💜</span> by{" "}
+            <strong>Impact PPS.</strong> Made with{" "}
+            <span style={{ fontSize: 10 }}>💜</span> by{" "}
             <a
               href="https://insaangroup.org"
               style={{ textDecoration: "underline" }}
@@ -71,9 +76,4 @@ const Navbar: NextComponentType = () => {
   );
 };
 
-const Avatar = styled(Image)`
-  height: 32px;
-  border-radius: 100%;
-`;
-
-export default Navbar;
+export default Footer;
