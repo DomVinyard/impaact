@@ -1,0 +1,9 @@
+query fetchPopular($top: Int) {
+  orgs(order_by: { created_at: desc }, limit: $top) {
+    id
+    created_at
+    name
+    slug
+    description
+  }
+}

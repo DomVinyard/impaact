@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import Content from "components/Content";
 import OrgsList from "components/OrgList";
-import { useFetchOrgsQuery } from "generated-graphql";
+import { useFetchPopularQuery } from "generated-graphql";
 import React from "react";
 import SearchBar from "components/SearchBar";
 import Globe from "components/Globe";
@@ -31,7 +31,11 @@ const HomePageComponent = () => {
   const [latestKeypress, setLatestKeypress] = React.useState<
     Date | undefined
   >();
-  const { data, error, loading } = useFetchOrgsQuery();
+  const { data, error, loading } = useFetchPopularQuery({
+    variables: {
+      top: isMobile ? 3 : 6,
+    },
+  });
   const IS_LOCKED = IS_CLOSED && !session;
 
   return (
@@ -145,20 +149,18 @@ const HomePageComponent = () => {
                 color={"#64a3cb"}
                 mb={6}
               >
-                RECENTLY ADDED
+                POPULAR
               </Heading>
-              {<OrgsList orgs={data?.orgs} loading={loading} />}
-            </Box>
-            <Box>
-              <Heading
-                mt={{ base: 20, md: 20 }}
-                size={"xl"}
-                color={"#64a3cb"}
-                mb={6}
-              >
-                GLOBAL GOALS
-              </Heading>
-              <Box background={"#eee"} height={400}></Box>
+              {
+                <OrgsList
+                  orgs={data?.orgs}
+                  loading={loading}
+                  variant="popular"
+                />
+              }
+              <Link href={"/browse"}>
+                <Button colorScheme={"blue"}>Browse</Button>
+              </Link>
             </Box>
             <Box>
               <Heading
@@ -171,7 +173,7 @@ const HomePageComponent = () => {
               </Heading>
             </Box>
           </Content>
-          <Box background={"#eee"} height={800}></Box>
+          <Box background={"#eee"} height={{ base: 300, md: 600 }}></Box>
         </Box>
       )}
     </>
