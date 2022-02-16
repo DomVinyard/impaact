@@ -67,7 +67,7 @@ const AddEditOrgForm = ({ org }) => {
       slug,
       description,
     };
-    setIsSubmitted(isEditMode ? "Editing" : "Adding");
+    setIsSubmitted(isEditMode ? "Updating report" : "Creating report");
     if (isEditMode) {
       await updateOrg({
         variables: {

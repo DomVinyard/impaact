@@ -30,7 +30,7 @@ const SearchPageComponent = () => {
 const NoResults = ({ query }) => {
   return (
     <>
-      <Text pt={6} fontSize={"1.25rem"}>
+      <Text pt={6} fontSize={{ base: "1.25rem", md: "1.5rem" }}>
         No results for <strong>{query}</strong>
       </Text>
       <Box pt={6}>

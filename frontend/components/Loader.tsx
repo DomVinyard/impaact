@@ -27,16 +27,18 @@ const Loader: FC<Props> = ({ message, thickness = 0.15 }) => {
         thickness={15}
         ringColor={"brand.900"}
       />
-      <Text
-        fontFamily={"Montserrat"}
-        opacity={0.5}
-        color={"white"}
-        fontSize={32}
-        fontWeight={800}
-        textTransform={"uppercase"}
-      >
-        {message || "loading"}
-      </Text>
+      {message?.length && (
+        <Text
+          fontFamily={"Montserrat"}
+          opacity={0.5}
+          color={"white"}
+          fontSize={32}
+          fontWeight={800}
+          textTransform={"uppercase"}
+        >
+          {message}
+        </Text>
+      )}
     </Stack>
   );
 };
