@@ -95,6 +95,7 @@ const Navbar: NextComponentType = () => {
             justifyContent="space-between"
             w="full"
             alignItems="center"
+            color="white"
           >
             <Flex>
               <Stack
@@ -120,7 +121,7 @@ const Navbar: NextComponentType = () => {
                   <SearchBar
                     mini
                     value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    onChange={(value) => setQuery(value)}
                     onSubmit={() => {
                       const cachedQuery = query;
                       setQuery("");

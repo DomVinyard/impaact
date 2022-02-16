@@ -67,6 +67,7 @@ export const SearchBar = ({
         />
       )}
       <AsyncSelect
+        defaultInputValue={value}
         tagVariant={mini ? "subtle" : "outline"}
         onChange={(option) => {
           if (option.value === "@search") {
@@ -83,7 +84,7 @@ export const SearchBar = ({
           input: (provided) => ({
             width: "100%",
             background: "none",
-            marginLeft: "1.5rem",
+            marginLeft: mini ? 0 : "1.5rem",
             outline: "none",
             type: "search",
             enterKeyHint: "search",
@@ -92,15 +93,16 @@ export const SearchBar = ({
           inputContainer: (provided) => ({
             width: "100%",
             maxW: "440px",
-            marginLeft: mini ? 2 : 0,
+            marginLeft: mini ? 0 : 0,
           }),
           container: (provided) => ({
             width: "100%",
             maxWidth: 440,
+            marginLeft: mini ? 2 : 0,
           }),
           placeholder: (provided) => ({
             ...provided,
-            marginLeft: "1.5rem",
+            marginLeft: mini ? 0 : "1.5rem",
           }),
           dropdownIndicator: (provided) => ({
             ...provided,
@@ -112,7 +114,7 @@ export const SearchBar = ({
             width: "100%",
             maxW: "440px",
             color: "black",
-            display: !value.length ? "none" : "block",
+            display: !value?.length ? "none" : "block",
           }),
         }}
         // width={{ input: "100%", inputContainer: "100%" }}
