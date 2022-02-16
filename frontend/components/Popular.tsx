@@ -45,7 +45,7 @@ const PopularComponent = () => {
     },
   });
   return (
-    <Box>
+    <Box pb={{ base: 4, md: 10 }}>
       <Heading mt={{ base: 10, md: 32 }} size={"xl"} color={"#64a3cb"} mb={6}>
         POPULAR
       </Heading>

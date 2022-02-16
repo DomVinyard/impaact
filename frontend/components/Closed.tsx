@@ -5,9 +5,10 @@ import Link from "next/link";
 
 type Props = {
   type?: "invite" | "not-implemented";
+  message?: string;
 };
 
-const ClosedComponent = ({ type = "invite" }: Props) => {
+const ClosedComponent = ({ type = "invite", message }: Props) => {
   return (
     <>
       <Stack
@@ -31,24 +32,33 @@ const ClosedComponent = ({ type = "invite" }: Props) => {
           width={"100%"}
         >
           <Stack lineHeight={"1"}>
-            {type === "invite" && (
+            {message && (
               <>
-                <Box mt={"25vh"}>Invite only atm</Box>
-                <Link href={"mailto:i@dom.vin"}>
-                  <Text
-                    fontWeight={"normal"}
-                    cursor={"pointer"}
-                    fontSize={{ base: "16px", md: "20px" }}
-                    pt={8}
-                  >
-                    Request access <ChevronRightIcon />
-                  </Text>
-                </Link>
+                <Box mt={"25vh"}>{message}</Box>
               </>
             )}
-            {type === "not-implemented" && (
+            {!message && (
               <>
-                <Box mt={"25vh"}>Not implemented yet</Box>
+                {type === "invite" && (
+                  <>
+                    <Box mt={"25vh"}>Invite only atm</Box>
+                    <Link href={"mailto:i@dom.vin"}>
+                      <Text
+                        fontWeight={"normal"}
+                        cursor={"pointer"}
+                        fontSize={{ base: "16px", md: "20px" }}
+                        pt={8}
+                      >
+                        Request access <ChevronRightIcon />
+                      </Text>
+                    </Link>
+                  </>
+                )}
+                {type === "not-implemented" && (
+                  <>
+                    <Box mt={"25vh"}>Not implemented yet</Box>
+                  </>
+                )}
               </>
             )}
           </Stack>

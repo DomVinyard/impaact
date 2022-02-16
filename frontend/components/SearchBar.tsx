@@ -19,7 +19,7 @@ export const SearchBar = ({
   isSearchFocusMobile,
 }: any) => {
   const [searchOrgs] = useSearchOrgsLazyQuery({ fetchPolicy: "network-only" });
-  const [isSelected, setIsSelected] = React.useState("");
+  const [isSelected, setIsSelected] = React.useState<any>();
   const isMobile = useBreakpointValue({ base: true, md: false });
   const router = useRouter();
 
@@ -52,7 +52,11 @@ export const SearchBar = ({
 
   if (isSelected)
     return (
-      <Loader message={isSelected === "@search" ? "Searching" : "Get report"} />
+      <Loader
+        message={
+          isSelected?.value === "@search" ? "Searching" : isSelected?.label
+        }
+      />
     );
 
   return (
@@ -73,7 +77,7 @@ export const SearchBar = ({
         defaultInputValue={value}
         tagVariant={mini ? "solid" : "outline"}
         onChange={(option) => {
-          setIsSelected(option.value);
+          setIsSelected(option);
           if (option.value === "@search") {
             router.push(`/search?q=${value}`);
           } else {
