@@ -94,7 +94,6 @@ const Navbar: NextComponentType = () => {
             justifyContent="space-between"
             w="full"
             alignItems="center"
-            color="white"
           >
             <Flex>
               <Stack
@@ -116,7 +115,11 @@ const Navbar: NextComponentType = () => {
                 />
               </Stack>
               {router.pathname !== "/" && (
-                <Box width={260} display={{ base: "none", md: "block" }}>
+                <Box
+                  width={260}
+                  display={{ base: "none", md: "block" }}
+                  color="white"
+                >
                   <SearchBar
                     mini
                     value={query}
@@ -137,8 +140,8 @@ const Navbar: NextComponentType = () => {
                   {session && (
                     <MenuButton
                       background={"none"}
-                      _hover={{ bg: "#555" }}
-                      _active={{ bg: "#555" }}
+                      _hover={{ bg: "#333" }}
+                      _active={{ bg: "#333" }}
                       as={Button}
                       pl={"10px"}
                       pr={"0px"}
