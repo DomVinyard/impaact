@@ -1,8 +1,4 @@
-import {
-  ArrowBackIcon,
-  ArrowRightIcon,
-  ChevronRightIcon,
-} from "@chakra-ui/icons";
+import { ArrowBackIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -13,13 +9,12 @@ import {
   Text,
 } from "@chakra-ui/react";
 import Content from "components/Content";
-import OrgsList from "components/OrgList";
-import { useFetchPopularQuery } from "generated-graphql";
 import React from "react";
 import SearchBar from "components/SearchBar";
 import Globe from "components/Globe";
 import { useSession } from "next-auth/client";
-import Link from "next/link";
+import PopularComponent from "components/Popular";
+import ClosedComponent from "components/Closed";
 
 const IS_CLOSED = true;
 
@@ -31,20 +26,16 @@ const HomePageComponent = () => {
   const [latestKeypress, setLatestKeypress] = React.useState<
     Date | undefined
   >();
-  const { data, error, loading } = useFetchPopularQuery({
-    variables: {
-      top: isMobile ? 3 : 6,
-    },
-  });
-  const IS_LOCKED = IS_CLOSED && !session;
+
+  if (IS_CLOSED && !session) return <ClosedComponent />;
 
   return (
     <>
       <Stack
         background={"brand.900"}
-        height={IS_LOCKED ? "100vh" : "auto"}
-        position={IS_LOCKED ? "fixed" : "relative"}
-        width={IS_LOCKED ? "100vw" : "auto"}
+        height={"auto"}
+        position={"relative"}
+        width={"auto"}
         marginTop={isSearchFocusMobile ? -235 : 0}
       >
         {isSearchFocusMobile && (
@@ -72,27 +63,10 @@ const HomePageComponent = () => {
             fontWeight={700}
           >
             <Stack lineHeight={"1"}>
-              {!IS_LOCKED && (
-                <>
-                  <Box>Measuring</Box>
-                  <Box>positive impact</Box>
-                </>
-              )}
-              {IS_LOCKED && (
-                <>
-                  <Box mt={"25vh"}>Invite only</Box>
-                  <Link href={"mailto:i@dom.vin"}>
-                    <Text
-                      fontWeight={"normal"}
-                      cursor={"pointer"}
-                      fontSize={{ base: "16px", md: "20px" }}
-                      pt={8}
-                    >
-                      Request access <ChevronRightIcon />
-                    </Text>
-                  </Link>
-                </>
-              )}
+              <>
+                <Box>Measuring</Box>
+                <Box>positive impact</Box>
+              </>
               <Flex pt={5}>
                 {isSearchFocusMobile && (
                   <Button
@@ -107,24 +81,23 @@ const HomePageComponent = () => {
                     <ArrowBackIcon color="gray.300" />
                   </Button>
                 )}
-                {!IS_LOCKED && (
-                  <SearchBar
-                    isSearchFocusMobile={isSearchFocusMobile}
-                    mini={false}
-                    value={query}
-                    onFocus={() => isMobile && setIsSearchFocusMobile(true)}
-                    onChange={(value) => {
-                      if (value.length > query.length)
-                        setLatestKeypress(new Date());
-                      setQuery(value);
-                    }}
-                    onSubmit={() => {
-                      const cachedQuery = query;
-                      setQuery("");
-                      location.assign("/search?q=" + cachedQuery);
-                    }}
-                  />
-                )}
+
+                <SearchBar
+                  isSearchFocusMobile={isSearchFocusMobile}
+                  mini={false}
+                  value={query}
+                  onFocus={() => isMobile && setIsSearchFocusMobile(true)}
+                  onChange={(value) => {
+                    if (value.length > query.length)
+                      setLatestKeypress(new Date());
+                    setQuery(value);
+                  }}
+                  onSubmit={() => {
+                    const cachedQuery = query;
+                    setQuery("");
+                    location.assign("/search?q=" + cachedQuery);
+                  }}
+                />
               </Flex>
             </Stack>
           </Box>
@@ -134,48 +107,24 @@ const HomePageComponent = () => {
           alt="Glowing universe"
           style={{ position: "absolute", pointerEvents: "none" }}
         />
-        {!IS_LOCKED && <Globe latestKeypress={latestKeypress} />}
+        <Globe latestKeypress={latestKeypress} />
       </Stack>
-      {!IS_LOCKED && (
-        <Box
-          // mb={{ base: 20, md: 40 }}
-          textAlign={{ base: "center", md: "left" }}
-        >
-          <Content>
-            <Box>
-              <Heading
-                mt={{ base: 10, md: 40 }}
-                size={"xl"}
-                color={"#64a3cb"}
-                mb={6}
-              >
-                POPULAR
-              </Heading>
-              {
-                <OrgsList
-                  orgs={data?.orgs}
-                  loading={loading}
-                  variant="popular"
-                />
-              }
-              <Link href={"/browse"}>
-                <Button colorScheme={"blue"}>Browse</Button>
-              </Link>
-            </Box>
-            <Box>
-              <Heading
-                mt={{ base: 20, md: 20 }}
-                size={"xl"}
-                color={"#64a3cb"}
-                mb={6}
-              >
-                ABOUT PPS
-              </Heading>
-            </Box>
-          </Content>
-          <Box background={"#eee"} height={{ base: 300, md: 600 }}></Box>
-        </Box>
-      )}
+      <Box textAlign={{ base: "center", md: "left" }}>
+        <Content>
+          <PopularComponent />
+          <Box>
+            <Heading
+              mt={{ base: 20, md: 32 }}
+              size={"xl"}
+              color={"#64a3cb"}
+              mb={6}
+            >
+              ABOUT IMPACT PPS
+            </Heading>
+          </Box>
+        </Content>
+        <Box background={"#eee"} height={{ base: 300, md: 600 }}></Box>
+      </Box>
     </>
   );
 };
