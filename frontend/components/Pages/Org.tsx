@@ -53,16 +53,16 @@ const OrgPageComponent = ({ org }) => {
                   </Box>
                 )}
               </Stack>
-              <Box height={160} p={4} color={"#777"} background={"#eee"}>
+              <Box height={200} p={4} color={"#777"} background={"#eee"}>
                 Photo/Map
               </Box>
-              <Box height={400} p={4} color={"#777"} background={"#ddd"}>
+              <Box height={460} p={4} color={"#777"} background={"#ddd"}>
                 Impact
               </Box>
-              <Box height={200} p={4} color={"#777"} background={"#ccc"}>
+              <Box height={240} p={4} color={"#777"} background={"#ccc"}>
                 Operations
               </Box>
-              <Box height={200} p={4} color={"#777"} background={"#bbb"}>
+              <Box height={240} p={4} color={"#777"} background={"#bbb"}>
                 Financial
               </Box>
             </Box>

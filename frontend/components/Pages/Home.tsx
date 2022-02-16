@@ -81,7 +81,7 @@ const HomePageComponent = () => {
                     <Text
                       fontWeight={"normal"}
                       cursor={"pointer"}
-                      fontSize={15}
+                      fontSize={{ base: "16px", md: "20px" }}
                       pt={8}
                     >
                       Request access <ChevronRightIcon />
@@ -134,7 +134,7 @@ const HomePageComponent = () => {
       </Stack>
       {!IS_LOCKED && (
         <Box
-          mb={{ base: 20, md: 40 }}
+          // mb={{ base: 20, md: 40 }}
           textAlign={{ base: "center", md: "left" }}
         >
           <Content>
@@ -169,9 +169,9 @@ const HomePageComponent = () => {
               >
                 ABOUT PPS
               </Heading>
-              <Box background={"#eee"} height={800}></Box>
             </Box>
           </Content>
+          <Box background={"#eee"} height={800}></Box>
         </Box>
       )}
     </>
