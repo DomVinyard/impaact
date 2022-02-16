@@ -112,18 +112,35 @@ const HomePageComponent = () => {
       <Box textAlign={{ base: "center", md: "left" }}>
         <Content>
           <PopularComponent />
-          <Box>
-            <Heading
-              mt={{ base: 20, md: 32 }}
-              size={"xl"}
-              color={"#64a3cb"}
-              mb={6}
-            >
-              ABOUT IMPACT PPS
-            </Heading>
-          </Box>
+          <Box mb={{ base: 20, md: 32 }}></Box>
         </Content>
-        <Box background={"#eee"} height={{ base: 300, md: 600 }}></Box>
+        <Box
+          background={"brand.900"}
+          height={{ base: 420, md: 660 }}
+          overflow={"none"}
+        >
+          <Box
+            height={{ base: 420, md: 660 }}
+            width={"100%"}
+            backgroundImage="url(https://github.githubassets.com/images/modules/site/home/hero-glow.svg)"
+            alt="Glowing universe"
+            style={{ position: "absolute", pointerEvents: "none" }}
+          />
+          <Content>
+            <Box>
+              <Heading
+                // mt={{ base: 20, md: 32 }}
+                size={"xl"}
+                color={"#fff"}
+                fontFamily={"Montserrat"}
+                fontWeight={800}
+                pt={{ base: 8, md: 16 }}
+              >
+                About Impact PPS
+              </Heading>
+            </Box>
+          </Content>
+        </Box>
       </Box>
     </>
   );

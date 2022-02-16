@@ -41,7 +41,7 @@ const PopularComponent = () => {
   const view = useBreakpointValue({ base: "base", md: "md", lg: "lg" });
   const { data, error, loading } = useFetchPopularQuery({
     variables: {
-      top: view === "base" ? 4 : view === "md" ? 7 : 11,
+      top: view === "base" ? 5 : view === "md" ? 7 : 11,
     },
   });
   return (

@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 
 type Props = {
-  type: "invite" | "not-implemented";
+  type?: "invite" | "not-implemented";
 };
 
 const ClosedComponent = ({ type = "invite" }: Props) => {

@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, useBreakpointValue } from "@chakra-ui/react";
 import React, { useEffect, useState, useRef } from "react";
 import { Canvas, useFrame } from "react-three-fiber";
 import * as THREE from "three";
@@ -74,29 +74,18 @@ const Lights = () => {
 };
 
 const Globe = ({ latestKeypress }) => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
   return (
-    <>
-      <Flex display={{ base: "none", md: "block" }}>
-        <Canvas
-          style={{ minHeight: "600px", height: "80vh", width: "100%" }}
-          colorManagement
-          camera={{ position: [-1, -0.25, 4.5] }}
-        >
-          <Lights />
-          <Model latestKeypress={latestKeypress} baseSpeed={0.001} />
-        </Canvas>
-      </Flex>
-      <Flex display={{ base: "block", md: "none" }}>
-        <Canvas
-          style={{ minHeight: "600px", height: "80vh", width: "100%" }}
-          colorManagement
-          camera={{ position: [0, 1.75, 5] }}
-        >
-          <Lights />
-          <Model latestKeypress={latestKeypress} baseSpeed={0.002} />
-        </Canvas>
-      </Flex>
-    </>
+    <Flex style={{ minHeight: "600px", height: "80vh", width: "100%" }}>
+      <Canvas
+        style={{ height: "100%" }}
+        colorManagement
+        camera={{ position: isMobile ? [0, 1.75, 5] : [-1, -0.25, 4.5] }}
+      >
+        <Lights />
+        <Model latestKeypress={latestKeypress} baseSpeed={0.002} />
+      </Canvas>
+    </Flex>
   );
 };
 
