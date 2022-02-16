@@ -27,7 +27,7 @@ const Footer: NextComponentType = () => {
   const router = useRouter();
 
   const isMobile = useBreakpointValue({ base: true, md: false });
-  const footerHeight = isMobile ? "50vh" : 200;
+  const footerHeight = isMobile ? "50vh !important" : 200;
 
   return (
     <Box pt={footerHeight} mt={"0 !important"}>

@@ -264,18 +264,41 @@ const IndexPageComponent = () => {
           </Flex>
         </>
       </Stack>
-      <Box mb={200} textAlign={{ base: "center", md: "left" }}>
+      <Box mb={{ base: 20, md: 40 }} textAlign={{ base: "center", md: "left" }}>
         <Content>
-          <Heading
-            mt={{ base: 10, md: 20 }}
-            size={"xl"}
-            color={"#64a3cb"}
-            mb={8}
-          >
-            FEATURED
-          </Heading>
-
-          {<OrgsList orgs={data?.orgs} />}
+          <Box>
+            <Heading
+              mt={{ base: 10, md: 40 }}
+              size={"xl"}
+              color={"#64a3cb"}
+              mb={6}
+            >
+              FEATURED
+            </Heading>
+            {<OrgsList orgs={data?.orgs} />}
+          </Box>
+          <Box>
+            <Heading
+              mt={{ base: 20, md: 20 }}
+              size={"xl"}
+              color={"#64a3cb"}
+              mb={6}
+            >
+              BROWSE GOALS
+            </Heading>
+            <Box background={"#ddd"} height={400}></Box>
+          </Box>
+          <Box>
+            <Heading
+              mt={{ base: 20, md: 20 }}
+              size={"xl"}
+              color={"#64a3cb"}
+              mb={6}
+            >
+              ABOUT PPS
+            </Heading>
+            <Box background={"#ddd"} height={800}></Box>
+          </Box>
         </Content>
       </Box>
     </>
