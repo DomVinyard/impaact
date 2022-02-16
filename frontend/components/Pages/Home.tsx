@@ -78,7 +78,7 @@ const HomePageComponent = () => {
                   value={query}
                   onFocus={() => isMobile && setIsSearchFocusMobile(true)}
                   onChange={(value) => {
-                    value.length > query.length &&
+                    if (value.length > query.length)
                       setLatestKeypress(new Date());
                     setQuery(value);
                   }}

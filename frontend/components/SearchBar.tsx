@@ -16,7 +16,7 @@ export const SearchBar = ({
   onBlur,
   isSearchFocusMobile,
 }: any) => {
-  const [searchOrgs] = useSearchOrgsLazyQuery();
+  const [searchOrgs] = useSearchOrgsLazyQuery({ fetchPolicy: "network-only" });
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   const getAsyncOptions = async (inputValue) => {
@@ -57,6 +57,9 @@ export const SearchBar = ({
           } else {
             location.href = `/${option.value}`;
           }
+        }}
+        onInputChange={(inputValue) => {
+          onChange(inputValue);
         }}
         loadOptions={(inputValue) => {
           onChange(inputValue);
