@@ -110,7 +110,7 @@ const HomePageComponent = () => {
             >
               FEATURED
             </Heading>
-            {<OrgsList orgs={data?.orgs} />}
+            {<OrgsList orgs={data?.orgs} loading={loading} />}
           </Box>
           <Box>
             <Heading

@@ -22,7 +22,7 @@ const SearchPageComponent = () => {
           {!data?.orgs.length && <NoResults query={q} />}
         </Stack>
       </Stack>
-      {<OrgsList orgs={data?.orgs} />}
+      {<OrgsList orgs={data?.orgs} loading={loading} />}
     </Content>
   );
 };

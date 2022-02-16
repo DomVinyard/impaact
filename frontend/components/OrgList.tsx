@@ -3,7 +3,8 @@ import Loader from "components/Loader";
 import React from "react";
 import IOrg from "types/org";
 
-const OrgsList = ({ orgs }) => {
+const OrgsList = ({ orgs, loading }) => {
+  if (loading) return "loading";
   return (
     <Stack spacing={8}>
       {orgs?.map((org: IOrg, index: number) => {
