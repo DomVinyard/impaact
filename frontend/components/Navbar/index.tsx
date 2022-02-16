@@ -18,8 +18,7 @@ import { signIn, signOut, useSession } from "next-auth/client";
 import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/router";
-import { SearchBar } from "components/Pages/Landing";
-
+import SearchBar from "components/SearchBar";
 const Navbar: NextComponentType = () => {
   const [session] = useSession();
   const router = useRouter();

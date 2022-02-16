@@ -47,20 +47,18 @@ const Footer: NextComponentType = () => {
           m="0 auto"
           height={footerHeight}
           pb={5}
+          fontSize={13}
         >
           <Image
             src="/images/logo.png"
             alt="PPS"
-            height={"24px"}
-            width={"32px"}
-            minW={"24px"}
-            maxW={"32px"}
+            height={"18px"}
+            width={"28px"}
             pl={"8px"}
             mr={2}
           />
           <Text color={"rgb(140, 140, 172)"}>
-            <strong>Impact PPS.</strong> Made with{" "}
-            <span style={{ fontSize: 10 }}>💜</span> by{" "}
+            <strong>Impact PPS.</strong> Made with <span>💜</span> by{" "}
             <a
               href="https://insaangroup.org"
               style={{ textDecoration: "underline" }}
