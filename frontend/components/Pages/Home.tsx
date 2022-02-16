@@ -130,11 +130,11 @@ const HomePageComponent = () => {
             <Box>
               <Heading
                 // mt={{ base: 20, md: 32 }}
-                size={"xl"}
+                fontSize={{ base: "28px", md: "xl" }}
                 color={"#fff"}
                 fontFamily={"Montserrat"}
                 fontWeight={800}
-                pt={{ base: 8, md: 16 }}
+                pt={{ base: 12, md: 16 }}
               >
                 About Impact PPS
               </Heading>

@@ -8,6 +8,7 @@ import { useSearchOrgsLazyQuery } from "generated-graphql";
 import React from "react";
 import { AsyncSelect } from "chakra-react-select";
 import router, { useRouter } from "next/router";
+import Loader from "components/Loader";
 
 export const SearchBar = ({
   value,
@@ -18,6 +19,7 @@ export const SearchBar = ({
   isSearchFocusMobile,
 }: any) => {
   const [searchOrgs] = useSearchOrgsLazyQuery({ fetchPolicy: "network-only" });
+  const [isSelected, setIsSelected] = React.useState("");
   const isMobile = useBreakpointValue({ base: true, md: false });
   const router = useRouter();
 
@@ -47,6 +49,12 @@ export const SearchBar = ({
       </div>
     );
   };
+
+  if (isSelected)
+    return (
+      <Loader message={isSelected === "@search" ? "Searching" : "Get report"} />
+    );
+
   return (
     <InputGroup
       alignSelf={{ base: "center", md: "left" }}
@@ -65,6 +73,7 @@ export const SearchBar = ({
         defaultInputValue={value}
         tagVariant={mini ? "solid" : "outline"}
         onChange={(option) => {
+          setIsSelected(option.value);
           if (option.value === "@search") {
             router.push(`/search?q=${value}`);
           } else {
