@@ -12,6 +12,7 @@ import {
   Input,
   Stack,
   Textarea,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import AccessDeniedIndicator from "components/AccessDeniedIndicator";
 import {
@@ -91,7 +92,7 @@ const AddEditOrgForm = ({ org }) => {
         <Stack spacing={4}>
           <FormControl isRequired>
             <Heading mt={6} mb={6}>
-              {org ? "Edit Organisation" : "Add Organisation"}
+              {isEditMode ? "Edit" : "Add"} Organisation
             </Heading>
             <Box>
               <FormLabel>Name</FormLabel>

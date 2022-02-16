@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 
 const Footer: NextComponentType = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
-  const footerHeight = isMobile ? "50vh !important" : 200;
+  const footerHeight = isMobile ? "33vh !important" : 200;
 
   return (
     <Box pt={footerHeight} mt={"0 !important"}>
