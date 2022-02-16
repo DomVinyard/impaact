@@ -16,6 +16,7 @@ import React from "react";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
 import IOrg from "types/org";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
 const PopularOrg = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
   return (
@@ -40,7 +41,7 @@ const PopularComponent = () => {
   const view = useBreakpointValue({ base: "base", md: "md", lg: "lg" });
   const { data, error, loading } = useFetchPopularQuery({
     variables: {
-      top: view === "base" ? 3 : view === "md" ? 5 : 8,
+      top: view === "base" ? 4 : view === "md" ? 7 : 11,
     },
   });
   return (
@@ -68,9 +69,16 @@ const PopularComponent = () => {
         ))}
         <GridItem rowSpan={1} colSpan={1} background="#ccc">
           <Link href={"/browse"}>
-            <Box height={"100%"} width={"100%"} cursor={"pointer"}>
-              Browse
-            </Box>
+            <Flex
+              height={"100%"}
+              width={"100%"}
+              cursor={"pointer"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              color="#444"
+            >
+              View More <ChevronRightIcon />
+            </Flex>
           </Link>
         </GridItem>
       </Grid>

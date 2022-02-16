@@ -7,7 +7,7 @@ import {
 import { useSearchOrgsLazyQuery } from "generated-graphql";
 import React from "react";
 import { AsyncSelect } from "chakra-react-select";
-import router from "next/router";
+import router, { useRouter } from "next/router";
 
 export const SearchBar = ({
   value,
@@ -19,6 +19,9 @@ export const SearchBar = ({
 }: any) => {
   const [searchOrgs] = useSearchOrgsLazyQuery({ fetchPolicy: "network-only" });
   const isMobile = useBreakpointValue({ base: true, md: false });
+  const router = useRouter();
+
+  // console.log({ router });
 
   const getAsyncOptions = async (inputValue) => {
     const { data, error } = await searchOrgs({
