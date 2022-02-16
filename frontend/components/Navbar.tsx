@@ -24,44 +24,39 @@ const Navbar: NextComponentType = () => {
   const { q } = router.query;
   const [query, setQuery] = React.useState(q);
 
+  const signInOrUp = (e) => {
+    e.preventDefault();
+    signIn({ callbackUrl: "/orgs" });
+  };
+
   const signInButtonNode = () => {
     if (session) return false;
     return (
       <Box>
         <Button
-          as="a"
-          href="/api/auth/signin"
           background={"none"}
           _hover={{ bg: "none" }}
           _active={{ bg: "none" }}
           color="#fff"
-          onClick={(e) => {
-            e.preventDefault();
-            signIn();
-          }}
+          onClick={signInOrUp}
           children="Sign In"
         />
 
-        <Link href="/api/auth/signin">
-          <Button
-            display={{
-              base: router.pathname === "/" ? "inline-block" : "none",
-              md: "inline-block",
-            }}
-            background={"none"}
-            variant="outline"
-            paddingY={1}
-            _hover={{ bg: "#555" }}
-            _active={{ bg: "#555" }}
-            color="#fff"
-            onClick={(e) => {
-              e.preventDefault();
-              signIn();
-            }}
-          >
-            Add your organisation
-          </Button>
-        </Link>
+        <Button
+          display={{
+            base: router.pathname === "/" ? "inline-block" : "none",
+            md: "inline-block",
+          }}
+          background={"none"}
+          variant="outline"
+          paddingY={1}
+          _hover={{ bg: "#555" }}
+          _active={{ bg: "#555" }}
+          color="#fff"
+          onClick={signInOrUp}
+        >
+          Add your organisation
+        </Button>
       </Box>
     );
   };
@@ -79,23 +74,19 @@ const Navbar: NextComponentType = () => {
             alignItems="center"
           >
             <Flex>
-              <Stack
-                as="a"
-                isInline
-                spacing={4}
-                align="center"
-                fontWeight="semibold"
-                href={"/"}
-              >
-                <Image
-                  src="/images/logo.png"
-                  alt="PPS"
-                  height={"27px"}
-                  width={"36px"}
-                  minW={"36px"}
-                  maxW={"36px"}
-                  pl={"8px"}
-                />
+              <Stack isInline spacing={4} align="center" fontWeight="semibold">
+                <Link href="/">
+                  <Image
+                    cursor={"pointer"}
+                    src="/images/logo.png"
+                    alt="PPS"
+                    height={"27px"}
+                    width={"36px"}
+                    minW={"36px"}
+                    maxW={"36px"}
+                    pl={"8px"}
+                  />
+                </Link>
               </Stack>
               {router.pathname !== "/" && (
                 <Box
@@ -144,15 +135,13 @@ const Navbar: NextComponentType = () => {
                     </MenuButton>
                   )}
                   <MenuList zIndex={2}>
-                    <MenuItem as="a" href="/orgs">
-                      Your Organisations
+                    <MenuItem>
+                      <Link href="/orgs">Your Organisations</Link>
                     </MenuItem>
                     <MenuItem
-                      as="a"
-                      href="/api/auth/signout"
                       onClick={(e) => {
                         e.preventDefault();
-                        signOut();
+                        signOut({ callbackUrl: "/" });
                       }}
                     >
                       Logout

@@ -11,6 +11,7 @@ import Loader from "components/Loader";
 import OrgsList from "components/OrgList";
 import { useMyOrgsQuery } from "generated-graphql";
 import { getSession } from "next-auth/client";
+import Link from "next/link";
 import React from "react";
 import IOrg from "types/org";
 
@@ -29,17 +30,17 @@ const OrgsPageComponent = ({ userId }) => {
     <Content>
       <Stack spacing={8}>
         {/* <Box> */}
-        <Button
-          leftIcon={<AddIcon />}
-          colorScheme="blue"
-          as="a"
-          href={"/orgs/add"}
-          ml={"auto"}
-          mr={isMobile ? 0 : 4}
-          mt={3}
-        >
-          Add{!isMobile && " Organisation"}
-        </Button>
+        <Link href={"/orgs/add"}>
+          <Button
+            leftIcon={<AddIcon />}
+            colorScheme="blue"
+            ml={"auto"}
+            mr={isMobile ? 0 : 4}
+            mt={3}
+          >
+            Add{!isMobile && " Organisation"}
+          </Button>
+        </Link>
         {/* </Box> */}
         <Heading>My Organisations</Heading>
         {<OrgsList orgs={orgs} loading={loading} />}

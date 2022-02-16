@@ -7,6 +7,7 @@ import {
 import { useSearchOrgsLazyQuery } from "generated-graphql";
 import React from "react";
 import { AsyncSelect } from "chakra-react-select";
+import router from "next/router";
 
 export const SearchBar = ({
   value,
@@ -35,6 +36,14 @@ export const SearchBar = ({
       })),
     ];
   };
+
+  const formatOptionLabel = ({ value, label }) => {
+    return (
+      <div style={{ display: "flex" }}>
+        <div>{label}</div>
+      </div>
+    );
+  };
   return (
     <InputGroup
       alignSelf={{ base: "center", md: "left" }}
@@ -49,13 +58,14 @@ export const SearchBar = ({
         />
       )}
       <AsyncSelect
+        formatOptionLabel={formatOptionLabel}
         defaultInputValue={value}
         tagVariant={mini ? "solid" : "outline"}
         onChange={(option) => {
           if (option.value === "@search") {
-            location.href = `/search?q=${value}`;
+            router.push(`/search?q=${value}`);
           } else {
-            location.href = `/${option.value}`;
+            router.push(`/${option.value}`);
           }
         }}
         onInputChange={(inputValue) => {

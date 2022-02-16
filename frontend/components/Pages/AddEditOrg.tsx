@@ -26,7 +26,7 @@ import { useSession } from "next-auth/client";
 import React, { ChangeEvent, useState } from "react";
 import Content from "components/Content";
 import { useFetchOrgQuery } from "generated-graphql";
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 import { DeleteIcon } from "@chakra-ui/icons";
 import slugify from "../../lib/slugify";
 import Loader from "components/Loader";
@@ -58,7 +58,7 @@ const AddEditOrgForm = ({ org }) => {
   const handleDelete = async () => {
     setIsSubmitted("deleting");
     await deleteOrg();
-    window.location.href = "/orgs";
+    router.push(`/orgs`);
   };
 
   const handleSubmit = async () => {
@@ -84,7 +84,7 @@ const AddEditOrgForm = ({ org }) => {
       });
     }
     setName("");
-    window.location.href = `/${slug}`;
+    router.push(`/${slug}`);
   };
 
   const errorNode = () => {
@@ -102,6 +102,7 @@ const AddEditOrgForm = ({ org }) => {
   };
 
   if (isFetching || isSubmitted) return <Loader message={isSubmitted} />;
+  const linkText = isEditMode ? "Link: " : "Your report will be at: ";
 
   return (
     <Stack spacing={4}>
@@ -125,8 +126,8 @@ const AddEditOrgForm = ({ org }) => {
                 isDisabled={isEditMode ? updateOrgFetching : insertOrgFetching}
               />
             </Box>
-            <Text color={"blue"} fontSize={12}>
-              <strong>Link:</strong>{" "}
+            <Text color={"blue"} fontSize={12} pt={1}>
+              <strong>{linkText}</strong>
               <span>
                 https://impact.ooo/{slugify(`${name}`, { lower: true })}
               </span>
@@ -150,7 +151,7 @@ const AddEditOrgForm = ({ org }) => {
               <ButtonGroup>
                 <Button
                   onClick={() => {
-                    window.location.href = `/${slug}`;
+                    router.push(`/${slug}`);
                   }}
                 >
                   Cancel

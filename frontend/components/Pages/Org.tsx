@@ -2,24 +2,25 @@ import { EditIcon } from "@chakra-ui/icons";
 import { Box, Button, Heading, Stack, Text } from "@chakra-ui/react";
 import Content from "components/Content";
 import { useSession } from "next-auth/client";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
 const MyOrgBar = () => {
   const router = useRouter();
   return (
-    <Button
-      leftIcon={<EditIcon />}
-      colorScheme="gray"
-      as="a"
-      href={`/${router?.query.slug}/edit`}
-      w="120px"
-      ml={"auto"}
-      mr={4}
-      mt={3}
-    >
-      Edit
-    </Button>
+    <Link href={`/${router?.query.slug}/edit`}>
+      <Button
+        leftIcon={<EditIcon />}
+        colorScheme="gray"
+        w="120px"
+        ml={"auto"}
+        mr={4}
+        mt={3}
+      >
+        Edit
+      </Button>
+    </Link>
   );
 };
 
