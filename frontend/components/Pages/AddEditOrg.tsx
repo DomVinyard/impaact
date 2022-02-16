@@ -114,11 +114,11 @@ const AddEditOrgForm = ({ org }) => {
               {isEditMode ? "Edit" : "Add"} Organisation
             </Heading>
             <Box>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Organisation Name</FormLabel>
               <Input
                 id="name"
                 value={name}
-                placeholder="My organisation"
+                placeholder="Org X"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   setName(e.currentTarget.value);
                   setSlug(slugify(e.currentTarget.value));
@@ -133,7 +133,7 @@ const AddEditOrgForm = ({ org }) => {
               </span>
             </Text>
             <Box my={6}>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>Short description</FormLabel>
               <Textarea
                 id="description"
                 value={description}

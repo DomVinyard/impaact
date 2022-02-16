@@ -42,7 +42,7 @@ const OrgsPageComponent = ({ userId }) => {
           </Button>
         </Link>
         {/* </Box> */}
-        <Heading>My Organisations</Heading>
+        <Heading>Your Organisations</Heading>
         {<OrgsList orgs={orgs} loading={loading} />}
         {!orgs.length && (
           <Text pt={6} fontSize={"1.25rem"}>
