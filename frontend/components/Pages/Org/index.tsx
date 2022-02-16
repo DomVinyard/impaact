@@ -43,7 +43,11 @@ const OrgPageComponent = ({ org }) => {
           <Stack>
             {isMyOrg && <MyOrgBar />}
             <Box maxW={760}>
-              <Stack px={{ base: 5, md: 0 }} mb={10} mt={4}>
+              <Stack
+                px={{ base: 5, md: 0 }}
+                mb={10}
+                mt={{ base: 12, md: "100px" }}
+              >
                 <Heading fontWeight={700} size={"2xl"} textAlign={"left"}>
                   {org.name}
                 </Heading>

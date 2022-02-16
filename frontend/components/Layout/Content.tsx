@@ -8,7 +8,7 @@ const Content: any = ({ children, isFull }) => {
       maxW="1200"
       mx="auto"
       w={!isFull ? "95%" : { base: "100%", md: "95%" }}
-      py={8}
+      // py={8}
       px={isFull ? 0 : { base: 2, md: 0 }}
     >
       {children}

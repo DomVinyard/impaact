@@ -197,7 +197,7 @@ const IndexPageComponent = () => {
             fontWeight={700}
           >
             <Stack lineHeight={"1"}>
-              <Box>The power of</Box>
+              <Box>Measuring</Box>
               <Box>positive impact</Box>
               <Flex pt={5}>
                 {isSearchFocusMobile && (
@@ -239,7 +239,7 @@ const IndexPageComponent = () => {
         <img
           src="https://github.githubassets.com/images/modules/site/home/hero-glow.svg"
           alt="Glowing universe"
-          style={{ position: "absolute" }}
+          style={{ position: "absolute", pointerEvents: "none" }}
         ></img>
         <>
           <Flex display={{ base: "none", md: "block" }}>
