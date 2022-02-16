@@ -68,7 +68,7 @@ export const SearchBar = ({
       )}
       <AsyncSelect
         defaultInputValue={value}
-        tagVariant={mini ? "subtle" : "outline"}
+        tagVariant={mini ? "solid" : "outline"}
         onChange={(option) => {
           if (option.value === "@search") {
             location.href = `/search?q=${value}`;
@@ -79,6 +79,10 @@ export const SearchBar = ({
         loadOptions={(inputValue) => {
           onChange(inputValue);
           return getAsyncOptions(inputValue);
+        }}
+        components={{
+          DropdownIndicator: () => null,
+          IndicatorSeparator: () => null,
         }}
         chakraStyles={{
           input: (provided) => ({
@@ -99,16 +103,18 @@ export const SearchBar = ({
             width: "100%",
             maxWidth: 440,
             marginLeft: mini ? 2 : 0,
+            border: mini ? "0px solid rgba(0,0,0,0) !important" : "auto",
+            background: mini ? "rgb(67, 58, 87) !important" : "auto",
           }),
           placeholder: (provided) => ({
             ...provided,
             marginLeft: mini ? 0 : "1.5rem",
           }),
-          dropdownIndicator: (provided) => ({
-            ...provided,
-            background: "none",
-            display: "none",
-          }),
+          // dropdownIndicator: (provided) => ({
+          //   ...provided,
+          //   background: "none",
+          //   display: "none",
+          // }),
           menu: (provided) => ({
             ...provided,
             width: "100%",
