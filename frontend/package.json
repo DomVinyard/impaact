@@ -8,7 +8,7 @@
     "export": "next export",
     "generate-graphql": "graphql-codegen --config codegen.yml --require dotenv/config",
     "start": "next start",
-    "type-check": "tsc"
+    "types": "tsc"
   },
   "dependencies": {
     "@apollo/client": "^3.5.7",
