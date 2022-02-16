@@ -31,8 +31,8 @@ const Footer: NextComponentType = () => {
           maxWidth={1200}
           m="0 auto"
           height={footerHeight}
-          pb={5}
           fontSize={13}
+          pb={8}
         >
           <Image
             src="/images/logo.png"

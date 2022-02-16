@@ -13,9 +13,10 @@ const MyOrgBar = () => {
       colorScheme="gray"
       as="a"
       href={`/${router?.query.slug}/edit`}
-      w="160px"
+      w="120px"
       ml={"auto"}
       mr={4}
+      mt={3}
     >
       Edit
     </Button>
