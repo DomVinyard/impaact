@@ -17,13 +17,13 @@ import { useSession } from "next-auth/client";
 import Link from "next/link";
 import IOrg from "types/org";
 import { ChevronRightIcon } from "@chakra-ui/icons";
+import Content from "./Content";
 
 const PopularComponent = () => {
-  const view = useBreakpointValue({ base: "base", md: "md", lg: "lg" });
+  const isMobile = useBreakpointValue({ base: true, md: false });
+  const top = useBreakpointValue({ base: 5, md: 7, lg: 11 });
   const { data, error, loading } = useFetchPopularQuery({
-    variables: {
-      top: view === "base" ? 5 : view === "md" ? 8 : 12,
-    },
+    variables: { top },
   });
   return (
     <Box pb={{ base: 4, md: 10 }}>
@@ -33,12 +33,31 @@ const PopularComponent = () => {
         fontFamily={"Montserrat"}
         fontWeight={"800"}
         size={"xl"}
-        color={"#64a3cb"}
         mb={{ base: 8, md: 10 }}
       >
         Trending
       </Heading>
-      <OrgsList orgs={data?.orgs} loading={loading} />
+      <OrgsList
+        orgs={data?.orgs}
+        loading={loading}
+        after={
+          <GridItem rowSpan={1} colSpan={1}>
+            <Link href={"/browse"}>
+              <Flex
+                height={"100%"}
+                width={"100%"}
+                cursor={"pointer"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                color="#444"
+                background="#ccc"
+              >
+                View More <ChevronRightIcon />
+              </Flex>
+            </Link>
+          </GridItem>
+        }
+      />
     </Box>
   );
 };

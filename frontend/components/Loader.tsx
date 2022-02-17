@@ -10,7 +10,7 @@ const Loader: FC<Props> = ({ message, thickness = 0.15 }) => {
   return (
     <Stack
       zIndex={99}
-      pos={"fixed"}
+      pos={"absolute"}
       h="100vh"
       top={0}
       left={0}

@@ -25,7 +25,6 @@ const OrgsCountComponent = () => {
         display="flex"
         alignItems="center"
         background={{ base: "#000", md: "transparent" }}
-        zIndex={1}
         height={24}
         color={"white"}
       >

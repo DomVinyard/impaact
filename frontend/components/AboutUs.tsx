@@ -1,4 +1,13 @@
-import { Box, Flex, Heading, Stack, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Stack,
+  Image,
+  Text,
+  useBreakpointValue,
+  Button,
+} from "@chakra-ui/react";
 import Content from "components/Content";
 import React from "react";
 import { AddOrgButton } from "components/Navbar";
@@ -6,12 +15,13 @@ import Link from "next/link";
 import { useSession } from "next-auth/client";
 
 const AboutUsComponent = () => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
   const session = useSession();
   return (
     <Box background={"brand.900"} overflow={"none"}>
       <Box
-        pt={{ base: 12, md: 20 }}
-        pb={{ base: 6, md: 32 }}
+        pt={{ base: 24, md: 24 }}
+        pb={{ base: 24, md: 32 }}
         width={"100%"}
         backgroundImage="url(https://github.githubassets.com/images/modules/site/home/hero-glow.svg)"
         alt="Glowing universe"
@@ -22,20 +32,16 @@ const AboutUsComponent = () => {
             <Box w={"100%"} maxW={600}>
               <Box>
                 <Heading
-                  // mt={{ base: 20, md: 32 }}
                   fontSize={{ base: "28px", md: "34px" }}
                   color={"#fff"}
                   fontFamily={"Montserrat"}
                   fontWeight={800}
                 >
-                  Who are we?
+                  Our vision
                 </Heading>
               </Box>
             </Box>
-            <Flex
-              direction={{ base: "column", md: "row" }}
-              flex={{ base: "0 0 600px", md: "1" }}
-            >
+            <Flex direction={{ base: "column", md: "row" }}>
               <Image
                 width={"100%"}
                 maxWidth={"600px"}
@@ -44,35 +50,47 @@ const AboutUsComponent = () => {
               />
               <Stack
                 color={"white"}
-                flex={1}
                 padding={{ base: 0, md: 8 }}
                 alignItems="center"
                 justifyContent={"center"}
-                // marginTop={{ base: 8, md: 28 }}
-                textAlign={"left"}
               >
-                <Text fontSize={{ base: 17, md: 22 }}>
-                  Pellentesque ligula arcu, mollis at turpis vel, cursus
-                  dignissim lorem. Curabitur porta ut velit eget mattis. Aliquam
-                  erat volutpat. Aenean euismod lacus vel interdum volutpat.
-                  Quisque aliquet elit in dui egestas dictum. Donec eu risus
-                  volutpat, aliquam neque eget, luctus libero.
-                </Text>
-                <Flex
-                  alignItems={"flex-start"}
-                  width={"100%"}
-                  pt={{ base: 6, md: 8 }}
-                  pb={{ base: 6, md: 8 }}
-                >
-                  <Link href="/orgs">
-                    <AddOrgButton
-                      cursor={"pointer"}
-                      children={
-                        session ? "Your organisations" : "Add your organisation"
-                      }
-                    />
-                  </Link>
-                </Flex>
+                <Box width={"100%"}>
+                  {!isMobile && (
+                    <Text fontSize={{ base: 17, md: 22 }}>
+                      Pellentesque ligula arcu, mollis at turpis vel, cursus
+                      dignissim lorem. Curabitur porta ut velit eget mattis.
+                      Aliquam erat volutpat. Aenean euismod lacus vel interdum
+                      volutpat. Quisque aliquet elit in dui egestas dictum.
+                      Donec eu risus volutpat, aliquam neque eget, luctus
+                      libero.
+                    </Text>
+                  )}
+                  <Flex
+                    justifyContent={{ base: "center", md: "flex-start" }}
+                    width={"100%"}
+                    pt={{ base: 12, md: 8 }}
+                    pb={{ base: 6, md: 8 }}
+                  >
+                    <Link href="/orgs">
+                      <AddOrgButton
+                        cursor={"pointer"}
+                        children={
+                          session
+                            ? "Your organisations"
+                            : "Add your organisation"
+                        }
+                      />
+                    </Link>
+                    {/* <Link href="https://insaangroup.org">
+                      <Button
+                        colorScheme={"purple"}
+                        cursor={"pointer"}
+                        children={"More info"}
+                        ml={3}
+                      />
+                    </Link> */}
+                  </Flex>
+                </Box>
               </Stack>
             </Flex>
           </Stack>

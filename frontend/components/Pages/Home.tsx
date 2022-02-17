@@ -32,6 +32,11 @@ const HomePageComponent = () => {
     Date | undefined
   >();
 
+  const handleCloseMobileSearch = () => {
+    setQuery("");
+    setIsSearchFocusMobile(false);
+  };
+
   if (IS_CLOSED && !session) return <ClosedComponent />;
 
   return (
@@ -43,81 +48,84 @@ const HomePageComponent = () => {
         width={"auto"}
         marginTop={isSearchFocusMobile ? -235 : 0}
       >
-        {isSearchFocusMobile && (
+        <Stack
+          backgroundImage={
+            'url("https://github.githubassets.com/images/modules/site/home/hero-glow.svg")'
+          }
+          backgroundSize={"cover"}
+          backgroundPosition={["center", "center"]}
+        >
+          {isSearchFocusMobile && (
+            <Box
+              width="100vw"
+              position={"fixed"}
+              left={0}
+              top={0}
+              zIndex={2}
+              background={"brand.900"}
+              height={"100vh"}
+            />
+          )}
           <Box
-            width="100vw"
-            position={"fixed"}
-            left={0}
-            top={0}
-            zIndex={2}
-            background={"brand.900"}
-            height={"100vh"}
-          />
-        )}
-        <Box width="100%" position={"absolute"} zIndex={2}>
-          <Box
-            p={3}
-            mx={2}
-            pt={{ base: "65px", md: 20 }}
-            textAlign={{ base: "center", md: "left" }}
-            maxWidth={1200}
-            m="0 auto"
-            color={"#fff"}
-            fontSize={{ base: "38px", md: "42px", lg: "60px" }}
-            fontFamily={"Montserrat"}
-            fontWeight={700}
+            width="100%"
+            position={"absolute"}
+            zIndex={isSearchFocusMobile ? 2 : 1}
           >
-            <Stack lineHeight={"1"}>
-              <>
-                <Box>Measuring</Box>
-                <Box>positive impact</Box>
-              </>
-              <Flex pt={5}>
-                {isSearchFocusMobile && (
-                  <Button
-                    size={"lg"}
-                    background={"none"}
-                    colorScheme={"blue"}
-                    onClick={() => {
-                      setQuery("");
-                      setIsSearchFocusMobile(false);
-                    }}
-                  >
-                    <ArrowBackIcon color="gray.300" />
-                  </Button>
-                )}
+            <Box
+              p={3}
+              mx={2}
+              pt={{ base: "65px", md: 20 }}
+              textAlign={{ base: "center", md: "left" }}
+              maxWidth={1200}
+              m="0 auto"
+              color={"#fff"}
+              fontSize={{ base: "38px", md: "42px", lg: "60px" }}
+              fontFamily={"Montserrat"}
+              fontWeight={700}
+            >
+              <Stack lineHeight={"1"}>
+                <>
+                  <Box>Measuring</Box>
+                  <Box>positive impact</Box>
+                </>
+                <Flex pt={5}>
+                  {isSearchFocusMobile && (
+                    <Button
+                      size={"lg"}
+                      background={"none"}
+                      colorScheme={"blue"}
+                      onClick={handleCloseMobileSearch}
+                    >
+                      <ArrowBackIcon color="gray.300" />
+                    </Button>
+                  )}
 
-                <SearchBar
-                  isSearchFocusMobile={isSearchFocusMobile}
-                  mini={false}
-                  value={query}
-                  onFocus={() => isMobile && setIsSearchFocusMobile(true)}
-                  onChange={(value) => {
-                    if (value.length > query.length)
-                      setLatestKeypress(new Date());
-                    setQuery(value);
-                  }}
-                  onSubmit={() => {
-                    const cachedQuery = query;
-                    setQuery("");
-                    location.assign("/search?q=" + cachedQuery);
-                  }}
-                />
-              </Flex>
-            </Stack>
+                  <SearchBar
+                    isSearchFocusMobile={isSearchFocusMobile}
+                    mini={false}
+                    value={query}
+                    onFocus={() => isMobile && setIsSearchFocusMobile(true)}
+                    onChange={(value) => {
+                      if (value.length > query.length)
+                        setLatestKeypress(new Date());
+                      setQuery(value);
+                    }}
+                    onSubmit={() => {
+                      const cachedQuery = query;
+                      setQuery("");
+                      location.assign("/search?q=" + cachedQuery);
+                    }}
+                  />
+                </Flex>
+              </Stack>
+            </Box>
           </Box>
-        </Box>
-        <Image
-          src="https://github.githubassets.com/images/modules/site/home/hero-glow.svg"
-          alt="Glowing universe"
-          position={"absolute"}
-          pointerEvents={"none"}
-        />
-        <OrgsCountComponent />
-        <Globe latestKeypress={latestKeypress} />
+          <Globe latestKeypress={latestKeypress} />
+          <OrgsCountComponent />
+        </Stack>
       </Stack>
       <Box textAlign={{ base: "center", md: "left" }}>
-        <Content>
+        <Content isFull={!!isMobile}>
           <Box mb={{ base: 20, md: 32 }}>
             <PopularComponent />
           </Box>

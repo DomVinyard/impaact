@@ -142,9 +142,9 @@ const Navbar: NextComponentType = () => {
                     </MenuButton>
                   )}
                   <MenuList zIndex={2}>
-                    <MenuItem>
-                      <Link href="/orgs">Your Organisations</Link>
-                    </MenuItem>
+                    <Link href="/orgs">
+                      <MenuItem>Your Organisations</MenuItem>
+                    </Link>
                     <MenuItem
                       onClick={(e) => {
                         e.preventDefault();
