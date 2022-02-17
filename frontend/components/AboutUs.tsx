@@ -37,7 +37,7 @@ const AboutUsComponent = () => {
                   fontFamily={"Montserrat"}
                   fontWeight={800}
                 >
-                  Our vision
+                  Our Vision
                 </Heading>
               </Box>
             </Box>

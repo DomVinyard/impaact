@@ -5,6 +5,8 @@ import {
   Heading,
   Stack,
   useBreakpointValue,
+  Box,
+  Flex,
 } from "@chakra-ui/react";
 import Content from "components/Content";
 import Loader from "components/Loader";
@@ -27,7 +29,7 @@ const OrgsPageComponent = ({ userId }) => {
 
   const orgs = data.users_by_pk?.orgs || [];
   return (
-    <Content>
+    <Content isFull={isMobile}>
       <Stack spacing={8}>
         {/* <Box> */}
         <Link href={"/orgs/add"}>
@@ -35,14 +37,15 @@ const OrgsPageComponent = ({ userId }) => {
             leftIcon={<AddIcon />}
             colorScheme="blue"
             ml={"auto"}
-            mr={isMobile ? 0 : 4}
+            mr={isMobile ? 4 : 0}
             mt={3}
           >
             Add{!isMobile && " Organisation"}
           </Button>
         </Link>
-        {/* </Box> */}
-        <Heading>Your Organisations</Heading>
+        <Heading textAlign={{ base: "center", md: "left" }}>
+          Your Organisations
+        </Heading>
         {<OrgsList orgs={orgs} loading={loading} />}
         {!orgs.length && (
           <Text pt={6} fontSize={"1.25rem"}>

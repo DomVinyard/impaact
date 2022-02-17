@@ -1,4 +1,12 @@
-import { Box, List, ListItem, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  List,
+  ListItem,
+  Stack,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import React from "react";
 import { useRouter } from "next/router";
 import Content from "components/Content";
@@ -11,16 +19,17 @@ const SearchPageComponent = () => {
   const { data, error, loading } = useSearchOrgsQuery({
     variables: { q: `%${q}%` },
   });
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
   return (
-    <Content>
+    <Content isFull={isMobile}>
       <Stack mt={12}>
-        <Stack fontFamily={"Montserrat"} fontWeight={600} opacity={0.4}>
+        <Stack fontFamily={"Montserrat"} fontWeight={600}>
           {data?.orgs.length > 0 && (
             <Box mb={8}>
-              <Text pt={6} fontSize={{ base: "1.25rem", md: "1.5rem" }}>
+              <Heading textAlign={{ base: "center", md: "left" }}>
                 {data?.orgs.length || 0} results
-              </Text>
+              </Heading>
             </Box>
           )}
           {!data?.orgs.length && <NoResults query={q} />}
