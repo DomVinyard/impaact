@@ -15,6 +15,7 @@ import Globe from "components/Globe";
 import { useSession } from "next-auth/client";
 import PopularComponent from "components/Popular";
 import ClosedComponent from "components/Closed";
+import OrgsCountComponent from "components/OrgsCount";
 
 const IS_CLOSED = true;
 
@@ -107,6 +108,7 @@ const HomePageComponent = () => {
           alt="Glowing universe"
           style={{ position: "absolute", pointerEvents: "none" }}
         />
+        <OrgsCountComponent />
         <Globe latestKeypress={latestKeypress} />
       </Stack>
       <Box textAlign={{ base: "center", md: "left" }}>

@@ -1733,6 +1733,18 @@ export type UpdateUserMutation = {
     | undefined;
 };
 
+export type CountOrgsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type CountOrgsQuery = {
+  __typename?: "query_root";
+  orgs_aggregate: {
+    __typename?: "orgs_aggregate";
+    aggregate?:
+      | { __typename?: "orgs_aggregate_fields"; count: number }
+      | undefined;
+  };
+};
+
 export type FetchOrgQueryVariables = Exact<{
   slug?: InputMaybe<Scalars["String"]>;
 }>;
@@ -2275,6 +2287,106 @@ export type UpdateUserMutationResult =
 export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<
   UpdateUserMutation,
   UpdateUserMutationVariables
+>;
+export const CountOrgsDocument = gql`
+  query countOrgs {
+    orgs_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+export type CountOrgsComponentProps = Omit<
+  ApolloReactComponents.QueryComponentOptions<
+    CountOrgsQuery,
+    CountOrgsQueryVariables
+  >,
+  "query"
+>;
+
+export const CountOrgsComponent = (props: CountOrgsComponentProps) => (
+  <ApolloReactComponents.Query<CountOrgsQuery, CountOrgsQueryVariables>
+    query={CountOrgsDocument}
+    {...props}
+  />
+);
+
+export type CountOrgsProps<
+  TChildProps = {},
+  TDataName extends string = "data"
+> = {
+  [key in TDataName]: ApolloReactHoc.DataValue<
+    CountOrgsQuery,
+    CountOrgsQueryVariables
+  >;
+} & TChildProps;
+export function withCountOrgs<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = "data"
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    CountOrgsQuery,
+    CountOrgsQueryVariables,
+    CountOrgsProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    CountOrgsQuery,
+    CountOrgsQueryVariables,
+    CountOrgsProps<TChildProps, TDataName>
+  >(CountOrgsDocument, {
+    alias: "countOrgs",
+    ...operationOptions,
+  });
+}
+
+/**
+ * __useCountOrgsQuery__
+ *
+ * To run a query within a React component, call `useCountOrgsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCountOrgsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCountOrgsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCountOrgsQuery(
+  baseOptions?: Apollo.QueryHookOptions<CountOrgsQuery, CountOrgsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<CountOrgsQuery, CountOrgsQueryVariables>(
+    CountOrgsDocument,
+    options
+  );
+}
+export function useCountOrgsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    CountOrgsQuery,
+    CountOrgsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<CountOrgsQuery, CountOrgsQueryVariables>(
+    CountOrgsDocument,
+    options
+  );
+}
+export type CountOrgsQueryHookResult = ReturnType<typeof useCountOrgsQuery>;
+export type CountOrgsLazyQueryHookResult = ReturnType<
+  typeof useCountOrgsLazyQuery
+>;
+export type CountOrgsQueryResult = Apollo.QueryResult<
+  CountOrgsQuery,
+  CountOrgsQueryVariables
 >;
 export const FetchOrgDocument = gql`
   query fetchOrg($slug: String) {

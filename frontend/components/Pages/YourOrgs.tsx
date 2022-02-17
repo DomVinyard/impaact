@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import Content from "components/Content";
 import Loader from "components/Loader";
-import OrgsList from "components/OrgList";
+import OrgsList from "components/OrgsList";
 import { useMyOrgsQuery } from "generated-graphql";
 import { getSession } from "next-auth/client";
 import Link from "next/link";

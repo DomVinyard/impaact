@@ -3,7 +3,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import Content from "components/Content";
 import { useSearchOrgsQuery } from "generated-graphql";
-import OrgsList from "components/OrgList";
+import OrgsList from "components/OrgsList";
 
 const SearchPageComponent = () => {
   const router = useRouter();
@@ -14,10 +14,12 @@ const SearchPageComponent = () => {
 
   return (
     <Content>
-      <Stack mt={6}>
+      <Stack mt={12}>
         <Stack fontFamily={"Montserrat"} fontWeight={600} opacity={0.4}>
           {data?.orgs.length > 0 && (
-            <Text>{data?.orgs.length || 0} results</Text>
+            <Box mb={8}>
+              <Text>{data?.orgs.length || 0} results</Text>
+            </Box>
           )}
           {!data?.orgs.length && <NoResults query={q} />}
         </Stack>
