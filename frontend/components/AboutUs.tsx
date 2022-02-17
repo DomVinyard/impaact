@@ -76,19 +76,11 @@ const AboutUsComponent = () => {
                         cursor={"pointer"}
                         children={
                           session
-                            ? "Your organisations"
+                            ? "Your Organisations"
                             : "Add your organisation"
                         }
                       />
                     </Link>
-                    {/* <Link href="https://insaangroup.org">
-                      <Button
-                        colorScheme={"purple"}
-                        cursor={"pointer"}
-                        children={"More info"}
-                        ml={3}
-                      />
-                    </Link> */}
                   </Flex>
                 </Box>
               </Stack>

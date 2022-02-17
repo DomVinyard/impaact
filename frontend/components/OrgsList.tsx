@@ -22,21 +22,64 @@ type ListProps = {
 const MiniOrg = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
   return (
     <Skeleton isLoaded={!loading}>
-      <Flex background="#eee">
-        <Box width={{ base: 16, md: 32 }} backgroundColor={"lightblue"}>
-          img
-        </Box>
-        <Box cursor={"pointer"} textAlign={"left"} padding={4} flexGrow={1}>
-          <Stack spacing={0}>
-            <Text fontSize="sm">@{org.slug}</Text>
-            <Text fontSize="md">{org.name}</Text>
-            <Text fontSize="md">{org.description}</Text>
-          </Stack>
-        </Box>
-      </Flex>
+      <Stack background={"ddd"}>
+        <Flex>
+          <Box
+            backgroundImage={`url(https://picsum.photos/seed/${org.slug}/200/300)`}
+            backgroundSize="cover"
+            backgroundPosition={"center center"}
+            minHeight={28}
+            justifyContent="flex-end"
+            width={"100%"}
+            flex={2}
+          />
+          <Box
+            backgroundImage={`/images/map_placeholder.png`}
+            backgroundSize="cover"
+            backgroundPosition={["center", "center"]}
+            cursor={"pointer"}
+            textAlign={"left"}
+            flex={1}
+          />
+        </Flex>
+        <Stack
+          spacing={0}
+          textAlign={"left"}
+          paddingX={6}
+          paddingBottom={2}
+          color="white"
+        >
+          <Text fontSize="lg" fontWeight={"800"} textTransform={"uppercase"}>
+            {org.name}
+          </Text>
+        </Stack>
+      </Stack>
     </Skeleton>
   );
 };
+
+const SDGs = [
+  { number: 1, goal: "no poverty", color: "#B53841" },
+  { number: 2, goal: "zero hunger", color: "#C7A756" },
+  { number: 3, goal: "good health and well-being", color: "#769D4E" },
+  { number: 4, goal: "quality education", color: "#9B2E34" },
+  { number: 5, goal: "gender equality", color: "#CC4A33" },
+  { number: 6, goal: "clean water and sanitation", color: "#80BADC" },
+];
+
+function randomColor(seed) {
+  var hash = 0,
+    len = seed.length;
+  for (var i = 0; i < len; i++) {
+    hash = (hash << 5) - hash + seed.charCodeAt(i);
+    hash |= 0; // to 32bit integer
+  }
+  var x = Math.sin(hash++) * 10000;
+  const randomNum = x - Math.floor(x);
+  const index = Math.floor(randomNum * SDGs.length);
+  console.log({ seed, index, randomNum });
+  return SDGs[index].color;
+}
 
 const OrgsList = ({ orgs, loading, after }: ListProps) => {
   const columns = useBreakpointValue({ base: 1, md: 2, lg: 3 });
@@ -45,20 +88,23 @@ const OrgsList = ({ orgs, loading, after }: ListProps) => {
   if (submitting) return <Loader message={submitting?.name} />;
   return (
     <Grid templateColumns={`repeat(${columns}, 1fr)`} autoRows={"1fr"} gap={4}>
-      {orgs?.map((org: IOrg, index: number) => (
-        <GridItem rowSpan={1} colSpan={1} background="#ccc">
-          <Link key={index} href={`/${org.slug}`}>
-            <Box
-              onClick={() => setSubmitting(org)}
-              height={"100%"}
-              width={"100%"}
-              cursor={"pointer"}
-            >
-              <MiniOrg org={org} loading={loading} />
-            </Box>
-          </Link>
-        </GridItem>
-      ))}
+      {orgs?.map((org: IOrg, index: number) => {
+        const BACKGROUND_FROM_SDG = randomColor(org.slug);
+        return (
+          <GridItem rowSpan={1} colSpan={1} background={BACKGROUND_FROM_SDG}>
+            <Link key={index} href={`/${org.slug}`}>
+              <Box
+                onClick={() => setSubmitting(org)}
+                height={"100%"}
+                width={"100%"}
+                cursor={"pointer"}
+              >
+                <MiniOrg org={org} loading={loading} />
+              </Box>
+            </Link>
+          </GridItem>
+        );
+      })}
       {after}
     </Grid>
   );
