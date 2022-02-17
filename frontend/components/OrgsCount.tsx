@@ -13,7 +13,7 @@ import React, { useEffect } from "react";
 import Content from "./Content";
 
 const OrgsCountComponent = () => {
-  const { data, error, loading } = useCountOrgsQuery();
+  const { data, error, loading } = useCountOrgsQuery({ pollInterval: 10000 });
   const total = data?.orgs_aggregate.aggregate.count;
   return (
     <Skeleton isLoaded={!loading && !!data}>

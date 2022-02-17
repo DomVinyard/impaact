@@ -11,9 +11,9 @@ import { useSession } from "next-auth/client";
 import React from "react";
 import { useRouter } from "next/router";
 
+export const footerHeight = { base: "33vh", md: "200px" };
 const Footer: NextComponentType = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
-  const footerHeight = isMobile ? "33vh !important" : 200;
 
   return (
     <Box pt={footerHeight} mt={"0 !important"}>

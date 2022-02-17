@@ -8,7 +8,7 @@ import ISession from "types/session";
 
 import { Box, ChakraProvider, Stack, theme } from "@chakra-ui/react";
 import Navbar from "components/Navbar";
-import Footer from "components/Footer";
+import Footer, { footerHeight } from "components/Footer";
 import { extendTheme } from "@chakra-ui/react";
 
 const Layout: FC = ({ children }) => {
@@ -36,7 +36,7 @@ const Layout: FC = ({ children }) => {
         minHeight={"100vh"}
       >
         <Navbar />
-        <Box p={0} mt={"0px !important"} mb={"200px"}>
+        <Box p={0} mt={"0px !important"} mb={footerHeight}>
           {children}
         </Box>
         <Footer />

@@ -125,8 +125,8 @@ const HomePageComponent = () => {
         </Stack>
       </Stack>
       <Box textAlign={{ base: "center", md: "left" }}>
-        <Content isFull={!!isMobile}>
-          <Box mb={{ base: 20, md: 32 }}>
+        <Content isFull={isMobile}>
+          <Box mb={{ base: 0, md: 32 }}>
             <PopularComponent />
           </Box>
         </Content>

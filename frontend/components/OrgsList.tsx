@@ -28,7 +28,7 @@ const MiniOrg = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
             backgroundImage={`url(https://picsum.photos/seed/${org.slug}/200/300)`}
             backgroundSize="cover"
             backgroundPosition={"center center"}
-            minHeight={28}
+            minHeight={{ base: 32, md: 28 }}
             justifyContent="flex-end"
             width={"100%"}
             flex={2}
@@ -77,7 +77,6 @@ function randomColor(seed) {
   var x = Math.sin(hash++) * 10000;
   const randomNum = x - Math.floor(x);
   const index = Math.floor(randomNum * SDGs.length);
-  console.log({ seed, index, randomNum });
   return SDGs[index].color;
 }
 
@@ -87,11 +86,20 @@ const OrgsList = ({ orgs, loading, after }: ListProps) => {
   if (!columns) return null;
   if (submitting) return <Loader message={submitting?.name} />;
   return (
-    <Grid templateColumns={`repeat(${columns}, 1fr)`} autoRows={"1fr"} gap={4}>
+    <Grid
+      templateColumns={`repeat(${columns}, 1fr)`}
+      autoRows={"1fr"}
+      gap={{ base: 0, md: 4 }}
+    >
       {orgs?.map((org: IOrg, index: number) => {
         const BACKGROUND_FROM_SDG = randomColor(org.slug);
         return (
-          <GridItem rowSpan={1} colSpan={1} background={BACKGROUND_FROM_SDG}>
+          <GridItem
+            rowSpan={1}
+            colSpan={1}
+            background={BACKGROUND_FROM_SDG}
+            borderTop={{ base: "2px solid #eee", md: "none" }}
+          >
             <Link key={index} href={`/${org.slug}`}>
               <Box
                 onClick={() => setSubmitting(org)}

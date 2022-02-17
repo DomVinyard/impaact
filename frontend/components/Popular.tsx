@@ -21,7 +21,7 @@ import Content from "./Content";
 
 const PopularComponent = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
-  const top = useBreakpointValue({ base: 5, md: 7, lg: 11 });
+  const top = useBreakpointValue({ base: 7, md: 9, lg: 11 });
   const { data, error, loading } = useFetchPopularQuery({
     variables: { top },
   });
@@ -34,6 +34,7 @@ const PopularComponent = () => {
         fontWeight={"800"}
         size={"xl"}
         mb={{ base: 8, md: 10 }}
+        display={isMobile ? "none" : "block"}
       >
         Trending
       </Heading>
@@ -52,7 +53,8 @@ const PopularComponent = () => {
                 color="#444"
                 background="#ccc"
               >
-                View More <ChevronRightIcon />
+                Find Amazing Organisations
+                <ChevronRightIcon />
               </Flex>
             </Link>
           </GridItem>
