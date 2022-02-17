@@ -22,7 +22,7 @@ const PopularComponent = () => {
   const view = useBreakpointValue({ base: "base", md: "md", lg: "lg" });
   const { data, error, loading } = useFetchPopularQuery({
     variables: {
-      top: view === "base" ? 5 : view === "md" ? 7 : 11,
+      top: view === "base" ? 5 : view === "md" ? 8 : 12,
     },
   });
   return (
@@ -38,26 +38,7 @@ const PopularComponent = () => {
       >
         Trending
       </Heading>
-      <OrgsList
-        orgs={data?.orgs}
-        loading={loading}
-        after={
-          <GridItem rowSpan={1} colSpan={1} background="#ccc">
-            <Link href={"/browse"}>
-              <Flex
-                height={"100%"}
-                width={"100%"}
-                cursor={"pointer"}
-                alignItems={"center"}
-                justifyContent={"center"}
-                color="#444"
-              >
-                View More <ChevronRightIcon />
-              </Flex>
-            </Link>
-          </GridItem>
-        }
-      />
+      <OrgsList orgs={data?.orgs} loading={loading} />
     </Box>
   );
 };
