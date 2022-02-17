@@ -133,7 +133,7 @@ export const SearchBar = ({
         placeholder={
           mini || (isMobile && isSearchFocusMobile)
             ? "Search"
-            : "Search charity or organisation"
+            : "Search charity or org"
         }
         autoFocus={!mini && !isMobile}
         value={value}

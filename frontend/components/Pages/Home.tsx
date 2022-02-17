@@ -116,11 +116,11 @@ const HomePageComponent = () => {
         </Content>
         <Box
           background={"brand.900"}
-          height={{ base: 420, md: 660 }}
+          height={{ base: 600, md: 600 }}
           overflow={"none"}
         >
           <Box
-            height={{ base: 420, md: 660 }}
+            height={{ base: 600, md: 600 }}
             width={"100%"}
             backgroundImage="url(https://github.githubassets.com/images/modules/site/home/hero-glow.svg)"
             alt="Glowing universe"
@@ -130,13 +130,13 @@ const HomePageComponent = () => {
             <Box>
               <Heading
                 // mt={{ base: 20, md: 32 }}
-                fontSize={{ base: "28px", md: "xl" }}
+                fontSize={{ base: "28px", md: "34px" }}
                 color={"#fff"}
                 fontFamily={"Montserrat"}
                 fontWeight={800}
-                pt={{ base: 12, md: 16 }}
+                pt={{ base: 12, md: 20 }}
               >
-                About Impact PPS
+                What is this?
               </Heading>
             </Box>
           </Content>

@@ -46,8 +46,16 @@ const PopularComponent = () => {
   });
   return (
     <Box pb={{ base: 4, md: 10 }}>
-      <Heading mt={{ base: 10, md: 32 }} size={"xl"} color={"#64a3cb"} mb={6}>
-        POPULAR
+      <Heading
+        mt={{ base: 14, md: 32 }}
+        fontSize={{ base: "28px", md: "34px" }}
+        fontFamily={"Montserrat"}
+        fontWeight={"800"}
+        size={"xl"}
+        color={"#64a3cb"}
+        mb={{ base: 8, md: 10 }}
+      >
+        Popular
       </Heading>
       <Grid
         templateColumns={{
