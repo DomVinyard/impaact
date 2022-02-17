@@ -5,7 +5,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { useSearchOrgsLazyQuery } from "generated-graphql";
-import React from "react";
+import React, { useEffect } from "react";
 import { AsyncSelect } from "chakra-react-select";
 import router, { useRouter } from "next/router";
 import Loader from "components/Loader";
@@ -19,11 +19,11 @@ export const SearchBar = ({
   isSearchFocusMobile,
 }: any) => {
   const [searchOrgs] = useSearchOrgsLazyQuery({ fetchPolicy: "network-only" });
+  const [inputValue, setInputValue] = React.useState(`${value}`);
   const [isSelected, setIsSelected] = React.useState<any>();
   const isMobile = useBreakpointValue({ base: true, md: false });
   const router = useRouter();
-
-  // console.log({ router });
+  useEffect(() => setIsSelected(false), [value]);
 
   const getAsyncOptions = async (inputValue) => {
     const { data, error } = await searchOrgs({
@@ -74,7 +74,7 @@ export const SearchBar = ({
       )}
       <AsyncSelect
         formatOptionLabel={formatOptionLabel}
-        defaultInputValue={value}
+        inputValue={value}
         tagVariant={mini ? "solid" : "outline"}
         onChange={(option) => {
           setIsSelected(option);
@@ -85,6 +85,7 @@ export const SearchBar = ({
           }
         }}
         onInputChange={(inputValue) => {
+          setInputValue(inputValue);
           onChange(inputValue);
         }}
         loadOptions={(inputValue) => {

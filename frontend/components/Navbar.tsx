@@ -15,7 +15,7 @@ import {
 import { NextComponentType } from "next";
 import { signIn, signOut, useSession } from "next-auth/client";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import SearchBar from "components/SearchBar";
 
@@ -39,6 +39,8 @@ const Navbar: NextComponentType = () => {
   const router = useRouter();
   const { q } = router.query;
   const [query, setQuery] = React.useState(q);
+
+  useEffect(() => setQuery(router.query.q), [router]);
 
   const signInOrUp = (e) => {
     e.preventDefault();
@@ -95,24 +97,21 @@ const Navbar: NextComponentType = () => {
                   />
                 </Link>
               </Stack>
-              {router.pathname !== "/" && (
-                <Box
-                  width={260}
-                  display={{ base: "none", md: "block" }}
-                  color="white"
-                >
-                  <SearchBar
-                    mini
-                    value={query}
-                    onChange={(value) => setQuery(value)}
-                    onSubmit={() => {
-                      const cachedQuery = query;
-                      setQuery("");
-                      location.assign("/search?q=" + cachedQuery);
-                    }}
-                  />
-                </Box>
-              )}
+              <Box
+                width={260}
+                display={{
+                  base: "none",
+                  md: router.pathname !== "/" ? "block" : "none",
+                }}
+                color="white"
+              >
+                <SearchBar
+                  mini
+                  value={query}
+                  onChange={(value) => setQuery(value)}
+                  onSubmit={() => router.push(`/search?q=${query}`)}
+                />
+              </Box>
             </Flex>
             <Box>
               <Stack isInline spacing={4} align="center">
