@@ -85,6 +85,7 @@ const OrgsList = ({ orgs, loading, after }: ListProps) => {
   const [submitting, setSubmitting] = React.useState<IOrg | undefined>();
   if (!columns) return null;
   if (submitting) return <Loader message={submitting?.name} />;
+
   return (
     <Grid
       templateColumns={`repeat(${columns}, 1fr)`}

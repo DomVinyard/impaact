@@ -26,7 +26,7 @@ const PopularComponent = () => {
     variables: { top },
   });
   return (
-    <Box pb={{ base: 4, md: 10 }}>
+    <Box pb={{ base: 0, md: 10 }}>
       <Heading
         mt={{ base: 14, md: 32 }}
         fontSize={{ base: "28px", md: "34px" }}
@@ -34,7 +34,7 @@ const PopularComponent = () => {
         fontWeight={"800"}
         size={"xl"}
         mb={{ base: 8, md: 10 }}
-        display={isMobile ? "none" : "block"}
+        hidden={isMobile}
       >
         Trending
       </Heading>
@@ -45,7 +45,8 @@ const PopularComponent = () => {
           <GridItem rowSpan={1} colSpan={1}>
             <Link href={"/browse"}>
               <Flex
-                height={"100%"}
+                // height={{ base: "400px", md: "100%" }}
+                height="100%"
                 width={"100%"}
                 cursor={"pointer"}
                 alignItems={"center"}

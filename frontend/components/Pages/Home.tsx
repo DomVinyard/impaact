@@ -38,6 +38,7 @@ const HomePageComponent = () => {
   };
 
   if (IS_CLOSED && !session) return <ClosedComponent />;
+  console.log("ismobile", isMobile);
 
   return (
     <>
@@ -55,17 +56,16 @@ const HomePageComponent = () => {
           backgroundSize={"cover"}
           backgroundPosition={["center", "center"]}
         >
-          {isSearchFocusMobile && (
-            <Box
-              width="100vw"
-              position={"fixed"}
-              left={0}
-              top={0}
-              zIndex={2}
-              background={"brand.900"}
-              height={"100vh"}
-            />
-          )}
+          <Box
+            width="100vw"
+            position={"fixed"}
+            left={0}
+            top={0}
+            zIndex={2}
+            background={"brand.900"}
+            height={"100vh"}
+            display={isSearchFocusMobile ? "block" : "none"}
+          />
           <Box
             width="100%"
             position={"absolute"}
@@ -124,14 +124,12 @@ const HomePageComponent = () => {
           <OrgsCountComponent />
         </Stack>
       </Stack>
-      <Box textAlign={{ base: "center", md: "left" }}>
-        <Content isFull={isMobile}>
-          <Box mb={{ base: 0, md: 32 }}>
-            <PopularComponent />
-          </Box>
-        </Content>
-        <AboutUsComponent />
-      </Box>
+      <Content isFull={isMobile}>
+        <Box mb={{ base: 0, md: 32 }}>
+          <PopularComponent />
+        </Box>
+      </Content>
+      <AboutUsComponent />
     </>
   );
 };
