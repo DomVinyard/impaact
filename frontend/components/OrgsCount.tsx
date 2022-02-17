@@ -1,3 +1,4 @@
+import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
   Box,
   Heading,
@@ -7,6 +8,7 @@ import {
   Skeleton,
 } from "@chakra-ui/react";
 import { useCountOrgsQuery } from "generated-graphql";
+import Link from "next/link";
 import React, { useEffect } from "react";
 import Content from "./Content";
 
@@ -28,25 +30,30 @@ const OrgsCountComponent = () => {
         color={"white"}
       >
         <Content>
-          <Flex
-            justifyContent={{ base: "center", md: "left" }}
-            alignItems="center"
-          >
-            <Text
-              fontSize={{ base: 44, md: 58 }}
-              fontFamily={"VT323"}
-              paddingRight={2}
+          <Link href={"/browse"}>
+            <Flex
+              cursor={"pointer"}
+              justifyContent={{ base: "center", md: "left" }}
+              _hover={{ color: "white !important" }}
+              alignItems="center"
             >
-              {`${total}`.padStart(3, "0")}
-            </Text>{" "}
-            <Text
-              opacity={0.8}
-              fontWeight={800}
-              fontSize={{ base: 24, md: 24 }}
-            >
-              Organisations
-            </Text>
-          </Flex>
+              <Text
+                fontSize={{ base: 44, md: 58 }}
+                fontFamily={"VT323"}
+                paddingRight={2}
+              >
+                {`${total}`.padStart(3, "0")}
+              </Text>{" "}
+              <Text
+                color={"rgba(255,255,255,0.8)"}
+                fontWeight={800}
+                fontSize={{ base: 24, md: 24 }}
+              >
+                Organisations
+                <ChevronRightIcon />
+              </Text>
+            </Flex>
+          </Link>
         </Content>
       </Box>
     </Skeleton>

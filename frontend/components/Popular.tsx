@@ -36,7 +36,7 @@ const PopularComponent = () => {
         color={"#64a3cb"}
         mb={{ base: 8, md: 10 }}
       >
-        Popular
+        Trending
       </Heading>
       <OrgsList
         orgs={data?.orgs}

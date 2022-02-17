@@ -6,6 +6,7 @@ import {
   Heading,
   Stack,
   useBreakpointValue,
+  Image,
   Text,
 } from "@chakra-ui/react";
 import Content from "components/Content";
@@ -16,6 +17,9 @@ import { useSession } from "next-auth/client";
 import PopularComponent from "components/Popular";
 import ClosedComponent from "components/Closed";
 import OrgsCountComponent from "components/OrgsCount";
+import { AddOrgButton } from "components/Navbar";
+import Link from "next/link";
+import AboutUsComponent from "components/AboutUs";
 
 const IS_CLOSED = true;
 
@@ -45,12 +49,12 @@ const HomePageComponent = () => {
             position={"fixed"}
             left={0}
             top={0}
-            zIndex={1}
+            zIndex={2}
             background={"brand.900"}
             height={"100vh"}
           />
         )}
-        <Box width="100%" position={"absolute"} zIndex={1}>
+        <Box width="100%" position={"absolute"} zIndex={2}>
           <Box
             p={3}
             mx={2}
@@ -103,46 +107,22 @@ const HomePageComponent = () => {
             </Stack>
           </Box>
         </Box>
-        <img
+        <Image
           src="https://github.githubassets.com/images/modules/site/home/hero-glow.svg"
           alt="Glowing universe"
-          style={{ position: "absolute", pointerEvents: "none" }}
+          position={"absolute"}
+          pointerEvents={"none"}
         />
         <OrgsCountComponent />
         <Globe latestKeypress={latestKeypress} />
       </Stack>
       <Box textAlign={{ base: "center", md: "left" }}>
         <Content>
-          <PopularComponent />
-          <Box mb={{ base: 20, md: 32 }}></Box>
+          <Box mb={{ base: 20, md: 32 }}>
+            <PopularComponent />
+          </Box>
         </Content>
-        <Box
-          background={"brand.900"}
-          height={{ base: 600, md: 600 }}
-          overflow={"none"}
-        >
-          <Box
-            height={{ base: 600, md: 600 }}
-            width={"100%"}
-            backgroundImage="url(https://github.githubassets.com/images/modules/site/home/hero-glow.svg)"
-            alt="Glowing universe"
-            style={{ position: "absolute", pointerEvents: "none" }}
-          />
-          <Content>
-            <Box>
-              <Heading
-                // mt={{ base: 20, md: 32 }}
-                fontSize={{ base: "28px", md: "34px" }}
-                color={"#fff"}
-                fontFamily={"Montserrat"}
-                fontWeight={800}
-                pt={{ base: 12, md: 20 }}
-              >
-                What is this?
-              </Heading>
-            </Box>
-          </Content>
-        </Box>
+        <AboutUsComponent />
       </Box>
     </>
   );

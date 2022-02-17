@@ -18,6 +18,22 @@ import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/router";
 import SearchBar from "components/SearchBar";
+
+export const AddOrgButton = (additionalProps) => {
+  return (
+    <Button
+      background={"none"}
+      variant="outline"
+      paddingY={1}
+      _hover={{ bg: "#555" }}
+      _active={{ bg: "#555" }}
+      color="#fff"
+      children={"Add your organisation"}
+      {...additionalProps}
+    />
+  );
+};
+
 const Navbar: NextComponentType = () => {
   const [session] = useSession();
   const router = useRouter();
@@ -41,22 +57,13 @@ const Navbar: NextComponentType = () => {
           onClick={signInOrUp}
           children="Sign In"
         />
-
-        <Button
+        <AddOrgButton
           display={{
             base: router.pathname === "/" ? "inline-block" : "none",
             md: "inline-block",
           }}
-          background={"none"}
-          variant="outline"
-          paddingY={1}
-          _hover={{ bg: "#555" }}
-          _active={{ bg: "#555" }}
-          color="#fff"
           onClick={signInOrUp}
-        >
-          Add your organisation
-        </Button>
+        />
       </Box>
     );
   };

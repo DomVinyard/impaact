@@ -18,7 +18,9 @@ const SearchPageComponent = () => {
         <Stack fontFamily={"Montserrat"} fontWeight={600} opacity={0.4}>
           {data?.orgs.length > 0 && (
             <Box mb={8}>
-              <Text>{data?.orgs.length || 0} results</Text>
+              <Text pt={6} fontSize={{ base: "1.25rem", md: "1.5rem" }}>
+                {data?.orgs.length || 0} results
+              </Text>
             </Box>
           )}
           {!data?.orgs.length && <NoResults query={q} />}
