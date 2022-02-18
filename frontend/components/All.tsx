@@ -20,11 +20,7 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import Content from "./Content";
 
 const PopularComponent = () => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
-  const top = useBreakpointValue({ base: 5, md: 9, lg: 11 });
-  const { data, error, loading } = useFetchPopularQuery({
-    variables: { top },
-  });
+  const { data, error, loading } = useFetchPopularQuery();
   const tabs = [
     { label: "Trending", id: "trending", isSelected: true },
     { label: "New", id: "new" },
@@ -40,7 +36,7 @@ const PopularComponent = () => {
         mb={{ base: 8, md: 10 }}
         display={{ base: "none", md: "block" }}
       >
-        Featured
+        All Organisations
       </Heading>
       <Flex
         fontSize={18}

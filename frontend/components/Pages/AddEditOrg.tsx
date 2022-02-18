@@ -101,7 +101,7 @@ const AddEditOrgForm = ({ org }) => {
     );
   };
 
-  if (isFetching || isSubmitted) return <Loader message={isSubmitted} />;
+  // if (isFetching || isSubmitted) return <Loader message={isSubmitted} />;
   const linkText = isEditMode ? "Link: " : "Your report will be at: ";
 
   return (
@@ -192,9 +192,9 @@ const AddEditOrgPage = () => {
   });
   const [org] = data?.orgs || [];
 
-  if (loading) {
-    return <Loader />;
-  }
+  // if (loading) {
+  //   return <Loader />;
+  // }
   return (
     <Content>
       <AddEditOrgForm org={org} />

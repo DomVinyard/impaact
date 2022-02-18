@@ -45,7 +45,7 @@ const OrgsList = ({ orgs, loading, after }: ListProps) => {
   const columns = useBreakpointValue({ base: 1, md: 2, lg: 3 });
   const [submitting, setSubmitting] = React.useState<IOrg | undefined>();
   if (!columns) return null;
-  if (submitting) return <Loader message={submitting?.name} />;
+  // if (submitting) return <Loader message={submitting?.name} />;
 
   return (
     <Grid

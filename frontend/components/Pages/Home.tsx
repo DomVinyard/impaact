@@ -128,7 +128,7 @@ const HomePageComponent = () => {
         <Content display={{ base: "none", md: "block" }} mb={32}>
           <PopularComponent />
         </Content>
-        <Box display={{ base: "block", md: "none" }}>
+        <Box display={{ base: "block", md: "none" }} mb={1}>
           <PopularComponent />
         </Box>
       </>

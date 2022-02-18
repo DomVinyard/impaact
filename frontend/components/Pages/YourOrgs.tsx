@@ -23,9 +23,9 @@ const OrgsPageComponent = ({ userId }) => {
     variables: { userId },
   });
 
-  if (!data) {
-    return <Loader />;
-  }
+  // if (!data) {
+  //   return <Loader />;
+  // }
 
   const orgs = data.users_by_pk?.orgs || [];
   return (

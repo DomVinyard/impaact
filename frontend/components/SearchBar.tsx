@@ -50,14 +50,14 @@ export const SearchBar = ({
     );
   };
 
-  if (isSelected)
-    return (
-      <Loader
-        message={
-          isSelected?.value === "@search" ? "Searching" : isSelected?.label
-        }
-      />
-    );
+  // if (isSelected)
+  //   return (
+  //     <Loader
+  //       message={
+  //         isSelected?.value === "@search" ? "Searching" : isSelected?.label
+  //       }
+  //     />
+  //   );
 
   return (
     <InputGroup
@@ -137,7 +137,7 @@ export const SearchBar = ({
             ? "Search"
             : "Search charity or org"
         }
-        autoFocus={!mini && !isMobile}
+        // autoFocus={!mini && !isMobile}
         value={value}
         onFocus={onFocus}
         onBlur={onBlur}
