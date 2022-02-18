@@ -27,7 +27,7 @@ const OrgsPageComponent = ({ userId }) => {
   //   return <Loader />;
   // }
 
-  const orgs = data.users_by_pk?.orgs || [];
+  const orgs = data?.users_by_pk?.orgs || [];
   return (
     <Content isFull={isMobile}>
       <Stack spacing={8}>
