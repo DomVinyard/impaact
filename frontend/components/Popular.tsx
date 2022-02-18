@@ -79,11 +79,11 @@ const PopularComponent = () => {
                 alignItems={"center"}
                 justifyContent={"center"}
                 color="#444"
-                background="#ccc"
-              >
-                Find Amazing Organisations
-                <ChevronRightIcon />
-              </Flex>
+                fontWeight={800}
+                backgroundImage={"url(images/cloud.png)"}
+                backgroundSize={"cover"}
+                backgroundPosition={"center center"}
+              ></Flex>
             </Link>
           </GridItem>
         }
