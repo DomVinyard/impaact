@@ -36,7 +36,7 @@ const AboutUsComponent = () => {
                   fontWeight={800}
                   textAlign={{ base: "center", md: "left" }}
                 >
-                  Our Vision
+                  {session ? "Your Organisations" : "Our Vision"}
                 </Heading>
               </Box>
             </Box>
@@ -72,11 +72,10 @@ const AboutUsComponent = () => {
                   >
                     <Link href="/orgs">
                       <AddOrgButton
-                        instanceid="add-org-button"
                         cursor={"pointer"}
                         children={
                           session
-                            ? "Your Organisations"
+                            ? "View organisations"
                             : "Add your organisation"
                         }
                       />

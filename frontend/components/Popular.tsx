@@ -26,7 +26,7 @@ const PopularComponent = () => {
     variables: { top },
   });
   const tabs = [
-    { label: "Trending", id: "trending", isSelected: true },
+    { label: "Featured", id: "featured", isSelected: true },
     { label: "New", id: "new" },
   ];
   return (

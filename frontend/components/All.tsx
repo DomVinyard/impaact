@@ -19,12 +19,8 @@ import IOrg from "types/org";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import Content from "./Content";
 
-const PopularComponent = () => {
+const AllComponent = () => {
   const { data, error, loading } = useFetchPopularQuery();
-  const tabs = [
-    { label: "Trending", id: "trending", isSelected: true },
-    { label: "New", id: "new" },
-  ];
   return (
     <Box pb={{ base: 0, md: 10 }}>
       <Heading
@@ -38,28 +34,6 @@ const PopularComponent = () => {
       >
         All Organisations
       </Heading>
-      <Flex
-        fontSize={18}
-        fontFamily={"Montserrat"}
-        display={{ base: "flex", md: "none" }}
-        background={"#aaa"}
-        borderBottom={"8px solid #eee"}
-      >
-        {tabs.map((tab) => (
-          <Box
-            background={tab.isSelected ? "#eee" : "#ddd"}
-            margin={0}
-            mb={0}
-            opacity={tab.isSelected ? 1 : 0.4}
-            py={6}
-            flex={1}
-            key={tab.id}
-            textAlign={"center"}
-          >
-            {tab.label}
-          </Box>
-        ))}
-      </Flex>
 
       <OrgsList
         orgs={data?.orgs}
@@ -88,4 +62,4 @@ const PopularComponent = () => {
   );
 };
 
-export default PopularComponent;
+export default AllComponent;
