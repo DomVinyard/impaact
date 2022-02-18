@@ -36,6 +36,7 @@ const AboutUsComponent = () => {
                   color={"#fff"}
                   fontFamily={"Montserrat"}
                   fontWeight={800}
+                  textAlign={{ base: "center", md: "left" }}
                 >
                   Our Vision
                 </Heading>

@@ -26,13 +26,14 @@ const Footer: NextComponentType = () => {
         width={"100%"}
       >
         <Flex
-          alignItems={"flex-end"}
+          alignItems={{ base: "center", md: "flex-end" }}
+          justifyContent={{ base: "center", md: "flex-start" }}
           mx={2}
           maxWidth={1200}
           m="0 auto"
           height={footerHeight}
           fontSize={13}
-          pb={8}
+          pb={{ base: 0, md: 8 }}
         >
           <Image
             src="/images/logo.png"
