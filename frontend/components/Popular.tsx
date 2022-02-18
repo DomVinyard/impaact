@@ -34,10 +34,11 @@ const PopularComponent = () => {
         fontWeight={"800"}
         size={"xl"}
         mb={{ base: 8, md: 10 }}
-        hidden={isMobile}
+        display={{ base: "none", md: "block" }}
       >
         Trending
       </Heading>
+
       <OrgsList
         orgs={data?.orgs}
         loading={loading}

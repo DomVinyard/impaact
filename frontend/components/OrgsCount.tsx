@@ -46,9 +46,9 @@ const OrgsCountComponent = () => {
               <Text
                 color={"rgba(255,255,255,0.8)"}
                 fontWeight={800}
-                fontSize={{ base: 24, md: 24 }}
+                fontSize={{ base: 21, md: 24 }}
               >
-                Organisations
+                organisations
                 <ChevronRightIcon />
               </Text>
             </Flex>

@@ -12,52 +12,13 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import IOrg from "types/org";
 import Loader from "./Loader";
+import OrgCard from "./OrgCard";
 
 type ListProps = {
   orgs: any;
   loading?: boolean;
   after?: any;
 };
-
-const MiniOrg = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
-  return (
-    <Skeleton isLoaded={!loading}>
-      <Stack background={"ddd"}>
-        <Flex>
-          <Box
-            backgroundImage={`url(https://picsum.photos/seed/${org.slug}/200/300)`}
-            backgroundSize="cover"
-            backgroundPosition={"center center"}
-            minHeight={{ base: 32, md: 28 }}
-            justifyContent="flex-end"
-            width={"100%"}
-            flex={2}
-          />
-          <Box
-            backgroundImage={`/images/map_placeholder.png`}
-            backgroundSize="cover"
-            backgroundPosition={["center", "center"]}
-            cursor={"pointer"}
-            textAlign={"left"}
-            flex={1}
-          />
-        </Flex>
-        <Stack
-          spacing={0}
-          textAlign={"left"}
-          paddingX={6}
-          paddingBottom={2}
-          color="white"
-        >
-          <Text fontSize="lg" fontWeight={"800"} textTransform={"uppercase"}>
-            {org.name}
-          </Text>
-        </Stack>
-      </Stack>
-    </Skeleton>
-  );
-};
-
 const SDGs = [
   { number: 1, goal: "no poverty", color: "#B53841" },
   { number: 2, goal: "zero hunger", color: "#C7A756" },
@@ -96,6 +57,7 @@ const OrgsList = ({ orgs, loading, after }: ListProps) => {
         const BACKGROUND_FROM_SDG = randomColor(org.slug);
         return (
           <GridItem
+            key={org.slug}
             rowSpan={1}
             colSpan={1}
             background={BACKGROUND_FROM_SDG}
@@ -108,7 +70,7 @@ const OrgsList = ({ orgs, loading, after }: ListProps) => {
                 width={"100%"}
                 cursor={"pointer"}
               >
-                <MiniOrg org={org} loading={loading} />
+                <OrgCard org={org} loading={loading} />
               </Box>
             </Link>
           </GridItem>

@@ -38,7 +38,7 @@ const HomePageComponent = () => {
   };
 
   if (IS_CLOSED && !session) return <ClosedComponent />;
-  console.log("ismobile", isMobile);
+  // console.log("ismobile", isMobile);
 
   return (
     <>

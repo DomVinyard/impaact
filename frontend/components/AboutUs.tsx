@@ -24,8 +24,6 @@ const AboutUsComponent = () => {
         pb={{ base: 24, md: 32 }}
         width={"100%"}
         backgroundImage="url(https://github.githubassets.com/images/modules/site/home/hero-glow.svg)"
-        alt="Glowing universe"
-        // style={{ position: "absolute" }}
       >
         <Content>
           <Stack>
@@ -74,6 +72,7 @@ const AboutUsComponent = () => {
                   >
                     <Link href="/orgs">
                       <AddOrgButton
+                        instanceid="add-org-button"
                         cursor={"pointer"}
                         children={
                           session

@@ -74,6 +74,7 @@ export const SearchBar = ({
       )}
       <AsyncSelect
         formatOptionLabel={formatOptionLabel}
+        instanceId={mini ? "nav" : "splash"}
         inputValue={value}
         tagVariant={mini ? "solid" : "outline"}
         onChange={(option) => {

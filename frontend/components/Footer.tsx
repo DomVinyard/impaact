@@ -44,7 +44,8 @@ const Footer: NextComponentType = () => {
             mr={2}
           />
           <Text color={"rgb(140, 140, 172)"}>
-            <strong>Impact PPS.</strong> Made with <span>💜</span> by{" "}
+            <strong>Impact PPS</strong>
+            {!isMobile ? <>. Made with 💜 by </> : " 💜 by "}
             <a
               href="https://insaangroup.org"
               style={{ textDecoration: "underline" }}
@@ -52,7 +53,6 @@ const Footer: NextComponentType = () => {
             >
               Insaan
             </a>
-            .
           </Text>
         </Flex>
       </Box>
