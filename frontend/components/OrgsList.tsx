@@ -61,7 +61,7 @@ const OrgsList = ({ orgs, loading, after }: ListProps) => {
             rowSpan={1}
             colSpan={1}
             background={BACKGROUND_FROM_SDG}
-            borderTop={{ base: "2px solid #eee", md: "none" }}
+            borderBottom={{ base: "4px solid #eee", md: "none" }}
           >
             <Link key={index} href={`/${org.slug}`}>
               <Box
