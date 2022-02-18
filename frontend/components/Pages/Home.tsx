@@ -124,11 +124,14 @@ const HomePageComponent = () => {
           <OrgsCountComponent />
         </Stack>
       </Stack>
-      <Content isFull={isMobile}>
-        <Box mb={{ base: 0, md: 32 }}>
+      <>
+        <Content display={{ base: "none", md: "block" }} mb={32}>
+          <PopularComponent />
+        </Content>
+        <Box display={{ base: "block", md: "none" }}>
           <PopularComponent />
         </Box>
-      </Content>
+      </>
       <AboutUsComponent />
     </>
   );
