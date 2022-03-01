@@ -1745,6 +1745,38 @@ export type CountOrgsQuery = {
   };
 };
 
+export type FetchFeaturedQueryVariables = Exact<{
+  top?: InputMaybe<Scalars["Int"]>;
+}>;
+
+export type FetchFeaturedQuery = {
+  __typename?: "query_root";
+  orgs: Array<{
+    __typename?: "orgs";
+    id: any;
+    created_at: string;
+    name: string;
+    slug: string;
+    description?: string | undefined;
+  }>;
+};
+
+export type FetchLatestQueryVariables = Exact<{
+  top?: InputMaybe<Scalars["Int"]>;
+}>;
+
+export type FetchLatestQuery = {
+  __typename?: "query_root";
+  orgs: Array<{
+    __typename?: "orgs";
+    id: any;
+    created_at: string;
+    name: string;
+    slug: string;
+    description?: string | undefined;
+  }>;
+};
+
 export type FetchOrgQueryVariables = Exact<{
   slug?: InputMaybe<Scalars["String"]>;
 }>;
@@ -1765,22 +1797,6 @@ export type FetchOrgQuery = {
 export type FetchOrgsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type FetchOrgsQuery = {
-  __typename?: "query_root";
-  orgs: Array<{
-    __typename?: "orgs";
-    id: any;
-    created_at: string;
-    name: string;
-    slug: string;
-    description?: string | undefined;
-  }>;
-};
-
-export type FetchPopularQueryVariables = Exact<{
-  top?: InputMaybe<Scalars["Int"]>;
-}>;
-
-export type FetchPopularQuery = {
   __typename?: "query_root";
   orgs: Array<{
     __typename?: "orgs";
@@ -2388,6 +2404,220 @@ export type CountOrgsQueryResult = Apollo.QueryResult<
   CountOrgsQuery,
   CountOrgsQueryVariables
 >;
+export const FetchFeaturedDocument = gql`
+  query fetchFeatured($top: Int) {
+    orgs(order_by: { name: asc }, limit: $top) {
+      id
+      created_at
+      name
+      slug
+      description
+    }
+  }
+`;
+export type FetchFeaturedComponentProps = Omit<
+  ApolloReactComponents.QueryComponentOptions<
+    FetchFeaturedQuery,
+    FetchFeaturedQueryVariables
+  >,
+  "query"
+>;
+
+export const FetchFeaturedComponent = (props: FetchFeaturedComponentProps) => (
+  <ApolloReactComponents.Query<FetchFeaturedQuery, FetchFeaturedQueryVariables>
+    query={FetchFeaturedDocument}
+    {...props}
+  />
+);
+
+export type FetchFeaturedProps<
+  TChildProps = {},
+  TDataName extends string = "data"
+> = {
+  [key in TDataName]: ApolloReactHoc.DataValue<
+    FetchFeaturedQuery,
+    FetchFeaturedQueryVariables
+  >;
+} & TChildProps;
+export function withFetchFeatured<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = "data"
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    FetchFeaturedQuery,
+    FetchFeaturedQueryVariables,
+    FetchFeaturedProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    FetchFeaturedQuery,
+    FetchFeaturedQueryVariables,
+    FetchFeaturedProps<TChildProps, TDataName>
+  >(FetchFeaturedDocument, {
+    alias: "fetchFeatured",
+    ...operationOptions,
+  });
+}
+
+/**
+ * __useFetchFeaturedQuery__
+ *
+ * To run a query within a React component, call `useFetchFeaturedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchFeaturedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFetchFeaturedQuery({
+ *   variables: {
+ *      top: // value for 'top'
+ *   },
+ * });
+ */
+export function useFetchFeaturedQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    FetchFeaturedQuery,
+    FetchFeaturedQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<FetchFeaturedQuery, FetchFeaturedQueryVariables>(
+    FetchFeaturedDocument,
+    options
+  );
+}
+export function useFetchFeaturedLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    FetchFeaturedQuery,
+    FetchFeaturedQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<FetchFeaturedQuery, FetchFeaturedQueryVariables>(
+    FetchFeaturedDocument,
+    options
+  );
+}
+export type FetchFeaturedQueryHookResult = ReturnType<
+  typeof useFetchFeaturedQuery
+>;
+export type FetchFeaturedLazyQueryHookResult = ReturnType<
+  typeof useFetchFeaturedLazyQuery
+>;
+export type FetchFeaturedQueryResult = Apollo.QueryResult<
+  FetchFeaturedQuery,
+  FetchFeaturedQueryVariables
+>;
+export const FetchLatestDocument = gql`
+  query fetchLatest($top: Int) {
+    orgs(order_by: { created_at: desc }, limit: $top) {
+      id
+      created_at
+      name
+      slug
+      description
+    }
+  }
+`;
+export type FetchLatestComponentProps = Omit<
+  ApolloReactComponents.QueryComponentOptions<
+    FetchLatestQuery,
+    FetchLatestQueryVariables
+  >,
+  "query"
+>;
+
+export const FetchLatestComponent = (props: FetchLatestComponentProps) => (
+  <ApolloReactComponents.Query<FetchLatestQuery, FetchLatestQueryVariables>
+    query={FetchLatestDocument}
+    {...props}
+  />
+);
+
+export type FetchLatestProps<
+  TChildProps = {},
+  TDataName extends string = "data"
+> = {
+  [key in TDataName]: ApolloReactHoc.DataValue<
+    FetchLatestQuery,
+    FetchLatestQueryVariables
+  >;
+} & TChildProps;
+export function withFetchLatest<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = "data"
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    FetchLatestQuery,
+    FetchLatestQueryVariables,
+    FetchLatestProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    FetchLatestQuery,
+    FetchLatestQueryVariables,
+    FetchLatestProps<TChildProps, TDataName>
+  >(FetchLatestDocument, {
+    alias: "fetchLatest",
+    ...operationOptions,
+  });
+}
+
+/**
+ * __useFetchLatestQuery__
+ *
+ * To run a query within a React component, call `useFetchLatestQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchLatestQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFetchLatestQuery({
+ *   variables: {
+ *      top: // value for 'top'
+ *   },
+ * });
+ */
+export function useFetchLatestQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    FetchLatestQuery,
+    FetchLatestQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<FetchLatestQuery, FetchLatestQueryVariables>(
+    FetchLatestDocument,
+    options
+  );
+}
+export function useFetchLatestLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    FetchLatestQuery,
+    FetchLatestQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<FetchLatestQuery, FetchLatestQueryVariables>(
+    FetchLatestDocument,
+    options
+  );
+}
+export type FetchLatestQueryHookResult = ReturnType<typeof useFetchLatestQuery>;
+export type FetchLatestLazyQueryHookResult = ReturnType<
+  typeof useFetchLatestLazyQuery
+>;
+export type FetchLatestQueryResult = Apollo.QueryResult<
+  FetchLatestQuery,
+  FetchLatestQueryVariables
+>;
 export const FetchOrgDocument = gql`
   query fetchOrg($slug: String) {
     orgs(where: { slug: { _eq: $slug } }) {
@@ -2593,114 +2823,6 @@ export type FetchOrgsLazyQueryHookResult = ReturnType<
 export type FetchOrgsQueryResult = Apollo.QueryResult<
   FetchOrgsQuery,
   FetchOrgsQueryVariables
->;
-export const FetchPopularDocument = gql`
-  query fetchPopular($top: Int) {
-    orgs(order_by: { created_at: desc }, limit: $top) {
-      id
-      created_at
-      name
-      slug
-      description
-    }
-  }
-`;
-export type FetchPopularComponentProps = Omit<
-  ApolloReactComponents.QueryComponentOptions<
-    FetchPopularQuery,
-    FetchPopularQueryVariables
-  >,
-  "query"
->;
-
-export const FetchPopularComponent = (props: FetchPopularComponentProps) => (
-  <ApolloReactComponents.Query<FetchPopularQuery, FetchPopularQueryVariables>
-    query={FetchPopularDocument}
-    {...props}
-  />
-);
-
-export type FetchPopularProps<
-  TChildProps = {},
-  TDataName extends string = "data"
-> = {
-  [key in TDataName]: ApolloReactHoc.DataValue<
-    FetchPopularQuery,
-    FetchPopularQueryVariables
-  >;
-} & TChildProps;
-export function withFetchPopular<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = "data"
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    FetchPopularQuery,
-    FetchPopularQueryVariables,
-    FetchPopularProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withQuery<
-    TProps,
-    FetchPopularQuery,
-    FetchPopularQueryVariables,
-    FetchPopularProps<TChildProps, TDataName>
-  >(FetchPopularDocument, {
-    alias: "fetchPopular",
-    ...operationOptions,
-  });
-}
-
-/**
- * __useFetchPopularQuery__
- *
- * To run a query within a React component, call `useFetchPopularQuery` and pass it any options that fit your needs.
- * When your component renders, `useFetchPopularQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useFetchPopularQuery({
- *   variables: {
- *      top: // value for 'top'
- *   },
- * });
- */
-export function useFetchPopularQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    FetchPopularQuery,
-    FetchPopularQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<FetchPopularQuery, FetchPopularQueryVariables>(
-    FetchPopularDocument,
-    options
-  );
-}
-export function useFetchPopularLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    FetchPopularQuery,
-    FetchPopularQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<FetchPopularQuery, FetchPopularQueryVariables>(
-    FetchPopularDocument,
-    options
-  );
-}
-export type FetchPopularQueryHookResult = ReturnType<
-  typeof useFetchPopularQuery
->;
-export type FetchPopularLazyQueryHookResult = ReturnType<
-  typeof useFetchPopularLazyQuery
->;
-export type FetchPopularQueryResult = Apollo.QueryResult<
-  FetchPopularQuery,
-  FetchPopularQueryVariables
 >;
 export const FetchUserDocument = gql`
   query fetchUser($userId: uuid!) {

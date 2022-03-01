@@ -1,0 +1,9 @@
+query fetchFeatured($top: Int) {
+  orgs(order_by: { name: asc }, limit: $top) {
+    id
+    created_at
+    name
+    slug
+    description
+  }
+}

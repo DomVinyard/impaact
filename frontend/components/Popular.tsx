@@ -11,24 +11,51 @@ import {
   GridItem,
 } from "@chakra-ui/react";
 import OrgsList from "components/OrgsList";
-import { useFetchPopularQuery } from "generated-graphql";
-import React from "react";
+import { useFetchLatestQuery, useFetchFeaturedQuery } from "generated-graphql";
+import React, { useState } from "react";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
 import IOrg from "types/org";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import Content from "./Content";
 
+type TabIDs = "featured" | "latest";
+type tab = {
+  id: TabIDs;
+  label: string;
+  isSelected: boolean;
+};
+
 const PopularComponent = () => {
+  const [selected, setSelected] = useState<TabIDs>("featured");
   const isMobile = useBreakpointValue({ base: true, md: false });
   const top = useBreakpointValue({ base: 5, md: 9, lg: 11 });
-  const { data, error, loading } = useFetchPopularQuery({
+  const {
+    data: featured_data,
+    error: featured_error,
+    loading: featured_loading,
+  } = useFetchFeaturedQuery({
     variables: { top },
   });
-  const tabs = [
-    { label: "Featured", id: "featured", isSelected: true },
-    { label: "New", id: "new" },
+  const {
+    data: latest_data,
+    error: latest_error,
+    loading: latest_loading,
+  } = useFetchLatestQuery({
+    variables: { top },
+  });
+  const tabs: tab[] = [
+    { label: "Featured", id: "featured", isSelected: selected === "featured" },
+    { label: "New", id: "latest", isSelected: selected === "latest" },
   ];
+  const handleSelectTab = (id) => {
+    setSelected(id);
+  };
+
+  const data = selected === "featured" ? featured_data : latest_data;
+  const error = selected === "featured" ? featured_error : latest_error;
+  const loading = selected === "featured" ? featured_loading : latest_loading;
+
   return (
     <Box pb={{ base: 0, md: 10 }}>
       <Heading
@@ -47,10 +74,11 @@ const PopularComponent = () => {
         fontFamily={"Montserrat"}
         display={{ base: "flex", md: "none" }}
         background={"#aaa"}
-        borderBottom={"8px solid #eee"}
+        borderBottom={"4px solid #eee"}
       >
         {tabs.map((tab) => (
           <Box
+            onClick={() => handleSelectTab(tab.id)}
             background={tab.isSelected ? "#eee" : "#ddd"}
             margin={0}
             mb={0}

@@ -41,7 +41,7 @@ const ClosedComponent = ({ type = "invite", message }: Props) => {
               <>
                 {type === "invite" && (
                   <>
-                    <Box mt={"25vh"}>Invite only atm</Box>
+                    <Box mt={"25vh"}>Invite only</Box>
                     <Link href={"mailto:i@dom.vin"}>
                       <Text
                         fontWeight={"normal"}

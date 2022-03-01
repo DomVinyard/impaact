@@ -12,7 +12,9 @@ interface group {
 const incrementSpeed = 0.001;
 const maxSpeed = 0.01;
 
-const Model = ({ latestKeypress, baseSpeed = 0.001 }) => {
+const SHOW_GLOBE = true;
+
+const Model = ({ latestKeypress, baseSpeed = 0.0002 }) => {
   const group: group = useRef();
   const [model, setModel] = useState<Object3D | null>(null);
   const [rotateAt, setRotateAt] = useState(baseSpeed);
@@ -78,12 +80,12 @@ const Globe = ({ latestKeypress }) => {
   return (
     <Flex style={{ minHeight: "600px", height: "80vh", width: "100%" }}>
       <Canvas
-        style={{ height: "100%" }}
+        style={{ height: "100%", opacity: SHOW_GLOBE ? 1 : 0 }}
         colorManagement
         camera={{ position: isMobile ? [0, 1.75, 5] : [-1, -0.25, 4.5] }}
       >
         <Lights />
-        <Model latestKeypress={latestKeypress} baseSpeed={0.002} />
+        <Model latestKeypress={latestKeypress} baseSpeed={0.001} />
       </Canvas>
     </Flex>
   );

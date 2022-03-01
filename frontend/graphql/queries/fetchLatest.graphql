@@ -1,4 +1,4 @@
-query fetchPopular($top: Int) {
+query fetchLatest($top: Int) {
   orgs(order_by: { created_at: desc }, limit: $top) {
     id
     created_at
