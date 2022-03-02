@@ -25,9 +25,9 @@ const OrgsPageComponent = ({ userId }) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const { data, error, loading } = useFetchOrgsQuery({});
 
-  if (!data) {
-    return <Loader />;
-  }
+  // if (!data) {
+  //   return <Loader />;
+  // }
 
   const orgs = data.orgs || [];
   return (

@@ -6,23 +6,27 @@ import { getSession } from "next-auth/client";
 import AccessDeniedIndicator from "components/AccessDeniedIndicator";
 import ISession from "types/session";
 import Landing from "components/Pages/Home";
+import WHITELIST from "./../lib/WHITELIST";
+import ClosedComponent from "components/Closed";
 
 interface IProps {
   session: ISession;
 }
 
-const IndexPage: NextPage<IProps> = ({ session }) => {
-  if (!session) {
-    return <Landing />;
-  }
+const WHITELIST_ONLY = true;
 
-  return (
+const IndexPage: NextPage<IProps> = ({ session }) => {
+  // console.log({ EMAIL: session.user.email, WHITELIST });
+  const hasAccess = !WHITELIST_ONLY || WHITELIST.includes(session?.user?.email);
+  return hasAccess ? (
     <>
       <Head>
-        <title>Impact</title>
+        <title>Impact.ooo</title>
       </Head>
       <Landing />
     </>
+  ) : (
+    <ClosedComponent />
   );
 };
 

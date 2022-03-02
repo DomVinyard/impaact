@@ -78,7 +78,6 @@ const options = {
     },
     jwt: async (token: iToken, user: IUser) => {
       const isSignIn = user ? true : false;
-
       if (isSignIn) {
         token.id = user.id;
       }

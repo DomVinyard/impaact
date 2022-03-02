@@ -13,6 +13,7 @@ const incrementSpeed = 0.001;
 const maxSpeed = 0.01;
 
 const SHOW_GLOBE = true;
+const ROTATE_GLOBE = false;
 
 const Model = ({ latestKeypress, baseSpeed = 0.0002 }) => {
   const group: group = useRef();
@@ -39,7 +40,7 @@ const Model = ({ latestKeypress, baseSpeed = 0.0002 }) => {
   useFrame((_, delta) => mixer.update(delta));
   useFrame(() => {
     if (typeof group.current != "undefined")
-      return (group.current.rotation.y += rotateAt);
+      return (group.current.rotation.y += ROTATE_GLOBE ? rotateAt : 0);
   });
 
   return (
