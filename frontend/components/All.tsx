@@ -11,7 +11,7 @@ import {
   GridItem,
 } from "@chakra-ui/react";
 import OrgsList from "components/OrgsList";
-import { useFetchPopularQuery } from "generated-graphql";
+import { useFetchOrgsQuery } from "generated-graphql";
 import React from "react";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
@@ -20,7 +20,7 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import Content from "./Content";
 
 const AllComponent = () => {
-  const { data, error, loading } = useFetchPopularQuery();
+  const { data, error, loading } = useFetchOrgsQuery();
   return (
     <Box pb={{ base: 0, md: 10 }}>
       <Heading
