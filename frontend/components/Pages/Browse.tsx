@@ -21,7 +21,7 @@ import Link from "next/link";
 import React from "react";
 import IOrg from "types/org";
 
-const OrgsPageComponent = ({ userId }) => {
+const OrgsPageComponent = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const { data, error, loading } = useFetchOrgsQuery({});
 
