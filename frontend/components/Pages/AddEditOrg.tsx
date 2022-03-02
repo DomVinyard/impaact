@@ -39,6 +39,7 @@ const AddEditOrgForm = ({ org }) => {
   const [description, setDescription] = useState(org?.description || "");
   const [session] = useSession();
   const isEditMode = !!org;
+
   const [insertOrg, { loading: insertOrgFetching, error: insertOrgError }] =
     useInsertOrgMutation();
   const [updateOrg, { loading: updateOrgFetching, error: updateOrgError }] =
@@ -83,7 +84,7 @@ const AddEditOrgForm = ({ org }) => {
         },
       });
     }
-    setName("");
+    console.log("set name");
     router.push(`/${slug}`);
   };
 
@@ -101,8 +102,9 @@ const AddEditOrgForm = ({ org }) => {
     );
   };
 
-  // if (isFetching || isSubmitted) return <Loader message={isSubmitted} />;
+  if (isFetching || isSubmitted) return <Loader message={isSubmitted} />;
   const linkText = isEditMode ? "Link: " : "Your report will be at: ";
+  console.log({ org, isEditMode, name });
 
   return (
     <Stack spacing={4}>
@@ -192,9 +194,9 @@ const AddEditOrgPage = () => {
   });
   const [org] = data?.orgs || [];
 
-  // if (loading) {
-  //   return <Loader />;
-  // }
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <Content>
       <AddEditOrgForm org={org} />
