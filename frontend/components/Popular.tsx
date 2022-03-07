@@ -1,25 +1,14 @@
 import {
   Box,
-  Button,
   Flex,
-  Heading,
-  Stack,
   useBreakpointValue,
-  Text,
-  Skeleton,
-  Grid,
   GridItem,
   Select,
-  SelectField,
 } from "@chakra-ui/react";
 import OrgsList from "components/OrgsList";
 import { useFetchLatestQuery, useFetchFeaturedQuery } from "generated-graphql";
 import React, { useState } from "react";
-import { useSession } from "next-auth/client";
 import Link from "next/link";
-import IOrg from "types/org";
-import { ChevronRightIcon } from "@chakra-ui/icons";
-import Content from "./Content";
 
 type TabIDs = "featured" | "latest";
 type tab = {
