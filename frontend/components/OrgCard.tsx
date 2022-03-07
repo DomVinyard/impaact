@@ -30,7 +30,7 @@ const OrgCard = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
           textAlign={"left"}
           paddingX={6}
           paddingBottom={2}
-          color="white"
+          color="black"
         >
           <Text fontSize="lg" fontWeight={"800"} textTransform={"uppercase"}>
             {org.name}

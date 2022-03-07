@@ -54,7 +54,7 @@ const OrgsList = ({ orgs, loading, after }: ListProps) => {
       gap={{ base: 0, md: 4 }}
     >
       {orgs?.map((org: IOrg, index: number) => {
-        const BACKGROUND_FROM_SDG = randomColor(org.slug);
+        const BACKGROUND_FROM_SDG = "#eee";
         return (
           <GridItem
             key={org.slug}

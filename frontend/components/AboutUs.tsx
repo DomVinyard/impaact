@@ -57,7 +57,7 @@ const AboutUsComponent = () => {
                 <Box width={"100%"}>
                   {!isMobile && (
                     <>
-                      <Text fontSize={{ base: 17, md: 24 }}>
+                      <Text fontSize={{ base: 17, md: 24 }} fontWeight="bold">
                         Pellentesque ligula arcu, mollis at turpis vel, cursus
                         dignissim lorem. Curabitur porta ut velit eget mattis
                         velit eget mattis.

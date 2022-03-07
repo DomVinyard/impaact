@@ -4,17 +4,99 @@ import {
   useBreakpointValue,
   GridItem,
   Select,
+  ButtonGroup,
+  Button,
+  IconButton,
 } from "@chakra-ui/react";
 import OrgsList from "components/OrgsList";
 import { useFetchLatestQuery, useFetchFeaturedQuery } from "generated-graphql";
 import React, { useState } from "react";
 import Link from "next/link";
+import { AddIcon } from "@chakra-ui/icons";
+import { BsGridFill } from "react-icons/bs";
+import { FaThList } from "react-icons/fa";
 
 type TabIDs = "featured" | "latest";
 type tab = {
   id: TabIDs;
   label: string;
   isSelected: boolean;
+};
+
+const Controls = ({ tabs, handleSelectTab }) => {
+  return (
+    <>
+      {/* Wide */}
+      <Flex
+        display={{ base: "none", md: "flex" }}
+        marginTop={12}
+        marginBottom={6}
+      >
+        <Box flexGrow={1}></Box>
+        <Box>
+          <Select
+            onChange={(e) => handleSelectTab(e.target.value)}
+            borderColor={"#ccc"}
+            variant="outline"
+            size="md"
+            minWidth={200}
+          >
+            {tabs.map((tab) => (
+              <option
+                style={{ margin: "16px" }}
+                key={tab.id + "wide"}
+                value={tab.id}
+              >
+                {tab.label}
+              </option>
+            ))}
+          </Select>
+        </Box>
+        <Box ml={2}>
+          <ButtonGroup size="md" isAttached variant="outline">
+            <IconButton
+              size="md"
+              variant="outline"
+              mr="-px"
+              aria-label="Add to friends"
+              icon={<BsGridFill />}
+            />
+            <IconButton
+              size="md"
+              variant="outline"
+              aria-label="Add to friends"
+              icon={<FaThList />}
+            />
+          </ButtonGroup>
+        </Box>
+      </Flex>
+
+      {/* Mobile */}
+      <Flex
+        fontSize={18}
+        fontFamily={"Montserrat"}
+        display={{ base: "flex", md: "none" }}
+        background={"#aaa"}
+        borderBottom={"4px solid #eee"}
+      >
+        {tabs.map((tab) => (
+          <Box
+            onClick={() => handleSelectTab(tab.id)}
+            background={tab.isSelected ? "#eee" : "#ddd"}
+            margin={0}
+            mb={0}
+            opacity={tab.isSelected ? 1 : 0.4}
+            py={6}
+            flex={1}
+            key={tab.id}
+            textAlign={"center"}
+          >
+            {tab.label}
+          </Box>
+        ))}
+      </Flex>
+    </>
+  );
 };
 
 const PopularComponent = () => {
@@ -49,57 +131,7 @@ const PopularComponent = () => {
 
   return (
     <Box pb={{ base: 0, md: 10 }}>
-      {/* Wide */}
-      <Select
-        mt={32}
-        mb={10}
-        onChange={(e) => handleSelectTab(e.target.value)}
-        display={{ base: "none", md: "block" }}
-        fontSize={{ base: "28px", md: "34px" }}
-        maxW={300}
-        fontFamily={"Montserrat"}
-        fontWeight={"800"}
-        borderColor={"#ccc"}
-        // size={"xl"}
-        variant="outline"
-      >
-        {tabs.map((tab) => (
-          <option
-            style={{ margin: "16px" }}
-            key={tab.id + "wide"}
-            value={tab.id}
-          >
-            {tab.label}
-          </option>
-        ))}
-      </Select>
-      {/* </Heading> */}
-
-      {/* Mobile */}
-      <Flex
-        fontSize={18}
-        fontFamily={"Montserrat"}
-        display={{ base: "flex", md: "none" }}
-        background={"#aaa"}
-        borderBottom={"4px solid #eee"}
-      >
-        {tabs.map((tab) => (
-          <Box
-            onClick={() => handleSelectTab(tab.id)}
-            background={tab.isSelected ? "#eee" : "#ddd"}
-            margin={0}
-            mb={0}
-            opacity={tab.isSelected ? 1 : 0.4}
-            py={6}
-            flex={1}
-            key={tab.id}
-            textAlign={"center"}
-          >
-            {tab.label}
-          </Box>
-        ))}
-      </Flex>
-
+      <Controls tabs={tabs} handleSelectTab={handleSelectTab} />
       <OrgsList
         orgs={data?.orgs}
         loading={loading}
@@ -107,7 +139,6 @@ const PopularComponent = () => {
           <GridItem rowSpan={1} colSpan={1}>
             <Link href={"/browse"}>
               <Flex
-                // height={{ base: "400px", md: "100%" }}
                 height="100%"
                 width={"100%"}
                 cursor={"pointer"}

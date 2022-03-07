@@ -43,14 +43,14 @@ const OrgsCountComponent = () => {
               >
                 {`${total}`.padStart(3, "0")}
               </Text>{" "}
-              <Text
-                color={"rgba(255,255,255,0.8)"}
+              <Heading
+                color={"rgba(255,255,255,1)"}
                 fontWeight={800}
-                fontSize={{ base: 21, md: 24 }}
+                // fontSize={{ base: 21, md: 24 }}
               >
                 organisations
                 <ChevronRightIcon />
-              </Text>
+              </Heading>
             </Flex>
           </Link>
         </Content>
