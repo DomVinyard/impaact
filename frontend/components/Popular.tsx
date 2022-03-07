@@ -9,6 +9,8 @@ import {
   Skeleton,
   Grid,
   GridItem,
+  Select,
+  SelectField,
 } from "@chakra-ui/react";
 import OrgsList from "components/OrgsList";
 import { useFetchLatestQuery, useFetchFeaturedQuery } from "generated-graphql";
@@ -46,7 +48,7 @@ const PopularComponent = () => {
   });
   const tabs: tab[] = [
     { label: "Featured", id: "featured", isSelected: selected === "featured" },
-    { label: "New", id: "latest", isSelected: selected === "latest" },
+    { label: "Latest", id: "latest", isSelected: selected === "latest" },
   ];
   const handleSelectTab = (id) => {
     setSelected(id);
@@ -58,17 +60,33 @@ const PopularComponent = () => {
 
   return (
     <Box pb={{ base: 0, md: 10 }}>
-      <Heading
-        mt={{ base: 14, md: 32 }}
+      {/* Wide */}
+      <Select
+        mt={32}
+        mb={10}
+        onChange={(e) => handleSelectTab(e.target.value)}
+        display={{ base: "none", md: "block" }}
         fontSize={{ base: "28px", md: "34px" }}
+        maxW={300}
         fontFamily={"Montserrat"}
         fontWeight={"800"}
-        size={"xl"}
-        mb={{ base: 8, md: 10 }}
-        display={{ base: "none", md: "block" }}
+        borderColor={"#ccc"}
+        // size={"xl"}
+        variant="outline"
       >
-        Featured
-      </Heading>
+        {tabs.map((tab) => (
+          <option
+            style={{ margin: "16px" }}
+            key={tab.id + "wide"}
+            value={tab.id}
+          >
+            {tab.label}
+          </option>
+        ))}
+      </Select>
+      {/* </Heading> */}
+
+      {/* Mobile */}
       <Flex
         fontSize={18}
         fontFamily={"Montserrat"}
