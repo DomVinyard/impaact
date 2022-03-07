@@ -6,7 +6,6 @@ import { getSession } from "next-auth/client";
 import AccessDeniedIndicator from "components/AccessDeniedIndicator";
 import ISession from "types/session";
 import Landing from "components/Pages/Home";
-import WHITELIST from "./../lib/WHITELIST";
 import ClosedComponent from "components/Closed";
 
 interface IProps {
@@ -17,11 +16,11 @@ const WHITELIST_ONLY = true;
 
 const IndexPage: NextPage<IProps> = ({ session }) => {
   // console.log({ EMAIL: session.user.email, WHITELIST });
-  const hasAccess = !WHITELIST_ONLY || WHITELIST.includes(session?.user?.email);
+  const hasAccess = true;
   return hasAccess ? (
     <>
       <Head>
-        <title>Impact.ooo</title>
+        <title>PPS/Impact</title>
       </Head>
       <Landing />
     </>

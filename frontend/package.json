@@ -8,7 +8,8 @@
     "export": "next export",
     "generate-graphql": "graphql-codegen --config codegen.yml --require dotenv/config",
     "start": "next start",
-    "types": "tsc --watch"
+    "types": "tsc --watch",
+    "docker:rebuild": "docker-compose up --build"
   },
   "dependencies": {
     "@apollo/client": "^3.5.7",
@@ -26,10 +27,12 @@
     "next": "^12.0.8",
     "next-auth": "^3.29.0",
     "next-transpile-modules": "^9.0.0",
+    "nextjs-progressbar": "^0.0.14",
     "pg": "^8.7.1",
     "react": "^17.0.2",
     "react-accessible-dropdown-menu-hook": "^3.2.0",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
     "react-three-fiber": "^5.3.7",
     "react-useinterval": "^1.0.2",
     "subscriptions-transport-ws": "^0.11.0",

@@ -9,11 +9,12 @@ interface group {
   current: { rotation: { x: number; y: number; z: number } };
 }
 
+const ROTATION_SPEED = 0.0005;
 const incrementSpeed = 0.001;
 const maxSpeed = 0.01;
 
 const SHOW_GLOBE = true;
-const ROTATE_GLOBE = false;
+const ROTATE_GLOBE = true;
 
 const Model = ({ latestKeypress, baseSpeed = 0.0002 }) => {
   const group: group = useRef();
@@ -86,7 +87,7 @@ const Globe = ({ latestKeypress }) => {
         camera={{ position: isMobile ? [0, 1.75, 5] : [-1, -0.25, 4.5] }}
       >
         <Lights />
-        <Model latestKeypress={latestKeypress} baseSpeed={0.001} />
+        <Model latestKeypress={latestKeypress} baseSpeed={ROTATION_SPEED} />
       </Canvas>
     </Flex>
   );
