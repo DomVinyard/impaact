@@ -6,6 +6,7 @@ export default [
   // Team
   "claudiahy.cheung@gmail.com",
   "farahnaz@insaangroup.org",
+  "Simon.vittorio.moore@gmail.com",
 
   // Etc
 ];
