@@ -31,8 +31,8 @@ const Layout: FC = ({ children }) => {
   };
   return (
     <>
-      <NextNProgress />
-      <ChakraProvider theme={theme}>
+      <NextNProgress color="#b0d8eb" height={6} />
+      <ChakraProvider theme={theme} cssVarsRoot={undefined}>
         <Stack
           style={{ position: "relative" }}
           height={"100%"}

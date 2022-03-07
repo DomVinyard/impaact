@@ -72,16 +72,13 @@ const AboutUsComponent = () => {
                     pt={{ base: 12, md: 8 }}
                     pb={{ base: 6, md: 8 }}
                   >
-                    <Link href="/orgs">
-                      <AddOrgButton
-                        cursor={"pointer"}
-                        children={
-                          session
-                            ? "View organisations"
-                            : "Add your organisation"
-                        }
-                      />
-                    </Link>
+                    {/* <Link href="/orgs"> */}
+                    <AddOrgButton
+                      onClick={() => alert("coming soon")}
+                      cursor={"pointer"}
+                      children={"Learn more"}
+                    />
+                    {/* </Link> */}
                   </Flex>
                 </Box>
               </Stack>
