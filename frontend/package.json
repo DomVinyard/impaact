@@ -26,6 +26,7 @@
     "next": "^12.0.8",
     "next-auth": "^3.29.0",
     "next-transpile-modules": "^9.0.0",
+    "nextjs-progressbar": "^0.0.14",
     "pg": "^8.7.1",
     "react": "^17.0.2",
     "react-accessible-dropdown-menu-hook": "^3.2.0",

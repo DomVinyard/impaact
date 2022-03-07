@@ -36,7 +36,7 @@ const AboutUsComponent = () => {
                   fontWeight={800}
                   textAlign={{ base: "center", md: "left" }}
                 >
-                  {session ? "Your Organisations" : "Our Vision"}
+                  Our Vision
                 </Heading>
               </Box>
             </Box>
@@ -55,13 +55,15 @@ const AboutUsComponent = () => {
               >
                 <Box width={"100%"}>
                   {!isMobile && (
-                    <Text fontSize={{ base: 17, md: 22 }}>
+                    <Text
+                      fontSize={{ base: 17, md: 22 }}
+                      mt={{ base: 0, md: 12 }}
+                    >
                       Pellentesque ligula arcu, mollis at turpis vel, cursus
                       dignissim lorem. Curabitur porta ut velit eget mattis.
                       Aliquam erat volutpat. Aenean euismod lacus vel interdum
                       volutpat. Quisque aliquet elit in dui egestas dictum.
-                      Donec eu risus volutpat, aliquam neque eget, luctus
-                      libero.
+                      Donec eu risus volutpat
                     </Text>
                   )}
                   <Flex

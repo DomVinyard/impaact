@@ -10,6 +10,7 @@ import { Box, ChakraProvider, Stack, theme } from "@chakra-ui/react";
 import Navbar from "components/Navbar";
 import Footer, { footerHeight } from "components/Footer";
 import { extendTheme } from "@chakra-ui/react";
+import NextNProgress from "nextjs-progressbar";
 
 const Layout: FC = ({ children }) => {
   // 2. Call `extendTheme` and pass your custom values
@@ -29,19 +30,22 @@ const Layout: FC = ({ children }) => {
     },
   };
   return (
-    <ChakraProvider theme={theme}>
-      <Stack
-        style={{ position: "relative" }}
-        height={"100%"}
-        minHeight={"100vh"}
-      >
-        <Navbar />
-        <Box p={0} mt={"0px !important"} mb={footerHeight}>
-          {children}
-        </Box>
-        <Footer />
-      </Stack>
-    </ChakraProvider>
+    <>
+      <NextNProgress />
+      <ChakraProvider theme={theme}>
+        <Stack
+          style={{ position: "relative" }}
+          height={"100%"}
+          minHeight={"100vh"}
+        >
+          <Navbar />
+          <Box p={0} mt={"0px !important"} mb={footerHeight}>
+            {children}
+          </Box>
+          <Footer />
+        </Stack>
+      </ChakraProvider>
+    </>
   );
 };
 
