@@ -20,7 +20,7 @@ const IndexPage: NextPage<IProps> = ({ session }) => {
   return hasAccess ? (
     <>
       <Head>
-        <title>PPS/Impact</title>
+        <title>Impact PPS</title>
       </Head>
       <Landing />
     </>
