@@ -58,13 +58,15 @@ const Controls = ({ tabs, handleSelectTab }) => {
               size="md"
               variant="outline"
               mr="-px"
-              aria-label="Add to friends"
+              aria-label="Grid"
+              isActive={true}
               icon={<BsGridFill />}
             />
             <IconButton
+              onClick={() => alert("List view not implemented yet")}
               size="md"
               variant="outline"
-              aria-label="Add to friends"
+              aria-label="List"
               icon={<FaThList />}
             />
           </ButtonGroup>
