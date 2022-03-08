@@ -15,7 +15,6 @@ interface IProps {
 const WHITELIST_ONLY = true;
 
 const IndexPage: NextPage<IProps> = ({ session }) => {
-  // console.log({ EMAIL: session.user.email, WHITELIST });
   const hasAccess = true;
   return hasAccess ? (
     <>

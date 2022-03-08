@@ -34,6 +34,8 @@ const FIELDS: Field[] = [
         lower: true,
       })}`;
 
+      if (values.name === "") return null;
+
       return (
         <Text color={"blue"} fontSize={12} mt={1}>
           <strong>{linkText}</strong>
@@ -51,6 +53,7 @@ const FIELDS: Field[] = [
       return (
         <Flex
           backgroundImage={`url(${values.main_image})`}
+          backgroundColor={"#eee"}
           backgroundSize="cover"
           backgroundPosition={"center center"}
           minHeight={{ base: 32, md: 28 }}
@@ -59,20 +62,18 @@ const FIELDS: Field[] = [
         >
           <Button
             name="main_image"
-            size="sm"
             colorScheme="blue"
             mt={2}
-            onClick={async (e) => {
+            onClick={async () => {
               const prompt = window.prompt(
                 "Paste image URL here",
                 values.main_image
               );
               if (!prompt) return;
-              e.target.value = prompt;
-              await onChange(e);
+              await onChange({ target: { name: "main_image", value: prompt } });
             }}
           >
-            Edit
+            {isEditMode ? "Change" : "Upload"}
           </Button>
         </Flex>
       );
@@ -89,13 +90,13 @@ const FIELDS: Field[] = [
         message: "Minimum length should be 60 characters",
       },
       maxLength: {
-        value: 240,
-        message: "Maximum length should be 240 characters",
+        value: 360,
+        message: "Maximum length should be 360 characters",
       },
     },
   },
   {
-    id: "locations",
+    id: "geography",
     label: "Geography",
     element: Textarea,
     validation: {},

@@ -44,6 +44,7 @@ const AddEditOrgForm = ({ org }) => {
     },
   });
   const values = watch();
+  console.log({ values });
   const [isSubmitted, setIsSubmitted] = useState("");
   const isMobile = useBreakpointValue({ base: true, md: false });
   const [session] = useSession();
@@ -71,12 +72,16 @@ const AddEditOrgForm = ({ org }) => {
   const onSubmit = async (values) => {
     values.slug = slugify(values.name);
     setIsSubmitted(isEditMode ? "Updating report" : "Creating report");
-    if (isEditMode) {
-      await updateOrg({ variables: { id: org.id, ...values } });
-    } else {
-      await insertOrg({ variables: { author_id: session.id, ...values } });
+    try {
+      if (isEditMode) {
+        await updateOrg({ variables: { id: org.id, ...values } });
+      } else {
+        await insertOrg({ variables: { author_id: session.id, ...values } });
+      }
+    } catch (e) {
+      console.log(e);
     }
-    router.reload();
+    router.push(`/${values.slug}`);
   };
 
   const errorNode = () => {
@@ -97,19 +102,22 @@ const AddEditOrgForm = ({ org }) => {
       <Stack spacing={4}>
         {errorNode()}
         <Box p={4} maxW={760}>
-          <Stack spacing={4}>
-            <Heading mt={6} mb={12}>
+          <Stack spacing={4} my={12}>
+            {/* <Heading mt={6} mb={12}>
               {isEditMode ? "Edit" : "Add"} Organisation
-            </Heading>
+            </Heading> */}
 
             {/* Fields */}
             {FIELDS.map((field) => (
-              <Box paddingBottom={5}>
+              <Box paddingBottom={8}>
                 <FormControl isInvalid={errors[field.id]}>
                   {field.before && (
                     <field.before values={values} isEditMode={isEditMode} />
                   )}
-                  <FormLabel htmlFor={errors[field.id]}>
+                  <FormLabel
+                    style={{ fontSize: 22 }}
+                    htmlFor={errors[field.id]}
+                  >
                     {field.label}
                   </FormLabel>
                   {field.custom ? (
@@ -121,6 +129,7 @@ const AddEditOrgForm = ({ org }) => {
                     />
                   ) : (
                     <field.element
+                      autoComplate="off"
                       id={field.id}
                       placeholder={field.placeholder}
                       {...register(field.id, field.validation)}

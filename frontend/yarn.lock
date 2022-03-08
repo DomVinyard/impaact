@@ -3371,7 +3371,7 @@ inquirer@^8.0.0:
     strip-ansi "^6.0.0"
     through "^2.3.6"
 
-invariant@^2.2.4:
+invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -4567,6 +4567,13 @@ react-merge-refs@^1.0.0, react-merge-refs@^1.1.0:
   resolved "https://registry.yarnpkg.com/react-merge-refs/-/react-merge-refs-1.1.0.tgz#73d88b892c6c68cbb7a66e0800faa374f4c38b06"
   integrity sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==
 
+react-promise@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-promise/-/react-promise-2.0.0.tgz#089769abf2178c96b8932c7aae9b3ac878dd8c7c"
+  integrity sha512-Tzoleo9bA5rSFzAgWI31gyjTO+A7ByMRqVdhL34aEp7XqFRIi6G6Am+tBNSlFeW7+rPyhCVUbDEGj2BL49qWJA==
+  dependencies:
+    prop-types "^15.6.0"
+
 react-reconciler@0.26.1:
   version "0.26.1"
   resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.26.1.tgz#860952dd359fd870f94895c254271e3a9de3b2d6"
@@ -4607,6 +4614,15 @@ react-select@^5.2.2:
     memoize-one "^5.0.0"
     prop-types "^15.6.0"
     react-transition-group "^4.3.0"
+
+react-static-google-map@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/react-static-google-map/-/react-static-google-map-0.9.0.tgz#1ab33ea8c7ef3a2cd322ec60dc0a0d9f0ea3f0f3"
+  integrity sha512-KmzXMKMHkZP1ZzWcbIrc1634bWLwVMZKtM1quHwIdIIFly0OzTDBm2TGUDpNWDrIq3RCPabANVE6M8gK+5Gd5w==
+  dependencies:
+    invariant "^2.2.2"
+    react ">=0.14.x"
+    react-promise "2.0.0"
 
 react-style-singleton@^2.1.0:
   version "2.1.1"
@@ -4654,7 +4670,7 @@ react-useinterval@^1.0.2:
   resolved "https://registry.yarnpkg.com/react-useinterval/-/react-useinterval-1.0.2.tgz#d9537b7e1a823422c70cb3dc226d07835ff15569"
   integrity sha512-aC0ATWbm1HaQjp7ILQzn6qge0K70cAgVzIhdUtDXPo9ho7W84MJ7/KOJIKMoi1hFwMp8lQDMYuVUDDk/3mn6sw==
 
-react@^17.0.2:
+react@>=0.14.x, react@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
   integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==

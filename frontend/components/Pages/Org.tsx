@@ -13,6 +13,7 @@ import { useSession } from "next-auth/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import { StaticGoogleMap, Marker, Path } from "react-static-google-map";
 
 const MyOrgBar = () => {
   const router = useRouter();
@@ -35,6 +36,7 @@ const MyOrgBar = () => {
 const OrgPageComponent = ({ org, loading }) => {
   const [session] = useSession();
   const isMyOrg = session?.id === org?.author_id;
+  console.log({ org });
   return (
     <>
       <Box textAlign={{ base: "center", md: "left" }} pb={{ base: 0, md: 160 }}>
@@ -65,7 +67,7 @@ const OrgPageComponent = ({ org, loading }) => {
               <Skeleton isLoaded={!loading}>
                 <Flex height={200} color={"#777"}>
                   <Box
-                    backgroundImage={`url(${org.image})`}
+                    backgroundImage={`url(${org.main_image})`}
                     backgroundSize="cover"
                     backgroundPosition={"center center"}
                     minHeight={{ base: 32, md: 28 }}
@@ -73,12 +75,27 @@ const OrgPageComponent = ({ org, loading }) => {
                     width={"100%"}
                     flex={1}
                   />
+
                   <Box
                     backgroundImage={`/images/map_placeholder.png`}
                     backgroundSize="cover"
                     backgroundPosition={["center", "center"]}
-                    flex={2}
-                  />
+                    flex={1}
+                    overflow={"hidden"}
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    {org.geography && (
+                      <StaticGoogleMap
+                        size="600x600"
+                        apiKey="AIzaSyAEsz877McL_8NQD7sRqiz420HjW4XHjIs"
+                      >
+                        {org.geography.split(",").map((location) => (
+                          <Marker location={location.trim()} />
+                        ))}
+                      </StaticGoogleMap>
+                    )}
+                  </Box>
                 </Flex>
                 <Box height={460} p={4} color={"#777"} background={"#ddd"}>
                   Impact
