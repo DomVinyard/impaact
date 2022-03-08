@@ -5,5 +5,7 @@ query fetchOrgs {
     name
     slug
     description
+    main_image
+    geography
   }
 }

@@ -65,7 +65,7 @@ const OrgPageComponent = ({ org, loading }) => {
               <Skeleton isLoaded={!loading}>
                 <Flex height={200} color={"#777"}>
                   <Box
-                    backgroundImage={`url(https://picsum.photos/seed/${org.slug}/200/300)`}
+                    backgroundImage={`url(${org.image})`}
                     backgroundSize="cover"
                     backgroundPosition={"center center"}
                     minHeight={{ base: 32, md: 28 }}

@@ -4,5 +4,7 @@ query searchOrgs($q: String) {
     name
     slug
     description
+    main_image
+    geography
   }
 }

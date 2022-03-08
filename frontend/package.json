@@ -6,10 +6,11 @@
     "build": "next build",
     "dev": "concurrently \"next dev\" \"yarn generate-graphql --watch\"",
     "export": "next export",
-    "generate-graphql": "graphql-codegen --config codegen.yml --require dotenv/config",
+    "graphql:generate": "graphql-codegen --config codegen.yml --require dotenv/config",
     "start": "next start",
     "types": "tsc --watch",
-    "docker:rebuild": "docker-compose up --build"
+    "docker:rebuild": "docker-compose up --build",
+    "docker:frontend": "docker exec -t -i nhb-frontend /bin/bash"
   },
   "dependencies": {
     "@apollo/client": "^3.5.7",

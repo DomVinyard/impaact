@@ -3,6 +3,8 @@ mutation insertOrg(
   $name: String!
   $slug: String!
   $description: String
+  $main_image: String!
+  $geography: String
 ) {
   insert_orgs_one(
     object: {
@@ -10,6 +12,8 @@ mutation insertOrg(
       name: $name
       slug: $slug
       description: $description
+      main_image: $main_image
+      geography: $geography
     }
   ) {
     id
@@ -17,10 +21,7 @@ mutation insertOrg(
     name
     slug
     description
-    author {
-      id
-      name
-      image
-    }
+    main_image
+    geography
   }
 }

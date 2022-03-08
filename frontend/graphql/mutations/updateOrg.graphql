@@ -3,9 +3,17 @@ mutation updateOrg(
   $name: String
   $slug: String!
   $description: String
+  $main_image: String!
+  $geography: String
 ) {
   update_orgs_by_pk(
-    _set: { name: $name, slug: $slug, description: $description }
+    _set: {
+      name: $name
+      slug: $slug
+      description: $description
+      main_image: $main_image
+      geography: $geography
+    }
     pk_columns: { id: $id }
   ) {
     id
@@ -13,10 +21,7 @@ mutation updateOrg(
     name
     slug
     description
-    author {
-      id
-      name
-      image
-    }
+    main_image
+    geography
   }
 }

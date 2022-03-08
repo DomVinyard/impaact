@@ -125,13 +125,13 @@ const PopularComponent = () => {
     { label: "Featured", id: "featured", isSelected: selected === "featured" },
     { label: "Latest", id: "latest", isSelected: selected === "latest" },
   ];
-  const handleSelectTab = (id) => {
-    setSelected(id);
-  };
+  const handleSelectTab = (id) => setSelected(id);
 
   const data = selected === "featured" ? featured_data : latest_data;
   const error = selected === "featured" ? featured_error : latest_error;
   const loading = selected === "featured" ? featured_loading : latest_loading;
+
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <Box pb={{ base: 0, md: 10 }}>

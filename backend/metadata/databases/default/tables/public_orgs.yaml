@@ -2,64 +2,72 @@ table:
   name: orgs
   schema: public
 object_relationships:
-  - name: author
-    using:
-      manual_configuration:
-        column_mapping:
-          author_id: id
-        insertion_order: null
-        remote_table:
-          name: users
-          schema: public
+- name: author
+  using:
+    manual_configuration:
+      column_mapping:
+        author_id: id
+      insertion_order: null
+      remote_table:
+        name: users
+        schema: public
 insert_permissions:
-  - permission:
-      backend_only: false
-      check: {}
-      columns:
-        - author_id
-        - name
-        - slug
-        - description
-    role: user
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - author_id
+    - description
+    - geography
+    - main_image
+    - name
+    - slug
+  role: user
 select_permissions:
-  - permission:
-      allow_aggregations: true
-      columns:
-        - name
-        - created_at
-        - updated_at
-        - author_id
-        - id
-        - slug
-        - description
-      filter: {}
-    role: public
-  - permission:
-      allow_aggregations: true
-      columns:
-        - name
-        - created_at
-        - updated_at
-        - author_id
-        - id
-        - slug
-        - description
-      filter: {}
-    role: user
+- permission:
+    allow_aggregations: true
+    columns:
+    - author_id
+    - created_at
+    - description
+    - geography
+    - id
+    - main_image
+    - name
+    - slug
+    - updated_at
+    filter: {}
+  role: public
+- permission:
+    allow_aggregations: true
+    columns:
+    - author_id
+    - created_at
+    - description
+    - geography
+    - id
+    - main_image
+    - name
+    - slug
+    - updated_at
+    filter: {}
+  role: user
 update_permissions:
-  - permission:
-      check: null
-      columns:
-        - name
-        - slug
-        - description
-      filter:
-        author_id:
-          _eq: X-Hasura-User-Id
-    role: user
+- permission:
+    check: null
+    columns:
+    - description
+    - geography
+    - main_image
+    - name
+    - slug
+    filter:
+      author_id:
+        _eq: X-Hasura-User-Id
+  role: user
 delete_permissions:
-  - permission:
-      filter:
-        author_id:
-          _eq: X-Hasura-User-Id
-    role: user
+- permission:
+    filter:
+      author_id:
+        _eq: X-Hasura-User-Id
+  role: user

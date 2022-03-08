@@ -3,10 +3,5 @@ mutation deleteOrg($id: uuid!) {
     id
     created_at
     name
-    author {
-      id
-      name
-      image
-    }
   }
 }

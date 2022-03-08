@@ -35,7 +35,7 @@ const OrgCard = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
         </Stack>
         <Flex>
           <Box
-            backgroundImage={`url(https://picsum.photos/seed/${org.slug}/200/300)`}
+            backgroundImage={`url(${org.main_image})`}
             backgroundSize="cover"
             backgroundPosition={"center center"}
             minHeight={{ base: 32, md: 28 }}

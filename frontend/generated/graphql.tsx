@@ -19,9 +19,9 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
   [SubKey in K]: Maybe<T[SubKey]>;
 };
-export type RequireFields<T, K extends keyof T> = {
-  [X in Exclude<keyof T, K>]?: T[X];
-} & { [P in K]-?: NonNullable<T[P]> };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & {
+  [P in K]-?: NonNullable<T[P]>;
+};
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
@@ -553,7 +553,9 @@ export type Orgs = {
   author_id: Scalars["uuid"];
   created_at: Scalars["timestamptz"];
   description?: Maybe<Scalars["String"]>;
+  geography?: Maybe<Scalars["String"]>;
   id: Scalars["uuid"];
+  main_image?: Maybe<Scalars["String"]>;
   name: Scalars["String"];
   slug: Scalars["String"];
   updated_at: Scalars["timestamptz"];
@@ -603,7 +605,9 @@ export type Orgs_Bool_Exp = {
   author_id?: InputMaybe<Uuid_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
+  geography?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  main_image?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   slug?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -623,7 +627,9 @@ export type Orgs_Insert_Input = {
   author_id?: InputMaybe<Scalars["uuid"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   description?: InputMaybe<Scalars["String"]>;
+  geography?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["uuid"]>;
+  main_image?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
   slug?: InputMaybe<Scalars["String"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
@@ -635,7 +641,9 @@ export type Orgs_Max_Fields = {
   author_id?: Maybe<Scalars["uuid"]>;
   created_at?: Maybe<Scalars["timestamptz"]>;
   description?: Maybe<Scalars["String"]>;
+  geography?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["uuid"]>;
+  main_image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
   slug?: Maybe<Scalars["String"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
@@ -646,7 +654,9 @@ export type Orgs_Max_Order_By = {
   author_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
+  geography?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  main_image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   slug?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -658,7 +668,9 @@ export type Orgs_Min_Fields = {
   author_id?: Maybe<Scalars["uuid"]>;
   created_at?: Maybe<Scalars["timestamptz"]>;
   description?: Maybe<Scalars["String"]>;
+  geography?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["uuid"]>;
+  main_image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
   slug?: Maybe<Scalars["String"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
@@ -669,7 +681,9 @@ export type Orgs_Min_Order_By = {
   author_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
+  geography?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  main_image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   slug?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -697,7 +711,9 @@ export type Orgs_Order_By = {
   author_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
+  geography?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  main_image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   slug?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -717,7 +733,11 @@ export enum Orgs_Select_Column {
   /** column name */
   Description = "description",
   /** column name */
+  Geography = "geography",
+  /** column name */
   Id = "id",
+  /** column name */
+  MainImage = "main_image",
   /** column name */
   Name = "name",
   /** column name */
@@ -731,7 +751,9 @@ export type Orgs_Set_Input = {
   author_id?: InputMaybe<Scalars["uuid"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   description?: InputMaybe<Scalars["String"]>;
+  geography?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["uuid"]>;
+  main_image?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
   slug?: InputMaybe<Scalars["String"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
@@ -746,7 +768,11 @@ export enum Orgs_Update_Column {
   /** column name */
   Description = "description",
   /** column name */
+  Geography = "geography",
+  /** column name */
   Id = "id",
+  /** column name */
+  MainImage = "main_image",
   /** column name */
   Name = "name",
   /** column name */
@@ -1639,20 +1665,7 @@ export type DeleteOrgMutationVariables = Exact<{
 export type DeleteOrgMutation = {
   __typename?: "mutation_root";
   delete_orgs_by_pk?:
-    | {
-        __typename?: "orgs";
-        id: any;
-        created_at: string;
-        name: string;
-        author?:
-          | {
-              __typename?: "users";
-              id: any;
-              name?: string | undefined;
-              image?: string | undefined;
-            }
-          | undefined;
-      }
+    | { __typename?: "orgs"; id: any; created_at: string; name: string }
     | undefined;
 };
 
@@ -1661,6 +1674,8 @@ export type InsertOrgMutationVariables = Exact<{
   name: Scalars["String"];
   slug: Scalars["String"];
   description?: InputMaybe<Scalars["String"]>;
+  main_image: Scalars["String"];
+  geography?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type InsertOrgMutation = {
@@ -1673,14 +1688,8 @@ export type InsertOrgMutation = {
         name: string;
         slug: string;
         description?: string | undefined;
-        author?:
-          | {
-              __typename?: "users";
-              id: any;
-              name?: string | undefined;
-              image?: string | undefined;
-            }
-          | undefined;
+        main_image?: string | undefined;
+        geography?: string | undefined;
       }
     | undefined;
 };
@@ -1690,6 +1699,8 @@ export type UpdateOrgMutationVariables = Exact<{
   name?: InputMaybe<Scalars["String"]>;
   slug: Scalars["String"];
   description?: InputMaybe<Scalars["String"]>;
+  main_image: Scalars["String"];
+  geography?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type UpdateOrgMutation = {
@@ -1702,14 +1713,8 @@ export type UpdateOrgMutation = {
         name: string;
         slug: string;
         description?: string | undefined;
-        author?:
-          | {
-              __typename?: "users";
-              id: any;
-              name?: string | undefined;
-              image?: string | undefined;
-            }
-          | undefined;
+        main_image?: string | undefined;
+        geography?: string | undefined;
       }
     | undefined;
 };
@@ -1758,6 +1763,8 @@ export type FetchFeaturedQuery = {
     name: string;
     slug: string;
     description?: string | undefined;
+    main_image?: string | undefined;
+    geography?: string | undefined;
   }>;
 };
 
@@ -1774,6 +1781,8 @@ export type FetchLatestQuery = {
     name: string;
     slug: string;
     description?: string | undefined;
+    main_image?: string | undefined;
+    geography?: string | undefined;
   }>;
 };
 
@@ -1791,6 +1800,8 @@ export type FetchOrgQuery = {
     author_id: any;
     slug: string;
     description?: string | undefined;
+    main_image?: string | undefined;
+    geography?: string | undefined;
   }>;
 };
 
@@ -1805,6 +1816,8 @@ export type FetchOrgsQuery = {
     name: string;
     slug: string;
     description?: string | undefined;
+    main_image?: string | undefined;
+    geography?: string | undefined;
   }>;
 };
 
@@ -1837,14 +1850,8 @@ export type MyOrgsQuery = {
           name: string;
           slug: string;
           description?: string | undefined;
-          author?:
-            | {
-                __typename?: "users";
-                id: any;
-                name?: string | undefined;
-                image?: string | undefined;
-              }
-            | undefined;
+          main_image?: string | undefined;
+          geography?: string | undefined;
         }>;
       }
     | undefined;
@@ -1862,6 +1869,8 @@ export type SearchOrgsQuery = {
     name: string;
     slug: string;
     description?: string | undefined;
+    main_image?: string | undefined;
+    geography?: string | undefined;
   }>;
 };
 
@@ -1871,11 +1880,6 @@ export const DeleteOrgDocument = gql`
       id
       created_at
       name
-      author {
-        id
-        name
-        image
-      }
     }
   }
 `;
@@ -1973,6 +1977,8 @@ export const InsertOrgDocument = gql`
     $name: String!
     $slug: String!
     $description: String
+    $main_image: String!
+    $geography: String
   ) {
     insert_orgs_one(
       object: {
@@ -1980,6 +1986,8 @@ export const InsertOrgDocument = gql`
         name: $name
         slug: $slug
         description: $description
+        main_image: $main_image
+        geography: $geography
       }
     ) {
       id
@@ -1987,11 +1995,8 @@ export const InsertOrgDocument = gql`
       name
       slug
       description
-      author {
-        id
-        name
-        image
-      }
+      main_image
+      geography
     }
   }
 `;
@@ -2063,6 +2068,8 @@ export function withInsertOrg<
  *      name: // value for 'name'
  *      slug: // value for 'slug'
  *      description: // value for 'description'
+ *      main_image: // value for 'main_image'
+ *      geography: // value for 'geography'
  *   },
  * });
  */
@@ -2092,9 +2099,17 @@ export const UpdateOrgDocument = gql`
     $name: String
     $slug: String!
     $description: String
+    $main_image: String!
+    $geography: String
   ) {
     update_orgs_by_pk(
-      _set: { name: $name, slug: $slug, description: $description }
+      _set: {
+        name: $name
+        slug: $slug
+        description: $description
+        main_image: $main_image
+        geography: $geography
+      }
       pk_columns: { id: $id }
     ) {
       id
@@ -2102,11 +2117,8 @@ export const UpdateOrgDocument = gql`
       name
       slug
       description
-      author {
-        id
-        name
-        image
-      }
+      main_image
+      geography
     }
   }
 `;
@@ -2178,6 +2190,8 @@ export function withUpdateOrg<
  *      name: // value for 'name'
  *      slug: // value for 'slug'
  *      description: // value for 'description'
+ *      main_image: // value for 'main_image'
+ *      geography: // value for 'geography'
  *   },
  * });
  */
@@ -2412,6 +2426,8 @@ export const FetchFeaturedDocument = gql`
       name
       slug
       description
+      main_image
+      geography
     }
   }
 `;
@@ -2520,6 +2536,8 @@ export const FetchLatestDocument = gql`
       name
       slug
       description
+      main_image
+      geography
     }
   }
 `;
@@ -2627,6 +2645,8 @@ export const FetchOrgDocument = gql`
       author_id
       slug
       description
+      main_image
+      geography
     }
   }
 `;
@@ -2730,6 +2750,8 @@ export const FetchOrgsDocument = gql`
       name
       slug
       description
+      main_image
+      geography
     }
   }
 `;
@@ -2936,11 +2958,8 @@ export const MyOrgsDocument = gql`
         name
         slug
         description
-        author {
-          id
-          name
-          image
-        }
+        main_image
+        geography
       }
     }
   }
@@ -3037,6 +3056,8 @@ export const SearchOrgsDocument = gql`
       name
       slug
       description
+      main_image
+      geography
     }
   }
 `;
@@ -3506,7 +3527,7 @@ export type Accounts_Aggregate_FieldsResolvers<
     ResolversTypes["Int"],
     ParentType,
     ContextType,
-    RequireFields<Accounts_Aggregate_FieldsCountArgs, never>
+    Partial<Accounts_Aggregate_FieldsCountArgs>
   >;
   max?: Resolver<
     Maybe<ResolversTypes["accounts_max_fields"]>,
@@ -3843,7 +3864,17 @@ export type OrgsResolvers<
     ParentType,
     ContextType
   >;
+  geography?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  main_image?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
@@ -3871,7 +3902,7 @@ export type Orgs_Aggregate_FieldsResolvers<
     ResolversTypes["Int"],
     ParentType,
     ContextType,
-    RequireFields<Orgs_Aggregate_FieldsCountArgs, never>
+    Partial<Orgs_Aggregate_FieldsCountArgs>
   >;
   max?: Resolver<
     Maybe<ResolversTypes["orgs_max_fields"]>,
@@ -3901,7 +3932,17 @@ export type Orgs_Max_FieldsResolvers<
     ParentType,
     ContextType
   >;
+  geography?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  main_image?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   updated_at?: Resolver<
@@ -3927,7 +3968,17 @@ export type Orgs_Min_FieldsResolvers<
     ParentType,
     ContextType
   >;
+  geography?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  main_image?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   updated_at?: Resolver<
@@ -3955,13 +4006,13 @@ export type Query_RootResolvers<
     Array<ResolversTypes["accounts"]>,
     ParentType,
     ContextType,
-    RequireFields<Query_RootAccountsArgs, never>
+    Partial<Query_RootAccountsArgs>
   >;
   accounts_aggregate?: Resolver<
     ResolversTypes["accounts_aggregate"],
     ParentType,
     ContextType,
-    RequireFields<Query_RootAccounts_AggregateArgs, never>
+    Partial<Query_RootAccounts_AggregateArgs>
   >;
   accounts_by_pk?: Resolver<
     Maybe<ResolversTypes["accounts"]>,
@@ -3973,13 +4024,13 @@ export type Query_RootResolvers<
     Array<ResolversTypes["orgs"]>,
     ParentType,
     ContextType,
-    RequireFields<Query_RootOrgsArgs, never>
+    Partial<Query_RootOrgsArgs>
   >;
   orgs_aggregate?: Resolver<
     ResolversTypes["orgs_aggregate"],
     ParentType,
     ContextType,
-    RequireFields<Query_RootOrgs_AggregateArgs, never>
+    Partial<Query_RootOrgs_AggregateArgs>
   >;
   orgs_by_pk?: Resolver<
     Maybe<ResolversTypes["orgs"]>,
@@ -3991,13 +4042,13 @@ export type Query_RootResolvers<
     Array<ResolversTypes["sessions"]>,
     ParentType,
     ContextType,
-    RequireFields<Query_RootSessionsArgs, never>
+    Partial<Query_RootSessionsArgs>
   >;
   sessions_aggregate?: Resolver<
     ResolversTypes["sessions_aggregate"],
     ParentType,
     ContextType,
-    RequireFields<Query_RootSessions_AggregateArgs, never>
+    Partial<Query_RootSessions_AggregateArgs>
   >;
   sessions_by_pk?: Resolver<
     Maybe<ResolversTypes["sessions"]>,
@@ -4009,13 +4060,13 @@ export type Query_RootResolvers<
     Array<ResolversTypes["users"]>,
     ParentType,
     ContextType,
-    RequireFields<Query_RootUsersArgs, never>
+    Partial<Query_RootUsersArgs>
   >;
   users_aggregate?: Resolver<
     ResolversTypes["users_aggregate"],
     ParentType,
     ContextType,
-    RequireFields<Query_RootUsers_AggregateArgs, never>
+    Partial<Query_RootUsers_AggregateArgs>
   >;
   users_by_pk?: Resolver<
     Maybe<ResolversTypes["users"]>,
@@ -4027,13 +4078,13 @@ export type Query_RootResolvers<
     Array<ResolversTypes["verification_requests"]>,
     ParentType,
     ContextType,
-    RequireFields<Query_RootVerification_RequestsArgs, never>
+    Partial<Query_RootVerification_RequestsArgs>
   >;
   verification_requests_aggregate?: Resolver<
     ResolversTypes["verification_requests_aggregate"],
     ParentType,
     ContextType,
-    RequireFields<Query_RootVerification_Requests_AggregateArgs, never>
+    Partial<Query_RootVerification_Requests_AggregateArgs>
   >;
   verification_requests_by_pk?: Resolver<
     Maybe<ResolversTypes["verification_requests"]>,
@@ -4083,7 +4134,7 @@ export type Sessions_Aggregate_FieldsResolvers<
     ResolversTypes["Int"],
     ParentType,
     ContextType,
-    RequireFields<Sessions_Aggregate_FieldsCountArgs, never>
+    Partial<Sessions_Aggregate_FieldsCountArgs>
   >;
   max?: Resolver<
     Maybe<ResolversTypes["sessions_max_fields"]>,
@@ -4287,14 +4338,14 @@ export type Subscription_RootResolvers<
     "accounts",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootAccountsArgs, never>
+    Partial<Subscription_RootAccountsArgs>
   >;
   accounts_aggregate?: SubscriptionResolver<
     ResolversTypes["accounts_aggregate"],
     "accounts_aggregate",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootAccounts_AggregateArgs, never>
+    Partial<Subscription_RootAccounts_AggregateArgs>
   >;
   accounts_by_pk?: SubscriptionResolver<
     Maybe<ResolversTypes["accounts"]>,
@@ -4308,14 +4359,14 @@ export type Subscription_RootResolvers<
     "orgs",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootOrgsArgs, never>
+    Partial<Subscription_RootOrgsArgs>
   >;
   orgs_aggregate?: SubscriptionResolver<
     ResolversTypes["orgs_aggregate"],
     "orgs_aggregate",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootOrgs_AggregateArgs, never>
+    Partial<Subscription_RootOrgs_AggregateArgs>
   >;
   orgs_by_pk?: SubscriptionResolver<
     Maybe<ResolversTypes["orgs"]>,
@@ -4329,14 +4380,14 @@ export type Subscription_RootResolvers<
     "sessions",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootSessionsArgs, never>
+    Partial<Subscription_RootSessionsArgs>
   >;
   sessions_aggregate?: SubscriptionResolver<
     ResolversTypes["sessions_aggregate"],
     "sessions_aggregate",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootSessions_AggregateArgs, never>
+    Partial<Subscription_RootSessions_AggregateArgs>
   >;
   sessions_by_pk?: SubscriptionResolver<
     Maybe<ResolversTypes["sessions"]>,
@@ -4350,14 +4401,14 @@ export type Subscription_RootResolvers<
     "users",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootUsersArgs, never>
+    Partial<Subscription_RootUsersArgs>
   >;
   users_aggregate?: SubscriptionResolver<
     ResolversTypes["users_aggregate"],
     "users_aggregate",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootUsers_AggregateArgs, never>
+    Partial<Subscription_RootUsers_AggregateArgs>
   >;
   users_by_pk?: SubscriptionResolver<
     Maybe<ResolversTypes["users"]>,
@@ -4371,14 +4422,14 @@ export type Subscription_RootResolvers<
     "verification_requests",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootVerification_RequestsArgs, never>
+    Partial<Subscription_RootVerification_RequestsArgs>
   >;
   verification_requests_aggregate?: SubscriptionResolver<
     ResolversTypes["verification_requests_aggregate"],
     "verification_requests_aggregate",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootVerification_Requests_AggregateArgs, never>
+    Partial<Subscription_RootVerification_Requests_AggregateArgs>
   >;
   verification_requests_by_pk?: SubscriptionResolver<
     Maybe<ResolversTypes["verification_requests"]>,
@@ -4412,13 +4463,13 @@ export type UsersResolvers<
     Array<ResolversTypes["orgs"]>,
     ParentType,
     ContextType,
-    RequireFields<UsersOrgsArgs, never>
+    Partial<UsersOrgsArgs>
   >;
   orgs_aggregate?: Resolver<
     ResolversTypes["orgs_aggregate"],
     ParentType,
     ContextType,
-    RequireFields<UsersOrgs_AggregateArgs, never>
+    Partial<UsersOrgs_AggregateArgs>
   >;
   updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -4445,7 +4496,7 @@ export type Users_Aggregate_FieldsResolvers<
     ResolversTypes["Int"],
     ParentType,
     ContextType,
-    RequireFields<Users_Aggregate_FieldsCountArgs, never>
+    Partial<Users_Aggregate_FieldsCountArgs>
   >;
   max?: Resolver<
     Maybe<ResolversTypes["users_max_fields"]>,
@@ -4564,7 +4615,7 @@ export type Verification_Requests_Aggregate_FieldsResolvers<
     ResolversTypes["Int"],
     ParentType,
     ContextType,
-    RequireFields<Verification_Requests_Aggregate_FieldsCountArgs, never>
+    Partial<Verification_Requests_Aggregate_FieldsCountArgs>
   >;
   max?: Resolver<
     Maybe<ResolversTypes["verification_requests_max_fields"]>,

@@ -8,11 +8,8 @@ query myOrgs($userId: uuid!) {
       name
       slug
       description
-      author {
-        id
-        name
-        image
-      }
+      main_image
+      geography
     }
   }
 }
