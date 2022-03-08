@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-// import Page from "components/Pages/Dashboard/index";
+import Page from "components/Pages/About";
 import { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/client";
 import AccessDeniedIndicator from "components/AccessDeniedIndicator";
@@ -12,20 +12,14 @@ interface IProps {
   session: ISession;
 }
 
-const WHITELIST_ONLY = true;
-
-const IndexPage: NextPage<IProps> = ({ session }) => {
-  // console.log({ EMAIL: session.user.email, WHITELIST });
-  const hasAccess = true;
-  return hasAccess ? (
+const SearchPage: NextPage<IProps> = ({ session }) => {
+  return (
     <>
       <Head>
-        <title>Impact PPS</title>
+        <title>About</title>
       </Head>
-      <Landing />
+      <Page />
     </>
-  ) : (
-    <ClosedComponent />
   );
 };
 
@@ -39,4 +33,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   };
 };
 
-export default IndexPage;
+export default SearchPage;

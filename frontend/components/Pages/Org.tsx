@@ -1,5 +1,13 @@
 import { EditIcon } from "@chakra-ui/icons";
-import { Box, Button, Heading, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Skeleton,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import Content from "components/Content";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
@@ -24,7 +32,7 @@ const MyOrgBar = () => {
   );
 };
 
-const OrgPageComponent = ({ org }) => {
+const OrgPageComponent = ({ org, loading }) => {
   const [session] = useSession();
   const isMyOrg = session?.id === org?.author_id;
   return (
@@ -53,18 +61,35 @@ const OrgPageComponent = ({ org }) => {
                   </Box>
                 )}
               </Stack>
-              <Box height={200} p={4} color={"#777"} background={"#eee"}>
-                Photo/Map
-              </Box>
-              <Box height={460} p={4} color={"#777"} background={"#ddd"}>
-                Impact
-              </Box>
-              <Box height={240} p={4} color={"#777"} background={"#ccc"}>
-                Operations
-              </Box>
-              <Box height={240} p={4} color={"#777"} background={"#bbb"}>
-                Financial
-              </Box>
+
+              <Skeleton isLoaded={!loading}>
+                <Flex height={200} color={"#777"}>
+                  <Box
+                    backgroundImage={`url(https://picsum.photos/seed/${org.slug}/200/300)`}
+                    backgroundSize="cover"
+                    backgroundPosition={"center center"}
+                    minHeight={{ base: 32, md: 28 }}
+                    justifyContent="flex-end"
+                    width={"100%"}
+                    flex={1}
+                  />
+                  <Box
+                    backgroundImage={`/images/map_placeholder.png`}
+                    backgroundSize="cover"
+                    backgroundPosition={["center", "center"]}
+                    flex={2}
+                  />
+                </Flex>
+                <Box height={460} p={4} color={"#777"} background={"#ddd"}>
+                  Impact
+                </Box>
+                <Box height={240} p={4} color={"#777"} background={"#ccc"}>
+                  Operations
+                </Box>
+                <Box height={240} p={4} color={"#777"} background={"#bbb"}>
+                  Financial
+                </Box>
+              </Skeleton>
             </Box>
           </Stack>
         </Content>

@@ -18,6 +18,7 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import SearchBar from "components/SearchBar";
+import { FcGoogle } from "react-icons/fc";
 
 export const AddOrgButton = (additionalProps) => {
   return (
@@ -135,12 +136,19 @@ const Navbar: NextComponentType = () => {
                       <Image
                         height="32px"
                         borderRadius="100%"
-                        src={session.user.image}
+                        src={session?.user?.image}
                         alt="avatar"
                       />
                     </MenuButton>
                   )}
                   <MenuList zIndex={2}>
+                    <Link href="/orgs">
+                      <MenuItem fontWeight="bold">
+                        <FcGoogle style={{ marginRight: 4 }} />
+                        {session?.user?.name}
+                      </MenuItem>
+                    </Link>
+                    <MenuDivider />
                     <Link href="/orgs">
                       <MenuItem>Your Organisations</MenuItem>
                     </Link>

@@ -12,7 +12,50 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import IOrg from "types/org";
 import Loader from "./Loader";
-import OrgCard from "./OrgCard";
+// import OrgCard from "./OrgCard";
+
+const OrgCard = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
+  return (
+    <Skeleton isLoaded={!loading}>
+      <Stack
+        background={"#ddd"}
+        borderTop={{ base: "1px solid #ccc", md: "none" }}
+        marginBottom={{ base: 4, md: 0 }}
+      >
+        <Stack
+          spacing={0}
+          textAlign={"left"}
+          paddingX={4}
+          paddingTop={{ base: 2, md: 2 }}
+          color="black"
+        >
+          <Text fontSize="md" fontWeight={"700"}>
+            {org.name}
+          </Text>
+        </Stack>
+        <Flex>
+          <Box
+            backgroundImage={`url(https://picsum.photos/seed/${org.slug}/200/300)`}
+            backgroundSize="cover"
+            backgroundPosition={"center center"}
+            minHeight={{ base: 32, md: 28 }}
+            justifyContent="flex-end"
+            width={"100%"}
+            flex={2}
+          />
+          <Box
+            backgroundImage={`/images/map_placeholder.png`}
+            backgroundSize="cover"
+            backgroundPosition={["center", "center"]}
+            cursor={"pointer"}
+            textAlign={"left"}
+            flex={1}
+          />
+        </Flex>
+      </Stack>
+    </Skeleton>
+  );
+};
 
 type ListProps = {
   orgs: any;
@@ -28,25 +71,10 @@ const SDGs = [
   { number: 6, goal: "clean water and sanitation", color: "#80BADC" },
 ];
 
-function randomColor(seed) {
-  var hash = 0,
-    len = seed.length;
-  for (var i = 0; i < len; i++) {
-    hash = (hash << 5) - hash + seed.charCodeAt(i);
-    hash |= 0; // to 32bit integer
-  }
-  var x = Math.sin(hash++) * 10000;
-  const randomNum = x - Math.floor(x);
-  const index = Math.floor(randomNum * SDGs.length);
-  return SDGs[index].color;
-}
-
 const OrgsList = ({ orgs, loading, after }: ListProps) => {
   const columns = useBreakpointValue({ base: 1, md: 2, lg: 3 });
   const [submitting, setSubmitting] = React.useState<IOrg | undefined>();
   if (!columns) return null;
-  // if (submitting) return <Loader message={submitting?.name} />;
-
   return (
     <Grid
       templateColumns={`repeat(${columns}, 1fr)`}
@@ -54,26 +82,27 @@ const OrgsList = ({ orgs, loading, after }: ListProps) => {
       gap={{ base: 0, md: 4 }}
     >
       {orgs?.map((org: IOrg, index: number) => {
-        const BACKGROUND_FROM_SDG = "#eee";
         return (
-          <GridItem
-            key={org.slug}
-            rowSpan={1}
-            colSpan={1}
-            background={BACKGROUND_FROM_SDG}
-            borderBottom={{ base: "4px solid #eee", md: "none" }}
-          >
-            <Link key={index} href={`/${org.slug}`}>
-              <Box
-                onClick={() => setSubmitting(org)}
-                height={"100%"}
-                width={"100%"}
-                cursor={"pointer"}
-              >
-                <OrgCard org={org} loading={loading} />
-              </Box>
-            </Link>
-          </GridItem>
+          <Skeleton isLoaded={!loading}>
+            <GridItem
+              key={org.slug}
+              rowSpan={1}
+              colSpan={1}
+              background={"#eee"}
+              borderBottom={{ base: "4px solid #eee", md: "none" }}
+            >
+              <Link key={index} href={`/${org.slug}`}>
+                <Box
+                  onClick={() => setSubmitting(org)}
+                  height={"100%"}
+                  width={"100%"}
+                  cursor={"pointer"}
+                >
+                  <OrgCard org={org} loading={loading} />
+                </Box>
+              </Link>
+            </GridItem>
+          </Skeleton>
         );
       })}
       {after}

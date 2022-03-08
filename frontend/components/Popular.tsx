@@ -63,7 +63,7 @@ const Controls = ({ tabs, handleSelectTab }) => {
               icon={<BsGridFill />}
             />
             <IconButton
-              onClick={() => alert("List view not implemented yet")}
+              // onClick={() => alert("List view not implemented yet")}
               size="md"
               variant="outline"
               aria-label="List"
@@ -75,11 +75,11 @@ const Controls = ({ tabs, handleSelectTab }) => {
 
       {/* Mobile */}
       <Flex
-        fontSize={18}
-        fontFamily={"Montserrat"}
+        fontSize={22}
         display={{ base: "flex", md: "none" }}
         background={"#aaa"}
         borderBottom={"4px solid #eee"}
+        fontWeight={300}
       >
         {tabs.map((tab) => (
           <Box
@@ -105,6 +105,8 @@ const PopularComponent = () => {
   const [selected, setSelected] = useState<TabIDs>("featured");
   const isMobile = useBreakpointValue({ base: true, md: false });
   const top = useBreakpointValue({ base: 5, md: 9, lg: 11 });
+
+  const emptyList = Array.apply(null, Array(top)).map(() => ({}));
   const {
     data: featured_data,
     error: featured_error,
@@ -135,7 +137,7 @@ const PopularComponent = () => {
     <Box pb={{ base: 0, md: 10 }}>
       <Controls tabs={tabs} handleSelectTab={handleSelectTab} />
       <OrgsList
-        orgs={data?.orgs}
+        orgs={data?.orgs || emptyList}
         loading={loading}
         after={
           <GridItem rowSpan={1} colSpan={1}>

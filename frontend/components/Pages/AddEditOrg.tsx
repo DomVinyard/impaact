@@ -57,6 +57,7 @@ const AddEditOrgForm = ({ org }) => {
     insertOrgFetching || updateOrgFetching || deleteOrgFetching;
 
   const handleDelete = async () => {
+    if (!confirm("Are you sure you want to delete this org?")) return;
     setIsSubmitted("deleting");
     await deleteOrg();
     router.push(`/orgs`);
@@ -109,7 +110,7 @@ const AddEditOrgForm = ({ org }) => {
   return (
     <Stack spacing={4}>
       {errorNode()}
-      <Box p={4} shadow="lg" rounded="lg">
+      <Box p={4} maxW={760}>
         <Stack spacing={4}>
           <FormControl isRequired>
             <Heading mt={6} mb={12}>
@@ -150,6 +151,16 @@ const AddEditOrgForm = ({ org }) => {
           <FormControl>
             {/* <ButtonGroup> */}
             <Flex mt={6} justifyContent={"space-between"}>
+              {isEditMode && (
+                <Button
+                  marginRight={"auto"}
+                  colorScheme="red"
+                  leftIcon={<DeleteIcon />}
+                  onClick={handleDelete}
+                >
+                  Delete{!isMobile && " Organisation"}
+                </Button>
+              )}
               <ButtonGroup>
                 <Button
                   onClick={() => {
@@ -168,16 +179,6 @@ const AddEditOrgForm = ({ org }) => {
                   {isEditMode ? "Save" : "Add"}
                 </Button>
               </ButtonGroup>
-              {isEditMode && (
-                <Button
-                  marginLeft={"auto"}
-                  colorScheme="red"
-                  leftIcon={<DeleteIcon />}
-                  onClick={handleDelete}
-                >
-                  Delete{!isMobile && " Organisation"}
-                </Button>
-              )}
             </Flex>
             {/* </ButtonGroup> */}
           </FormControl>
