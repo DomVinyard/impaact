@@ -30,11 +30,13 @@ import {
 } from "@dnd-kit/sortable";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useUpdateImpactPriorityMutation } from "generated-graphql";
 
 export function ImpactCard({ id, item, onEdit }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: id });
 
+  //
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -69,8 +71,12 @@ export function ImpactCard({ id, item, onEdit }) {
 // import { SortableItem } from "./SortableItem";
 
 function SortableList({ items: initialItems, onOpen, setSelectedImpact }) {
+  const [updateImpactPriority, { error, loading }] =
+    useUpdateImpactPriorityMutation();
   const [items, setItems] = useState(initialItems);
-  useEffect(() => setItems(initialItems), [initialItems]);
+  useEffect(() => {
+    setItems(initialItems);
+  }, [initialItems]);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -78,13 +84,27 @@ function SortableList({ items: initialItems, onOpen, setSelectedImpact }) {
     })
   );
 
+  function saveSortOrder(newOrder) {
+    newOrder.forEach(async (item, index) => {
+      // set the index in the db
+      const variables = { impactID: item.id, priority: index };
+      try {
+        updateImpactPriority({ variables });
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  }
+
   function handleDragEnd(event) {
     const { active, over } = event;
     if (active.id !== over.id) {
       setItems((items) => {
-        const oldIndex = items.indexOf(active.id);
-        const newIndex = items.indexOf(over.id);
-        return arrayMove(items, oldIndex, newIndex);
+        const oldIndex = items.map(({ id }) => id).indexOf(active.id);
+        const newIndex = items.map(({ id }) => id).indexOf(over.id);
+        const newOrder = arrayMove(items, oldIndex, newIndex);
+        saveSortOrder(newOrder);
+        return newOrder;
       });
     }
   }

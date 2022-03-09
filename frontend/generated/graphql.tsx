@@ -303,6 +303,7 @@ export type Impact = {
   /** An object relationship */
   orgByOrg: Orgs;
   prefix?: Maybe<Scalars["String"]>;
+  priority: Scalars["Int"];
   sdg: Scalars["String"];
   suffix?: Maybe<Scalars["String"]>;
   value: Scalars["numeric"];
@@ -362,11 +363,13 @@ export type Impact_Arr_Rel_Insert_Input = {
 /** aggregate avg on columns */
 export type Impact_Avg_Fields = {
   __typename?: "impact_avg_fields";
+  priority?: Maybe<Scalars["Float"]>;
   value?: Maybe<Scalars["Float"]>;
 };
 
 /** order by avg() on columns of table "impact" */
 export type Impact_Avg_Order_By = {
+  priority?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
@@ -381,6 +384,7 @@ export type Impact_Bool_Exp = {
   org?: InputMaybe<Uuid_Comparison_Exp>;
   orgByOrg?: InputMaybe<Orgs_Bool_Exp>;
   prefix?: InputMaybe<String_Comparison_Exp>;
+  priority?: InputMaybe<Int_Comparison_Exp>;
   sdg?: InputMaybe<String_Comparison_Exp>;
   suffix?: InputMaybe<String_Comparison_Exp>;
   value?: InputMaybe<Numeric_Comparison_Exp>;
@@ -394,6 +398,7 @@ export enum Impact_Constraint {
 
 /** input type for incrementing numeric columns in table "impact" */
 export type Impact_Inc_Input = {
+  priority?: InputMaybe<Scalars["Int"]>;
   value?: InputMaybe<Scalars["numeric"]>;
 };
 
@@ -405,6 +410,7 @@ export type Impact_Insert_Input = {
   org?: InputMaybe<Scalars["uuid"]>;
   orgByOrg?: InputMaybe<Orgs_Obj_Rel_Insert_Input>;
   prefix?: InputMaybe<Scalars["String"]>;
+  priority?: InputMaybe<Scalars["Int"]>;
   sdg?: InputMaybe<Scalars["String"]>;
   suffix?: InputMaybe<Scalars["String"]>;
   value?: InputMaybe<Scalars["numeric"]>;
@@ -418,6 +424,7 @@ export type Impact_Max_Fields = {
   indicator?: Maybe<Scalars["String"]>;
   org?: Maybe<Scalars["uuid"]>;
   prefix?: Maybe<Scalars["String"]>;
+  priority?: Maybe<Scalars["Int"]>;
   sdg?: Maybe<Scalars["String"]>;
   suffix?: Maybe<Scalars["String"]>;
   value?: Maybe<Scalars["numeric"]>;
@@ -430,6 +437,7 @@ export type Impact_Max_Order_By = {
   indicator?: InputMaybe<Order_By>;
   org?: InputMaybe<Order_By>;
   prefix?: InputMaybe<Order_By>;
+  priority?: InputMaybe<Order_By>;
   sdg?: InputMaybe<Order_By>;
   suffix?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
@@ -443,6 +451,7 @@ export type Impact_Min_Fields = {
   indicator?: Maybe<Scalars["String"]>;
   org?: Maybe<Scalars["uuid"]>;
   prefix?: Maybe<Scalars["String"]>;
+  priority?: Maybe<Scalars["Int"]>;
   sdg?: Maybe<Scalars["String"]>;
   suffix?: Maybe<Scalars["String"]>;
   value?: Maybe<Scalars["numeric"]>;
@@ -455,6 +464,7 @@ export type Impact_Min_Order_By = {
   indicator?: InputMaybe<Order_By>;
   org?: InputMaybe<Order_By>;
   prefix?: InputMaybe<Order_By>;
+  priority?: InputMaybe<Order_By>;
   sdg?: InputMaybe<Order_By>;
   suffix?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
@@ -484,6 +494,7 @@ export type Impact_Order_By = {
   org?: InputMaybe<Order_By>;
   orgByOrg?: InputMaybe<Orgs_Order_By>;
   prefix?: InputMaybe<Order_By>;
+  priority?: InputMaybe<Order_By>;
   sdg?: InputMaybe<Order_By>;
   suffix?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
@@ -507,6 +518,8 @@ export enum Impact_Select_Column {
   /** column name */
   Prefix = "prefix",
   /** column name */
+  Priority = "priority",
+  /** column name */
   Sdg = "sdg",
   /** column name */
   Suffix = "suffix",
@@ -521,6 +534,7 @@ export type Impact_Set_Input = {
   indicator?: InputMaybe<Scalars["String"]>;
   org?: InputMaybe<Scalars["uuid"]>;
   prefix?: InputMaybe<Scalars["String"]>;
+  priority?: InputMaybe<Scalars["Int"]>;
   sdg?: InputMaybe<Scalars["String"]>;
   suffix?: InputMaybe<Scalars["String"]>;
   value?: InputMaybe<Scalars["numeric"]>;
@@ -529,44 +543,52 @@ export type Impact_Set_Input = {
 /** aggregate stddev on columns */
 export type Impact_Stddev_Fields = {
   __typename?: "impact_stddev_fields";
+  priority?: Maybe<Scalars["Float"]>;
   value?: Maybe<Scalars["Float"]>;
 };
 
 /** order by stddev() on columns of table "impact" */
 export type Impact_Stddev_Order_By = {
+  priority?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Impact_Stddev_Pop_Fields = {
   __typename?: "impact_stddev_pop_fields";
+  priority?: Maybe<Scalars["Float"]>;
   value?: Maybe<Scalars["Float"]>;
 };
 
 /** order by stddev_pop() on columns of table "impact" */
 export type Impact_Stddev_Pop_Order_By = {
+  priority?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Impact_Stddev_Samp_Fields = {
   __typename?: "impact_stddev_samp_fields";
+  priority?: Maybe<Scalars["Float"]>;
   value?: Maybe<Scalars["Float"]>;
 };
 
 /** order by stddev_samp() on columns of table "impact" */
 export type Impact_Stddev_Samp_Order_By = {
+  priority?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
 export type Impact_Sum_Fields = {
   __typename?: "impact_sum_fields";
+  priority?: Maybe<Scalars["Int"]>;
   value?: Maybe<Scalars["numeric"]>;
 };
 
 /** order by sum() on columns of table "impact" */
 export type Impact_Sum_Order_By = {
+  priority?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
@@ -583,6 +605,8 @@ export enum Impact_Update_Column {
   /** column name */
   Prefix = "prefix",
   /** column name */
+  Priority = "priority",
+  /** column name */
   Sdg = "sdg",
   /** column name */
   Suffix = "suffix",
@@ -593,33 +617,39 @@ export enum Impact_Update_Column {
 /** aggregate var_pop on columns */
 export type Impact_Var_Pop_Fields = {
   __typename?: "impact_var_pop_fields";
+  priority?: Maybe<Scalars["Float"]>;
   value?: Maybe<Scalars["Float"]>;
 };
 
 /** order by var_pop() on columns of table "impact" */
 export type Impact_Var_Pop_Order_By = {
+  priority?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type Impact_Var_Samp_Fields = {
   __typename?: "impact_var_samp_fields";
+  priority?: Maybe<Scalars["Float"]>;
   value?: Maybe<Scalars["Float"]>;
 };
 
 /** order by var_samp() on columns of table "impact" */
 export type Impact_Var_Samp_Order_By = {
+  priority?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type Impact_Variance_Fields = {
   __typename?: "impact_variance_fields";
+  priority?: Maybe<Scalars["Float"]>;
   value?: Maybe<Scalars["Float"]>;
 };
 
 /** order by variance() on columns of table "impact" */
 export type Impact_Variance_Order_By = {
+  priority?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
@@ -2219,6 +2249,18 @@ export type UpdateImpactMutation = {
     | undefined;
 };
 
+export type UpdateImpactPriorityMutationVariables = Exact<{
+  impactID: Scalars["uuid"];
+  priority: Scalars["Int"];
+}>;
+
+export type UpdateImpactPriorityMutation = {
+  __typename?: "mutation_root";
+  update_impact_by_pk?:
+    | { __typename?: "impact"; id: any; priority: number }
+    | undefined;
+};
+
 export type UpdateOrgMutationVariables = Exact<{
   id: Scalars["uuid"];
   name?: InputMaybe<Scalars["String"]>;
@@ -2984,6 +3026,112 @@ export type UpdateImpactMutationOptions = Apollo.BaseMutationOptions<
   UpdateImpactMutation,
   UpdateImpactMutationVariables
 >;
+export const UpdateImpactPriorityDocument = gql`
+  mutation UpdateImpactPriority($impactID: uuid!, $priority: Int!) {
+    update_impact_by_pk(
+      pk_columns: { id: $impactID }
+      _set: { priority: $priority }
+    ) {
+      id
+      priority
+    }
+  }
+`;
+export type UpdateImpactPriorityMutationFn = Apollo.MutationFunction<
+  UpdateImpactPriorityMutation,
+  UpdateImpactPriorityMutationVariables
+>;
+export type UpdateImpactPriorityComponentProps = Omit<
+  ApolloReactComponents.MutationComponentOptions<
+    UpdateImpactPriorityMutation,
+    UpdateImpactPriorityMutationVariables
+  >,
+  "mutation"
+>;
+
+export const UpdateImpactPriorityComponent = (
+  props: UpdateImpactPriorityComponentProps
+) => (
+  <ApolloReactComponents.Mutation<
+    UpdateImpactPriorityMutation,
+    UpdateImpactPriorityMutationVariables
+  >
+    mutation={UpdateImpactPriorityDocument}
+    {...props}
+  />
+);
+
+export type UpdateImpactPriorityProps<
+  TChildProps = {},
+  TDataName extends string = "mutate"
+> = {
+  [key in TDataName]: Apollo.MutationFunction<
+    UpdateImpactPriorityMutation,
+    UpdateImpactPriorityMutationVariables
+  >;
+} & TChildProps;
+export function withUpdateImpactPriority<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = "mutate"
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    UpdateImpactPriorityMutation,
+    UpdateImpactPriorityMutationVariables,
+    UpdateImpactPriorityProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    UpdateImpactPriorityMutation,
+    UpdateImpactPriorityMutationVariables,
+    UpdateImpactPriorityProps<TChildProps, TDataName>
+  >(UpdateImpactPriorityDocument, {
+    alias: "updateImpactPriority",
+    ...operationOptions,
+  });
+}
+
+/**
+ * __useUpdateImpactPriorityMutation__
+ *
+ * To run a mutation, you first call `useUpdateImpactPriorityMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateImpactPriorityMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateImpactPriorityMutation, { data, loading, error }] = useUpdateImpactPriorityMutation({
+ *   variables: {
+ *      impactID: // value for 'impactID'
+ *      priority: // value for 'priority'
+ *   },
+ * });
+ */
+export function useUpdateImpactPriorityMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateImpactPriorityMutation,
+    UpdateImpactPriorityMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateImpactPriorityMutation,
+    UpdateImpactPriorityMutationVariables
+  >(UpdateImpactPriorityDocument, options);
+}
+export type UpdateImpactPriorityMutationHookResult = ReturnType<
+  typeof useUpdateImpactPriorityMutation
+>;
+export type UpdateImpactPriorityMutationResult =
+  Apollo.MutationResult<UpdateImpactPriorityMutation>;
+export type UpdateImpactPriorityMutationOptions = Apollo.BaseMutationOptions<
+  UpdateImpactPriorityMutation,
+  UpdateImpactPriorityMutationVariables
+>;
 export const UpdateOrgDocument = gql`
   mutation updateOrg(
     $id: uuid!
@@ -3319,7 +3467,7 @@ export const FetchFeaturedDocument = gql`
       description
       main_image
       geography
-      impacts {
+      impacts(order_by: { priority: asc }) {
         id
         value
         indicator
@@ -3435,7 +3583,7 @@ export const FetchLatestDocument = gql`
       description
       main_image
       geography
-      impacts {
+      impacts(order_by: { priority: asc }) {
         id
         value
         indicator
@@ -3550,7 +3698,7 @@ export const FetchOrgDocument = gql`
       description
       main_image
       geography
-      impacts {
+      impacts(order_by: { priority: asc }) {
         id
         value
         indicator
@@ -3661,7 +3809,7 @@ export const FetchOrgsDocument = gql`
       description
       main_image
       geography
-      impacts {
+      impacts(order_by: { priority: asc }) {
         id
         value
         indicator
@@ -3875,7 +4023,7 @@ export const MyOrgsDocument = gql`
         description
         main_image
         geography
-        impacts {
+        impacts(order_by: { priority: asc }) {
           id
           value
           indicator
@@ -3979,7 +4127,7 @@ export const SearchOrgsDocument = gql`
       description
       main_image
       geography
-      impacts {
+      impacts(order_by: { priority: asc }) {
         id
         value
         indicator
@@ -4675,6 +4823,7 @@ export type ImpactResolvers<
   org?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
   orgByOrg?: Resolver<ResolversTypes["orgs"], ParentType, ContextType>;
   prefix?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  priority?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   sdg?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   suffix?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   value?: Resolver<ResolversTypes["numeric"], ParentType, ContextType>;
@@ -4761,6 +4910,7 @@ export type Impact_Avg_FieldsResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["impact_avg_fields"] = ResolversParentTypes["impact_avg_fields"]
 > = {
+  priority?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   value?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -4778,6 +4928,7 @@ export type Impact_Max_FieldsResolvers<
   >;
   org?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
   prefix?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  priority?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
   sdg?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   suffix?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   value?: Resolver<Maybe<ResolversTypes["numeric"]>, ParentType, ContextType>;
@@ -4797,6 +4948,7 @@ export type Impact_Min_FieldsResolvers<
   >;
   org?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
   prefix?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  priority?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
   sdg?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   suffix?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   value?: Resolver<Maybe<ResolversTypes["numeric"]>, ParentType, ContextType>;
@@ -4820,6 +4972,7 @@ export type Impact_Stddev_FieldsResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["impact_stddev_fields"] = ResolversParentTypes["impact_stddev_fields"]
 > = {
+  priority?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   value?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -4828,6 +4981,7 @@ export type Impact_Stddev_Pop_FieldsResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["impact_stddev_pop_fields"] = ResolversParentTypes["impact_stddev_pop_fields"]
 > = {
+  priority?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   value?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -4836,6 +4990,7 @@ export type Impact_Stddev_Samp_FieldsResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["impact_stddev_samp_fields"] = ResolversParentTypes["impact_stddev_samp_fields"]
 > = {
+  priority?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   value?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -4844,6 +4999,7 @@ export type Impact_Sum_FieldsResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["impact_sum_fields"] = ResolversParentTypes["impact_sum_fields"]
 > = {
+  priority?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
   value?: Resolver<Maybe<ResolversTypes["numeric"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -4852,6 +5008,7 @@ export type Impact_Var_Pop_FieldsResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["impact_var_pop_fields"] = ResolversParentTypes["impact_var_pop_fields"]
 > = {
+  priority?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   value?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -4860,6 +5017,7 @@ export type Impact_Var_Samp_FieldsResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["impact_var_samp_fields"] = ResolversParentTypes["impact_var_samp_fields"]
 > = {
+  priority?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   value?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -4868,6 +5026,7 @@ export type Impact_Variance_FieldsResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["impact_variance_fields"] = ResolversParentTypes["impact_variance_fields"]
 > = {
+  priority?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   value?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };

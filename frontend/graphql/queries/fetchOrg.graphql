@@ -8,7 +8,7 @@ query fetchOrg($slug: String) {
     description
     main_image
     geography
-    impacts {
+    impacts(order_by: { priority: asc }) {
       id
       value
       indicator

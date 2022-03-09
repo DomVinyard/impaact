@@ -148,6 +148,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
                   <Button
                     marginRight={"auto"}
                     colorScheme="red"
+                    variant="outline"
                     leftIcon={<DeleteIcon />}
                     onClick={handleDelete}
                   >

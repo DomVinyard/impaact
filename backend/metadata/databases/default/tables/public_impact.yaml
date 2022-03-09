@@ -17,6 +17,7 @@ insert_permissions:
     - indicator
     - org
     - prefix
+    - priority
     - sdg
     - suffix
     - value
@@ -29,6 +30,7 @@ select_permissions:
     - indicator
     - org
     - prefix
+    - priority
     - sdg
     - suffix
     - value
@@ -41,6 +43,7 @@ select_permissions:
     - indicator
     - org
     - prefix
+    - priority
     - sdg
     - suffix
     - value
@@ -56,6 +59,7 @@ update_permissions:
     - image
     - indicator
     - prefix
+    - priority
     - sdg
     - suffix
     - value
