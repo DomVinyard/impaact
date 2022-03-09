@@ -40,7 +40,6 @@ import { Field } from "./Pages/AddEditOrg.form";
 type ImpactModelType = {
   isOpen: boolean;
   onClose: () => void;
-  isEditMode: boolean;
   impact?: any;
   org: any;
   refetchList?: () => void;
@@ -49,11 +48,11 @@ type ImpactModelType = {
 const ImpactModal = ({
   isOpen,
   onClose,
-  isEditMode,
   impact,
   org,
   refetchList,
 }: ImpactModelType) => {
+  const isEditMode = !!impact?.id;
   const FIELDS: Field[] = [
     {
       id: "indicator",
@@ -120,6 +119,7 @@ const ImpactModal = ({
   };
 
   const onSubmit = async (values, e) => {
+    console.log({ isEditMode });
     if (isEditMode) {
       const updateVariables = { id: impact.id, ...values, org: org.id };
       await updateImpact({ variables: updateVariables });
@@ -151,7 +151,7 @@ const ImpactModal = ({
         <Stack spacing={4}>
           {errorNode()}
           <Stack spacing={4} my={12}>
-            {FIELDS.map((field) => {
+            {FIELDS?.map((field) => {
               return (
                 <FormControl isInvalid={errors[field.id]}>
                   <FormLabel

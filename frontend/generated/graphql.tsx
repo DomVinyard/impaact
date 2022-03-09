@@ -297,6 +297,7 @@ export enum Accounts_Update_Column {
 export type Impact = {
   __typename?: "impact";
   id: Scalars["uuid"];
+  image?: Maybe<Scalars["String"]>;
   indicator: Scalars["String"];
   org: Scalars["uuid"];
   /** An object relationship */
@@ -375,6 +376,7 @@ export type Impact_Bool_Exp = {
   _not?: InputMaybe<Impact_Bool_Exp>;
   _or?: InputMaybe<Array<Impact_Bool_Exp>>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  image?: InputMaybe<String_Comparison_Exp>;
   indicator?: InputMaybe<String_Comparison_Exp>;
   org?: InputMaybe<Uuid_Comparison_Exp>;
   orgByOrg?: InputMaybe<Orgs_Bool_Exp>;
@@ -398,6 +400,7 @@ export type Impact_Inc_Input = {
 /** input type for inserting data into table "impact" */
 export type Impact_Insert_Input = {
   id?: InputMaybe<Scalars["uuid"]>;
+  image?: InputMaybe<Scalars["String"]>;
   indicator?: InputMaybe<Scalars["String"]>;
   org?: InputMaybe<Scalars["uuid"]>;
   orgByOrg?: InputMaybe<Orgs_Obj_Rel_Insert_Input>;
@@ -411,6 +414,7 @@ export type Impact_Insert_Input = {
 export type Impact_Max_Fields = {
   __typename?: "impact_max_fields";
   id?: Maybe<Scalars["uuid"]>;
+  image?: Maybe<Scalars["String"]>;
   indicator?: Maybe<Scalars["String"]>;
   org?: Maybe<Scalars["uuid"]>;
   prefix?: Maybe<Scalars["String"]>;
@@ -422,6 +426,7 @@ export type Impact_Max_Fields = {
 /** order by max() on columns of table "impact" */
 export type Impact_Max_Order_By = {
   id?: InputMaybe<Order_By>;
+  image?: InputMaybe<Order_By>;
   indicator?: InputMaybe<Order_By>;
   org?: InputMaybe<Order_By>;
   prefix?: InputMaybe<Order_By>;
@@ -434,6 +439,7 @@ export type Impact_Max_Order_By = {
 export type Impact_Min_Fields = {
   __typename?: "impact_min_fields";
   id?: Maybe<Scalars["uuid"]>;
+  image?: Maybe<Scalars["String"]>;
   indicator?: Maybe<Scalars["String"]>;
   org?: Maybe<Scalars["uuid"]>;
   prefix?: Maybe<Scalars["String"]>;
@@ -445,6 +451,7 @@ export type Impact_Min_Fields = {
 /** order by min() on columns of table "impact" */
 export type Impact_Min_Order_By = {
   id?: InputMaybe<Order_By>;
+  image?: InputMaybe<Order_By>;
   indicator?: InputMaybe<Order_By>;
   org?: InputMaybe<Order_By>;
   prefix?: InputMaybe<Order_By>;
@@ -472,6 +479,7 @@ export type Impact_On_Conflict = {
 /** Ordering options when selecting data from "impact". */
 export type Impact_Order_By = {
   id?: InputMaybe<Order_By>;
+  image?: InputMaybe<Order_By>;
   indicator?: InputMaybe<Order_By>;
   org?: InputMaybe<Order_By>;
   orgByOrg?: InputMaybe<Orgs_Order_By>;
@@ -491,6 +499,8 @@ export enum Impact_Select_Column {
   /** column name */
   Id = "id",
   /** column name */
+  Image = "image",
+  /** column name */
   Indicator = "indicator",
   /** column name */
   Org = "org",
@@ -507,6 +517,7 @@ export enum Impact_Select_Column {
 /** input type for updating data in table "impact" */
 export type Impact_Set_Input = {
   id?: InputMaybe<Scalars["uuid"]>;
+  image?: InputMaybe<Scalars["String"]>;
   indicator?: InputMaybe<Scalars["String"]>;
   org?: InputMaybe<Scalars["uuid"]>;
   prefix?: InputMaybe<Scalars["String"]>;
@@ -563,6 +574,8 @@ export type Impact_Sum_Order_By = {
 export enum Impact_Update_Column {
   /** column name */
   Id = "id",
+  /** column name */
+  Image = "image",
   /** column name */
   Indicator = "indicator",
   /** column name */
@@ -4657,6 +4670,7 @@ export type ImpactResolvers<
   ParentType extends ResolversParentTypes["impact"] = ResolversParentTypes["impact"]
 > = {
   id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   indicator?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   org?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
   orgByOrg?: Resolver<ResolversTypes["orgs"], ParentType, ContextType>;
@@ -4756,6 +4770,7 @@ export type Impact_Max_FieldsResolvers<
   ParentType extends ResolversParentTypes["impact_max_fields"] = ResolversParentTypes["impact_max_fields"]
 > = {
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   indicator?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
@@ -4774,6 +4789,7 @@ export type Impact_Min_FieldsResolvers<
   ParentType extends ResolversParentTypes["impact_min_fields"] = ResolversParentTypes["impact_min_fields"]
 > = {
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   indicator?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,

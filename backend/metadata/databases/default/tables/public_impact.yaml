@@ -13,6 +13,7 @@ insert_permissions:
         author_id:
           _eq: X-Hasura-User-Id
     columns:
+    - image
     - indicator
     - org
     - prefix
@@ -23,24 +24,26 @@ insert_permissions:
 select_permissions:
 - permission:
     columns:
-    - value
+    - id
+    - image
     - indicator
+    - org
     - prefix
     - sdg
     - suffix
-    - id
-    - org
+    - value
     filter: {}
   role: public
 - permission:
     columns:
-    - value
+    - id
+    - image
     - indicator
+    - org
     - prefix
     - sdg
     - suffix
-    - id
-    - org
+    - value
     filter: {}
   role: user
 update_permissions:
@@ -50,6 +53,7 @@ update_permissions:
         author_id:
           _eq: X-Hasura-User-Id
     columns:
+    - image
     - indicator
     - prefix
     - sdg

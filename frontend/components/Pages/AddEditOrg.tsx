@@ -102,7 +102,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
         <Box p={4} maxW={760}>
           <Stack spacing={4} my={12}>
             {/* Fields */}
-            {FIELDS.map((field) => (
+            {FIELDS?.map((field) => (
               <Box paddingBottom={8}>
                 <FormControl isInvalid={errors[field.id]}>
                   {field.before && (

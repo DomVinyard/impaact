@@ -13,6 +13,86 @@ import React, { useState } from "react";
 import Link from "next/link";
 import slugify from "../../lib/slugify";
 import ImpactModal from "components/ImpactModal";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+
+export function SortableItem({ id, item }) {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  return (
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      {/* ... */} {/* <ListItem> */}
+      {JSON.stringify(item)}
+      <Button
+        onClick={() => {
+          // setSelectedImpact(impact);
+          // onOpen();
+        }}
+      >
+        edit
+      </Button>
+      {/* </ListItem> */}
+    </div>
+  );
+}
+
+// import { SortableItem } from "./SortableItem";
+
+function SortableList({ items: initialItems = [] }) {
+  const [items, setItems] = useState(initialItems);
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  function handleDragEnd(event) {
+    const { active, over } = event;
+    if (active.id !== over.id) {
+      setItems((items) => {
+        const oldIndex = items.indexOf(active.id);
+        const newIndex = items.indexOf(over.id);
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  }
+
+  if (!initialItems?.length) return <Box>none</Box>;
+  return (
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+    >
+      <SortableContext items={items} strategy={verticalListSortingStrategy}>
+        {(items || initialItems).map((item) => (
+          <SortableItem key={item.id} id={item.id} item={item} />
+        ))}
+      </SortableContext>
+    </DndContext>
+  );
+}
 
 export type Field = {
   id: string;
@@ -120,32 +200,8 @@ const FIELDS: Field[] = [
       const [selectedImpact, setSelectedImpact] = useState(null);
       return (
         <>
-          <List>
-            {!org?.impacts?.length && <ListItem>none</ListItem>}
-            {org?.impacts?.map((impact, index) => {
-              return (
-                <ListItem>
-                  {impact.indicator}: {impact.value}
-                  <Button
-                    onClick={() => {
-                      setSelectedImpact(impact);
-                      onOpen();
-                    }}
-                  >
-                    edit
-                  </Button>
-                  <ImpactModal
-                    refetchList={refetch}
-                    isOpen={isOpen}
-                    onClose={onClose}
-                    isEditMode={true}
-                    impact={impact}
-                    org={org}
-                  />
-                </ListItem>
-              );
-            })}
-          </List>
+          <SortableList items={org?.impacts} />
+
           <Button
             colorScheme="blue"
             onClick={() => {
@@ -159,7 +215,6 @@ const FIELDS: Field[] = [
             refetchList={refetch}
             isOpen={isOpen}
             onClose={onClose}
-            isEditMode={!!selectedImpact}
             impact={selectedImpact}
             org={org}
           />
