@@ -1,4 +1,13 @@
-import { Box, Button, Flex, Input, Text, Textarea } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Input,
+  List,
+  ListItem,
+  Text,
+  Textarea,
+} from "@chakra-ui/react";
 import React from "react";
 import Link from "next/link";
 import slugify from "../../lib/slugify";
@@ -61,7 +70,6 @@ const FIELDS: Field[] = [
           alignItems="center"
         >
           <Button
-            name="main_image"
             colorScheme="blue"
             mt={2}
             onClick={async () => {
@@ -93,6 +101,22 @@ const FIELDS: Field[] = [
         value: 360,
         message: "Maximum length should be 360 characters",
       },
+    },
+  },
+  {
+    id: "impact",
+    label: "Impact",
+    element: Textarea,
+    validation: {},
+    custom: ({ values, isEditMode, onChange, ...others }) => {
+      console.log({ impact: values.impact });
+      return (
+        <List>
+          <ListItem>1</ListItem>
+          <ListItem>2</ListItem>
+          <Button>Add evidence</Button>
+        </List>
+      );
     },
   },
   {
