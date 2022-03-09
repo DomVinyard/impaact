@@ -21,7 +21,7 @@ import {
   useUpdateOrgMutation,
 } from "generated-graphql";
 import { useSession } from "next-auth/client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Content from "components/Content";
 import { useFetchOrgQuery } from "generated-graphql";
 import router, { useRouter } from "next/router";
@@ -31,21 +31,23 @@ import Loader from "components/Loader";
 import { useForm } from "react-hook-form";
 import FIELDS from "./AddEditOrg.form";
 
-const AddEditOrgForm = ({ org }) => {
-  const [timestamp] = useState(Date.now());
+const AddEditOrgForm = ({ org, refetch, isLoading }) => {
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors, isSubmitting, isDirty, isValid },
   } = useForm({
     defaultValues: {
       ...org,
     },
   });
+  useEffect(() => {
+    if (!isLoading && org) reset(org);
+  }, [isLoading, org]);
   const values = watch();
-  console.log({ values });
-  const [isSubmitted, setIsSubmitted] = useState("");
+  // const [isSubmitted, setIsSubmitted] = useState("");
   const isMobile = useBreakpointValue({ base: true, md: false });
   const [session] = useSession();
   const isEditMode = !!org;
@@ -59,19 +61,19 @@ const AddEditOrgForm = ({ org }) => {
 
   if (!session) return <AccessDeniedIndicator message="Please sign in" />;
 
-  const isFetching =
+  const isUpdating =
     insertOrgFetching || updateOrgFetching || deleteOrgFetching;
 
   const handleDelete = async () => {
     if (!confirm("Are you sure you want to delete this org?")) return;
-    setIsSubmitted("deleting");
+    // setIsSubmitted("deleting");
     await deleteOrg();
     router.push(`/orgs`);
   };
 
   const onSubmit = async (values) => {
     values.slug = slugify(values.name);
-    setIsSubmitted(isEditMode ? "Updating report" : "Creating report");
+    // setIsSubmitted(isEditMode ? "Updating report" : "Creating report");
     try {
       if (isEditMode) {
         await updateOrg({ variables: { id: org.id, ...values } });
@@ -95,18 +97,12 @@ const AddEditOrgForm = ({ org }) => {
     );
   };
 
-  if (isFetching || isSubmitted) return <Loader message={isSubmitted} />;
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={4}>
         {errorNode()}
         <Box p={4} maxW={760}>
           <Stack spacing={4} my={12}>
-            {/* <Heading mt={6} mb={12}>
-              {isEditMode ? "Edit" : "Add"} Organisation
-            </Heading> */}
-
             {/* Fields */}
             {FIELDS.map((field) => (
               <Box paddingBottom={8}>
@@ -125,6 +121,8 @@ const AddEditOrgForm = ({ org }) => {
                       id={field.id}
                       values={values}
                       isEditMode={isEditMode}
+                      org={org}
+                      refetch={refetch}
                       {...register(field.id, field.validation)}
                     />
                   ) : (
@@ -167,9 +165,7 @@ const AddEditOrgForm = ({ org }) => {
                     colorScheme={"blue"}
                     minW={150}
                     onClick={handleSubmit}
-                    isLoading={
-                      isEditMode ? updateOrgFetching : insertOrgFetching
-                    }
+                    isLoading={isSubmitting}
                     isDisabled={isValid && !isDirty}
                     type={"submit"}
                   >
@@ -187,17 +183,13 @@ const AddEditOrgForm = ({ org }) => {
 
 const AddEditOrgPage = () => {
   const router = useRouter();
-  const { data, error, loading } = useFetchOrgQuery({
+  const { data, error, loading, refetch } = useFetchOrgQuery({
     variables: { slug: `${router?.query.slug}` },
   });
   const [org] = data?.orgs || [];
-
-  if (loading) {
-    return <Loader />;
-  }
   return (
     <Content>
-      <AddEditOrgForm org={org} />
+      <AddEditOrgForm org={org} refetch={refetch} isLoading={loading} />
     </Content>
   );
 };

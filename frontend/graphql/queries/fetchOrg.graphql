@@ -8,5 +8,11 @@ query fetchOrg($slug: String) {
     description
     main_image
     geography
+    impacts {
+      id
+      value
+      indicator
+      sdg
+    }
   }
 }

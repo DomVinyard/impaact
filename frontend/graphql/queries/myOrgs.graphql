@@ -10,6 +10,12 @@ query myOrgs($userId: uuid!) {
       description
       main_image
       geography
+      impacts {
+        id
+        value
+        indicator
+        sdg
+      }
     }
   }
 }

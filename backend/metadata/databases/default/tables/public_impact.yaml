@@ -5,3 +5,41 @@ object_relationships:
 - name: orgByOrg
   using:
     foreign_key_constraint_on: org
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      orgByOrg:
+        author_id:
+          _eq: X-Hasura-User-Id
+    columns:
+    - indicator
+    - org
+    - prefix
+    - sdg
+    - suffix
+    - value
+  role: user
+select_permissions:
+- permission:
+    columns:
+    - value
+    - indicator
+    - prefix
+    - sdg
+    - suffix
+    - id
+    - org
+    filter: {}
+  role: public
+- permission:
+    columns:
+    - value
+    - indicator
+    - prefix
+    - sdg
+    - suffix
+    - id
+    - org
+    filter: {}
+  role: user

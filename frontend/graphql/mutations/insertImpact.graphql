@@ -1,0 +1,15 @@
+mutation insertImpact(
+  $indicator: String!
+  $value: numeric!
+  $sdg: String!
+  $org: uuid!
+) {
+  insert_impact_one(
+    object: { indicator: $indicator, value: $value, sdg: $sdg, org: $org }
+  ) {
+    id
+    indicator
+    value
+    sdg
+  }
+}

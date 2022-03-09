@@ -1,0 +1,225 @@
+import {
+  Box,
+  Button,
+  Flex,
+  Textarea,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalCloseButton,
+  Input,
+} from "@chakra-ui/react";
+
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  ButtonGroup,
+  CloseButton,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Stack,
+  useBreakpointValue,
+} from "@chakra-ui/react";
+import AccessDeniedIndicator from "components/AccessDeniedIndicator";
+import {
+  useDeleteImpactMutation,
+  useInsertImpactMutation,
+  useUpdateImpactMutation,
+} from "generated-graphql";
+import { useSession } from "next-auth/client";
+import React, { useState } from "react";
+import { DeleteIcon } from "@chakra-ui/icons";
+import Loader from "components/Loader";
+import { useForm } from "react-hook-form";
+import { Field } from "./Pages/AddEditOrg.form";
+
+type ImpactModelType = {
+  isOpen: boolean;
+  onClose: () => void;
+  isEditMode: boolean;
+  impact?: any;
+  org: any;
+  refetchList?: () => void;
+};
+
+const ImpactModal = ({
+  isOpen,
+  onClose,
+  isEditMode,
+  impact,
+  org,
+  refetchList,
+}: ImpactModelType) => {
+  const FIELDS: Field[] = [
+    {
+      id: "indicator",
+      label: "Indicator",
+      element: Input,
+      validation: {},
+    },
+    {
+      id: "value",
+      label: "Value",
+      element: Input,
+      validation: {},
+    },
+    {
+      id: "sdg",
+      label: "SDG",
+      element: Input,
+      validation: {},
+    },
+  ];
+  console.log({ impact });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors, isSubmitting, isDirty, isValid },
+  } = useForm({
+    defaultValues: {
+      ...impact,
+    },
+  });
+  const values = watch();
+  console.log({ values });
+  const [isSubmitted, setIsSubmitted] = useState("");
+  const isMobile = useBreakpointValue({ base: true, md: false });
+  const [session] = useSession();
+
+  const [
+    insertImpact,
+    { loading: insertImpactFetching, error: insertImpactError },
+  ] = useInsertImpactMutation();
+
+  // console.log({ insertImpact, insertImpactFetching, insertImpactError });
+  const [
+    updateImpact,
+    { loading: updateImpactFetching, error: updateImpactError },
+  ] = useUpdateImpactMutation();
+  const [
+    deleteImpact,
+    { loading: deleteImpactFetching, error: deleteImpactError },
+  ] = useDeleteImpactMutation({ variables: { id: impact?.id } });
+
+  if (!session) return <AccessDeniedIndicator message="Please sign in" />;
+
+  const handleDelete = async () => {
+    // if (!confirm("Are you sure you want to delete this org?")) return;
+    // setIsSubmitted("deleting");
+    // await deleteOrg();
+    // router.push(`/orgs`);
+  };
+
+  const onSubmit = async (values, e) => {
+    try {
+      if (isEditMode) {
+        await updateImpact({
+          variables: { id: impact.id, ...values, org: org.id },
+        });
+      } else {
+        const insertVariables = { ...values, org: org.id };
+        // console.log({ insertVariables });
+        await insertImpact({ variables: insertVariables });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    await refetchList?.();
+    onClose();
+    reset();
+  };
+
+  const errorNode = () => {
+    if (!insertImpactError) return false;
+    return (
+      <Alert status="error">
+        <AlertIcon />
+        <AlertTitle>{insertImpactError}</AlertTitle>
+        <CloseButton position="absolute" right="8px" top="8px" />
+      </Alert>
+    );
+  };
+
+  // if (isFetching || isSubmitted) return <Loader message={isSubmitted} />;
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent px={8}>
+        <ModalCloseButton />
+        <Stack spacing={4}>
+          {errorNode()}
+          <Stack spacing={4} my={12}>
+            {FIELDS.map((field) => {
+              return (
+                <FormControl isInvalid={errors[field.id]}>
+                  <FormLabel
+                    style={{ fontSize: 22 }}
+                    htmlFor={errors[field.id]}
+                  >
+                    {field.label}
+                  </FormLabel>
+
+                  <field.element
+                    autoComplate="off"
+                    id={field.id}
+                    placeholder={field.placeholder}
+                    {...register(field.id, field.validation)}
+                  />
+                  <FormErrorMessage>
+                    {errors[field.id] && errors[field.id].message}
+                  </FormErrorMessage>
+                </FormControl>
+              );
+            })}
+
+            <ModalFooter p={0}>
+              <FormControl>
+                <Flex mt={12} justifyContent={"space-between"}>
+                  {isEditMode ? (
+                    <Button
+                      marginRight={"auto"}
+                      colorScheme="red"
+                      leftIcon={<DeleteIcon />}
+                      onClick={handleDelete}
+                    >
+                      Delete
+                    </Button>
+                  ) : (
+                    <Box></Box>
+                  )}
+                  <ButtonGroup>
+                    <Button onClick={() => onClose()}>
+                      {isDirty ? "Cancel" : "Back"}
+                    </Button>
+                    <Button
+                      loadingText="Adding/Updating"
+                      colorScheme={"blue"}
+                      minW={150}
+                      onClick={handleSubmit(onSubmit)}
+                      isLoading={
+                        isEditMode ? updateImpactFetching : insertImpactFetching
+                      }
+                      isDisabled={isValid && !isDirty}
+                      type={"submit"}
+                    >
+                      {isEditMode ? "Save" : "Add"}
+                    </Button>
+                  </ButtonGroup>
+                </Flex>
+              </FormControl>
+            </ModalFooter>
+          </Stack>
+        </Stack>
+      </ModalContent>
+    </Modal>
+  );
+};
+
+export default ImpactModal;

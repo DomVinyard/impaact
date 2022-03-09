@@ -7,12 +7,14 @@ import {
   ListItem,
   Text,
   Textarea,
+  useDisclosure,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import slugify from "../../lib/slugify";
+import ImpactModal from "components/ImpactModal";
 
-type Field = {
+export type Field = {
   id: string;
   label?: string;
   validation?: any;
@@ -24,6 +26,7 @@ type Field = {
 };
 
 const FIELDS: Field[] = [
+  // Name
   {
     id: "name",
     label: "Organisation Name",
@@ -42,9 +45,7 @@ const FIELDS: Field[] = [
       const linkURL = `https://impact.ooo/${slugify(`${values.name}`, {
         lower: true,
       })}`;
-
       if (values.name === "") return null;
-
       return (
         <Text color={"blue"} fontSize={12} mt={1}>
           <strong>{linkText}</strong>
@@ -53,6 +54,8 @@ const FIELDS: Field[] = [
       );
     },
   },
+
+  // Main image
   {
     id: "main_image",
     label: "Main Image",
@@ -87,6 +90,8 @@ const FIELDS: Field[] = [
       );
     },
   },
+
+  // Short description
   {
     id: "description",
     label: "Short description",
@@ -103,22 +108,67 @@ const FIELDS: Field[] = [
       },
     },
   },
+
+  // Impact
   {
     id: "impact",
-    label: "Impact",
+    label: "Impacts",
     element: Textarea,
     validation: {},
-    custom: ({ values, isEditMode, onChange, ...others }) => {
-      console.log({ impact: values.impact });
+    custom: ({ values, isEditMode, onChange, org, refetch }) => {
+      const { isOpen, onOpen, onClose } = useDisclosure();
+      const [selectedImpact, setSelectedImpact] = useState(null);
       return (
-        <List>
-          <ListItem>1</ListItem>
-          <ListItem>2</ListItem>
-          <Button>Add evidence</Button>
-        </List>
+        <>
+          <List>
+            {!org?.impacts?.length && <ListItem>none</ListItem>}
+            {org?.impacts?.map((impact, index) => {
+              return (
+                <ListItem>
+                  {impact.indicator}: {impact.value}
+                  <Button
+                    onClick={() => {
+                      setSelectedImpact(impact);
+                      onOpen();
+                    }}
+                  >
+                    edit
+                  </Button>
+                  <ImpactModal
+                    refetchList={refetch}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    isEditMode={true}
+                    impact={impact}
+                    org={org}
+                  />
+                </ListItem>
+              );
+            })}
+          </List>
+          <Button
+            colorScheme="blue"
+            onClick={() => {
+              setSelectedImpact(null);
+              onOpen();
+            }}
+          >
+            Add impact
+          </Button>
+          <ImpactModal
+            refetchList={refetch}
+            isOpen={isOpen}
+            onClose={onClose}
+            isEditMode={!!selectedImpact}
+            impact={selectedImpact}
+            org={org}
+          />
+        </>
       );
     },
   },
+
+  // Geography
   {
     id: "geography",
     label: "Geography",

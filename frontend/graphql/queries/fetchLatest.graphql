@@ -7,5 +7,11 @@ query fetchLatest($top: Int) {
     description
     main_image
     geography
+    impacts {
+      id
+      value
+      indicator
+      sdg
+    }
   }
 }
