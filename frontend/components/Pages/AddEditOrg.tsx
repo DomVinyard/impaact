@@ -43,9 +43,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
       ...org,
     },
   });
-  useEffect(() => {
-    if (!isLoading && org) reset(org);
-  }, [isLoading, org]);
+  useEffect(() => !isLoading && reset(org), [isLoading]);
   const values = watch();
   // const [isSubmitted, setIsSubmitted] = useState("");
   const isMobile = useBreakpointValue({ base: true, md: false });

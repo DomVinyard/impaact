@@ -149,7 +149,7 @@ const FIELDS: Field[] = [
           <Button
             colorScheme="blue"
             onClick={() => {
-              setSelectedImpact(null);
+              setSelectedImpact({ indicator: "", value: "", sdg: "" });
               onOpen();
             }}
           >

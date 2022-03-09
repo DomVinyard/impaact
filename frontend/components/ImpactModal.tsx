@@ -31,7 +31,7 @@ import {
   useUpdateImpactMutation,
 } from "generated-graphql";
 import { useSession } from "next-auth/client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DeleteIcon } from "@chakra-ui/icons";
 import Loader from "components/Loader";
 import { useForm } from "react-hook-form";
@@ -74,7 +74,7 @@ const ImpactModal = ({
       validation: {},
     },
   ];
-  console.log({ impact });
+  // console.log({ impact });
   const {
     register,
     handleSubmit,
@@ -86,9 +86,8 @@ const ImpactModal = ({
       ...impact,
     },
   });
+  useEffect(() => reset(impact), [impact]);
   const values = watch();
-  console.log({ values });
-  const [isSubmitted, setIsSubmitted] = useState("");
   const isMobile = useBreakpointValue({ base: true, md: false });
   const [session] = useSession();
 
@@ -109,30 +108,26 @@ const ImpactModal = ({
 
   if (!session) return <AccessDeniedIndicator message="Please sign in" />;
 
+  const closeForm = async () => {
+    await refetchList?.();
+    // reset({ indicator: "", value: "", sdg: "" });
+    onClose();
+  };
+
   const handleDelete = async () => {
-    // if (!confirm("Are you sure you want to delete this org?")) return;
-    // setIsSubmitted("deleting");
-    // await deleteOrg();
-    // router.push(`/orgs`);
+    await deleteImpact();
+    await closeForm();
   };
 
   const onSubmit = async (values, e) => {
-    try {
-      if (isEditMode) {
-        await updateImpact({
-          variables: { id: impact.id, ...values, org: org.id },
-        });
-      } else {
-        const insertVariables = { ...values, org: org.id };
-        // console.log({ insertVariables });
-        await insertImpact({ variables: insertVariables });
-      }
-    } catch (e) {
-      console.log(e);
+    if (isEditMode) {
+      const updateVariables = { id: impact.id, ...values, org: org.id };
+      await updateImpact({ variables: updateVariables });
+    } else {
+      const insertVariables = { ...values, org: org.id };
+      await insertImpact({ variables: insertVariables });
     }
-    await refetchList?.();
-    onClose();
-    reset();
+    await closeForm();
   };
 
   const errorNode = () => {
@@ -149,7 +144,7 @@ const ImpactModal = ({
   // if (isFetching || isSubmitted) return <Loader message={isSubmitted} />;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={closeForm}>
       <ModalOverlay />
       <ModalContent px={8}>
         <ModalCloseButton />
@@ -195,17 +190,15 @@ const ImpactModal = ({
                     <Box></Box>
                   )}
                   <ButtonGroup>
-                    <Button onClick={() => onClose()}>
+                    <Button onClick={() => closeForm()}>
                       {isDirty ? "Cancel" : "Back"}
                     </Button>
                     <Button
-                      loadingText="Adding/Updating"
+                      loadingText="Save"
                       colorScheme={"blue"}
                       minW={150}
                       onClick={handleSubmit(onSubmit)}
-                      isLoading={
-                        isEditMode ? updateImpactFetching : insertImpactFetching
-                      }
+                      isLoading={isSubmitting}
                       isDisabled={isValid && !isDirty}
                       type={"submit"}
                     >

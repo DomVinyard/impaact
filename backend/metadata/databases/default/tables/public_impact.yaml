@@ -43,3 +43,27 @@ select_permissions:
     - org
     filter: {}
   role: user
+update_permissions:
+- permission:
+    check:
+      orgByOrg:
+        author_id:
+          _eq: X-Hasura-User-Id
+    columns:
+    - indicator
+    - prefix
+    - sdg
+    - suffix
+    - value
+    filter:
+      orgByOrg:
+        author_id:
+          _eq: X-Hasura-User-Id
+  role: user
+delete_permissions:
+- permission:
+    filter:
+      orgByOrg:
+        author_id:
+          _eq: X-Hasura-User-Id
+  role: user
