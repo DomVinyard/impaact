@@ -3,6 +3,7 @@ import {
   Button,
   Flex,
   Input,
+  Image,
   List,
   ListItem,
   Stack,
@@ -31,37 +32,63 @@ import {
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useUpdateImpactPriorityMutation } from "generated-graphql";
+import SDGs from "lib/SDGs";
 
 export function ImpactCard({ id, item, onEdit }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: id });
 
-  //
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
   };
 
+  const SDG = SDGs.find((sdg) => sdg.id === item.sdg);
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
       {/* ... */} {/* <ListItem> */}
       <Stack mb={2} background="#eee">
-        <Flex justifyContent="space-between" background="#ddd">
-          <Text p={1}>{item.sdg}</Text>
+        <Flex
+          justifyContent="space-between"
+          color="#fff"
+          background={SDG?.color}
+          alignItems="center"
+          p={1}
+        >
+          <Image
+            src={`/images/sdg_trim/E-WEB-Goal-${SDG?.id}.png`}
+            height={8}
+            mr={2}
+            ml={2}
+          />
+          <Text
+            p={1}
+            ml={2}
+            textTransform="uppercase"
+            fontWeight="bold"
+            fontSize={20}
+            opacity={0.5}
+          >
+            {SDG?.goal}
+          </Text>
+        </Flex>
+        <Flex p={3} pb={5} justifyContent="space-between" alignItems="center">
+          <Box>
+            <Text fontSize={24} lineHeight={1}>
+              {item.value}
+            </Text>
+            <Text fontSize={16}>{item.indicator}</Text>
+          </Box>
           <Button
             onMouseDown={onEdit}
-            variant="outline"
+            // variant="ghost"
             colorScheme="blue"
+            mr={1}
             size="sm"
           >
-            edit
+            update
           </Button>
         </Flex>
-        <Box px={3} pb={2}>
-          <Text fontSize={18}>
-            {item.indicator}: {item.value}
-          </Text>
-        </Box>
       </Stack>
       {/* </ListItem> */}
     </div>
@@ -174,6 +201,24 @@ const FIELDS: Field[] = [
     },
   },
 
+  // Short description
+  {
+    id: "description",
+    label: "Short description",
+    element: Textarea,
+    validation: {
+      required: "This is required",
+      minLength: {
+        value: 60,
+        message: "Minimum length should be 60 characters",
+      },
+      maxLength: {
+        value: 360,
+        message: "Maximum length should be 360 characters",
+      },
+    },
+  },
+
   // Main image
   {
     id: "main_image",
@@ -207,24 +252,6 @@ const FIELDS: Field[] = [
           </Button>
         </Flex>
       );
-    },
-  },
-
-  // Short description
-  {
-    id: "description",
-    label: "Short description",
-    element: Textarea,
-    validation: {
-      required: "This is required",
-      minLength: {
-        value: 60,
-        message: "Minimum length should be 60 characters",
-      },
-      maxLength: {
-        value: 360,
-        message: "Maximum length should be 360 characters",
-      },
     },
   },
 

@@ -6,9 +6,11 @@ import {
   Heading,
   Skeleton,
   Stack,
+  Image,
   Text,
 } from "@chakra-ui/react";
 import Content from "components/Content";
+import SDGs from "lib/SDGs";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -36,7 +38,18 @@ const MyOrgBar = () => {
 const OrgPageComponent = ({ org, loading }) => {
   const [session] = useSession();
   const isMyOrg = session?.id === org?.author_id;
-  console.log({ org });
+  const sdgs = Object.values(
+    org?.impacts?.reduce((acc, impact) => {
+      if (!acc?.[impact.sdg])
+        acc[impact.sdg] = {
+          sdg: SDGs.find((sdg) => sdg.id === impact.sdg),
+          impacts: [],
+        };
+      acc[impact.sdg].impacts.push(impact);
+      return acc;
+    }, {})
+  );
+
   return (
     <>
       <Box textAlign={{ base: "center", md: "left" }} pb={{ base: 0, md: 160 }}>
@@ -97,8 +110,41 @@ const OrgPageComponent = ({ org, loading }) => {
                     )}
                   </Box>
                 </Flex>
-                <Box height={460} p={4} color={"#777"} background={"#ddd"}>
-                  Impact
+                <Box color={"#777"} background={"#ddd"}>
+                  {sdgs.map(({ sdg, impacts }: any, i) => (
+                    <Box>
+                      <Flex
+                        justifyContent="space-between"
+                        color="#fff"
+                        background={sdg?.color}
+                        height={i === 0 ? 180 : 120}
+                        borderLeft={{
+                          base: `6px solid ${sdgs[0].sdg?.color}`,
+                          md: `8px solid ${sdgs[0].sdg?.color}`,
+                        }}
+                        alignItems="center"
+                        p={1}
+                      >
+                        <Flex>
+                          <Image
+                            src={`/images/sdg_trim/E-WEB-Goal-${sdg?.id}.png`}
+                            height={8}
+                            mr={2}
+                            ml={2}
+                          />
+                          <Text>{sdg.goal}</Text>
+                        </Flex>
+                        <Stack>
+                          {impacts.map((impact) => (
+                            <Box>
+                              <Text>{impact.value}</Text>
+                              <Text>{impact.indicator}</Text>
+                            </Box>
+                          ))}
+                        </Stack>
+                      </Flex>
+                    </Box>
+                  ))}
                 </Box>
                 <Box height={240} p={4} color={"#777"} background={"#ccc"}>
                   Operations

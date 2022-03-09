@@ -62,14 +62,6 @@ type ListProps = {
   loading?: boolean;
   after?: any;
 };
-const SDGs = [
-  { number: 1, goal: "no poverty", color: "#B53841" },
-  { number: 2, goal: "zero hunger", color: "#C7A756" },
-  { number: 3, goal: "good health and well-being", color: "#769D4E" },
-  { number: 4, goal: "quality education", color: "#9B2E34" },
-  { number: 5, goal: "gender equality", color: "#CC4A33" },
-  { number: 6, goal: "clean water and sanitation", color: "#80BADC" },
-];
 
 const OrgsList = ({ orgs, loading, after }: ListProps) => {
   const columns = useBreakpointValue({ base: 1, md: 2, lg: 3 });

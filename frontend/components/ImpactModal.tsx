@@ -10,6 +10,7 @@ import {
   ModalFooter,
   ModalCloseButton,
   Input,
+  Select,
 } from "@chakra-ui/react";
 
 import {
@@ -36,6 +37,7 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import Loader from "components/Loader";
 import { useForm } from "react-hook-form";
 import { Field } from "./Pages/AddEditOrg.form";
+import SDG from "../lib/SDGs";
 
 type ImpactModelType = {
   isOpen: boolean;
@@ -54,25 +56,21 @@ const ImpactModal = ({
 }: ImpactModelType) => {
   const isEditMode = !!impact?.id;
   const FIELDS: Field[] = [
-    {
-      id: "indicator",
-      label: "Indicator",
-      element: Input,
-      validation: {},
-    },
+    !isEditMode
+      ? {
+          id: "indicator",
+          label: "What do you measure?",
+          element: Input,
+          validation: {},
+        }
+      : undefined,
     {
       id: "value",
-      label: "Value",
+      label: isEditMode ? impact.indicator : "Total",
       element: Input,
       validation: {},
     },
-    {
-      id: "sdg",
-      label: "SDG",
-      element: Input,
-      validation: {},
-    },
-  ];
+  ].filter(Boolean);
   // console.log({ impact });
   const {
     register,
@@ -173,6 +171,23 @@ const ImpactModal = ({
                 </FormControl>
               );
             })}
+            {!isEditMode && (
+              <FormControl isInvalid={errors["sdg"]}>
+                <FormLabel style={{ fontSize: 22 }} htmlFor={errors["sdg"]}>
+                  Closest SDG
+                </FormLabel>
+
+                <Select {...register("sdg", {})}>
+                  <option value="">Select an SDG</option>
+                  {SDG.map((sdg) => {
+                    return <option value={sdg.id}>{sdg.goal}</option>;
+                  })}
+                </Select>
+                <FormErrorMessage>
+                  {errors.sdg && errors.sdg.message}
+                </FormErrorMessage>
+              </FormControl>
+            )}
 
             <ModalFooter p={0}>
               <FormControl>
