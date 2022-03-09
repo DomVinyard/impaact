@@ -5,11 +5,12 @@ import {
   Input,
   List,
   ListItem,
+  Stack,
   Text,
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import slugify from "../../lib/slugify";
 import ImpactModal from "components/ImpactModal";
@@ -30,7 +31,7 @@ import {
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-export function SortableItem({ id, item }) {
+export function ImpactCard({ id, item, onEdit }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: id });
 
@@ -42,15 +43,24 @@ export function SortableItem({ id, item }) {
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
       {/* ... */} {/* <ListItem> */}
-      {JSON.stringify(item)}
-      <Button
-        onClick={() => {
-          // setSelectedImpact(impact);
-          // onOpen();
-        }}
-      >
-        edit
-      </Button>
+      <Stack mb={2} background="#eee">
+        <Flex justifyContent="space-between" background="#ddd">
+          <Text p={1}>{item.sdg}</Text>
+          <Button
+            onMouseDown={onEdit}
+            variant="outline"
+            colorScheme="blue"
+            size="sm"
+          >
+            edit
+          </Button>
+        </Flex>
+        <Box px={3} pb={2}>
+          <Text fontSize={18}>
+            {item.indicator}: {item.value}
+          </Text>
+        </Box>
+      </Stack>
       {/* </ListItem> */}
     </div>
   );
@@ -58,8 +68,9 @@ export function SortableItem({ id, item }) {
 
 // import { SortableItem } from "./SortableItem";
 
-function SortableList({ items: initialItems = [] }) {
+function SortableList({ items: initialItems, onOpen, setSelectedImpact }) {
   const [items, setItems] = useState(initialItems);
+  useEffect(() => setItems(initialItems), [initialItems]);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -78,7 +89,7 @@ function SortableList({ items: initialItems = [] }) {
     }
   }
 
-  if (!initialItems?.length) return <Box>none</Box>;
+  if (!items?.length) return <Box>none</Box>;
   return (
     <DndContext
       sensors={sensors}
@@ -86,8 +97,16 @@ function SortableList({ items: initialItems = [] }) {
       onDragEnd={handleDragEnd}
     >
       <SortableContext items={items} strategy={verticalListSortingStrategy}>
-        {(items || initialItems).map((item) => (
-          <SortableItem key={item.id} id={item.id} item={item} />
+        {items.map((item) => (
+          <ImpactCard
+            key={item.id}
+            id={item.id}
+            item={item}
+            onEdit={() => {
+              setSelectedImpact(item);
+              onOpen();
+            }}
+          />
         ))}
       </SortableContext>
     </DndContext>
@@ -200,7 +219,11 @@ const FIELDS: Field[] = [
       const [selectedImpact, setSelectedImpact] = useState(null);
       return (
         <>
-          <SortableList items={org?.impacts} />
+          <SortableList
+            onOpen={onOpen}
+            setSelectedImpact={setSelectedImpact}
+            items={org?.impacts}
+          />
 
           <Button
             colorScheme="blue"
