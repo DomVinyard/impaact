@@ -174,7 +174,7 @@ const ImpactModal = ({
             {!isEditMode && (
               <FormControl isInvalid={errors["sdg"]}>
                 <FormLabel style={{ fontSize: 22 }} htmlFor={errors["sdg"]}>
-                  Closest SDG
+                  Global Goal
                 </FormLabel>
 
                 <Select {...register("sdg", {})}>

@@ -119,26 +119,49 @@ const OrgPageComponent = ({ org, loading }) => {
                         background={sdg?.color}
                         height={i === 0 ? 180 : 120}
                         borderLeft={{
-                          base: `6px solid ${sdgs[0].sdg?.color}`,
-                          md: `8px solid ${sdgs[0].sdg?.color}`,
+                          base: `8px solid ${sdgs[0].sdg?.color}`,
+                          md: `16px solid ${sdgs[0].sdg?.color}`,
                         }}
                         alignItems="center"
                         p={1}
                       >
-                        <Flex>
+                        <Flex alignItems="center" width={"200px"}>
                           <Image
                             src={`/images/sdg_trim/E-WEB-Goal-${sdg?.id}.png`}
                             height={8}
                             mr={2}
                             ml={2}
                           />
-                          <Text>{sdg.goal}</Text>
+                          <Text
+                            fontFamily="Oswald"
+                            fontWeight="600"
+                            textTransform="uppercase"
+                            textAlign="left"
+                            maxWidth={40}
+                            fontSize={{ base: "1.2em", md: "1.4em" }}
+                            lineHeight={{ base: 1, md: 1.2 }}
+                          >
+                            {sdg.goal}
+                          </Text>
                         </Flex>
-                        <Stack>
+                        <Stack flexGrow={1} mx={{ base: 3, md: 6 }}>
                           {impacts.map((impact) => (
-                            <Box>
-                              <Text>{impact.value}</Text>
-                              <Text>{impact.indicator}</Text>
+                            <Box
+                              backgroundColor="rgba(0,0,0,0.1)"
+                              textAlign="center"
+                              py={2}
+                            >
+                              <Text
+                                fontFamily="Oswald"
+                                fontWeight="600"
+                                fontSize={{ base: "1.4em", md: "1.8em" }}
+                                lineHeight={{ base: 1.2, md: 1.4 }}
+                              >
+                                {impact.value}
+                              </Text>
+                              <Text fontSize={{ base: "0.8em", md: "0.9em" }}>
+                                {impact.indicator}
+                              </Text>
                             </Box>
                           ))}
                         </Stack>
