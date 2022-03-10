@@ -57,6 +57,22 @@ const OrgPageComponent = ({ org, loading }) => {
     md: `16px solid ${topGoalColour}`,
   };
 
+  const SectionHeading = ({ children }) => (
+    <Text
+      backgroundColor={topGoalColour}
+      mt={12}
+      color="#fff"
+      display="inline-block"
+      paddingY={2}
+      paddingLeft={3}
+      paddingRight={5}
+      fontWeight={"bold"}
+      fontSize={{ base: "1.2em", md: "1.4em" }}
+    >
+      {children}
+    </Text>
+  );
+
   return (
     <>
       <Box textAlign={{ base: "center", md: "left" }} pb={{ base: 0, md: 160 }}>
@@ -189,28 +205,30 @@ const OrgPageComponent = ({ org, loading }) => {
                     );
                   })}
                 </Box>
-                <Box
+                <Stack
+                  alignItems="flex-start"
                   height={240}
-                  p={4}
+                  // p={4}
                   color={"#777"}
                   background={"#fff"}
                   borderLeft={sdgBorder}
+                  spacing={0}
                 >
-                  <Text backgroundColor={topGoalColour} color="#fff">
-                    Operations
-                  </Text>
-                </Box>
-                <Box
+                  <SectionHeading>Operations</SectionHeading>
+                  <Box width={"100%"} background={"#eee"} height={180}></Box>
+                </Stack>
+                <Stack
+                  alignItems="flex-start"
                   height={240}
-                  p={4}
+                  // p={4}
                   color={"#777"}
                   background={"#fff"}
                   borderLeft={sdgBorder}
+                  spacing={0}
                 >
-                  <Text backgroundColor={topGoalColour} color="#fff">
-                    Financials
-                  </Text>
-                </Box>
+                  <SectionHeading>Financials</SectionHeading>
+                  <Box width={"100%"} background={"#eee"} height={180}></Box>
+                </Stack>
               </Skeleton>
             </Box>
           </Stack>
