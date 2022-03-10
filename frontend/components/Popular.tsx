@@ -9,14 +9,20 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import OrgsList from "components/OrgsList";
-import { useFetchLatestQuery, useFetchFeaturedQuery } from "generated-graphql";
+import {
+  useFetchLatestQuery,
+  useFetchFeaturedQuery,
+  useMyOrgsQuery,
+} from "generated-graphql";
 import React, { useState } from "react";
 import Link from "next/link";
 import { AddIcon } from "@chakra-ui/icons";
 import { BsGridFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
+import { session } from "next-auth/client";
+import { useSession } from "next-auth/client";
 
-type TabIDs = "featured" | "latest";
+type TabIDs = "featured" | "latest" | "yours";
 type tab = {
   id: TabIDs;
   label: string;
@@ -75,7 +81,7 @@ const Controls = ({ tabs, handleSelectTab }) => {
 
       {/* Mobile */}
       <Flex
-        fontSize={22}
+        fontSize={19}
         display={{ base: "flex", md: "none" }}
         background={"#aaa"}
         borderBottom={"4px solid #eee"}
@@ -106,6 +112,8 @@ const PopularComponent = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const top = useBreakpointValue({ base: 5, md: 9, lg: 11 });
 
+  const [session] = useSession();
+
   const emptyList = Array.apply(null, Array(top)).map(() => ({}));
   const {
     data: featured_data,
@@ -121,6 +129,13 @@ const PopularComponent = () => {
   } = useFetchLatestQuery({
     variables: { top },
   });
+  // const {
+  //   data: yours_data,
+  //   error: yours_error,
+  //   loading: yours_loading,
+  // } = useMyOrgsQuery({
+  //   variables: { userId: session?.user?.id },
+  // });
   const tabs: tab[] = [
     { label: "Featured", id: "featured", isSelected: selected === "featured" },
     { label: "Latest", id: "latest", isSelected: selected === "latest" },

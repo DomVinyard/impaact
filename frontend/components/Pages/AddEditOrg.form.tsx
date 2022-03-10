@@ -302,6 +302,36 @@ const FIELDS: Field[] = [
     element: Textarea,
     validation: {},
   },
+
+  // Size
+  {
+    id: "size",
+    label: "Org Size",
+    element: Input,
+    validation: {},
+  },
+
+  // Founded
+  {
+    id: "founded_at",
+    label: "Date Founded",
+    element: Input,
+    validation: {},
+  },
+
+  // Links
+  {
+    id: "link_processes",
+    label: "Link to Processes",
+    element: Input,
+    validation: {},
+  },
+  {
+    id: "link_financials",
+    label: "Link to Financials",
+    element: Input,
+    validation: {},
+  },
 ];
 
 export default FIELDS;

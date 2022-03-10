@@ -209,15 +209,14 @@ const ImpactModal = ({
                       {isDirty ? "Cancel" : "Back"}
                     </Button>
                     <Button
-                      loadingText="Save"
+                      loadingText={isEditMode ? "Updating" : "Adding"}
                       colorScheme={"blue"}
-                      minW={150}
                       onClick={handleSubmit(onSubmit)}
                       isLoading={isSubmitting}
                       isDisabled={isValid && !isDirty}
                       type={"submit"}
                     >
-                      {isEditMode ? "Save" : "Add"}
+                      {isEditMode ? "Update" : "Add"}
                     </Button>
                   </ButtonGroup>
                 </Flex>

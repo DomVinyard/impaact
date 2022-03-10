@@ -51,7 +51,7 @@ const OrgPageComponent = ({ org, loading }) => {
     }, {})
   );
 
-  const topGoalColour = sdgs[0].sdg?.color;
+  const topGoalColour = sdgs[0]?.sdg?.color || "#777";
   const sdgBorder = {
     base: `8px solid ${topGoalColour}`,
     md: `16px solid ${topGoalColour}`,
@@ -76,7 +76,7 @@ const OrgPageComponent = ({ org, loading }) => {
     (typeof window !== "undefined" && window?.innerWidth) || 500;
 
   const mapWidth = isMobile ? screenWidth / 2 : 760 / 2;
-  const mapHeight = 220;
+  const mapHeight = isMobile ? 240 : 300;
 
   const RGBToBin = function (r, g, b) {
     var bin = (r << 16) | (g << 8) | b;
@@ -113,17 +113,17 @@ const OrgPageComponent = ({ org, loading }) => {
               </Stack>
 
               <Skeleton isLoaded={!loading}>
-                <Flex height={"200px"} color={"#777"}>
-                  <Box
-                    // backgroundImage={`/images/map_placeholder.png`}
-                    backgroundSize="cover"
-                    backgroundPosition={["center", "center"]}
-                    flex={1}
-                    overflow={"hidden"}
-                    justifyContent="center"
-                    alignItems="center"
-                  >
-                    {org.geography && (
+                <Flex height={{ base: "220px", md: "280px" }} color={"#777"}>
+                  {org.geography && (
+                    <Box
+                      backgroundColor={`#aadafe`}
+                      backgroundSize="cover"
+                      backgroundPosition={["center", "center"]}
+                      flex={1}
+                      overflow={"hidden"}
+                      justifyContent="center"
+                      alignItems="center"
+                    >
                       <StaticGoogleMap
                         size={`${mapWidth}x${mapHeight}`}
                         apiKey="AIzaSyAEsz877McL_8NQD7sRqiz420HjW4XHjIs"
@@ -139,8 +139,8 @@ const OrgPageComponent = ({ org, loading }) => {
                             />
                           ))}
                       </StaticGoogleMap>
-                    )}
-                  </Box>
+                    </Box>
+                  )}
                   <Box
                     backgroundImage={`url(${org.main_image})`}
                     backgroundSize="cover"
@@ -163,8 +163,8 @@ const OrgPageComponent = ({ org, loading }) => {
                           minHeight={i === 0 ? 180 : 120}
                           borderLeft={sdgBorder}
                           alignItems="center"
-                          p={1}
-                          py={{ base: 8, md: 6 }}
+                          py={{ base: 8, md: i === 0 ? 12 : 6 }}
+                          px={{ base: 1, md: 4 }}
                           textAlign="left"
                         >
                           <Stack flex={1} ml={2}>
@@ -188,7 +188,7 @@ const OrgPageComponent = ({ org, loading }) => {
                                 fontWeight="600"
                                 textTransform="uppercase"
                                 textAlign="left"
-                                maxWidth={"140px"}
+                                maxWidth={"150px"}
                                 fontSize={{ base: "1.2em", md: "1.4em" }}
                                 lineHeight={{ base: 1, md: 1.2 }}
                               >
@@ -196,7 +196,7 @@ const OrgPageComponent = ({ org, loading }) => {
                               </Text>
                             </Flex>
                             {i === 0 && (
-                              <Text opacity={0.8} pr={4}>
+                              <Text opacity={0.8} pr={4} maxWidth="300px">
                                 {sdg.description}
                               </Text>
                             )}

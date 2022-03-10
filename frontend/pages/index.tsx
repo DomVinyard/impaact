@@ -5,7 +5,7 @@ import { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/client";
 import AccessDeniedIndicator from "components/AccessDeniedIndicator";
 import ISession from "types/session";
-import Landing from "components/Pages/Home";
+import Home from "components/Pages/Home";
 import ClosedComponent from "components/Closed";
 
 interface IProps {
@@ -21,7 +21,7 @@ const IndexPage: NextPage<IProps> = ({ session }) => {
       <Head>
         <title>Impact PPS</title>
       </Head>
-      <Landing />
+      <Home />
     </>
   ) : (
     <ClosedComponent />

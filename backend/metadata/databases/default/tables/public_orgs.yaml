@@ -26,9 +26,13 @@ insert_permissions:
     columns:
     - author_id
     - description
+    - founded_at
     - geography
+    - link_financials
+    - link_processes
     - main_image
     - name
+    - size
     - slug
   role: user
 select_permissions:
@@ -38,10 +42,14 @@ select_permissions:
     - author_id
     - created_at
     - description
+    - founded_at
     - geography
     - id
+    - link_financials
+    - link_processes
     - main_image
     - name
+    - size
     - slug
     - updated_at
     filter: {}
@@ -52,10 +60,14 @@ select_permissions:
     - author_id
     - created_at
     - description
+    - founded_at
     - geography
     - id
+    - link_financials
+    - link_processes
     - main_image
     - name
+    - size
     - slug
     - updated_at
     filter: {}
@@ -65,9 +77,13 @@ update_permissions:
     check: null
     columns:
     - description
+    - founded_at
     - geography
+    - link_financials
+    - link_processes
     - main_image
     - name
+    - size
     - slug
     filter:
       author_id:
