@@ -151,7 +151,7 @@ const ImpactModal = ({
           <Stack spacing={4} my={12}>
             {FIELDS?.map((field) => {
               return (
-                <FormControl isInvalid={errors[field.id]}>
+                <FormControl key={field.id} isInvalid={errors[field.id]}>
                   <FormLabel
                     style={{ fontSize: 22 }}
                     htmlFor={errors[field.id]}
@@ -180,7 +180,11 @@ const ImpactModal = ({
                 <Select {...register("sdg", {})}>
                   <option value="">Select an SDG</option>
                   {SDG.map((sdg) => {
-                    return <option value={sdg.id}>{sdg.goal}</option>;
+                    return (
+                      <option key={sdg.id} value={sdg.id}>
+                        {sdg.goal}
+                      </option>
+                    );
                   })}
                 </Select>
                 <FormErrorMessage>

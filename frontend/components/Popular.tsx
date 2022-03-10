@@ -35,10 +35,15 @@ const Controls = ({ tabs, handleSelectTab }) => {
       {/* Wide */}
       <Flex
         display={{ base: "none", md: "flex" }}
-        marginTop={12}
+        marginTop={24}
         marginBottom={6}
       >
-        <Box flexGrow={1}></Box>
+        <Box flexGrow={1}>
+          <Button colorScheme="blue">Add organisation</Button>
+          <Button colorScheme="gray" ml={2} color="gray" variant="ghost">
+            Your organisations →
+          </Button>
+        </Box>
         <Box>
           <Select
             onChange={(e) => handleSelectTab(e.target.value)}

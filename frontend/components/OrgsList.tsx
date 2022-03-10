@@ -75,7 +75,7 @@ const OrgsList = ({ orgs, loading, after }: ListProps) => {
     >
       {orgs?.map((org: IOrg, index: number) => {
         return (
-          <Skeleton isLoaded={!loading}>
+          <Skeleton key={org.slug} isLoaded={!loading}>
             <GridItem
               key={org.slug}
               rowSpan={1}

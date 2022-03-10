@@ -8,6 +8,10 @@ query fetchOrg($slug: String) {
     description
     main_image
     geography
+    founded_at
+    size
+    link_processes
+    link_financials
     impacts(order_by: { priority: asc }) {
       id
       value

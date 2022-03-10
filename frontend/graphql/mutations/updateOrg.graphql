@@ -5,6 +5,10 @@ mutation updateOrg(
   $description: String
   $main_image: String!
   $geography: String
+  $size: String
+  $founded_at: String
+  $link_processes: String
+  $link_financials: String
 ) {
   update_orgs_by_pk(
     _set: {
@@ -13,6 +17,10 @@ mutation updateOrg(
       description: $description
       main_image: $main_image
       geography: $geography
+      size: $size
+      founded_at: $founded_at
+      link_processes: $link_processes
+      link_financials: $link_financials
     }
     pk_columns: { id: $id }
   ) {
@@ -23,5 +31,9 @@ mutation updateOrg(
     description
     main_image
     geography
+    size
+    founded_at
+    link_processes
+    link_financials
   }
 }

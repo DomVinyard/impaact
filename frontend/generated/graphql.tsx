@@ -975,14 +975,18 @@ export type Orgs = {
   author_id: Scalars["uuid"];
   created_at: Scalars["timestamptz"];
   description?: Maybe<Scalars["String"]>;
+  founded_at?: Maybe<Scalars["String"]>;
   geography?: Maybe<Scalars["String"]>;
   id: Scalars["uuid"];
   /** An array relationship */
   impacts: Array<Impact>;
   /** An aggregate relationship */
   impacts_aggregate: Impact_Aggregate;
+  link_financials?: Maybe<Scalars["String"]>;
+  link_processes?: Maybe<Scalars["String"]>;
   main_image?: Maybe<Scalars["String"]>;
   name: Scalars["String"];
+  size?: Maybe<Scalars["String"]>;
   slug: Scalars["String"];
   updated_at: Scalars["timestamptz"];
 };
@@ -1049,11 +1053,15 @@ export type Orgs_Bool_Exp = {
   author_id?: InputMaybe<Uuid_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
+  founded_at?: InputMaybe<String_Comparison_Exp>;
   geography?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   impacts?: InputMaybe<Impact_Bool_Exp>;
+  link_financials?: InputMaybe<String_Comparison_Exp>;
+  link_processes?: InputMaybe<String_Comparison_Exp>;
   main_image?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  size?: InputMaybe<String_Comparison_Exp>;
   slug?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
@@ -1072,11 +1080,15 @@ export type Orgs_Insert_Input = {
   author_id?: InputMaybe<Scalars["uuid"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   description?: InputMaybe<Scalars["String"]>;
+  founded_at?: InputMaybe<Scalars["String"]>;
   geography?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["uuid"]>;
   impacts?: InputMaybe<Impact_Arr_Rel_Insert_Input>;
+  link_financials?: InputMaybe<Scalars["String"]>;
+  link_processes?: InputMaybe<Scalars["String"]>;
   main_image?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
+  size?: InputMaybe<Scalars["String"]>;
   slug?: InputMaybe<Scalars["String"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
 };
@@ -1087,10 +1099,14 @@ export type Orgs_Max_Fields = {
   author_id?: Maybe<Scalars["uuid"]>;
   created_at?: Maybe<Scalars["timestamptz"]>;
   description?: Maybe<Scalars["String"]>;
+  founded_at?: Maybe<Scalars["String"]>;
   geography?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["uuid"]>;
+  link_financials?: Maybe<Scalars["String"]>;
+  link_processes?: Maybe<Scalars["String"]>;
   main_image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
+  size?: Maybe<Scalars["String"]>;
   slug?: Maybe<Scalars["String"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
@@ -1100,10 +1116,14 @@ export type Orgs_Max_Order_By = {
   author_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
+  founded_at?: InputMaybe<Order_By>;
   geography?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  link_financials?: InputMaybe<Order_By>;
+  link_processes?: InputMaybe<Order_By>;
   main_image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  size?: InputMaybe<Order_By>;
   slug?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -1114,10 +1134,14 @@ export type Orgs_Min_Fields = {
   author_id?: Maybe<Scalars["uuid"]>;
   created_at?: Maybe<Scalars["timestamptz"]>;
   description?: Maybe<Scalars["String"]>;
+  founded_at?: Maybe<Scalars["String"]>;
   geography?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["uuid"]>;
+  link_financials?: Maybe<Scalars["String"]>;
+  link_processes?: Maybe<Scalars["String"]>;
   main_image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
+  size?: Maybe<Scalars["String"]>;
   slug?: Maybe<Scalars["String"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
@@ -1127,10 +1151,14 @@ export type Orgs_Min_Order_By = {
   author_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
+  founded_at?: InputMaybe<Order_By>;
   geography?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  link_financials?: InputMaybe<Order_By>;
+  link_processes?: InputMaybe<Order_By>;
   main_image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  size?: InputMaybe<Order_By>;
   slug?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -1164,11 +1192,15 @@ export type Orgs_Order_By = {
   author_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
+  founded_at?: InputMaybe<Order_By>;
   geography?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   impacts_aggregate?: InputMaybe<Impact_Aggregate_Order_By>;
+  link_financials?: InputMaybe<Order_By>;
+  link_processes?: InputMaybe<Order_By>;
   main_image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  size?: InputMaybe<Order_By>;
   slug?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -1187,13 +1219,21 @@ export enum Orgs_Select_Column {
   /** column name */
   Description = "description",
   /** column name */
+  FoundedAt = "founded_at",
+  /** column name */
   Geography = "geography",
   /** column name */
   Id = "id",
   /** column name */
+  LinkFinancials = "link_financials",
+  /** column name */
+  LinkProcesses = "link_processes",
+  /** column name */
   MainImage = "main_image",
   /** column name */
   Name = "name",
+  /** column name */
+  Size = "size",
   /** column name */
   Slug = "slug",
   /** column name */
@@ -1205,10 +1245,14 @@ export type Orgs_Set_Input = {
   author_id?: InputMaybe<Scalars["uuid"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   description?: InputMaybe<Scalars["String"]>;
+  founded_at?: InputMaybe<Scalars["String"]>;
   geography?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["uuid"]>;
+  link_financials?: InputMaybe<Scalars["String"]>;
+  link_processes?: InputMaybe<Scalars["String"]>;
   main_image?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
+  size?: InputMaybe<Scalars["String"]>;
   slug?: InputMaybe<Scalars["String"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
 };
@@ -1222,13 +1266,21 @@ export enum Orgs_Update_Column {
   /** column name */
   Description = "description",
   /** column name */
+  FoundedAt = "founded_at",
+  /** column name */
   Geography = "geography",
   /** column name */
   Id = "id",
   /** column name */
+  LinkFinancials = "link_financials",
+  /** column name */
+  LinkProcesses = "link_processes",
+  /** column name */
   MainImage = "main_image",
   /** column name */
   Name = "name",
+  /** column name */
+  Size = "size",
   /** column name */
   Slug = "slug",
   /** column name */
@@ -2211,6 +2263,10 @@ export type InsertOrgMutationVariables = Exact<{
   description?: InputMaybe<Scalars["String"]>;
   main_image: Scalars["String"];
   geography?: InputMaybe<Scalars["String"]>;
+  size?: InputMaybe<Scalars["String"]>;
+  founded_at?: InputMaybe<Scalars["String"]>;
+  link_processes?: InputMaybe<Scalars["String"]>;
+  link_financials?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type InsertOrgMutation = {
@@ -2225,13 +2281,16 @@ export type InsertOrgMutation = {
         description?: string | undefined;
         main_image?: string | undefined;
         geography?: string | undefined;
+        size?: string | undefined;
+        founded_at?: string | undefined;
+        link_processes?: string | undefined;
+        link_financials?: string | undefined;
       }
     | undefined;
 };
 
 export type UpdateImpactMutationVariables = Exact<{
   id: Scalars["uuid"];
-  indicator: Scalars["String"];
   value: Scalars["numeric"];
   sdg: Scalars["String"];
 }>;
@@ -2239,13 +2298,7 @@ export type UpdateImpactMutationVariables = Exact<{
 export type UpdateImpactMutation = {
   __typename?: "mutation_root";
   update_impact_by_pk?:
-    | {
-        __typename?: "impact";
-        id: any;
-        indicator: string;
-        value: number;
-        sdg: string;
-      }
+    | { __typename?: "impact"; id: any; value: number; sdg: string }
     | undefined;
 };
 
@@ -2268,6 +2321,10 @@ export type UpdateOrgMutationVariables = Exact<{
   description?: InputMaybe<Scalars["String"]>;
   main_image: Scalars["String"];
   geography?: InputMaybe<Scalars["String"]>;
+  size?: InputMaybe<Scalars["String"]>;
+  founded_at?: InputMaybe<Scalars["String"]>;
+  link_processes?: InputMaybe<Scalars["String"]>;
+  link_financials?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type UpdateOrgMutation = {
@@ -2282,6 +2339,10 @@ export type UpdateOrgMutation = {
         description?: string | undefined;
         main_image?: string | undefined;
         geography?: string | undefined;
+        size?: string | undefined;
+        founded_at?: string | undefined;
+        link_processes?: string | undefined;
+        link_financials?: string | undefined;
       }
     | undefined;
 };
@@ -2383,6 +2444,10 @@ export type FetchOrgQuery = {
     description?: string | undefined;
     main_image?: string | undefined;
     geography?: string | undefined;
+    founded_at?: string | undefined;
+    size?: string | undefined;
+    link_processes?: string | undefined;
+    link_financials?: string | undefined;
     impacts: Array<{
       __typename?: "impact";
       id: any;
@@ -2799,6 +2864,10 @@ export const InsertOrgDocument = gql`
     $description: String
     $main_image: String!
     $geography: String
+    $size: String
+    $founded_at: String
+    $link_processes: String
+    $link_financials: String
   ) {
     insert_orgs_one(
       object: {
@@ -2808,6 +2877,10 @@ export const InsertOrgDocument = gql`
         description: $description
         main_image: $main_image
         geography: $geography
+        size: $size
+        founded_at: $founded_at
+        link_processes: $link_processes
+        link_financials: $link_financials
       }
     ) {
       id
@@ -2817,6 +2890,10 @@ export const InsertOrgDocument = gql`
       description
       main_image
       geography
+      size
+      founded_at
+      link_processes
+      link_financials
     }
   }
 `;
@@ -2890,6 +2967,10 @@ export function withInsertOrg<
  *      description: // value for 'description'
  *      main_image: // value for 'main_image'
  *      geography: // value for 'geography'
+ *      size: // value for 'size'
+ *      founded_at: // value for 'founded_at'
+ *      link_processes: // value for 'link_processes'
+ *      link_financials: // value for 'link_financials'
  *   },
  * });
  */
@@ -2914,18 +2995,12 @@ export type InsertOrgMutationOptions = Apollo.BaseMutationOptions<
   InsertOrgMutationVariables
 >;
 export const UpdateImpactDocument = gql`
-  mutation updateImpact(
-    $id: uuid!
-    $indicator: String!
-    $value: numeric!
-    $sdg: String!
-  ) {
+  mutation updateImpact($id: uuid!, $value: numeric!, $sdg: String!) {
     update_impact_by_pk(
-      _set: { indicator: $indicator, value: $value, sdg: $sdg }
+      _set: { value: $value, sdg: $sdg }
       pk_columns: { id: $id }
     ) {
       id
-      indicator
       value
       sdg
     }
@@ -2999,7 +3074,6 @@ export function withUpdateImpact<
  * const [updateImpactMutation, { data, loading, error }] = useUpdateImpactMutation({
  *   variables: {
  *      id: // value for 'id'
- *      indicator: // value for 'indicator'
  *      value: // value for 'value'
  *      sdg: // value for 'sdg'
  *   },
@@ -3140,6 +3214,10 @@ export const UpdateOrgDocument = gql`
     $description: String
     $main_image: String!
     $geography: String
+    $size: String
+    $founded_at: String
+    $link_processes: String
+    $link_financials: String
   ) {
     update_orgs_by_pk(
       _set: {
@@ -3148,6 +3226,10 @@ export const UpdateOrgDocument = gql`
         description: $description
         main_image: $main_image
         geography: $geography
+        size: $size
+        founded_at: $founded_at
+        link_processes: $link_processes
+        link_financials: $link_financials
       }
       pk_columns: { id: $id }
     ) {
@@ -3158,6 +3240,10 @@ export const UpdateOrgDocument = gql`
       description
       main_image
       geography
+      size
+      founded_at
+      link_processes
+      link_financials
     }
   }
 `;
@@ -3231,6 +3317,10 @@ export function withUpdateOrg<
  *      description: // value for 'description'
  *      main_image: // value for 'main_image'
  *      geography: // value for 'geography'
+ *      size: // value for 'size'
+ *      founded_at: // value for 'founded_at'
+ *      link_processes: // value for 'link_processes'
+ *      link_financials: // value for 'link_financials'
  *   },
  * });
  */
@@ -3459,7 +3549,15 @@ export type CountOrgsQueryResult = Apollo.QueryResult<
 >;
 export const FetchFeaturedDocument = gql`
   query fetchFeatured($top: Int) {
-    orgs(order_by: { name: asc }, limit: $top) {
+    orgs(
+      order_by: { name: asc }
+      limit: $top
+      where: {
+        main_image: { _is_null: false }
+        geography: { _is_null: false }
+        impacts: { id: { _is_null: false } }
+      }
+    ) {
       id
       created_at
       name
@@ -3467,7 +3565,7 @@ export const FetchFeaturedDocument = gql`
       description
       main_image
       geography
-      impacts(order_by: { priority: asc }) {
+      impacts(order_by: { priority: asc }, limit: 1) {
         id
         value
         indicator
@@ -3698,6 +3796,10 @@ export const FetchOrgDocument = gql`
       description
       main_image
       geography
+      founded_at
+      size
+      link_processes
+      link_financials
       impacts(order_by: { priority: asc }) {
         id
         value
@@ -5273,6 +5375,11 @@ export type OrgsResolvers<
     ParentType,
     ContextType
   >;
+  founded_at?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   geography?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
@@ -5291,12 +5398,23 @@ export type OrgsResolvers<
     ContextType,
     Partial<OrgsImpacts_AggregateArgs>
   >;
+  link_financials?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  link_processes?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   main_image?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
     ContextType
   >;
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  size?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -5353,18 +5471,34 @@ export type Orgs_Max_FieldsResolvers<
     ParentType,
     ContextType
   >;
+  founded_at?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   geography?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
     ContextType
   >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  link_financials?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  link_processes?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   main_image?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
     ContextType
   >;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  size?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   updated_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,
@@ -5389,18 +5523,34 @@ export type Orgs_Min_FieldsResolvers<
     ParentType,
     ContextType
   >;
+  founded_at?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   geography?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
     ContextType
   >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  link_financials?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  link_processes?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   main_image?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
     ContextType
   >;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  size?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   updated_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,

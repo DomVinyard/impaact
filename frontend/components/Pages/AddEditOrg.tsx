@@ -33,7 +33,7 @@ import { useForm } from "react-hook-form";
 import FIELDS from "./AddEditOrg.form";
 
 const AddEditOrgForm = ({ org, refetch, isLoading }) => {
-  console.log("initial", org);
+  // console.log("initial", org);
   const {
     register,
     handleSubmit,
@@ -54,7 +54,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const [session] = useSession();
   const isEditMode = !!org;
-  console.log({ values });
+  // console.log({ values });
 
   const [insertOrg, { loading: insertOrgFetching, error: insertOrgError }] =
     useInsertOrgMutation();
@@ -68,6 +68,9 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
   const isUpdating =
     insertOrgFetching || updateOrgFetching || deleteOrgFetching;
 
+  // if (insertOrgError || updateOrgError || deleteOrgError) {
+  // console.error({ insertOrgError, updateOrgError, deleteOrgError });
+  // }
   const handleDelete = async () => {
     if (!confirm("Are you sure you want to delete this org?")) return;
     // setIsSubmitted("deleting");
@@ -80,13 +83,20 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
     // setIsSubmitted(isEditMode ? "Updating report" : "Creating report");
     try {
       if (isEditMode) {
-        await updateOrg({ variables: { id: org.id, ...values } });
+        console.log({ values });
+        await updateOrg({
+          variables: {
+            id: org.id,
+            ...values,
+            founded_at: new Date(values.founded_at),
+          },
+        });
 
         values.impacts.forEach(async (item, index) => {
           // set the index in the db
           const variables = { impactID: item.id, priority: index };
           try {
-            console.log({ variables });
+            // console.log({ variables });
             updateImpactPriority({ variables });
           } catch (error) {
             console.error(error);
@@ -121,7 +131,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
           <Stack spacing={4} my={12}>
             {/* Fields */}
             {FIELDS?.map((field) => (
-              <Box paddingBottom={8}>
+              <Box key={field.id} paddingBottom={8}>
                 <FormControl isInvalid={errors[field.id]}>
                   {field.before && (
                     <field.before values={values} isEditMode={isEditMode} />
@@ -179,8 +189,8 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
         zIndex={1}
         background={"black"}
         left={0}
-        top={{ base: 0, md: "auto" }}
-        bottom={{ base: "auto", md: 0 }}
+        top={{ base: 0, md: 0 }}
+        // bottom={{ base: "auto", md: 0 }}
         p={6}
       >
         <Content isFull>

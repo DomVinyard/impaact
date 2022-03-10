@@ -40,7 +40,7 @@ export default [
   {
     id: "06",
     number: 6,
-    goal: "clean water and sanitation",
+    goal: "clean water & sanitation",
     color: "#27bde2",
     description:
       "Ensure availability and sustainable management of water and sanitation for all.",

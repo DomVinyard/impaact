@@ -35,6 +35,18 @@ const MyOrgBar = () => {
   );
 };
 
+const Operations = ({ org }) => {
+  return (
+    <Box width={"100%"} background={"#eee"} height={180}>
+      {JSON.stringify({
+        size: org.size || "unknown",
+        processes: org.link_processes || "unknown",
+        established: org.founded_at || "unknown",
+      })}
+    </Box>
+  );
+};
+
 const OrgPageComponent = ({ org, loading }) => {
   const [session] = useSession();
   const isMyOrg = session?.id === org?.author_id;
@@ -50,6 +62,9 @@ const OrgPageComponent = ({ org, loading }) => {
       return acc;
     }, {})
   );
+  console.log({ org });
+
+  // console.log({ org });
 
   const topGoalColour = sdgs[0]?.sdg?.color || "#777";
   const sdgBorder = {
@@ -77,13 +92,6 @@ const OrgPageComponent = ({ org, loading }) => {
 
   const mapWidth = isMobile ? screenWidth / 2 : 760 / 2;
   const mapHeight = isMobile ? 240 : 300;
-
-  const RGBToBin = function (r, g, b) {
-    var bin = (r << 16) | (g << 8) | b;
-    return (function (h) {
-      return new Array(25 - h.length).join("0") + h;
-    })(bin.toString(2));
-  };
 
   return (
     <>
@@ -133,6 +141,7 @@ const OrgPageComponent = ({ org, loading }) => {
                           .filter(Boolean)
                           .map((location) => (
                             <Marker
+                              key={location}
                               size="normal"
                               location={location.trim()}
                               color={sdgs[0]?.sdg?.color.replace("#", "0x")}
@@ -155,7 +164,7 @@ const OrgPageComponent = ({ org, loading }) => {
                   {sdgs.map(({ sdg, impacts }: any, i) => {
                     const impactCount = i === 0 ? 3 : 1;
                     return (
-                      <Box>
+                      <Box key={`sdg_${sdg.id}`}>
                         <Flex
                           justifyContent="space-between"
                           color="#fff"
@@ -175,12 +184,11 @@ const OrgPageComponent = ({ org, loading }) => {
                               <Flex
                                 width={{ base: "40px", md: "50px" }}
                                 padding={1}
-                                mr={1}
+                                mr={2}
                               >
                                 <Image
                                   src={`/images/sdg_trim/E-WEB-Goal-${sdg?.id}.png`}
                                   width={"100%"}
-                                  mr={2}
                                 />
                               </Flex>
                               <Text
@@ -189,21 +197,27 @@ const OrgPageComponent = ({ org, loading }) => {
                                 textTransform="uppercase"
                                 textAlign="left"
                                 maxWidth={"150px"}
-                                fontSize={{ base: "1.2em", md: "1.4em" }}
+                                fontSize={
+                                  i === 0
+                                    ? { base: "1.3em", md: "1.6em" }
+                                    : { base: "1em", md: "1.2em" }
+                                }
                                 lineHeight={{ base: 1, md: 1.2 }}
                               >
                                 {sdg.goal}
                               </Text>
                             </Flex>
                             {i === 0 && (
-                              <Text opacity={0.8} pr={4} maxWidth="300px">
-                                {sdg.description}
-                              </Text>
-                            )}
-                            {!isMobile && (
-                              <Text fontWeight="bold" paddingTop={3}>
-                                Explore data →
-                              </Text>
+                              <>
+                                <Text opacity={0.8} pr={4} maxWidth="300px">
+                                  {sdg.description}
+                                </Text>
+                                <Text fontWeight="bold" paddingTop={3}>
+                                  {isMobile
+                                    ? `Explore data →`
+                                    : "Explore impact data →"}
+                                </Text>
+                              </>
                             )}
                           </Stack>
                           <Stack
@@ -220,6 +234,7 @@ const OrgPageComponent = ({ org, loading }) => {
                                   backgroundColor="rgba(0,0,0,0.1)"
                                   textAlign="center"
                                   py={2}
+                                  key={`impact_${impact.id}`}
                                 >
                                   <Text
                                     fontFamily="Oswald"
@@ -252,20 +267,34 @@ const OrgPageComponent = ({ org, loading }) => {
                   spacing={0}
                 >
                   <SectionHeading>Operations</SectionHeading>
-                  <Box width={"100%"} background={"#eee"} height={180}></Box>
+                  <Operations org={org} />
                 </Stack>
-                <Stack
-                  alignItems="flex-start"
-                  height={240}
-                  // p={4}
-                  color={"#777"}
-                  background={"#fff"}
-                  borderLeft={sdgBorder}
-                  spacing={0}
-                >
-                  <SectionHeading>Financials</SectionHeading>
-                  <Box width={"100%"} background={"#eee"} height={180}></Box>
-                </Stack>
+                {org.link_financials && (
+                  <Stack
+                    alignItems="flex-start"
+                    height={240}
+                    // p={4}
+                    color={"#777"}
+                    background={"#fff"}
+                    borderLeft={sdgBorder}
+                    spacing={0}
+                  >
+                    <SectionHeading>Financials</SectionHeading>
+                    <Flex
+                      width={"100%"}
+                      background={"#eee"}
+                      height={180}
+                      backgroundImage={
+                        "url(https://static.vecteezy.com/system/resources/previews/000/173/675/non_2x/spreadsheet-illustration-vector.jpg)"
+                      }
+                      backgroundPosition="top center"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <Button colorScheme="blue">View Financials →</Button>
+                    </Flex>
+                  </Stack>
+                )}
               </Skeleton>
             </Box>
           </Stack>
