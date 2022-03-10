@@ -49,7 +49,7 @@ export function ImpactCard({ id, item, onEdit }) {
       {/* ... */} {/* <ListItem> */}
       <Stack mb={2} background="#eee">
         <Flex
-          justifyContent="space-between"
+          // justifyContent="space-between"
           color="#fff"
           background={SDG?.color}
           alignItems="center"
@@ -58,23 +58,35 @@ export function ImpactCard({ id, item, onEdit }) {
           <Image
             src={`/images/sdg_trim/E-WEB-Goal-${SDG?.id}.png`}
             height={8}
-            mr={2}
+            // mr={1}
             ml={2}
           />
           <Text
             p={1}
             ml={2}
             textTransform="uppercase"
-            fontWeight="bold"
             fontSize={20}
-            opacity={0.5}
+            opacity={0.7}
+            fontFamily="Oswald"
+            fontWeight="600"
           >
             {SDG?.goal}
           </Text>
         </Flex>
-        <Flex p={3} pb={5} justifyContent="space-between" alignItems="center">
+        <Flex
+          p={3}
+          pl={5}
+          pb={5}
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Box>
-            <Text fontSize={24} lineHeight={1}>
+            <Text
+              fontSize={28}
+              lineHeight={1}
+              fontWeight="900"
+              color={SDG?.color}
+            >
               {item.value}
             </Text>
             <Text fontSize={16}>{item.indicator}</Text>
@@ -97,40 +109,29 @@ export function ImpactCard({ id, item, onEdit }) {
 
 // import { SortableItem } from "./SortableItem";
 
-function SortableList({ items: initialItems, onOpen, setSelectedImpact }) {
-  const [updateImpactPriority, { error, loading }] =
-    useUpdateImpactPriorityMutation();
+function SortableList({
+  items: initialItems,
+  onOpen,
+  setSelectedImpact,
+  onChange,
+}) {
   const [items, setItems] = useState(initialItems);
-  useEffect(() => {
-    setItems(initialItems);
-  }, [initialItems]);
+  useEffect(() => setItems(initialItems), [initialItems]);
   const sensors = useSensors(
     useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
-  function saveSortOrder(newOrder) {
-    newOrder.forEach(async (item, index) => {
-      // set the index in the db
-      const variables = { impactID: item.id, priority: index };
-      try {
-        updateImpactPriority({ variables });
-      } catch (error) {
-        console.error(error);
-      }
-    });
-  }
-
-  function handleDragEnd(event) {
+  async function handleDragEnd(event) {
     const { active, over } = event;
     if (active.id !== over.id) {
       setItems((items) => {
         const oldIndex = items.map(({ id }) => id).indexOf(active.id);
         const newIndex = items.map(({ id }) => id).indexOf(over.id);
         const newOrder = arrayMove(items, oldIndex, newIndex);
-        saveSortOrder(newOrder);
+        // saveSortOrder(newOrder);
+        const changeObject = { target: { name: "impacts", value: newOrder } };
+        onChange(changeObject);
         return newOrder;
       });
     }
@@ -257,7 +258,7 @@ const FIELDS: Field[] = [
 
   // Impact
   {
-    id: "impact",
+    id: "impacts",
     label: "Impacts",
     element: Textarea,
     validation: {},
@@ -270,6 +271,7 @@ const FIELDS: Field[] = [
             onOpen={onOpen}
             setSelectedImpact={setSelectedImpact}
             items={org?.impacts}
+            onChange={onChange}
           />
 
           <Button

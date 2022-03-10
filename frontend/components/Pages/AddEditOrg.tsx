@@ -18,6 +18,7 @@ import AccessDeniedIndicator from "components/AccessDeniedIndicator";
 import {
   useDeleteOrgMutation,
   useInsertOrgMutation,
+  useUpdateImpactPriorityMutation,
   useUpdateOrgMutation,
 } from "generated-graphql";
 import { useSession } from "next-auth/client";
@@ -32,6 +33,7 @@ import { useForm } from "react-hook-form";
 import FIELDS from "./AddEditOrg.form";
 
 const AddEditOrgForm = ({ org, refetch, isLoading }) => {
+  console.log("initial", org);
   const {
     register,
     handleSubmit,
@@ -43,12 +45,16 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
       ...org,
     },
   });
+
+  const [updateImpactPriority, { error, loading }] =
+    useUpdateImpactPriorityMutation();
   useEffect(() => !isLoading && reset(org), [isLoading]);
   const values = watch();
   // const [isSubmitted, setIsSubmitted] = useState("");
   const isMobile = useBreakpointValue({ base: true, md: false });
   const [session] = useSession();
   const isEditMode = !!org;
+  console.log({ values });
 
   const [insertOrg, { loading: insertOrgFetching, error: insertOrgError }] =
     useInsertOrgMutation();
@@ -75,12 +81,24 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
     try {
       if (isEditMode) {
         await updateOrg({ variables: { id: org.id, ...values } });
+
+        values.impacts.forEach(async (item, index) => {
+          // set the index in the db
+          const variables = { impactID: item.id, priority: index };
+          try {
+            console.log({ variables });
+            updateImpactPriority({ variables });
+          } catch (error) {
+            console.error(error);
+          }
+        });
       } else {
         await insertOrg({ variables: { author_id: session.id, ...values } });
       }
     } catch (e) {
       console.log(e);
     }
+
     router.push(`/${values.slug}`);
   };
 

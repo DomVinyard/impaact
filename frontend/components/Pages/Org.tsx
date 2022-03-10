@@ -103,9 +103,12 @@ const OrgPageComponent = ({ org, loading }) => {
                         size="600x600"
                         apiKey="AIzaSyAEsz877McL_8NQD7sRqiz420HjW4XHjIs"
                       >
-                        {org.geography.split(",").map((location) => (
-                          <Marker location={location.trim()} />
-                        ))}
+                        {org.geography
+                          .split(",")
+                          .filter(Boolean)
+                          .map((location) => (
+                            <Marker location={location.trim()} />
+                          ))}
                       </StaticGoogleMap>
                     )}
                   </Box>
