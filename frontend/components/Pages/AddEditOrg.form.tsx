@@ -47,21 +47,21 @@ export function ImpactCard({ id, item, onEdit }) {
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
       {/* ... */} {/* <ListItem> */}
-      <Stack mb={2} background="#eee">
+      <Flex mb={2} background="#eee">
         <Flex
           // justifyContent="space-between"
           color="#fff"
           background={SDG?.color}
+          w={{ base: "70px", md: "90px" }}
+          justifyContent="center"
           alignItems="center"
-          p={1}
         >
           <Image
             src={`/images/sdg_trim/E-WEB-Goal-${SDG?.id}.png`}
             height={8}
             // mr={1}
-            ml={2}
           />
-          <Text
+          {/* <Text
             p={1}
             ml={2}
             textTransform="uppercase"
@@ -71,16 +71,16 @@ export function ImpactCard({ id, item, onEdit }) {
             fontWeight="600"
           >
             {SDG?.goal}
-          </Text>
+          </Text> */}
         </Flex>
         <Flex
-          p={3}
+          p={5}
           pl={5}
-          pb={5}
           justifyContent="space-between"
           alignItems="center"
+          flexGrow={1}
         >
-          <Box>
+          <Stack spacing={0}>
             <Text
               fontSize={28}
               lineHeight={1}
@@ -90,7 +90,7 @@ export function ImpactCard({ id, item, onEdit }) {
               {item.value}
             </Text>
             <Text fontSize={16}>{item.indicator}</Text>
-          </Box>
+          </Stack>
           <Button
             onMouseDown={onEdit}
             // variant="ghost"
@@ -98,10 +98,10 @@ export function ImpactCard({ id, item, onEdit }) {
             mr={1}
             size="sm"
           >
-            update
+            Update
           </Button>
         </Flex>
-      </Stack>
+      </Flex>
       {/* </ListItem> */}
     </div>
   );
@@ -202,6 +202,45 @@ const FIELDS: Field[] = [
     },
   },
 
+  // Impact
+  {
+    id: "impacts",
+    label: "Impacts",
+    element: Textarea,
+    validation: {},
+    custom: ({ values, isEditMode, onChange, org, refetch }) => {
+      const { isOpen, onOpen, onClose } = useDisclosure();
+      const [selectedImpact, setSelectedImpact] = useState(null);
+      return (
+        <>
+          <SortableList
+            onOpen={onOpen}
+            setSelectedImpact={setSelectedImpact}
+            items={org?.impacts}
+            onChange={onChange}
+          />
+
+          <Button
+            colorScheme="blue"
+            onClick={() => {
+              setSelectedImpact({ indicator: "", value: "", sdg: "" });
+              onOpen();
+            }}
+          >
+            Add impact
+          </Button>
+          <ImpactModal
+            refetchList={refetch}
+            isOpen={isOpen}
+            onClose={onClose}
+            impact={selectedImpact}
+            org={org}
+          />
+        </>
+      );
+    },
+  },
+
   // Short description
   {
     id: "description",
@@ -252,45 +291,6 @@ const FIELDS: Field[] = [
             {isEditMode ? "Change" : "Upload"}
           </Button>
         </Flex>
-      );
-    },
-  },
-
-  // Impact
-  {
-    id: "impacts",
-    label: "Impacts",
-    element: Textarea,
-    validation: {},
-    custom: ({ values, isEditMode, onChange, org, refetch }) => {
-      const { isOpen, onOpen, onClose } = useDisclosure();
-      const [selectedImpact, setSelectedImpact] = useState(null);
-      return (
-        <>
-          <SortableList
-            onOpen={onOpen}
-            setSelectedImpact={setSelectedImpact}
-            items={org?.impacts}
-            onChange={onChange}
-          />
-
-          <Button
-            colorScheme="blue"
-            onClick={() => {
-              setSelectedImpact({ indicator: "", value: "", sdg: "" });
-              onOpen();
-            }}
-          >
-            Add impact
-          </Button>
-          <ImpactModal
-            refetchList={refetch}
-            isOpen={isOpen}
-            onClose={onClose}
-            impact={selectedImpact}
-            org={org}
-          />
-        </>
       );
     },
   },

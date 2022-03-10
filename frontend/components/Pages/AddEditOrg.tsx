@@ -117,7 +117,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={4}>
         {errorNode()}
-        <Box p={4} maxW={760}>
+        <Box maxW={760}>
           <Stack spacing={4} my={12}>
             {/* Fields */}
             {FIELDS?.map((field) => (
@@ -159,41 +159,59 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
               </Box>
             ))}
 
-            {/* Buttons */}
-            <FormControl>
-              <Flex mt={6} justifyContent={"space-between"} mb={16}>
-                {isEditMode && (
-                  <Button
-                    marginRight={"auto"}
-                    colorScheme="red"
-                    variant="outline"
-                    leftIcon={<DeleteIcon />}
-                    onClick={handleDelete}
-                  >
-                    Delete{!isMobile && " Organisation"}
-                  </Button>
-                )}
-                <ButtonGroup>
-                  <Button onClick={() => router.back()}>
-                    {isDirty ? "Cancel" : "Back"}
-                  </Button>
-                  <Button
-                    loadingText="Posting..."
-                    colorScheme={"blue"}
-                    minW={150}
-                    onClick={handleSubmit}
-                    isLoading={isSubmitting}
-                    isDisabled={isValid && !isDirty}
-                    type={"submit"}
-                  >
-                    {isEditMode ? "Save" : "Add"}
-                  </Button>
-                </ButtonGroup>
-              </Flex>
-            </FormControl>
+            {isEditMode && (
+              <Button
+                marginRight={"auto"}
+                colorScheme="red"
+                variant="outline"
+                leftIcon={<DeleteIcon />}
+                onClick={handleDelete}
+              >
+                Delete{!isMobile && " Organisation"}
+              </Button>
+            )}
           </Stack>
         </Box>
       </Stack>
+      {/* Buttons */}
+      <FormControl
+        position="fixed"
+        zIndex={1}
+        background={"black"}
+        left={0}
+        top={{ base: 0, md: "auto" }}
+        bottom={{ base: "auto", md: 0 }}
+        p={6}
+      >
+        <Content isFull>
+          <Flex
+            maxW={760}
+            justifyContent={isDirty ? "flex-end" : "space-between"}
+          >
+            <Button
+              variant={isDirty ? "outline" : "ghost"}
+              padding={isDirty ? 4 : 0}
+              colorScheme="gray"
+              color={"gray"}
+              onClick={() => router.back()}
+            >
+              {isDirty ? "Cancel" : `← Back to ${values.name}`}
+            </Button>
+            <Button
+              loadingText="Saving..."
+              colorScheme={"gray"}
+              minW={150}
+              onClick={handleSubmit}
+              isLoading={isSubmitting}
+              isDisabled={isValid && !isDirty}
+              type={"submit"}
+              ml={3}
+            >
+              {isEditMode ? "Save" : "Add"}
+            </Button>
+          </Flex>
+        </Content>
+      </FormControl>
     </form>
   );
 };
