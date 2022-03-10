@@ -190,12 +190,13 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
           >
             <Button
               variant={isDirty ? "outline" : "ghost"}
-              padding={isDirty ? 4 : 0}
               colorScheme="gray"
               color={"gray"}
               onClick={() => router.back()}
             >
-              {isDirty ? "Cancel" : `← Back to ${values.name}`}
+              {isDirty
+                ? "Cancel"
+                : `← Back to ${isMobile ? "report" : values.name}`}
             </Button>
             <Button
               loadingText="Saving..."

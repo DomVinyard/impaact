@@ -148,27 +148,44 @@ const OrgPageComponent = ({ org, loading }) => {
                           borderLeft={sdgBorder}
                           alignItems="center"
                           p={1}
-                          py={6}
+                          py={{ base: 8, md: 6 }}
+                          textAlign="left"
                         >
-                          <Flex alignItems="center" width={"200px"} flex={1}>
-                            <Image
-                              src={`/images/sdg_trim/E-WEB-Goal-${sdg?.id}.png`}
-                              height={8}
-                              mr={2}
-                              ml={2}
-                            />
-                            <Text
-                              fontFamily="Oswald"
-                              fontWeight="600"
-                              textTransform="uppercase"
-                              textAlign="left"
-                              maxWidth={40}
-                              fontSize={{ base: "1.2em", md: "1.4em" }}
-                              lineHeight={{ base: 1, md: 1.2 }}
+                          <Stack flex={1} ml={2}>
+                            <Flex
+                              alignItems="center"
+                              justifyContent="flex-start"
                             >
-                              {sdg.goal}
-                            </Text>
-                          </Flex>
+                              <Flex
+                                width={{ base: "40px", md: "50px" }}
+                                padding={1}
+                                mr={1}
+                              >
+                                <Image
+                                  src={`/images/sdg_trim/E-WEB-Goal-${sdg?.id}.png`}
+                                  width={"100%"}
+                                  mr={2}
+                                />
+                              </Flex>
+                              <Text
+                                fontFamily="Oswald"
+                                fontWeight="600"
+                                textTransform="uppercase"
+                                textAlign="left"
+                                maxWidth={"140px"}
+                                fontSize={{ base: "1.2em", md: "1.4em" }}
+                                lineHeight={{ base: 1, md: 1.2 }}
+                              >
+                                {sdg.goal}
+                              </Text>
+                            </Flex>
+                            {i === 0 && <Text>{sdg.description}</Text>}
+                            {!isMobile && (
+                              <Text fontWeight="bold" paddingTop={3}>
+                                Explore data →
+                              </Text>
+                            )}
+                          </Stack>
                           <Stack
                             flex={1}
                             // flexGrow={1}

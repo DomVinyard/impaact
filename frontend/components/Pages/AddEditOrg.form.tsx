@@ -241,24 +241,6 @@ const FIELDS: Field[] = [
     },
   },
 
-  // Short description
-  {
-    id: "description",
-    label: "Short description",
-    element: Textarea,
-    validation: {
-      required: "This is required",
-      minLength: {
-        value: 60,
-        message: "Minimum length should be 60 characters",
-      },
-      maxLength: {
-        value: 360,
-        message: "Maximum length should be 360 characters",
-      },
-    },
-  },
-
   // Main image
   {
     id: "main_image",
@@ -292,6 +274,24 @@ const FIELDS: Field[] = [
           </Button>
         </Flex>
       );
+    },
+  },
+
+  // Short description
+  {
+    id: "description",
+    label: "Short description",
+    element: Textarea,
+    validation: {
+      required: "This is required",
+      minLength: {
+        value: 60,
+        message: "Minimum length should be 60 characters",
+      },
+      maxLength: {
+        value: 360,
+        message: "Maximum length should be 360 characters",
+      },
     },
   },
 
