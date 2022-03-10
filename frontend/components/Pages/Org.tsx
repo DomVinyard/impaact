@@ -72,6 +72,18 @@ const OrgPageComponent = ({ org, loading }) => {
       {children}
     </Text>
   );
+  const screenWidth =
+    (typeof window !== "undefined" && window?.innerWidth) || 500;
+
+  const mapWidth = isMobile ? screenWidth / 2 : 760 / 2;
+  const mapHeight = 220;
+
+  const RGBToBin = function (r, g, b) {
+    var bin = (r << 16) | (g << 8) | b;
+    return (function (h) {
+      return new Array(25 - h.length).join("0") + h;
+    })(bin.toString(2));
+  };
 
   return (
     <>
@@ -101,9 +113,9 @@ const OrgPageComponent = ({ org, loading }) => {
               </Stack>
 
               <Skeleton isLoaded={!loading}>
-                <Flex height={200} color={"#777"}>
+                <Flex height={"200px"} color={"#777"}>
                   <Box
-                    backgroundImage={`/images/map_placeholder.png`}
+                    // backgroundImage={`/images/map_placeholder.png`}
                     backgroundSize="cover"
                     backgroundPosition={["center", "center"]}
                     flex={1}
@@ -113,14 +125,18 @@ const OrgPageComponent = ({ org, loading }) => {
                   >
                     {org.geography && (
                       <StaticGoogleMap
-                        size="600x600"
+                        size={`${mapWidth}x${mapHeight}`}
                         apiKey="AIzaSyAEsz877McL_8NQD7sRqiz420HjW4XHjIs"
                       >
                         {org.geography
                           .split(",")
                           .filter(Boolean)
                           .map((location) => (
-                            <Marker location={location.trim()} />
+                            <Marker
+                              size="normal"
+                              location={location.trim()}
+                              color={sdgs[0]?.sdg?.color.replace("#", "0x")}
+                            />
                           ))}
                       </StaticGoogleMap>
                     )}
@@ -179,7 +195,11 @@ const OrgPageComponent = ({ org, loading }) => {
                                 {sdg.goal}
                               </Text>
                             </Flex>
-                            {i === 0 && <Text>{sdg.description}</Text>}
+                            {i === 0 && (
+                              <Text opacity={0.8} pr={4}>
+                                {sdg.description}
+                              </Text>
+                            )}
                             {!isMobile && (
                               <Text fontWeight="bold" paddingTop={3}>
                                 Explore data →
