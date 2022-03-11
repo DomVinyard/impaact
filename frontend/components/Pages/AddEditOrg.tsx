@@ -125,7 +125,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={4}>
+      <Stack spacing={4} mt={28}>
         {errorNode()}
         <Box maxW={760}>
           <Stack spacing={4} my={12}>
@@ -204,9 +204,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
               color={"gray"}
               onClick={() => router.back()}
             >
-              {isDirty
-                ? "Cancel"
-                : `← Back to ${isMobile ? "report" : values.name}`}
+              Cancel
             </Button>
             <Button
               loadingText="Saving..."

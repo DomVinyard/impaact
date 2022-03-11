@@ -10,6 +10,7 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import styled from "@emotion/styled";
 import Content from "components/Content";
 import SDGs from "lib/SDGs";
 import { useSession } from "next-auth/client";
@@ -37,18 +38,38 @@ const MyOrgBar = () => {
 
 const Operations = ({ org }) => {
   return (
-    <Box width={"100%"} background={"#eee"} height={180}>
-      {JSON.stringify({
-        size: org.size || "unknown",
-        processes: org.link_processes || "unknown",
-        established: org.founded_at || "unknown",
-      })}
-    </Box>
+    <Flex
+      width={"100%"}
+      background={"#eee"}
+      paddingX={2}
+      paddingY={8}
+      paddingBottm={10}
+    >
+      <Stack flex={1} alignItems="center">
+        <OpsTitle>Website</OpsTitle>
+        <Link href={org.link_processes}>
+          <Button colorScheme="blue">Visit website →</Button>
+        </Link>
+      </Stack>
+      <Stack flex={1}>
+        <OpsTitle>Size</OpsTitle>
+        <Box>{org.size}</Box>
+      </Stack>
+      <Stack flex={1}>
+        <OpsTitle>Established</OpsTitle>
+        <Box>{org.founded_at}</Box>
+      </Stack>
+    </Flex>
   );
 };
 
+const OpsTitle = styled(Box)`
+  font-size: 0.9rem;
+`;
+
 const OrgPageComponent = ({ org, loading }) => {
   const [session] = useSession();
+  const [showMoreDescription, setShowMoreDescription] = React.useState(false);
   const isMyOrg = session?.id === org?.author_id;
   const isMobile = useBreakpointValue({ base: true, md: false });
   const sdgs = Object.values(
@@ -109,13 +130,33 @@ const OrgPageComponent = ({ org, loading }) => {
                   {org.name}
                 </Heading>
                 {org.description && (
-                  <Box
-                    fontSize={{ base: 21, md: 24 }}
-                    lineHeight={1.3}
-                    textAlign={"left"}
-                    pt={4}
-                  >
-                    <Text>{org.description}</Text>
+                  <Box textAlign={"left"}>
+                    <Box
+                      fontSize={{ base: 21, md: 24 }}
+                      lineHeight={1.3}
+                      pt={4}
+                    >
+                      <Text>{org.description} </Text>
+
+                      <Box>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          mt={3}
+                          p={0}
+                          onClick={() =>
+                            setShowMoreDescription(!showMoreDescription)
+                          }
+                        >
+                          {!showMoreDescription ? `Read more →` : `close`}
+                        </Button>
+                      </Box>
+                    </Box>
+                    {showMoreDescription && (
+                      <Box mt={4}>
+                        <Text>Long description lorum ipsum</Text>
+                      </Box>
+                    )}
                   </Box>
                 )}
               </Stack>
@@ -212,11 +253,14 @@ const OrgPageComponent = ({ org, loading }) => {
                                 <Text opacity={0.8} pr={4} maxWidth="300px">
                                   {sdg.description}
                                 </Text>
-                                <Text fontWeight="bold" paddingTop={3}>
+                                <Button
+                                  width={{ base: 150, md: 200 }}
+                                  variant="outline"
+                                >
                                   {isMobile
                                     ? `Explore data →`
                                     : "Explore impact data →"}
-                                </Text>
+                                </Button>
                               </>
                             )}
                           </Stack>

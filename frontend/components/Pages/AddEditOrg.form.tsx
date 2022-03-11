@@ -202,6 +202,42 @@ const FIELDS: Field[] = [
     },
   },
 
+  // Main image
+  {
+    id: "main_image",
+    label: "Main Image",
+    element: Input,
+    validation: {},
+    custom: ({ values, isEditMode, onChange, ...others }) => {
+      return (
+        <Flex
+          backgroundImage={`url(${values.main_image})`}
+          backgroundColor={"#eee"}
+          backgroundSize="cover"
+          backgroundPosition={"center center"}
+          minHeight={{ base: 32, md: 28 }}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Button
+            colorScheme="blue"
+            mt={2}
+            onClick={async () => {
+              const prompt = window.prompt(
+                "Paste image URL here",
+                values.main_image
+              );
+              if (!prompt) return;
+              await onChange({ target: { name: "main_image", value: prompt } });
+            }}
+          >
+            {isEditMode ? "Change" : "Upload"}
+          </Button>
+        </Flex>
+      );
+    },
+  },
+
   // Impact
   {
     id: "impacts",
@@ -237,42 +273,6 @@ const FIELDS: Field[] = [
             org={org}
           />
         </>
-      );
-    },
-  },
-
-  // Main image
-  {
-    id: "main_image",
-    label: "Main Image",
-    element: Input,
-    validation: {},
-    custom: ({ values, isEditMode, onChange, ...others }) => {
-      return (
-        <Flex
-          backgroundImage={`url(${values.main_image})`}
-          backgroundColor={"#eee"}
-          backgroundSize="cover"
-          backgroundPosition={"center center"}
-          minHeight={{ base: 32, md: 28 }}
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Button
-            colorScheme="blue"
-            mt={2}
-            onClick={async () => {
-              const prompt = window.prompt(
-                "Paste image URL here",
-                values.main_image
-              );
-              if (!prompt) return;
-              await onChange({ target: { name: "main_image", value: prompt } });
-            }}
-          >
-            {isEditMode ? "Change" : "Upload"}
-          </Button>
-        </Flex>
       );
     },
   },
