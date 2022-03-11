@@ -48,11 +48,11 @@ const Operations = ({ org }) => {
       paddingBottm={10}
     >
       <Stack flex={1} alignItems="flex-start" justifyContent="center">
-        <a href={org.link_processes} target="_blank">
+        <Link href={`/${org.slug}/operations`}>
           <Button variant="outline" ml={6} colorScheme="blue">
             View operations →
           </Button>
-        </a>
+        </Link>
       </Stack>
       <Flex mr={6} flexGrow={1} mx={{ base: 2, md: 3 }} textAlign="center">
         <Stack flex={1}>
@@ -272,19 +272,22 @@ const OrgPageComponent = ({ org, loading }) => {
                               </Text>
                             </Flex>
                             {i === 0 && (
-                              <>
+                              <Box>
                                 <Text opacity={0.8} pr={4} maxWidth="300px">
                                   {sdg.description}
                                 </Text>
-                                <Button
-                                  width={{ base: 150, md: 200 }}
-                                  variant="outline"
-                                >
-                                  {isMobile
-                                    ? `View data →`
-                                    : "View impact data →"}
-                                </Button>
-                              </>
+                                <Link href={`/${org.slug}/impact`}>
+                                  <Button
+                                    marginTop={{ base: 2, md: 4 }}
+                                    width={{ base: 150, md: 200 }}
+                                    variant="outline"
+                                  >
+                                    {isMobile
+                                      ? `View data →`
+                                      : "View impact data →"}
+                                  </Button>
+                                </Link>
+                              </Box>
                             )}
                           </Stack>
                           <Stack

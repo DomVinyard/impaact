@@ -5,7 +5,7 @@ import { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/client";
 import AccessDeniedIndicator from "components/AccessDeniedIndicator";
 import ISession from "types/session";
-import Org from "components/Pages/Org";
+import Org from "components/Pages/Org/Front";
 import { initializeApollo } from "lib/apolloClient";
 import { FetchOrgDocument } from "generated-graphql";
 import { useRouter } from "next/router";

@@ -39,10 +39,14 @@ const Controls = ({ tabs, handleSelectTab }) => {
         marginBottom={6}
       >
         <Box flexGrow={1}>
-          <Button colorScheme="blue">Add organisation</Button>
-          <Button colorScheme="gray" ml={2} color="gray" variant="ghost">
-            Your organisations →
-          </Button>
+          <Link href="/orgs/add">
+            <Button colorScheme="blue">Add organisation</Button>
+          </Link>
+          <Link href="/orgs">
+            <Button colorScheme="gray" ml={2} color="gray" variant="ghost">
+              Your organisations →
+            </Button>
+          </Link>
         </Box>
         <Box>
           <Select
