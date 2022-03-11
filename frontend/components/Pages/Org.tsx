@@ -18,6 +18,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { StaticGoogleMap, Marker, Path } from "react-static-google-map";
+import { BsPeopleFill, BsCalendar2CheckFill } from "react-icons/bs";
+import { FaFlag } from "react-icons/fa";
 
 const MyOrgBar = () => {
   const router = useRouter();
@@ -54,19 +56,28 @@ const Operations = ({ org }) => {
       </Stack>
       <Flex flex={1} mx={{ base: 2, md: 3 }} textAlign="center">
         <Stack flex={1}>
-          <OpsTitle>Size</OpsTitle>
-          <Box>icon</Box>
-          <Box>{org.size}</Box>
+          <OpsTitle>Team</OpsTitle>
+          <Flex justifyContent="center">
+            <BsPeopleFill size={30} style={{ marginRight: 4 }} />
+          </Flex>
+          <OpsMetric>{org.size}</OpsMetric>
         </Stack>
         <Stack flex={1}>
-          <OpsTitle>Established</OpsTitle>
-          <Box>icon</Box>
-          <Box>{org.founded_at}</Box>
+          <OpsTitle>Since</OpsTitle>
+          <Flex justifyContent="center">
+            <FaFlag size={30} style={{ marginRight: 4 }} />
+          </Flex>
+          <OpsMetric>{org.founded_at}</OpsMetric>
         </Stack>
       </Flex>
     </Flex>
   );
 };
+
+const OpsMetric = styled(Box)`
+  font-size: 1.1rem;
+  font-weight: bold;
+`;
 
 const OpsTitle = styled(Box)`
   font-size: 0.9rem;
