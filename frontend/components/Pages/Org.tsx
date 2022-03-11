@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { StaticGoogleMap, Marker, Path } from "react-static-google-map";
 import { BsPeopleFill, BsCalendar2CheckFill } from "react-icons/bs";
-import { FaFlag } from "react-icons/fa";
+import { FaFlag, FaCheck } from "react-icons/fa";
 
 const MyOrgBar = () => {
   const router = useRouter();
@@ -48,26 +48,33 @@ const Operations = ({ org }) => {
       paddingBottm={10}
     >
       <Stack flex={1} alignItems="flex-start" justifyContent="center">
-        <Link href={org.link_processes}>
+        <a href={org.link_processes} target="_blank">
           <Button variant="outline" ml={6} colorScheme="blue">
-            Visit website →
+            View operations →
           </Button>
-        </Link>
+        </a>
       </Stack>
-      <Flex flex={1} mx={{ base: 2, md: 3 }} textAlign="center">
+      <Flex mr={6} flexGrow={1} mx={{ base: 2, md: 3 }} textAlign="center">
         <Stack flex={1}>
-          <OpsTitle>Team</OpsTitle>
+          <OpsTitle>Team size</OpsTitle>
           <Flex justifyContent="center">
-            <BsPeopleFill size={30} style={{ marginRight: 4 }} />
+            <BsPeopleFill size={30} />
           </Flex>
           <OpsMetric>{org.size}</OpsMetric>
         </Stack>
         <Stack flex={1}>
-          <OpsTitle>Since</OpsTitle>
+          <OpsTitle>Established</OpsTitle>
           <Flex justifyContent="center">
-            <FaFlag size={30} style={{ marginRight: 4 }} />
+            <FaFlag size={30} />
           </Flex>
           <OpsMetric>{org.founded_at}</OpsMetric>
+        </Stack>
+        <Stack flex={1}>
+          <OpsTitle>Policies</OpsTitle>
+          <Flex justifyContent="center">
+            <FaCheck size={30} />
+          </Flex>
+          <OpsMetric>Good</OpsMetric>
         </Stack>
       </Flex>
     </Flex>
@@ -274,8 +281,8 @@ const OrgPageComponent = ({ org, loading }) => {
                                   variant="outline"
                                 >
                                   {isMobile
-                                    ? `Explore data →`
-                                    : "Explore impact data →"}
+                                    ? `View data →`
+                                    : "View impact data →"}
                                 </Button>
                               </>
                             )}
@@ -351,9 +358,11 @@ const OrgPageComponent = ({ org, loading }) => {
                       justifyContent="flex-start"
                       alignItems="center"
                     >
-                      <Button ml={9} color="white" variant="outline">
-                        View Financials →
-                      </Button>
+                      <a href={org.link_financials} target="_blank">
+                        <Button ml={9} color="white" variant="outline">
+                          View financials →
+                        </Button>
+                      </a>
                     </Flex>
                   </Stack>
                 )}

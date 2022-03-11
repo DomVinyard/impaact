@@ -12,6 +12,7 @@ import {
   FormLabel,
   Heading,
   Stack,
+  Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import AccessDeniedIndicator from "components/AccessDeniedIndicator";
@@ -129,7 +130,12 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
         <Box maxW={760}>
           <Stack spacing={4} my={12}>
             {/* Fields */}
-            {FIELDS?.map((field) => (
+            {FIELDS?.sort((a, b) => {
+              const mode = isEditMode ? "update" : "create";
+              if (a.order[mode] > b.order[mode]) return 1;
+              if (a.order[mode] < b.order[mode]) return -1;
+              return 0;
+            }).map((field) => (
               <Box key={field.id} paddingBottom={8}>
                 <FormControl isInvalid={errors[field.id]}>
                   {field.before && (
@@ -169,15 +175,20 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
             ))}
 
             {isEditMode && (
-              <Button
-                marginRight={"auto"}
-                colorScheme="red"
-                variant="outline"
-                leftIcon={<DeleteIcon />}
-                onClick={handleDelete}
-              >
-                Delete{!isMobile && " Organisation"}
-              </Button>
+              <>
+                <Text style={{ fontSize: 22, color: "firebrick" }}>
+                  Danger Zone
+                </Text>
+                <Button
+                  marginRight={"auto"}
+                  colorScheme="red"
+                  variant="outline"
+                  leftIcon={<DeleteIcon />}
+                  onClick={handleDelete}
+                >
+                  Delete{!isMobile ? " Organisation" : " Org"}
+                </Button>
+              </>
             )}
           </Stack>
         </Box>

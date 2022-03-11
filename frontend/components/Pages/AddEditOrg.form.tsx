@@ -162,6 +162,10 @@ function SortableList({
 }
 
 export type Field = {
+  order: {
+    create: number;
+    update: number;
+  };
   id: string;
   label?: string;
   validation?: any;
@@ -173,73 +177,12 @@ export type Field = {
 };
 
 const FIELDS: Field[] = [
-  // Name
-  {
-    id: "name",
-    label: "Organisation Name",
-    validation: {
-      required: "This is required",
-      minLength: {
-        value: 4,
-        message: "Minimum length should be 4 characters",
-      },
-    },
-    element: Input,
-    after: ({ values, isEditMode }) => {
-      const linkText = isEditMode
-        ? "Share Link: "
-        : "Your report will be created at: ";
-      const linkURL = `https://impact.ooo/${slugify(`${values.name}`, {
-        lower: true,
-      })}`;
-      if (values.name === "") return null;
-      return (
-        <Text color={"blue"} fontSize={12} mt={1}>
-          <strong>{linkText}</strong>
-          <Link href={linkURL}>{linkURL}</Link>
-        </Text>
-      );
-    },
-  },
-
-  // Main image
-  {
-    id: "main_image",
-    label: "Main Image",
-    element: Input,
-    validation: {},
-    custom: ({ values, isEditMode, onChange, ...others }) => {
-      return (
-        <Flex
-          backgroundImage={`url(${values.main_image})`}
-          backgroundColor={"#eee"}
-          backgroundSize="cover"
-          backgroundPosition={"center center"}
-          minHeight={{ base: 32, md: 28 }}
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Button
-            colorScheme="blue"
-            mt={2}
-            onClick={async () => {
-              const prompt = window.prompt(
-                "Paste image URL here",
-                values.main_image
-              );
-              if (!prompt) return;
-              await onChange({ target: { name: "main_image", value: prompt } });
-            }}
-          >
-            {isEditMode ? "Change" : "Upload"}
-          </Button>
-        </Flex>
-      );
-    },
-  },
-
   // Impact
   {
+    order: {
+      create: 3,
+      update: 1,
+    },
     id: "impacts",
     label: "Impacts",
     element: Textarea,
@@ -277,11 +220,88 @@ const FIELDS: Field[] = [
     },
   },
 
+  // Name
+  {
+    id: "name",
+    label: "Organisation Name",
+    order: {
+      create: 1,
+      update: 2,
+    },
+    validation: {
+      required: "This is required",
+      minLength: {
+        value: 4,
+        message: "Minimum length should be 4 characters",
+      },
+    },
+    element: Input,
+    after: ({ values, isEditMode }) => {
+      const linkText = isEditMode
+        ? "Share Link: "
+        : "Your report will be created at: ";
+      const linkURL = `https://impact.ooo/${slugify(`${values.name}`, {
+        lower: true,
+      })}`;
+      if (values.name === "") return null;
+      return (
+        <Text color={"blue"} fontSize={12} mt={1}>
+          <strong>{linkText}</strong>
+          <Link href={linkURL}>{linkURL}</Link>
+        </Text>
+      );
+    },
+  },
+
+  // Main image
+  {
+    id: "main_image",
+    label: "Main Image",
+    element: Input,
+    validation: {},
+    order: {
+      create: 3,
+      update: 3,
+    },
+    custom: ({ values, isEditMode, onChange, ...others }) => {
+      return (
+        <Flex
+          backgroundImage={`url(${values.main_image})`}
+          backgroundColor={"#eee"}
+          backgroundSize="cover"
+          backgroundPosition={"center center"}
+          minHeight={{ base: 32, md: 28 }}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Button
+            colorScheme="blue"
+            mt={2}
+            onClick={async () => {
+              const prompt = window.prompt(
+                "Paste image URL here",
+                values.main_image
+              );
+              if (!prompt) return;
+              await onChange({ target: { name: "main_image", value: prompt } });
+            }}
+          >
+            {isEditMode ? "Change" : "Upload"}
+          </Button>
+        </Flex>
+      );
+    },
+  },
+
   // Short description
   {
     id: "description",
     label: "Short description",
     element: Textarea,
+    order: {
+      create: 4,
+      update: 4,
+    },
     validation: {
       required: "This is required",
       minLength: {
@@ -297,6 +317,10 @@ const FIELDS: Field[] = [
 
   // Geography
   {
+    order: {
+      create: 5,
+      update: 5,
+    },
     id: "geography",
     label: "Geography",
     element: Textarea,
@@ -309,6 +333,10 @@ const FIELDS: Field[] = [
     label: "Org Size",
     element: Input,
     validation: {},
+    order: {
+      create: 6,
+      update: 6,
+    },
   },
 
   // Founded
@@ -317,6 +345,10 @@ const FIELDS: Field[] = [
     label: "Date Founded",
     element: Input,
     validation: {},
+    order: {
+      create: 7,
+      update: 7,
+    },
   },
 
   // Links
@@ -325,12 +357,20 @@ const FIELDS: Field[] = [
     label: "Link to Processes",
     element: Input,
     validation: {},
+    order: {
+      create: 8,
+      update: 8,
+    },
   },
   {
     id: "link_financials",
     label: "Link to Financials",
     element: Input,
     validation: {},
+    order: {
+      create: 9,
+      update: 9,
+    },
   },
 ];
 
