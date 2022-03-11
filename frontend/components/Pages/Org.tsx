@@ -45,20 +45,25 @@ const Operations = ({ org }) => {
       paddingY={8}
       paddingBottm={10}
     >
-      <Stack flex={1} alignItems="center">
-        <OpsTitle>Website</OpsTitle>
+      <Stack flex={1} alignItems="flex-start" justifyContent="center">
         <Link href={org.link_processes}>
-          <Button colorScheme="blue">Visit website →</Button>
+          <Button variant="outline" ml={6} colorScheme="blue">
+            Visit website →
+          </Button>
         </Link>
       </Stack>
-      <Stack flex={1}>
-        <OpsTitle>Size</OpsTitle>
-        <Box>{org.size}</Box>
-      </Stack>
-      <Stack flex={1}>
-        <OpsTitle>Established</OpsTitle>
-        <Box>{org.founded_at}</Box>
-      </Stack>
+      <Flex flex={1} mx={{ base: 2, md: 3 }} textAlign="center">
+        <Stack flex={1}>
+          <OpsTitle>Size</OpsTitle>
+          <Box>icon</Box>
+          <Box>{org.size}</Box>
+        </Stack>
+        <Stack flex={1}>
+          <OpsTitle>Established</OpsTitle>
+          <Box>icon</Box>
+          <Box>{org.founded_at}</Box>
+        </Stack>
+      </Flex>
     </Flex>
   );
 };
@@ -332,10 +337,12 @@ const OrgPageComponent = ({ org, loading }) => {
                         "url(https://static.vecteezy.com/system/resources/previews/000/173/675/non_2x/spreadsheet-illustration-vector.jpg)"
                       }
                       backgroundPosition="top center"
-                      justifyContent="center"
+                      justifyContent="flex-start"
                       alignItems="center"
                     >
-                      <Button colorScheme="blue">View Financials →</Button>
+                      <Button ml={9} color="white" variant="outline">
+                        View Financials →
+                      </Button>
                     </Flex>
                   </Stack>
                 )}

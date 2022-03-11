@@ -88,7 +88,6 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
           variables: {
             id: org.id,
             ...values,
-            founded_at: new Date(values.founded_at),
           },
         });
 
