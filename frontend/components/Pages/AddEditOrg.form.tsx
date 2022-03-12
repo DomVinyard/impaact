@@ -315,6 +315,18 @@ const FIELDS: Field[] = [
     },
   },
 
+  // Long description
+  {
+    order: {
+      create: 4.5,
+      update: 4.5,
+    },
+    id: "long_description",
+    label: "Long Description",
+    element: Textarea,
+    validation: {},
+  },
+
   // Geography
   {
     order: {

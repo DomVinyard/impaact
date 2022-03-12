@@ -41,11 +41,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
     watch,
     reset,
     formState: { errors, isSubmitting, isDirty, isValid },
-  } = useForm({
-    defaultValues: {
-      ...org,
-    },
-  });
+  } = useForm({ defaultValues: { ...org } });
 
   const [updateImpactPriority, { error, loading }] =
     useUpdateImpactPriorityMutation();

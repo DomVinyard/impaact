@@ -984,6 +984,7 @@ export type Orgs = {
   impacts_aggregate: Impact_Aggregate;
   link_financials?: Maybe<Scalars["String"]>;
   link_processes?: Maybe<Scalars["String"]>;
+  long_description?: Maybe<Scalars["String"]>;
   main_image?: Maybe<Scalars["String"]>;
   name: Scalars["String"];
   size?: Maybe<Scalars["String"]>;
@@ -1059,6 +1060,7 @@ export type Orgs_Bool_Exp = {
   impacts?: InputMaybe<Impact_Bool_Exp>;
   link_financials?: InputMaybe<String_Comparison_Exp>;
   link_processes?: InputMaybe<String_Comparison_Exp>;
+  long_description?: InputMaybe<String_Comparison_Exp>;
   main_image?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   size?: InputMaybe<String_Comparison_Exp>;
@@ -1086,6 +1088,7 @@ export type Orgs_Insert_Input = {
   impacts?: InputMaybe<Impact_Arr_Rel_Insert_Input>;
   link_financials?: InputMaybe<Scalars["String"]>;
   link_processes?: InputMaybe<Scalars["String"]>;
+  long_description?: InputMaybe<Scalars["String"]>;
   main_image?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
   size?: InputMaybe<Scalars["String"]>;
@@ -1104,6 +1107,7 @@ export type Orgs_Max_Fields = {
   id?: Maybe<Scalars["uuid"]>;
   link_financials?: Maybe<Scalars["String"]>;
   link_processes?: Maybe<Scalars["String"]>;
+  long_description?: Maybe<Scalars["String"]>;
   main_image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
   size?: Maybe<Scalars["String"]>;
@@ -1121,6 +1125,7 @@ export type Orgs_Max_Order_By = {
   id?: InputMaybe<Order_By>;
   link_financials?: InputMaybe<Order_By>;
   link_processes?: InputMaybe<Order_By>;
+  long_description?: InputMaybe<Order_By>;
   main_image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   size?: InputMaybe<Order_By>;
@@ -1139,6 +1144,7 @@ export type Orgs_Min_Fields = {
   id?: Maybe<Scalars["uuid"]>;
   link_financials?: Maybe<Scalars["String"]>;
   link_processes?: Maybe<Scalars["String"]>;
+  long_description?: Maybe<Scalars["String"]>;
   main_image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
   size?: Maybe<Scalars["String"]>;
@@ -1156,6 +1162,7 @@ export type Orgs_Min_Order_By = {
   id?: InputMaybe<Order_By>;
   link_financials?: InputMaybe<Order_By>;
   link_processes?: InputMaybe<Order_By>;
+  long_description?: InputMaybe<Order_By>;
   main_image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   size?: InputMaybe<Order_By>;
@@ -1198,6 +1205,7 @@ export type Orgs_Order_By = {
   impacts_aggregate?: InputMaybe<Impact_Aggregate_Order_By>;
   link_financials?: InputMaybe<Order_By>;
   link_processes?: InputMaybe<Order_By>;
+  long_description?: InputMaybe<Order_By>;
   main_image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   size?: InputMaybe<Order_By>;
@@ -1229,6 +1237,8 @@ export enum Orgs_Select_Column {
   /** column name */
   LinkProcesses = "link_processes",
   /** column name */
+  LongDescription = "long_description",
+  /** column name */
   MainImage = "main_image",
   /** column name */
   Name = "name",
@@ -1250,6 +1260,7 @@ export type Orgs_Set_Input = {
   id?: InputMaybe<Scalars["uuid"]>;
   link_financials?: InputMaybe<Scalars["String"]>;
   link_processes?: InputMaybe<Scalars["String"]>;
+  long_description?: InputMaybe<Scalars["String"]>;
   main_image?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
   size?: InputMaybe<Scalars["String"]>;
@@ -1275,6 +1286,8 @@ export enum Orgs_Update_Column {
   LinkFinancials = "link_financials",
   /** column name */
   LinkProcesses = "link_processes",
+  /** column name */
+  LongDescription = "long_description",
   /** column name */
   MainImage = "main_image",
   /** column name */
@@ -2261,6 +2274,7 @@ export type InsertOrgMutationVariables = Exact<{
   name: Scalars["String"];
   slug: Scalars["String"];
   description?: InputMaybe<Scalars["String"]>;
+  long_description?: InputMaybe<Scalars["String"]>;
   main_image: Scalars["String"];
   geography?: InputMaybe<Scalars["String"]>;
   size?: InputMaybe<Scalars["String"]>;
@@ -2279,6 +2293,7 @@ export type InsertOrgMutation = {
         name: string;
         slug: string;
         description?: string | undefined;
+        long_description?: string | undefined;
         main_image?: string | undefined;
         geography?: string | undefined;
         size?: string | undefined;
@@ -2319,6 +2334,7 @@ export type UpdateOrgMutationVariables = Exact<{
   name?: InputMaybe<Scalars["String"]>;
   slug: Scalars["String"];
   description?: InputMaybe<Scalars["String"]>;
+  long_description?: InputMaybe<Scalars["String"]>;
   main_image: Scalars["String"];
   geography?: InputMaybe<Scalars["String"]>;
   size?: InputMaybe<Scalars["String"]>;
@@ -2337,6 +2353,7 @@ export type UpdateOrgMutation = {
         name: string;
         slug: string;
         description?: string | undefined;
+        long_description?: string | undefined;
         main_image?: string | undefined;
         geography?: string | undefined;
         size?: string | undefined;
@@ -2442,6 +2459,7 @@ export type FetchOrgQuery = {
     author_id: any;
     slug: string;
     description?: string | undefined;
+    long_description?: string | undefined;
     main_image?: string | undefined;
     geography?: string | undefined;
     founded_at?: string | undefined;
@@ -2862,6 +2880,7 @@ export const InsertOrgDocument = gql`
     $name: String!
     $slug: String!
     $description: String
+    $long_description: String
     $main_image: String!
     $geography: String
     $size: String
@@ -2875,6 +2894,7 @@ export const InsertOrgDocument = gql`
         name: $name
         slug: $slug
         description: $description
+        long_description: $long_description
         main_image: $main_image
         geography: $geography
         size: $size
@@ -2888,6 +2908,7 @@ export const InsertOrgDocument = gql`
       name
       slug
       description
+      long_description
       main_image
       geography
       size
@@ -2965,6 +2986,7 @@ export function withInsertOrg<
  *      name: // value for 'name'
  *      slug: // value for 'slug'
  *      description: // value for 'description'
+ *      long_description: // value for 'long_description'
  *      main_image: // value for 'main_image'
  *      geography: // value for 'geography'
  *      size: // value for 'size'
@@ -3212,6 +3234,7 @@ export const UpdateOrgDocument = gql`
     $name: String
     $slug: String!
     $description: String
+    $long_description: String
     $main_image: String!
     $geography: String
     $size: String
@@ -3224,6 +3247,7 @@ export const UpdateOrgDocument = gql`
         name: $name
         slug: $slug
         description: $description
+        long_description: $long_description
         main_image: $main_image
         geography: $geography
         size: $size
@@ -3238,6 +3262,7 @@ export const UpdateOrgDocument = gql`
       name
       slug
       description
+      long_description
       main_image
       geography
       size
@@ -3315,6 +3340,7 @@ export function withUpdateOrg<
  *      name: // value for 'name'
  *      slug: // value for 'slug'
  *      description: // value for 'description'
+ *      long_description: // value for 'long_description'
  *      main_image: // value for 'main_image'
  *      geography: // value for 'geography'
  *      size: // value for 'size'
@@ -3794,6 +3820,7 @@ export const FetchOrgDocument = gql`
       author_id
       slug
       description
+      long_description
       main_image
       geography
       founded_at
@@ -5408,6 +5435,11 @@ export type OrgsResolvers<
     ParentType,
     ContextType
   >;
+  long_description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   main_image?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
@@ -5492,6 +5524,11 @@ export type Orgs_Max_FieldsResolvers<
     ParentType,
     ContextType
   >;
+  long_description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   main_image?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
@@ -5540,6 +5577,11 @@ export type Orgs_Min_FieldsResolvers<
     ContextType
   >;
   link_processes?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  long_description?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
     ContextType

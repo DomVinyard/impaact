@@ -7325,6 +7325,18 @@
             "deprecationReason": null
           },
           {
+            "name": "long_description",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "main_image",
             "description": null,
             "args": [],
@@ -7806,6 +7818,18 @@
             "deprecationReason": null
           },
           {
+            "name": "long_description",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "main_image",
             "description": null,
             "type": {
@@ -8020,6 +8044,18 @@
             "deprecationReason": null
           },
           {
+            "name": "long_description",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "main_image",
             "description": null,
             "type": {
@@ -8175,6 +8211,18 @@
           },
           {
             "name": "link_processes",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "long_description",
             "description": null,
             "args": [],
             "type": {
@@ -8354,6 +8402,18 @@
             "deprecationReason": null
           },
           {
+            "name": "long_description",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "main_image",
             "description": null,
             "type": {
@@ -8509,6 +8569,18 @@
           },
           {
             "name": "link_processes",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "long_description",
             "description": null,
             "args": [],
             "type": {
@@ -8677,6 +8749,18 @@
           },
           {
             "name": "link_processes",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "long_description",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -9032,6 +9116,18 @@
             "deprecationReason": null
           },
           {
+            "name": "long_description",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "main_image",
             "description": null,
             "type": {
@@ -9180,6 +9276,12 @@
             "deprecationReason": null
           },
           {
+            "name": "long_description",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "main_image",
             "description": "column name",
             "isDeprecated": false,
@@ -9315,6 +9417,18 @@
             "deprecationReason": null
           },
           {
+            "name": "long_description",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "main_image",
             "description": null,
             "type": {
@@ -9431,6 +9545,12 @@
           },
           {
             "name": "link_processes",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "long_description",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null

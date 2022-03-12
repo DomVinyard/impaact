@@ -3,6 +3,7 @@ mutation insertOrg(
   $name: String!
   $slug: String!
   $description: String
+  $long_description: String
   $main_image: String!
   $geography: String
   $size: String
@@ -16,6 +17,7 @@ mutation insertOrg(
       name: $name
       slug: $slug
       description: $description
+      long_description: $long_description
       main_image: $main_image
       geography: $geography
       size: $size
@@ -29,6 +31,7 @@ mutation insertOrg(
     name
     slug
     description
+    long_description
     main_image
     geography
     size

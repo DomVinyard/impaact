@@ -161,23 +161,25 @@ const OrgPageComponent = ({ org, loading }) => {
                     >
                       <Text>{org.description} </Text>
 
-                      <Box>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          mt={3}
-                          p={0}
-                          onClick={() =>
-                            setShowMoreDescription(!showMoreDescription)
-                          }
-                        >
-                          {!showMoreDescription ? `Read more →` : `close`}
-                        </Button>
-                      </Box>
+                      {org.long_description && (
+                        <Box>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            mt={3}
+                            p={0}
+                            onClick={() =>
+                              setShowMoreDescription(!showMoreDescription)
+                            }
+                          >
+                            {!showMoreDescription ? `Read more →` : `close`}
+                          </Button>
+                        </Box>
+                      )}
                     </Box>
-                    {showMoreDescription && (
+                    {org.long_description && showMoreDescription && (
                       <Box mt={4}>
-                        <Text>Long description lorum ipsum</Text>
+                        <Text>{org.long_description}</Text>
                       </Box>
                     )}
                   </Box>

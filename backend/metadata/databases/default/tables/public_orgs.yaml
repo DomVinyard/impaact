@@ -30,6 +30,7 @@ insert_permissions:
     - geography
     - link_financials
     - link_processes
+    - long_description
     - main_image
     - name
     - size
@@ -47,6 +48,7 @@ select_permissions:
     - id
     - link_financials
     - link_processes
+    - long_description
     - main_image
     - name
     - size
@@ -65,6 +67,7 @@ select_permissions:
     - id
     - link_financials
     - link_processes
+    - long_description
     - main_image
     - name
     - size
@@ -81,6 +84,7 @@ update_permissions:
     - geography
     - link_financials
     - link_processes
+    - long_description
     - main_image
     - name
     - size
