@@ -20,6 +20,7 @@ const runSeed = async () => {
   };
   let userIDs: any = [];
   let orgIDs: any = [];
+  let orgSlugs: any = [];
   const date = new Date().toISOString();
   const generateUsers = (number = 10) =>
     [...Array(number)]
@@ -43,6 +44,9 @@ const runSeed = async () => {
         const randomUser = userIDs[Math.floor(Math.random() * userIDs.length)];
         const name = faker.company.companyName().replace(/["']/g, "");
         const slug = slugify(name);
+        if (orgSlugs.includes(slug)) return "";
+        orgSlugs.push(slug);
+        orgIDs.push(orgID);
         const geography =
           `${faker.address.country()}, ${faker.address.country()}`.replace(
             /["']/g,
@@ -51,7 +55,6 @@ const runSeed = async () => {
         const image = faker.image.people(1020, 800, true);
         const founded_at = faker.datatype.number({ min: 1980, max: 2022 });
         const long_description = faker.lorem.paragraphs(6);
-        orgIDs.push(orgID);
         return `INSERT INTO public.orgs 
             (id, author_id, name, created_at, updated_at, slug, description, long_description, main_image, geography, size, founded_at, link_processes, link_financials, is_test_data)
             VALUES
@@ -82,11 +85,11 @@ const runSeed = async () => {
   };
   const seedScript = `
     ${generateDrop()}
-    ${generateUsers(10)}
-    ${generateOrgs(100)}
-    ${generateImpacts(200)}
+    ${generateUsers(100)}
+    ${generateOrgs(1000)}
+    ${generateImpacts(3000)}
     `;
-  fs.writeFile("./default/seed.sql", seedScript, (err) => {
+  fs.writeFile("./backend/seeds/default/seed.sql", seedScript, (err) => {
     if (err) {
       console.error(err);
       return;
