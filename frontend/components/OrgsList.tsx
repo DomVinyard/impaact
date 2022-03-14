@@ -7,33 +7,58 @@ import {
   Skeleton,
   Grid,
   GridItem,
+  Image,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import Link from "next/link";
 import IOrg from "types/org";
 import Loader from "./Loader";
+import { StaticGoogleMap, Marker, Path } from "react-static-google-map";
+import SDGs from "lib/SDGs";
 // import OrgCard from "./OrgCard";
 
 const OrgCard = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
+  const main_impact = org.impacts?.[0];
+  const main_impact_sdg = SDGs.find(({ id }) => main_impact?.sdg === id);
+  const isMobile = useBreakpointValue({ base: true, md: false });
+  const screenWidth =
+    (typeof window !== "undefined" && window?.innerWidth) || 500;
+
+  const mapWidth = isMobile ? Math.round(screenWidth / 3) : 150;
+  const mapHeight = isMobile ? 100 : 120;
+
   return (
     <Skeleton isLoaded={!loading}>
       <Stack
-        background={"#ddd"}
+        // backgroundColor={main_impact_sdg?.color}
         borderTop={{ base: "1px solid #ccc", md: "none" }}
         marginBottom={{ base: 4, md: 0 }}
+        textAlign="center"
+        color="white"
+        spacing={0}
       >
-        <Stack
-          spacing={0}
-          textAlign={"left"}
-          paddingX={4}
-          paddingTop={{ base: 2, md: 2 }}
-          color="black"
-        >
-          <Text fontSize="md" fontWeight={"700"}>
-            {org.name}
-          </Text>
-        </Stack>
+        <Text fontSize="md" fontWeight={"700"} padding={2} paddingTop={3}>
+          {org.name}
+        </Text>
         <Flex>
+          {org?.geography && (
+            <StaticGoogleMap
+              size={`${mapWidth}x${mapHeight}`}
+              apiKey="AIzaSyAEsz877McL_8NQD7sRqiz420HjW4XHjIs"
+            >
+              {org.geography
+                ?.split(",")
+                .filter(Boolean)
+                .map((location) => (
+                  <Marker
+                    key={location}
+                    size="normal"
+                    location={location.trim()}
+                    color={main_impact_sdg?.color.replace("#", "0x")}
+                  />
+                ))}
+            </StaticGoogleMap>
+          )}
           <Box
             backgroundImage={`url(${org.main_image})`}
             backgroundSize="cover"
@@ -43,15 +68,36 @@ const OrgCard = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
             width={"100%"}
             flex={2}
           />
-          <Box
-            backgroundImage={`/images/map_placeholder.png`}
-            backgroundSize="cover"
-            backgroundPosition={["center", "center"]}
-            cursor={"pointer"}
-            textAlign={"left"}
-            flex={1}
-          />
         </Flex>
+        <Box
+          textAlign="center"
+          p={4}
+          color="white"
+          key={`impact_${main_impact?.id}`}
+        >
+          <Flex alignItems="center" justifyContent="center">
+            <Box
+              width={{ base: "26px", md: "32px" }}
+              marginRight={{ base: 1.5, md: 2 }}
+            >
+              <Image
+                src={`/images/sdg_trim/E-WEB-Goal-${main_impact_sdg?.id}.png`}
+                width={"100%"}
+              />
+            </Box>
+            <Text
+              fontFamily="Oswald"
+              fontWeight="600"
+              fontSize={{ base: "1.4em", md: "1.8em" }}
+              lineHeight={{ base: 1.2, md: 1.4 }}
+            >
+              {main_impact?.value}
+            </Text>
+          </Flex>
+          <Text fontSize={{ base: "0.9em", md: "1em" }}>
+            {main_impact?.indicator}
+          </Text>
+        </Box>
       </Stack>
     </Skeleton>
   );
@@ -74,13 +120,16 @@ const OrgsList = ({ orgs, loading, after }: ListProps) => {
       gap={{ base: 0, md: 4 }}
     >
       {orgs?.map((org: IOrg, index: number) => {
+        const main_impact = org.impacts?.[0];
+        const main_impact_sdg = SDGs.find(({ id }) => main_impact?.sdg === id);
         return (
           <Skeleton key={org.slug} isLoaded={!loading}>
             <GridItem
               key={org.slug}
               rowSpan={1}
               colSpan={1}
-              background={"#eee"}
+              backgroundColor={main_impact_sdg?.color || "gray.50"}
+              height={"100%"}
               borderBottom={{ base: "4px solid #eee", md: "none" }}
             >
               <Link key={index} href={`/${org.slug}`}>

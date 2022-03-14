@@ -7,7 +7,7 @@ query fetchLatest($top: Int) {
     description
     main_image
     geography
-    impacts(order_by: { priority: asc }) {
+    impacts(order_by: { priority: asc }, limit: 1) {
       id
       value
       indicator

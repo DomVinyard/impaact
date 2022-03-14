@@ -106,8 +106,6 @@ const OrgPageComponent = ({ org, loading }) => {
       return acc;
     }, {})
   );
-  console.log({ org });
-
   // console.log({ org });
 
   const topGoalColour = sdgs[0]?.sdg?.color || "#777";
@@ -203,7 +201,7 @@ const OrgPageComponent = ({ org, loading }) => {
                         apiKey="AIzaSyAEsz877McL_8NQD7sRqiz420HjW4XHjIs"
                       >
                         {org.geography
-                          .split(",")
+                          ?.split(",")
                           .filter(Boolean)
                           .map((location) => (
                             <Marker

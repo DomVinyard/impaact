@@ -12,10 +12,9 @@ interface IProps {
   session: ISession;
 }
 
-const WHITELIST_ONLY = true;
-
 const IndexPage: NextPage<IProps> = ({ session }) => {
   const hasAccess = true;
+  console.log({ session });
   return hasAccess ? (
     <>
       <Head>
@@ -30,7 +29,6 @@ const IndexPage: NextPage<IProps> = ({ session }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const session = await getSession({ req });
-
   return {
     props: {
       session,

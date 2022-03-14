@@ -1,4 +1,5 @@
 - "!include public_accounts.yaml"
+- "!include public_admins.yaml"
 - "!include public_impact.yaml"
 - "!include public_orgs.yaml"
 - "!include public_sessions.yaml"

@@ -18,7 +18,7 @@ export default [
     id: "03",
     number: 3,
     goal: "good health and well-being",
-    color: "#769D4E",
+    color: "#4c9f38",
     description:
       "Ensure healthy lives and promote well-being for all, at all ages.",
   },
@@ -34,7 +34,7 @@ export default [
     id: "05",
     number: 5,
     goal: "gender equality",
-    color: "#CC4A33",
+    color: "#ff3a21",
     description: "Achieve gender equality and empower all women and girls.",
   },
   {
