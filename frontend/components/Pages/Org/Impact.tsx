@@ -124,7 +124,7 @@ const OrgImpactPageComponent = ({ org, loading }) => {
                     return (
                       <Stack
                         key={`sdg_${sdg.id}`}
-                        // mb={2}
+                        mb={2}
                         py={6}
                         color={"#fff"}
                         background={sdg?.color}
@@ -174,26 +174,28 @@ const OrgImpactPageComponent = ({ org, loading }) => {
                           {sdg.description}
                         </Text>
                         {[...impacts].map((impact) => (
-                          <Box
-                            backgroundColor="rgba(0,0,0,0.1)"
-                            textAlign="left"
-                            p={7}
-                            key={`impact_${impact.id}`}
-                          >
-                            <Text
-                              fontFamily="Oswald"
-                              fontWeight="600"
-                              fontSize={{ base: "1.4em", md: "1.8em" }}
-                              lineHeight={{ base: 1.2, md: 1.4 }}
+                          <Box px={{ base: 0, md: 6 }}>
+                            <Box
+                              backgroundColor="rgba(0,0,0,0.1)"
+                              textAlign="left"
+                              p={7}
+                              key={`impact_${impact.id}`}
                             >
-                              {impact.value}
-                            </Text>
-                            <Text fontSize="medium" opacity={0.7}>
-                              {impact.indicator}
-                            </Text>
-                            <Text fontSize="small" mt={3}>
-                              {impact.context || "No context provided"}
-                            </Text>
+                              <Text
+                                fontFamily="Oswald"
+                                fontWeight="600"
+                                fontSize={{ base: "1.4em", md: "1.8em" }}
+                                lineHeight={{ base: 1.2, md: 1.4 }}
+                              >
+                                {impact.value}
+                              </Text>
+                              <Text fontSize="medium" opacity={0.7}>
+                                {impact.indicator}
+                              </Text>
+                              <Text fontSize="small" mt={3}>
+                                {impact.context || "No context provided"}
+                              </Text>
+                            </Box>
                           </Box>
                         ))}
                         {/* //     <Flex

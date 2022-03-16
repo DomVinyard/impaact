@@ -207,7 +207,11 @@ const OrgPageComponent = ({ org, loading }) => {
               </Stack>
 
               <Skeleton isLoaded={!loading}>
-                <Flex height={{ base: "220px", md: "280px" }} color={"#777"}>
+                <Flex
+                  height={{ base: "220px", md: "280px" }}
+                  color={"#777"}
+                  background="#aaa"
+                >
                   {org.geography && (
                     <Box
                       backgroundColor={`#aadafe`}

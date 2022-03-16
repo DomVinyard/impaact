@@ -70,6 +70,12 @@ const ImpactModal = ({
       element: Input,
       validation: {},
     },
+    {
+      id: "context",
+      label: "Context",
+      element: Textarea,
+      validation: {},
+    },
   ].filter(Boolean);
   // console.log({ impact });
   const {
@@ -119,10 +125,10 @@ const ImpactModal = ({
   const onSubmit = async (values, e) => {
     console.log({ isEditMode });
     if (isEditMode) {
-      const updateVariables = { id: impact.id, ...values, org: org.id };
+      const updateVariables = { id: impact.id, ...values, org: org?.id };
       await updateImpact({ variables: updateVariables });
     } else {
-      const insertVariables = { ...values, org: org.id };
+      const insertVariables = { ...values, org: org?.id };
       await insertImpact({ variables: insertVariables });
     }
     await closeForm();

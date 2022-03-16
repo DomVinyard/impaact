@@ -41,7 +41,9 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
     watch,
     reset,
     formState: { errors, isSubmitting, isDirty, isValid },
-  } = useForm({ defaultValues: { ...org } });
+  } = useForm({ defaultValues: { ...org, main_image: "" } });
+
+  const router = useRouter();
 
   const [updateImpactPriority, { error, loading }] =
     useUpdateImpactPriorityMutation();
@@ -51,6 +53,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const [session] = useSession();
   const isEditMode = !!org;
+  const isNewImpactMode = router.query.mode === "impact";
   // console.log({ values });
 
   const [insertOrg, { loading: insertOrgFetching, error: insertOrgError }] =
@@ -101,11 +104,10 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
       } else {
         await insertOrg({ variables: { author_id: session.id, ...values } });
       }
+      router.push(`/${values.slug}/edit?mode=impact`);
     } catch (e) {
       console.log(e);
     }
-
-    router.push(`/${values.slug}`);
   };
 
   const errorNode = () => {
@@ -122,7 +124,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={4} mt={28}>
+      <Stack spacing={4} my={28}>
         {errorNode()}
         <Box maxW={760}>
           <Stack spacing={4}>
@@ -131,6 +133,9 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
             )}
             {/* Fields */}
             {FIELDS?.filter(({ order }) => order[mode] !== "hide")
+              .filter((field) =>
+                isNewImpactMode ? field.id === "impacts" : true
+              )
               .sort((a, b) => {
                 if (a.order[mode] > b.order[mode]) return 1;
                 if (a.order[mode] < b.order[mode]) return -1;
@@ -160,6 +165,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
                       />
                     ) : (
                       <field.element
+                        org={org}
                         autoComplate="off"
                         id={field.id}
                         placeholder={field.placeholder}
@@ -176,7 +182,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
                 </Box>
               ))}
 
-            {isEditMode && (
+            {isEditMode && !isNewImpactMode && (
               <Box paddingBottom={32}>
                 <Text style={{ fontSize: 22, color: "firebrick" }}>
                   Danger Zone
@@ -228,7 +234,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
               type={"submit"}
               ml={3}
             >
-              {isEditMode ? "Save" : "Add"}
+              {isEditMode ? "Save" : isNewImpactMode ? "Add" : "Next"}
             </Button>
           </Flex>
         </Content>

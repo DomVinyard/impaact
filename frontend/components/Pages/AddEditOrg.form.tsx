@@ -183,7 +183,7 @@ const FIELDS: Field[] = [
   // Impact
   {
     order: {
-      create: 3,
+      create: "hide",
       update: 1,
     },
     id: "impacts",
@@ -249,7 +249,7 @@ const FIELDS: Field[] = [
       const linkURL = `https://impact.ooo/${slugify(`${values.name}`, {
         lower: true,
       })}`;
-      if (values.name === "") return null;
+      if (!values.name?.length) return null;
       return (
         <Text color={"blue"} fontSize={12} mt={1}>
           <strong>{linkText}</strong>

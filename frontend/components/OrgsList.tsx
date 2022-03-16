@@ -57,7 +57,7 @@ const OrgCard = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
             {org.name}
           </Text>
         </Flex>
-        <Flex>
+        <Flex background="#aaa">
           {org?.geography && (
             <StaticGoogleMap
               size={`${mapWidth}x${mapHeight}`}
