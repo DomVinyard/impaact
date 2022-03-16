@@ -18,6 +18,7 @@ query fetchOrg($slug: String) {
       value
       indicator
       sdg
+      context
     }
   }
 }

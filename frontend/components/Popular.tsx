@@ -37,34 +37,19 @@ const Controls = ({
   popularFilter,
   popularLayout,
   handleSelectLayout,
+  hasOrgs,
 }) => {
-  // const [popularFilter, setPopularFilter] = useLocalState<TabIDs>(
-  //   "POPULAR_FILTER",
-  //   "featured"
-  // );
-  // const [popularLayout, setPopularLayout] = useLocalState(
-  //   "POPULAR_LAYOUT",
-  //   "grid"
-  // );
-  // console.log(tabs.find((t) => t.isSelected));
   return (
     <>
       {/* Wide */}
       <Flex
         display={{ base: "none", md: "flex" }}
         marginTop={24}
-        marginBottom={6}
+        paddingBottom={12}
+        marginBottom={12}
+        borderBottom="1px solid #ccc"
+        justifyContent={"space-between"}
       >
-        <Box flexGrow={1}>
-          <Link href="/orgs/add">
-            <Button colorScheme="blue">Add organisation</Button>
-          </Link>
-          <Link href="/orgs">
-            <Button colorScheme="gray" ml={2} color="gray" variant="ghost">
-              Your organisations →
-            </Button>
-          </Link>
-        </Box>
         <Box>
           <Select
             onChange={(e) => handleSelectTab(e.target.value)}
@@ -85,7 +70,19 @@ const Controls = ({
             ))}
           </Select>
         </Box>
-        <Box ml={2}>
+        <Box>
+          <Link href="/orgs/add">
+            <Button colorScheme="blue">Add organisation</Button>
+          </Link>
+          {hasOrgs && (
+            <Link href="/orgs">
+              <Button colorScheme="gray" ml={2} color="gray" variant="ghost">
+                Your organisations →
+              </Button>
+            </Link>
+          )}
+        </Box>
+        {/* <Box ml={2}>
           <ButtonGroup size="md" isAttached variant="outline">
             <IconButton
               onClick={() => handleSelectLayout("grid")}
@@ -105,7 +102,7 @@ const Controls = ({
               icon={<FaThList />}
             />
           </ButtonGroup>
-        </Box>
+        </Box> */}
       </Flex>
 
       {/* Mobile */}
@@ -142,7 +139,7 @@ const Controls = ({
 
 const PopularComponent = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
-  const top = useBreakpointValue({ base: 6, md: 10, lg: 15 });
+  const top = useBreakpointValue({ base: 8, md: 10, lg: 12 });
 
   const [session] = useSession();
 
@@ -175,6 +172,7 @@ const PopularComponent = () => {
       defaultValue: "grid",
     }
   );
+
   // const [selected, setSelected] = useState<TabIDs>(popularFilter);
   // const {
   //   data: yours_data,
@@ -203,6 +201,7 @@ const PopularComponent = () => {
   const error = popularFilter === "featured" ? featured_error : latest_error;
   const loading =
     popularFilter === "featured" ? featured_loading : latest_loading;
+  const hasOrgs = true;
 
   if (error) return <div>Error: {error.message}</div>;
 
@@ -214,6 +213,7 @@ const PopularComponent = () => {
         tabs={tabs}
         handleSelectTab={handleSelectTab}
         handleSelectLayout={handleSelectLayout}
+        hasOrgs={hasOrgs}
       />
       <OrgsList
         orgs={data?.orgs || emptyList}

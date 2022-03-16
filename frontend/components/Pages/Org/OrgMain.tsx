@@ -20,8 +20,9 @@ import React from "react";
 import { StaticGoogleMap, Marker, Path } from "react-static-google-map";
 import { BsPeopleFill, BsCalendar2CheckFill } from "react-icons/bs";
 import { FaFlag, FaCheck } from "react-icons/fa";
+import { useFetchUserQuery } from "generated-graphql";
 
-const MyOrgBar = () => {
+const MyOrgBar = ({ isAdmin }) => {
   const router = useRouter();
   return (
     <Flex
@@ -31,7 +32,7 @@ const MyOrgBar = () => {
     >
       <Link href={`/${router?.query.slug}/edit`}>
         <Button leftIcon={<EditIcon />} colorScheme="gray" w="120px" mt={3}>
-          Update
+          {isAdmin ? "Admin" : `Update`}
         </Button>
       </Link>
     </Flex>
@@ -40,44 +41,54 @@ const MyOrgBar = () => {
 
 const Operations = ({ org }) => {
   return (
-    <Flex
-      width={"100%"}
-      background={"#eee"}
-      paddingX={2}
-      paddingY={8}
-      paddingBottm={10}
-    >
-      <Stack flex={1} alignItems="flex-start" justifyContent="center">
+    <Stack width={"100%"} background={"#eee"}>
+      <Flex paddingX={2} paddingY={8} paddingBottom={6}>
+        {/* <Stack flex={1} alignItems="flex-start" justifyContent="center">
         <Link href={`/${org.slug}/operations`}>
           <Button variant="outline" ml={6} colorScheme="blue">
             View operations →
           </Button>
         </Link>
-      </Stack>
-      <Flex mr={6} flexGrow={1} mx={{ base: 2, md: 3 }} textAlign="center">
-        <Stack flex={1}>
-          <OpsTitle>Team size</OpsTitle>
-          <Flex justifyContent="center">
-            <BsPeopleFill size={30} />
-          </Flex>
-          <OpsMetric>{org.size}</OpsMetric>
-        </Stack>
-        <Stack flex={1}>
-          <OpsTitle>Established</OpsTitle>
-          <Flex justifyContent="center">
-            <FaFlag size={30} />
-          </Flex>
-          <OpsMetric>{org.founded_at}</OpsMetric>
-        </Stack>
-        <Stack flex={1}>
-          <OpsTitle>Policies</OpsTitle>
-          <Flex justifyContent="center">
-            <FaCheck size={30} />
-          </Flex>
-          <OpsMetric>Good</OpsMetric>
-        </Stack>
+      </Stack> */}
+        <Flex mr={6} flexGrow={1} mx={{ base: 2, md: 3 }} textAlign="center">
+          <Stack flex={1}>
+            <OpsTitle>Team size</OpsTitle>
+            <Flex justifyContent="center">
+              <BsPeopleFill size={30} />
+            </Flex>
+            <OpsMetric>{org.size}</OpsMetric>
+          </Stack>
+          <Stack flex={1}>
+            <OpsTitle>Established</OpsTitle>
+            <Flex justifyContent="center">
+              <FaFlag size={30} />
+            </Flex>
+            <OpsMetric>{org.founded_at}</OpsMetric>
+          </Stack>
+          <Stack flex={1}>
+            <OpsTitle>Policies</OpsTitle>
+            <Flex justifyContent="center">
+              <FaCheck size={30} />
+            </Flex>
+            <OpsMetric>Good</OpsMetric>
+          </Stack>
+        </Flex>
       </Flex>
-    </Flex>
+      {org.link_financials && (
+        <Flex alignItems={"center"} justifyContent="center" pb={12}>
+          <a href={org.link_financials} target="_blank">
+            <Button borderColor={"#555"} variant="outline">
+              Explore financials
+            </Button>
+          </a>
+          <a href={org.link_processes} target="_blank">
+            <Button background={"#444"} colorScheme={"blue"} ml={3}>
+              Visit Website →
+            </Button>
+          </a>
+        </Flex>
+      )}
+    </Stack>
   );
 };
 
@@ -106,7 +117,16 @@ const OrgPageComponent = ({ org, loading }) => {
       return acc;
     }, {})
   );
-  // console.log({ org });
+
+  const {
+    data: userData,
+    loading: userLoading,
+    error: userError,
+  } = useFetchUserQuery({
+    variables: { userEmail: session?.user?.email },
+  });
+
+  console.log({ userData, userLoading, userError });
 
   const topGoalColour = sdgs[0]?.sdg?.color || "#777";
   const sdgBorder = {
@@ -135,13 +155,15 @@ const OrgPageComponent = ({ org, loading }) => {
   const mapWidth = isMobile ? screenWidth / 2 : 760 / 2;
   const mapHeight = isMobile ? 240 : 300;
 
+  const isAdmin = userData?.users?.[0]?.is_user_admin;
+
   return (
     <>
       <Box textAlign={{ base: "center", md: "left" }} pb={{ base: 0, md: 160 }}>
         <Content isFull>
           <Stack>
             <Box maxW={760}>
-              {isMyOrg && <MyOrgBar />}
+              {(isMyOrg || isAdmin) && <MyOrgBar isAdmin={isAdmin} />}
               <Stack
                 px={{ base: 5, md: 0 }}
                 mb={10}
@@ -279,12 +301,14 @@ const OrgPageComponent = ({ org, loading }) => {
                                 <Link href={`/${org.slug}/impact`}>
                                   <Button
                                     marginTop={{ base: 2, md: 4 }}
-                                    width={{ base: 150, md: 200 }}
+                                    width={{ base: 140, md: 180 }}
                                     variant="outline"
+                                    _hover={{
+                                      color: sdg?.color,
+                                      backgroundColor: "white",
+                                    }}
                                   >
-                                    {isMobile
-                                      ? `View data →`
-                                      : "View impact data →"}
+                                    {isMobile ? `Context →` : "View context →"}
                                   </Button>
                                 </Link>
                               </Box>
@@ -329,46 +353,16 @@ const OrgPageComponent = ({ org, loading }) => {
                 </Box>
                 <Stack
                   alignItems="flex-start"
-                  height={240}
+                  // height={240}
                   // p={4}
                   color={"#777"}
                   background={"#fff"}
                   borderLeft={sdgBorder}
                   spacing={0}
                 >
-                  <SectionHeading>Operations</SectionHeading>
+                  <SectionHeading>Operations & Financials</SectionHeading>
                   <Operations org={org} />
                 </Stack>
-                {org.link_financials && (
-                  <Stack
-                    alignItems="flex-start"
-                    height={240}
-                    // p={4}
-                    color={"#777"}
-                    background={"#fff"}
-                    borderLeft={sdgBorder}
-                    spacing={0}
-                  >
-                    <SectionHeading>Financials</SectionHeading>
-                    <Flex
-                      width={"100%"}
-                      background={"#eee"}
-                      height={180}
-                      backgroundImage={
-                        "url(https://static.vecteezy.com/system/resources/previews/000/173/675/non_2x/spreadsheet-illustration-vector.jpg)"
-                      }
-                      backgroundPosition="top center"
-                      justifyContent="flex-start"
-                      alignItems="center"
-                    >
-                      <a href={org.link_financials} target="_blank">
-                        <Button ml={9} color="white" variant="outline">
-                          View financials →
-                        </Button>
-                      </a>
-                    </Flex>
-                  </Stack>
-                )}
               </Skeleton>
             </Box>
           </Stack>

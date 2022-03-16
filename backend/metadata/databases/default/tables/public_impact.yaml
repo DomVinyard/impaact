@@ -9,10 +9,22 @@ insert_permissions:
 - permission:
     backend_only: false
     check:
-      orgByOrg:
-        author_id:
-          _eq: X-Hasura-User-Id
+      _or:
+      - orgByOrg:
+          author_id:
+            _eq: X-Hasura-User-Id
+      - _exists:
+          _table:
+            name: users
+            schema: public
+          _where:
+            _and:
+            - id:
+                _eq: X-Hasura-User-Id
+            - is_user_admin:
+                _eq: true
     columns:
+    - context
     - image
     - indicator
     - org
@@ -25,6 +37,7 @@ insert_permissions:
 select_permissions:
 - permission:
     columns:
+    - context
     - id
     - image
     - indicator
@@ -38,6 +51,7 @@ select_permissions:
   role: public
 - permission:
     columns:
+    - context
     - id
     - image
     - indicator
@@ -52,10 +66,22 @@ select_permissions:
 update_permissions:
 - permission:
     check:
-      orgByOrg:
-        author_id:
-          _eq: X-Hasura-User-Id
+      _or:
+      - orgByOrg:
+          author_id:
+            _eq: X-Hasura-User-Id
+      - _exists:
+          _table:
+            name: users
+            schema: public
+          _where:
+            _and:
+            - id:
+                _eq: X-Hasura-User-Id
+            - is_user_admin:
+                _eq: true
     columns:
+    - context
     - image
     - indicator
     - prefix
@@ -64,9 +90,20 @@ update_permissions:
     - suffix
     - value
     filter:
-      orgByOrg:
-        author_id:
-          _eq: X-Hasura-User-Id
+      _or:
+      - orgByOrg:
+          author_id:
+            _eq: X-Hasura-User-Id
+      - _exists:
+          _table:
+            name: users
+            schema: public
+          _where:
+            _and:
+            - id:
+                _eq: X-Hasura-User-Id
+            - is_user_admin:
+                _eq: true
   role: user
 delete_permissions:
 - permission:

@@ -34,7 +34,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { useUpdateImpactPriorityMutation } from "generated-graphql";
 import SDGs from "lib/SDGs";
 
-export function ImpactCard({ id, item, onEdit }) {
+export function ImpactCard({ id, item, onEdit, isMobile }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: id });
 
@@ -98,7 +98,7 @@ export function ImpactCard({ id, item, onEdit }) {
             mr={1}
             size="sm"
           >
-            Update
+            {isMobile ? "Update" : "Update impact"}
           </Button>
         </Flex>
       </Flex>
@@ -114,6 +114,7 @@ function SortableList({
   onOpen,
   setSelectedImpact,
   onChange,
+  isMobile,
 }) {
   const [items, setItems] = useState(initialItems);
   useEffect(() => setItems(initialItems), [initialItems]);
@@ -137,7 +138,8 @@ function SortableList({
     }
   }
 
-  if (!items?.length) return <Box>none</Box>;
+  if (!items?.length)
+    return <Box>Impacts (with description of what to do)</Box>;
   return (
     <DndContext
       sensors={sensors}
@@ -154,6 +156,7 @@ function SortableList({
               setSelectedImpact(item);
               onOpen();
             }}
+            isMobile={isMobile}
           />
         ))}
       </SortableContext>
@@ -163,8 +166,8 @@ function SortableList({
 
 export type Field = {
   order: {
-    create: number;
-    update: number;
+    create: number | "hide";
+    update: number | "hide";
   };
   id: string;
   label?: string;
@@ -184,10 +187,10 @@ const FIELDS: Field[] = [
       update: 1,
     },
     id: "impacts",
-    label: "Impacts",
+    label: "",
     element: Textarea,
     validation: {},
-    custom: ({ values, isEditMode, onChange, org, refetch }) => {
+    custom: ({ values, isEditMode, onChange, org, refetch, isMobile }) => {
       const { isOpen, onOpen, onClose } = useDisclosure();
       const [selectedImpact, setSelectedImpact] = useState(null);
       return (
@@ -197,17 +200,20 @@ const FIELDS: Field[] = [
             setSelectedImpact={setSelectedImpact}
             items={org?.impacts}
             onChange={onChange}
+            isMobile={isMobile}
           />
-
-          <Button
-            colorScheme="blue"
-            onClick={() => {
-              setSelectedImpact({ indicator: "", value: "", sdg: "" });
-              onOpen();
-            }}
-          >
-            Add impact
-          </Button>
+          <Flex justifyContent={"flex-end"} pr={3} mt={6}>
+            <Button
+              colorScheme="blue"
+              size={"lg"}
+              onClick={() => {
+                setSelectedImpact({ indicator: "", value: "", sdg: "" });
+                onOpen();
+              }}
+            >
+              Add impact
+            </Button>
+          </Flex>
           <ImpactModal
             refetchList={refetch}
             isOpen={isOpen}
@@ -226,7 +232,7 @@ const FIELDS: Field[] = [
     label: "Organisation Name",
     order: {
       create: 1,
-      update: 2,
+      update: "hide",
     },
     validation: {
       required: "This is required",

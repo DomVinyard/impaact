@@ -118,60 +118,66 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
       </Alert>
     );
   };
+  const mode = isEditMode ? "update" : "create";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={4} mt={28}>
         {errorNode()}
         <Box maxW={760}>
-          <Stack spacing={4} my={12}>
+          <Stack spacing={4}>
+            {mode === "update" && (
+              <Heading size="lg">Editing {values.name}</Heading>
+            )}
             {/* Fields */}
-            {FIELDS?.sort((a, b) => {
-              const mode = isEditMode ? "update" : "create";
-              if (a.order[mode] > b.order[mode]) return 1;
-              if (a.order[mode] < b.order[mode]) return -1;
-              return 0;
-            }).map((field) => (
-              <Box key={field.id} paddingBottom={8}>
-                <FormControl isInvalid={errors[field.id]}>
-                  {field.before && (
-                    <field.before values={values} isEditMode={isEditMode} />
-                  )}
-                  <FormLabel
-                    style={{ fontSize: 22 }}
-                    htmlFor={errors[field.id]}
-                  >
-                    {field.label}
-                  </FormLabel>
-                  {field.custom ? (
-                    <field.custom
-                      id={field.id}
-                      values={values}
-                      isEditMode={isEditMode}
-                      org={org}
-                      refetch={refetch}
-                      {...register(field.id, field.validation)}
-                    />
-                  ) : (
-                    <field.element
-                      autoComplate="off"
-                      id={field.id}
-                      placeholder={field.placeholder}
-                      {...register(field.id, field.validation)}
-                    />
-                  )}
-                  <FormErrorMessage>
-                    {errors[field.id] && errors[field.id].message}
-                  </FormErrorMessage>
-                  {field.after && (
-                    <field.after values={values} isEditMode={isEditMode} />
-                  )}
-                </FormControl>
-              </Box>
-            ))}
+            {FIELDS?.filter(({ order }) => order[mode] !== "hide")
+              .sort((a, b) => {
+                if (a.order[mode] > b.order[mode]) return 1;
+                if (a.order[mode] < b.order[mode]) return -1;
+                return 0;
+              })
+              .map((field) => (
+                <Box key={field.id} paddingBottom={8}>
+                  <FormControl isInvalid={errors[field.id]}>
+                    {field.before && (
+                      <field.before values={values} isEditMode={isEditMode} />
+                    )}
+                    <FormLabel
+                      style={{ fontSize: 22 }}
+                      htmlFor={errors[field.id]}
+                    >
+                      {field.label}
+                    </FormLabel>
+                    {field.custom ? (
+                      <field.custom
+                        id={field.id}
+                        values={values}
+                        isEditMode={isEditMode}
+                        isMobile={isMobile}
+                        org={org}
+                        refetch={refetch}
+                        {...register(field.id, field.validation)}
+                      />
+                    ) : (
+                      <field.element
+                        autoComplate="off"
+                        id={field.id}
+                        placeholder={field.placeholder}
+                        {...register(field.id, field.validation)}
+                      />
+                    )}
+                    <FormErrorMessage>
+                      {errors[field.id] && errors[field.id].message}
+                    </FormErrorMessage>
+                    {field.after && (
+                      <field.after values={values} isEditMode={isEditMode} />
+                    )}
+                  </FormControl>
+                </Box>
+              ))}
 
             {isEditMode && (
-              <>
+              <Box paddingBottom={32}>
                 <Text style={{ fontSize: 22, color: "firebrick" }}>
                   Danger Zone
                 </Text>
@@ -184,7 +190,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
                 >
                   Delete{!isMobile ? " Organisation" : " Org"}
                 </Button>
-              </>
+              </Box>
             )}
           </Stack>
         </Box>

@@ -1,6 +1,5 @@
-query fetchUser($userId: uuid!) {
-  users_by_pk(id: $userId) {
-    id
-    name
+query fetchUser($userEmail: String!) {
+  users(where: { email: { _eq: $userEmail } }) {
+    is_user_admin
   }
 }

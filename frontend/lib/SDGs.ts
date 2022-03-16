@@ -17,7 +17,7 @@ export default [
   {
     id: "03",
     number: 3,
-    goal: "good health and well-being",
+    goal: "good health & well-being",
     color: "#4c9f38",
     description:
       "Ensure healthy lives and promote well-being for all, at all ages.",

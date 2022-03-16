@@ -90,8 +90,19 @@ update_permissions:
     - size
     - slug
     filter:
-      author_id:
-        _eq: X-Hasura-User-Id
+      _or:
+      - author_id:
+          _eq: X-Hasura-User-Id
+      - _exists:
+          _table:
+            name: users
+            schema: public
+          _where:
+            _and:
+            - id:
+                _eq: X-Hasura-User-Id
+            - is_user_admin:
+                _eq: true
   role: user
 delete_permissions:
 - permission:

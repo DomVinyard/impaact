@@ -209,9 +209,9 @@ const ImpactModal = ({
                     <Box></Box>
                   )}
                   <ButtonGroup>
-                    <Button onClick={() => closeForm()}>
+                    {/* <Button onClick={() => closeForm()}>
                       {isDirty ? "Cancel" : "Back"}
-                    </Button>
+                    </Button> */}
                     <Button
                       loadingText={isEditMode ? "Updating" : "Adding"}
                       colorScheme={"blue"}

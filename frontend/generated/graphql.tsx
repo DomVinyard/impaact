@@ -306,110 +306,10 @@ export enum Accounts_Update_Column {
   UserId = "user_id",
 }
 
-/** columns and relationships of "admins" */
-export type Admins = {
-  __typename?: "admins";
-  email: Scalars["String"];
-};
-
-/** aggregated selection of "admins" */
-export type Admins_Aggregate = {
-  __typename?: "admins_aggregate";
-  aggregate?: Maybe<Admins_Aggregate_Fields>;
-  nodes: Array<Admins>;
-};
-
-/** aggregate fields of "admins" */
-export type Admins_Aggregate_Fields = {
-  __typename?: "admins_aggregate_fields";
-  count: Scalars["Int"];
-  max?: Maybe<Admins_Max_Fields>;
-  min?: Maybe<Admins_Min_Fields>;
-};
-
-/** aggregate fields of "admins" */
-export type Admins_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Admins_Select_Column>>;
-  distinct?: InputMaybe<Scalars["Boolean"]>;
-};
-
-/** Boolean expression to filter rows from the table "admins". All fields are combined with a logical 'AND'. */
-export type Admins_Bool_Exp = {
-  _and?: InputMaybe<Array<Admins_Bool_Exp>>;
-  _not?: InputMaybe<Admins_Bool_Exp>;
-  _or?: InputMaybe<Array<Admins_Bool_Exp>>;
-  email?: InputMaybe<String_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "admins" */
-export enum Admins_Constraint {
-  /** unique or primary key constraint */
-  AdminsPkey = "admins_pkey",
-}
-
-/** input type for inserting data into table "admins" */
-export type Admins_Insert_Input = {
-  email?: InputMaybe<Scalars["String"]>;
-};
-
-/** aggregate max on columns */
-export type Admins_Max_Fields = {
-  __typename?: "admins_max_fields";
-  email?: Maybe<Scalars["String"]>;
-};
-
-/** aggregate min on columns */
-export type Admins_Min_Fields = {
-  __typename?: "admins_min_fields";
-  email?: Maybe<Scalars["String"]>;
-};
-
-/** response of any mutation on the table "admins" */
-export type Admins_Mutation_Response = {
-  __typename?: "admins_mutation_response";
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars["Int"];
-  /** data from the rows affected by the mutation */
-  returning: Array<Admins>;
-};
-
-/** on conflict condition type for table "admins" */
-export type Admins_On_Conflict = {
-  constraint: Admins_Constraint;
-  update_columns?: Array<Admins_Update_Column>;
-  where?: InputMaybe<Admins_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "admins". */
-export type Admins_Order_By = {
-  email?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: admins */
-export type Admins_Pk_Columns_Input = {
-  email: Scalars["String"];
-};
-
-/** select columns of table "admins" */
-export enum Admins_Select_Column {
-  /** column name */
-  Email = "email",
-}
-
-/** input type for updating data in table "admins" */
-export type Admins_Set_Input = {
-  email?: InputMaybe<Scalars["String"]>;
-};
-
-/** update columns of table "admins" */
-export enum Admins_Update_Column {
-  /** column name */
-  Email = "email",
-}
-
 /** columns and relationships of "impact" */
 export type Impact = {
   __typename?: "impact";
+  context?: Maybe<Scalars["String"]>;
   id: Scalars["uuid"];
   image?: Maybe<Scalars["String"]>;
   indicator: Scalars["String"];
@@ -492,6 +392,7 @@ export type Impact_Bool_Exp = {
   _and?: InputMaybe<Array<Impact_Bool_Exp>>;
   _not?: InputMaybe<Impact_Bool_Exp>;
   _or?: InputMaybe<Array<Impact_Bool_Exp>>;
+  context?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   image?: InputMaybe<String_Comparison_Exp>;
   indicator?: InputMaybe<String_Comparison_Exp>;
@@ -518,6 +419,7 @@ export type Impact_Inc_Input = {
 
 /** input type for inserting data into table "impact" */
 export type Impact_Insert_Input = {
+  context?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["uuid"]>;
   image?: InputMaybe<Scalars["String"]>;
   indicator?: InputMaybe<Scalars["String"]>;
@@ -533,6 +435,7 @@ export type Impact_Insert_Input = {
 /** aggregate max on columns */
 export type Impact_Max_Fields = {
   __typename?: "impact_max_fields";
+  context?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["uuid"]>;
   image?: Maybe<Scalars["String"]>;
   indicator?: Maybe<Scalars["String"]>;
@@ -546,6 +449,7 @@ export type Impact_Max_Fields = {
 
 /** order by max() on columns of table "impact" */
 export type Impact_Max_Order_By = {
+  context?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
   indicator?: InputMaybe<Order_By>;
@@ -560,6 +464,7 @@ export type Impact_Max_Order_By = {
 /** aggregate min on columns */
 export type Impact_Min_Fields = {
   __typename?: "impact_min_fields";
+  context?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["uuid"]>;
   image?: Maybe<Scalars["String"]>;
   indicator?: Maybe<Scalars["String"]>;
@@ -573,6 +478,7 @@ export type Impact_Min_Fields = {
 
 /** order by min() on columns of table "impact" */
 export type Impact_Min_Order_By = {
+  context?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
   indicator?: InputMaybe<Order_By>;
@@ -602,6 +508,7 @@ export type Impact_On_Conflict = {
 
 /** Ordering options when selecting data from "impact". */
 export type Impact_Order_By = {
+  context?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
   indicator?: InputMaybe<Order_By>;
@@ -621,6 +528,8 @@ export type Impact_Pk_Columns_Input = {
 
 /** select columns of table "impact" */
 export enum Impact_Select_Column {
+  /** column name */
+  Context = "context",
   /** column name */
   Id = "id",
   /** column name */
@@ -643,6 +552,7 @@ export enum Impact_Select_Column {
 
 /** input type for updating data in table "impact" */
 export type Impact_Set_Input = {
+  context?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["uuid"]>;
   image?: InputMaybe<Scalars["String"]>;
   indicator?: InputMaybe<Scalars["String"]>;
@@ -709,6 +619,8 @@ export type Impact_Sum_Order_By = {
 /** update columns of table "impact" */
 export enum Impact_Update_Column {
   /** column name */
+  Context = "context",
+  /** column name */
   Id = "id",
   /** column name */
   Image = "image",
@@ -774,10 +686,6 @@ export type Mutation_Root = {
   delete_accounts?: Maybe<Accounts_Mutation_Response>;
   /** delete single row from the table: "accounts" */
   delete_accounts_by_pk?: Maybe<Accounts>;
-  /** delete data from the table: "admins" */
-  delete_admins?: Maybe<Admins_Mutation_Response>;
-  /** delete single row from the table: "admins" */
-  delete_admins_by_pk?: Maybe<Admins>;
   /** delete data from the table: "impact" */
   delete_impact?: Maybe<Impact_Mutation_Response>;
   /** delete single row from the table: "impact" */
@@ -802,10 +710,6 @@ export type Mutation_Root = {
   insert_accounts?: Maybe<Accounts_Mutation_Response>;
   /** insert a single row into the table: "accounts" */
   insert_accounts_one?: Maybe<Accounts>;
-  /** insert data into the table: "admins" */
-  insert_admins?: Maybe<Admins_Mutation_Response>;
-  /** insert a single row into the table: "admins" */
-  insert_admins_one?: Maybe<Admins>;
   /** insert data into the table: "impact" */
   insert_impact?: Maybe<Impact_Mutation_Response>;
   /** insert a single row into the table: "impact" */
@@ -830,10 +734,6 @@ export type Mutation_Root = {
   update_accounts?: Maybe<Accounts_Mutation_Response>;
   /** update single row of the table: "accounts" */
   update_accounts_by_pk?: Maybe<Accounts>;
-  /** update data of the table: "admins" */
-  update_admins?: Maybe<Admins_Mutation_Response>;
-  /** update single row of the table: "admins" */
-  update_admins_by_pk?: Maybe<Admins>;
   /** update data of the table: "impact" */
   update_impact?: Maybe<Impact_Mutation_Response>;
   /** update single row of the table: "impact" */
@@ -864,16 +764,6 @@ export type Mutation_RootDelete_AccountsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Accounts_By_PkArgs = {
   id: Scalars["uuid"];
-};
-
-/** mutation root */
-export type Mutation_RootDelete_AdminsArgs = {
-  where: Admins_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Admins_By_PkArgs = {
-  email: Scalars["String"];
 };
 
 /** mutation root */
@@ -936,18 +826,6 @@ export type Mutation_RootInsert_AccountsArgs = {
 export type Mutation_RootInsert_Accounts_OneArgs = {
   object: Accounts_Insert_Input;
   on_conflict?: InputMaybe<Accounts_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_AdminsArgs = {
-  objects: Array<Admins_Insert_Input>;
-  on_conflict?: InputMaybe<Admins_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Admins_OneArgs = {
-  object: Admins_Insert_Input;
-  on_conflict?: InputMaybe<Admins_On_Conflict>;
 };
 
 /** mutation root */
@@ -1020,18 +898,6 @@ export type Mutation_RootUpdate_AccountsArgs = {
 export type Mutation_RootUpdate_Accounts_By_PkArgs = {
   _set?: InputMaybe<Accounts_Set_Input>;
   pk_columns: Accounts_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_AdminsArgs = {
-  _set?: InputMaybe<Admins_Set_Input>;
-  where: Admins_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Admins_By_PkArgs = {
-  _set?: InputMaybe<Admins_Set_Input>;
-  pk_columns: Admins_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -1477,12 +1343,6 @@ export type Query_Root = {
   accounts_aggregate: Accounts_Aggregate;
   /** fetch data from the table: "accounts" using primary key columns */
   accounts_by_pk?: Maybe<Accounts>;
-  /** fetch data from the table: "admins" */
-  admins: Array<Admins>;
-  /** fetch aggregated fields from the table: "admins" */
-  admins_aggregate: Admins_Aggregate;
-  /** fetch data from the table: "admins" using primary key columns */
-  admins_by_pk?: Maybe<Admins>;
   /** fetch data from the table: "impact" */
   impact: Array<Impact>;
   /** fetch aggregated fields from the table: "impact" */
@@ -1533,26 +1393,6 @@ export type Query_RootAccounts_AggregateArgs = {
 
 export type Query_RootAccounts_By_PkArgs = {
   id: Scalars["uuid"];
-};
-
-export type Query_RootAdminsArgs = {
-  distinct_on?: InputMaybe<Array<Admins_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
-  order_by?: InputMaybe<Array<Admins_Order_By>>;
-  where?: InputMaybe<Admins_Bool_Exp>;
-};
-
-export type Query_RootAdmins_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Admins_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
-  order_by?: InputMaybe<Array<Admins_Order_By>>;
-  where?: InputMaybe<Admins_Bool_Exp>;
-};
-
-export type Query_RootAdmins_By_PkArgs = {
-  email: Scalars["String"];
 };
 
 export type Query_RootImpactArgs = {
@@ -1891,12 +1731,6 @@ export type Subscription_Root = {
   accounts_aggregate: Accounts_Aggregate;
   /** fetch data from the table: "accounts" using primary key columns */
   accounts_by_pk?: Maybe<Accounts>;
-  /** fetch data from the table: "admins" */
-  admins: Array<Admins>;
-  /** fetch aggregated fields from the table: "admins" */
-  admins_aggregate: Admins_Aggregate;
-  /** fetch data from the table: "admins" using primary key columns */
-  admins_by_pk?: Maybe<Admins>;
   /** fetch data from the table: "impact" */
   impact: Array<Impact>;
   /** fetch aggregated fields from the table: "impact" */
@@ -1947,26 +1781,6 @@ export type Subscription_RootAccounts_AggregateArgs = {
 
 export type Subscription_RootAccounts_By_PkArgs = {
   id: Scalars["uuid"];
-};
-
-export type Subscription_RootAdminsArgs = {
-  distinct_on?: InputMaybe<Array<Admins_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
-  order_by?: InputMaybe<Array<Admins_Order_By>>;
-  where?: InputMaybe<Admins_Bool_Exp>;
-};
-
-export type Subscription_RootAdmins_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Admins_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
-  order_by?: InputMaybe<Array<Admins_Order_By>>;
-  where?: InputMaybe<Admins_Bool_Exp>;
-};
-
-export type Subscription_RootAdmins_By_PkArgs = {
-  email: Scalars["String"];
 };
 
 export type Subscription_RootImpactArgs = {
@@ -2090,6 +1904,8 @@ export type Users = {
   email_verified?: Maybe<Scalars["timestamptz"]>;
   id: Scalars["uuid"];
   image?: Maybe<Scalars["String"]>;
+  is_admin?: Maybe<Scalars["String"]>;
+  is_user_admin: Scalars["Boolean"];
   name?: Maybe<Scalars["String"]>;
   /** fetch data from the table: "orgs" */
   orgs: Array<Orgs>;
@@ -2147,6 +1963,8 @@ export type Users_Bool_Exp = {
   email_verified?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   image?: InputMaybe<String_Comparison_Exp>;
+  is_admin?: InputMaybe<String_Comparison_Exp>;
+  is_user_admin?: InputMaybe<Boolean_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   orgs?: InputMaybe<Orgs_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -2154,6 +1972,8 @@ export type Users_Bool_Exp = {
 
 /** unique or primary key constraints on table "users" */
 export enum Users_Constraint {
+  /** unique or primary key constraint */
+  UsersEmailKey = "users_email_key",
   /** unique or primary key constraint */
   UsersPkey = "users_pkey",
 }
@@ -2165,6 +1985,8 @@ export type Users_Insert_Input = {
   email_verified?: InputMaybe<Scalars["timestamptz"]>;
   id?: InputMaybe<Scalars["uuid"]>;
   image?: InputMaybe<Scalars["String"]>;
+  is_admin?: InputMaybe<Scalars["String"]>;
+  is_user_admin?: InputMaybe<Scalars["Boolean"]>;
   name?: InputMaybe<Scalars["String"]>;
   orgs?: InputMaybe<Orgs_Arr_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
@@ -2178,6 +2000,7 @@ export type Users_Max_Fields = {
   email_verified?: Maybe<Scalars["timestamptz"]>;
   id?: Maybe<Scalars["uuid"]>;
   image?: Maybe<Scalars["String"]>;
+  is_admin?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
@@ -2190,6 +2013,7 @@ export type Users_Min_Fields = {
   email_verified?: Maybe<Scalars["timestamptz"]>;
   id?: Maybe<Scalars["uuid"]>;
   image?: Maybe<Scalars["String"]>;
+  is_admin?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
@@ -2224,6 +2048,8 @@ export type Users_Order_By = {
   email_verified?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
+  is_admin?: InputMaybe<Order_By>;
+  is_user_admin?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   orgs_aggregate?: InputMaybe<Orgs_Aggregate_Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -2247,6 +2073,10 @@ export enum Users_Select_Column {
   /** column name */
   Image = "image",
   /** column name */
+  IsAdmin = "is_admin",
+  /** column name */
+  IsUserAdmin = "is_user_admin",
+  /** column name */
   Name = "name",
   /** column name */
   UpdatedAt = "updated_at",
@@ -2259,6 +2089,8 @@ export type Users_Set_Input = {
   email_verified?: InputMaybe<Scalars["timestamptz"]>;
   id?: InputMaybe<Scalars["uuid"]>;
   image?: InputMaybe<Scalars["String"]>;
+  is_admin?: InputMaybe<Scalars["String"]>;
+  is_user_admin?: InputMaybe<Scalars["Boolean"]>;
   name?: InputMaybe<Scalars["String"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
 };
@@ -2275,6 +2107,10 @@ export enum Users_Update_Column {
   Id = "id",
   /** column name */
   Image = "image",
+  /** column name */
+  IsAdmin = "is_admin",
+  /** column name */
+  IsUserAdmin = "is_user_admin",
   /** column name */
   Name = "name",
   /** column name */
@@ -2693,6 +2529,7 @@ export type FetchOrgQuery = {
       value: number;
       indicator: string;
       sdg: string;
+      context?: string | undefined;
     }>;
   }>;
 };
@@ -2721,14 +2558,12 @@ export type FetchOrgsQuery = {
 };
 
 export type FetchUserQueryVariables = Exact<{
-  userId: Scalars["uuid"];
+  userEmail: Scalars["String"];
 }>;
 
 export type FetchUserQuery = {
   __typename?: "query_root";
-  users_by_pk?:
-    | { __typename?: "users"; id: any; name?: string | undefined }
-    | undefined;
+  users: Array<{ __typename?: "users"; is_user_admin: boolean }>;
 };
 
 export type MyOrgsQueryVariables = Exact<{
@@ -4053,6 +3888,7 @@ export const FetchOrgDocument = gql`
         value
         indicator
         sdg
+        context
       }
     }
   }
@@ -4260,10 +4096,9 @@ export type FetchOrgsQueryResult = Apollo.QueryResult<
   FetchOrgsQueryVariables
 >;
 export const FetchUserDocument = gql`
-  query fetchUser($userId: uuid!) {
-    users_by_pk(id: $userId) {
-      id
-      name
+  query fetchUser($userEmail: String!) {
+    users(where: { email: { _eq: $userEmail } }) {
+      is_user_admin
     }
   }
 `;
@@ -4327,7 +4162,7 @@ export function withFetchUser<
  * @example
  * const { data, loading, error } = useFetchUserQuery({
  *   variables: {
- *      userId: // value for 'userId'
+ *      userEmail: // value for 'userEmail'
  *   },
  * });
  */
@@ -4711,21 +4546,6 @@ export type ResolversTypes = {
   accounts_select_column: Accounts_Select_Column;
   accounts_set_input: Accounts_Set_Input;
   accounts_update_column: Accounts_Update_Column;
-  admins: ResolverTypeWrapper<Admins>;
-  admins_aggregate: ResolverTypeWrapper<Admins_Aggregate>;
-  admins_aggregate_fields: ResolverTypeWrapper<Admins_Aggregate_Fields>;
-  admins_bool_exp: Admins_Bool_Exp;
-  admins_constraint: Admins_Constraint;
-  admins_insert_input: Admins_Insert_Input;
-  admins_max_fields: ResolverTypeWrapper<Admins_Max_Fields>;
-  admins_min_fields: ResolverTypeWrapper<Admins_Min_Fields>;
-  admins_mutation_response: ResolverTypeWrapper<Admins_Mutation_Response>;
-  admins_on_conflict: Admins_On_Conflict;
-  admins_order_by: Admins_Order_By;
-  admins_pk_columns_input: Admins_Pk_Columns_Input;
-  admins_select_column: Admins_Select_Column;
-  admins_set_input: Admins_Set_Input;
-  admins_update_column: Admins_Update_Column;
   impact: ResolverTypeWrapper<Impact>;
   impact_aggregate: ResolverTypeWrapper<Impact_Aggregate>;
   impact_aggregate_fields: ResolverTypeWrapper<Impact_Aggregate_Fields>;
@@ -4870,18 +4690,6 @@ export type ResolversParentTypes = {
   accounts_order_by: Accounts_Order_By;
   accounts_pk_columns_input: Accounts_Pk_Columns_Input;
   accounts_set_input: Accounts_Set_Input;
-  admins: Admins;
-  admins_aggregate: Admins_Aggregate;
-  admins_aggregate_fields: Admins_Aggregate_Fields;
-  admins_bool_exp: Admins_Bool_Exp;
-  admins_insert_input: Admins_Insert_Input;
-  admins_max_fields: Admins_Max_Fields;
-  admins_min_fields: Admins_Min_Fields;
-  admins_mutation_response: Admins_Mutation_Response;
-  admins_on_conflict: Admins_On_Conflict;
-  admins_order_by: Admins_Order_By;
-  admins_pk_columns_input: Admins_Pk_Columns_Input;
-  admins_set_input: Admins_Set_Input;
   impact: Impact;
   impact_aggregate: Impact_Aggregate;
   impact_aggregate_fields: Impact_Aggregate_Fields;
@@ -5192,83 +5000,11 @@ export type Accounts_Mutation_ResponseResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type AdminsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["admins"] = ResolversParentTypes["admins"]
-> = {
-  email?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Admins_AggregateResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["admins_aggregate"] = ResolversParentTypes["admins_aggregate"]
-> = {
-  aggregate?: Resolver<
-    Maybe<ResolversTypes["admins_aggregate_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  nodes?: Resolver<Array<ResolversTypes["admins"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Admins_Aggregate_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["admins_aggregate_fields"] = ResolversParentTypes["admins_aggregate_fields"]
-> = {
-  count?: Resolver<
-    ResolversTypes["Int"],
-    ParentType,
-    ContextType,
-    Partial<Admins_Aggregate_FieldsCountArgs>
-  >;
-  max?: Resolver<
-    Maybe<ResolversTypes["admins_max_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  min?: Resolver<
-    Maybe<ResolversTypes["admins_min_fields"]>,
-    ParentType,
-    ContextType
-  >;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Admins_Max_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["admins_max_fields"] = ResolversParentTypes["admins_max_fields"]
-> = {
-  email?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Admins_Min_FieldsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["admins_min_fields"] = ResolversParentTypes["admins_min_fields"]
-> = {
-  email?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Admins_Mutation_ResponseResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["admins_mutation_response"] = ResolversParentTypes["admins_mutation_response"]
-> = {
-  affected_rows?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
-  returning?: Resolver<
-    Array<ResolversTypes["admins"]>,
-    ParentType,
-    ContextType
-  >;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
 export type ImpactResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["impact"] = ResolversParentTypes["impact"]
 > = {
+  context?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   indicator?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
@@ -5371,6 +5107,7 @@ export type Impact_Max_FieldsResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["impact_max_fields"] = ResolversParentTypes["impact_max_fields"]
 > = {
+  context?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   indicator?: Resolver<
@@ -5391,6 +5128,7 @@ export type Impact_Min_FieldsResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["impact_min_fields"] = ResolversParentTypes["impact_min_fields"]
 > = {
+  context?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   indicator?: Resolver<
@@ -5499,18 +5237,6 @@ export type Mutation_RootResolvers<
     ContextType,
     RequireFields<Mutation_RootDelete_Accounts_By_PkArgs, "id">
   >;
-  delete_admins?: Resolver<
-    Maybe<ResolversTypes["admins_mutation_response"]>,
-    ParentType,
-    ContextType,
-    RequireFields<Mutation_RootDelete_AdminsArgs, "where">
-  >;
-  delete_admins_by_pk?: Resolver<
-    Maybe<ResolversTypes["admins"]>,
-    ParentType,
-    ContextType,
-    RequireFields<Mutation_RootDelete_Admins_By_PkArgs, "email">
-  >;
   delete_impact?: Resolver<
     Maybe<ResolversTypes["impact_mutation_response"]>,
     ParentType,
@@ -5583,18 +5309,6 @@ export type Mutation_RootResolvers<
     ContextType,
     RequireFields<Mutation_RootInsert_Accounts_OneArgs, "object">
   >;
-  insert_admins?: Resolver<
-    Maybe<ResolversTypes["admins_mutation_response"]>,
-    ParentType,
-    ContextType,
-    RequireFields<Mutation_RootInsert_AdminsArgs, "objects">
-  >;
-  insert_admins_one?: Resolver<
-    Maybe<ResolversTypes["admins"]>,
-    ParentType,
-    ContextType,
-    RequireFields<Mutation_RootInsert_Admins_OneArgs, "object">
-  >;
   insert_impact?: Resolver<
     Maybe<ResolversTypes["impact_mutation_response"]>,
     ParentType,
@@ -5666,18 +5380,6 @@ export type Mutation_RootResolvers<
     ParentType,
     ContextType,
     RequireFields<Mutation_RootUpdate_Accounts_By_PkArgs, "pk_columns">
-  >;
-  update_admins?: Resolver<
-    Maybe<ResolversTypes["admins_mutation_response"]>,
-    ParentType,
-    ContextType,
-    RequireFields<Mutation_RootUpdate_AdminsArgs, "where">
-  >;
-  update_admins_by_pk?: Resolver<
-    Maybe<ResolversTypes["admins"]>,
-    ParentType,
-    ContextType,
-    RequireFields<Mutation_RootUpdate_Admins_By_PkArgs, "pk_columns">
   >;
   update_impact?: Resolver<
     Maybe<ResolversTypes["impact_mutation_response"]>,
@@ -5996,24 +5698,6 @@ export type Query_RootResolvers<
     ParentType,
     ContextType,
     RequireFields<Query_RootAccounts_By_PkArgs, "id">
-  >;
-  admins?: Resolver<
-    Array<ResolversTypes["admins"]>,
-    ParentType,
-    ContextType,
-    Partial<Query_RootAdminsArgs>
-  >;
-  admins_aggregate?: Resolver<
-    ResolversTypes["admins_aggregate"],
-    ParentType,
-    ContextType,
-    Partial<Query_RootAdmins_AggregateArgs>
-  >;
-  admins_by_pk?: Resolver<
-    Maybe<ResolversTypes["admins"]>,
-    ParentType,
-    ContextType,
-    RequireFields<Query_RootAdmins_By_PkArgs, "email">
   >;
   impact?: Resolver<
     Array<ResolversTypes["impact"]>,
@@ -6367,27 +6051,6 @@ export type Subscription_RootResolvers<
     ContextType,
     RequireFields<Subscription_RootAccounts_By_PkArgs, "id">
   >;
-  admins?: SubscriptionResolver<
-    Array<ResolversTypes["admins"]>,
-    "admins",
-    ParentType,
-    ContextType,
-    Partial<Subscription_RootAdminsArgs>
-  >;
-  admins_aggregate?: SubscriptionResolver<
-    ResolversTypes["admins_aggregate"],
-    "admins_aggregate",
-    ParentType,
-    ContextType,
-    Partial<Subscription_RootAdmins_AggregateArgs>
-  >;
-  admins_by_pk?: SubscriptionResolver<
-    Maybe<ResolversTypes["admins"]>,
-    "admins_by_pk",
-    ParentType,
-    ContextType,
-    RequireFields<Subscription_RootAdmins_By_PkArgs, "email">
-  >;
   impact?: SubscriptionResolver<
     Array<ResolversTypes["impact"]>,
     "impact",
@@ -6513,6 +6176,8 @@ export type UsersResolvers<
   >;
   id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  is_admin?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  is_user_admin?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   orgs?: Resolver<
     Array<ResolversTypes["orgs"]>,
@@ -6583,6 +6248,7 @@ export type Users_Max_FieldsResolvers<
   >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  is_admin?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   updated_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,
@@ -6609,6 +6275,7 @@ export type Users_Min_FieldsResolvers<
   >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  is_admin?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   updated_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,
@@ -6763,12 +6430,6 @@ export type Resolvers<ContextType = any> = {
   accounts_max_fields?: Accounts_Max_FieldsResolvers<ContextType>;
   accounts_min_fields?: Accounts_Min_FieldsResolvers<ContextType>;
   accounts_mutation_response?: Accounts_Mutation_ResponseResolvers<ContextType>;
-  admins?: AdminsResolvers<ContextType>;
-  admins_aggregate?: Admins_AggregateResolvers<ContextType>;
-  admins_aggregate_fields?: Admins_Aggregate_FieldsResolvers<ContextType>;
-  admins_max_fields?: Admins_Max_FieldsResolvers<ContextType>;
-  admins_min_fields?: Admins_Min_FieldsResolvers<ContextType>;
-  admins_mutation_response?: Admins_Mutation_ResponseResolvers<ContextType>;
   impact?: ImpactResolvers<ContextType>;
   impact_aggregate?: Impact_AggregateResolvers<ContextType>;
   impact_aggregate_fields?: Impact_Aggregate_FieldsResolvers<ContextType>;
