@@ -32,7 +32,7 @@ const MyOrgBar = ({ isAdmin }) => {
     >
       <Link href={`/${router?.query.slug}/edit`}>
         <Button leftIcon={<EditIcon />} colorScheme="gray" w="120px" mt={3}>
-          {isAdmin ? "Admin" : `Update`}
+          {isAdmin ? "Edit" : `Edit`}
         </Button>
       </Link>
     </Flex>

@@ -220,7 +220,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
               variant={isDirty ? "outline" : "ghost"}
               colorScheme="gray"
               color={"gray"}
-              onClick={() => router.back()}
+              onClick={() => router.push(`/${org.slug}`)}
             >
               Cancel
             </Button>
