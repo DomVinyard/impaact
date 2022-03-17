@@ -42,15 +42,26 @@ const OrgCard = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
           <Flex
             width={{ base: "30px", md: "40px" }}
             // marginLeft={{ base: 1.5, md: 2 }}
-            backgroundColor={main_impact_sdg?.color || "gray.50"}
+            backgroundColor={main_impact_sdg?.color || "#ddd"}
             height={"100%"}
             alignItems="center"
             justifyContent="center"
           >
             <Box padding={{ base: 1, md: 2 }}>
-              <Image
-                src={`/images/sdg_trim/E-WEB-Goal-${main_impact_sdg?.id}.png`}
-              />
+              {main_impact_sdg?.id ? (
+                <Image
+                  src={`/images/sdg_trim/E-WEB-Goal-${main_impact_sdg?.id}.png`}
+                />
+              ) : (
+                <Text
+                  color="#aaa"
+                  fontWeight={"bold"}
+                  fontSize="lg"
+                  lineHeight={"1rem"}
+                >
+                  ?
+                </Text>
+              )}
             </Box>
           </Flex>
           <Text fontSize="md" fontWeight={"700"} padding={2} paddingTop={3}>
@@ -93,28 +104,42 @@ const OrgCard = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
           key={`impact_${main_impact?.id}`}
           justifyContent="space-between"
           height="100%"
-          backgroundColor={main_impact_sdg?.color || "gray.50"}
+          backgroundColor={main_impact_sdg?.color || "#ddd"}
           alignItems="center"
         >
-          <Text
-            fontFamily="Oswald"
-            fontWeight="600"
-            fontSize={{ base: "1.4em", md: "1.8em" }}
-            lineHeight={{ base: 1.2, md: 1.4 }}
-            marginRight={3}
-            borderRight={"1px solid rgba(255,255,255,0.9)"}
-            paddingRight={3}
-          >
-            {main_impact?.value}
-          </Text>
-          <Text
-            flexGrow="1"
-            fontSize={{ base: "0.9em", md: "1em" }}
-            lineHeight={{ base: 1.1, md: 1.3 }}
-            textAlign="left"
-          >
-            {main_impact?.indicator}
-          </Text>
+          {main_impact ? (
+            <>
+              <Text
+                fontFamily="Oswald"
+                fontWeight="600"
+                fontSize={{ base: "1.4em", md: "1.8em" }}
+                lineHeight={{ base: 1.2, md: 1.4 }}
+                marginRight={3}
+                borderRight={"1px solid rgba(255,255,255,0.9)"}
+                paddingRight={3}
+              >
+                {main_impact?.value}
+              </Text>
+              <Text
+                flexGrow="1"
+                fontSize={{ base: "0.9em", md: "1em" }}
+                lineHeight={{ base: 1.1, md: 1.3 }}
+                textAlign="left"
+              >
+                {main_impact?.indicator}
+              </Text>
+            </>
+          ) : (
+            <Text
+              flexGrow="1"
+              fontSize={{ base: "0.9em", md: "1em" }}
+              lineHeight={{ base: 1.1, md: 1.3 }}
+              textAlign="center"
+              color="#777"
+            >
+              No impact data
+            </Text>
+          )}
         </Flex>
       </Stack>
     </Skeleton>

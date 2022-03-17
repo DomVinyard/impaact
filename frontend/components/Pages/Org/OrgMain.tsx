@@ -51,27 +51,31 @@ const Operations = ({ org }) => {
         </Link>
       </Stack> */}
         <Flex mr={6} flexGrow={1} mx={{ base: 2, md: 3 }} textAlign="center">
-          <Stack flex={1}>
-            <OpsTitle>Team size</OpsTitle>
-            <Flex justifyContent="center">
-              <BsPeopleFill size={30} />
-            </Flex>
-            <OpsMetric>{org.size}</OpsMetric>
-          </Stack>
-          <Stack flex={1}>
-            <OpsTitle>Established</OpsTitle>
-            <Flex justifyContent="center">
-              <FaFlag size={30} />
-            </Flex>
-            <OpsMetric>{org.founded_at}</OpsMetric>
-          </Stack>
-          <Stack flex={1}>
+          {org.size && (
+            <Stack flex={1}>
+              <OpsTitle>Team size</OpsTitle>
+              <Flex justifyContent="center">
+                <BsPeopleFill size={30} />
+              </Flex>
+              <OpsMetric>{org.size}</OpsMetric>
+            </Stack>
+          )}
+          {org?.founded_at && (
+            <Stack flex={1}>
+              <OpsTitle>Established</OpsTitle>
+              <Flex justifyContent="center">
+                <FaFlag size={30} />
+              </Flex>
+              <OpsMetric>{org.founded_at}</OpsMetric>
+            </Stack>
+          )}
+          {/* <Stack flex={1}>
             <OpsTitle>Policies</OpsTitle>
             <Flex justifyContent="center">
               <FaCheck size={30} />
             </Flex>
             <OpsMetric>Good</OpsMetric>
-          </Stack>
+          </Stack> */}
         </Flex>
       </Flex>
       {org.link_financials && (
@@ -126,7 +130,8 @@ const OrgPageComponent = ({ org, loading }) => {
     variables: { userEmail: session?.user?.email },
   });
 
-  console.log({ userData, userLoading, userError });
+  const showOps =
+    org.link_financials || org.link_processes || org.size || org.founded_at;
 
   const topGoalColour = sdgs[0]?.sdg?.color || "#777";
   const sdgBorder = {
@@ -355,18 +360,22 @@ const OrgPageComponent = ({ org, loading }) => {
                     );
                   })}
                 </Box>
-                <Stack
-                  alignItems="flex-start"
-                  // height={240}
-                  // p={4}
-                  color={"#777"}
-                  background={"#fff"}
-                  borderLeft={sdgBorder}
-                  spacing={0}
-                >
-                  <SectionHeading>Operations & Financials</SectionHeading>
-                  <Operations org={org} />
-                </Stack>
+                {showOps && (
+                  <Stack
+                    alignItems="flex-start"
+                    // height={240}
+                    // p={4}
+                    color={"#777"}
+                    background={"#fff"}
+                    borderLeft={sdgs.length && sdgBorder}
+                    spacing={0}
+                  >
+                    {sdgs.length && (
+                      <SectionHeading>Operations & Financials</SectionHeading>
+                    )}
+                    <Operations org={org} />
+                  </Stack>
+                )}
               </Skeleton>
             </Box>
           </Stack>
