@@ -190,7 +190,15 @@ const FIELDS: Field[] = [
     label: "",
     element: Textarea,
     validation: {},
-    custom: ({ values, isEditMode, onChange, org, refetch, isMobile }) => {
+    custom: ({
+      values,
+      isEditMode,
+      onChange,
+      org,
+      refetch,
+      isMobile,
+      setSimulateDirty,
+    }) => {
       const { isOpen, onOpen, onClose } = useDisclosure();
       const [selectedImpact, setSelectedImpact] = useState(null);
       return (
@@ -217,7 +225,10 @@ const FIELDS: Field[] = [
           <ImpactModal
             refetchList={refetch}
             isOpen={isOpen}
-            onClose={onClose}
+            onClose={() => {
+              setSimulateDirty(true);
+              onClose();
+            }}
             impact={selectedImpact}
             org={org}
           />

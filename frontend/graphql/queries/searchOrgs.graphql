@@ -3,13 +3,8 @@ query searchOrgs($q: String) {
     id
     name
     slug
-    description
-    main_image
-    geography
     impacts(order_by: { priority: asc }, limit: 1) {
       id
-      value
-      indicator
       sdg
     }
   }

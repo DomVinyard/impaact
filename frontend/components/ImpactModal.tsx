@@ -56,14 +56,12 @@ const ImpactModal = ({
 }: ImpactModelType) => {
   const isEditMode = !!impact?.id;
   const FIELDS: Field[] = [
-    !isEditMode
-      ? {
-          id: "indicator",
-          label: "What do you measure?",
-          element: Input,
-          validation: {},
-        }
-      : undefined,
+    {
+      id: "indicator",
+      label: "What do you measure?",
+      element: Input,
+      validation: {},
+    },
     {
       id: "value",
       label: isEditMode ? impact.indicator : "Total",

@@ -52,6 +52,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
   // const [isSubmitted, setIsSubmitted] = useState("");
   const isMobile = useBreakpointValue({ base: true, md: false });
   const [session] = useSession();
+  const [simulateDirty, setSimulateDirty] = useState(false);
   const isEditMode = !!org;
   const isNewImpactMode = router.query.mode === "impact";
   // console.log({ values });
@@ -83,7 +84,6 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
     // setIsSubmitted(isEditMode ? "Updating report" : "Creating report");
     try {
       if (isEditMode) {
-        console.log({ values });
         await updateOrg({
           variables: {
             id: org.id,
@@ -101,10 +101,11 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
             console.error(error);
           }
         });
+        router.push(`/${values.slug}`);
       } else {
         await insertOrg({ variables: { author_id: session.id, ...values } });
+        router.push(`/${values.slug}/edit?mode=impact`);
       }
-      router.push(`/${values.slug}/edit?mode=impact`);
     } catch (e) {
       console.log(e);
     }
@@ -161,6 +162,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
                         isMobile={isMobile}
                         org={org}
                         refetch={refetch}
+                        setSimulateDirty={setSimulateDirty}
                         {...register(field.id, field.validation)}
                       />
                     ) : (
@@ -220,7 +222,9 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
               variant={isDirty ? "outline" : "ghost"}
               colorScheme="gray"
               color={"gray"}
-              onClick={() => router.push(`/${org.slug}`)}
+              onClick={() =>
+                isEditMode ? router.push(`/${org.slug}`) : router.back()
+              }
             >
               Cancel
             </Button>
@@ -230,7 +234,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
               minW={150}
               onClick={handleSubmit}
               isLoading={isSubmitting}
-              isDisabled={isValid && !isDirty}
+              isDisabled={isValid && !isDirty && !simulateDirty}
               type={"submit"}
               ml={3}
             >

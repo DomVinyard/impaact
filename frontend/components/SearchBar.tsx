@@ -1,7 +1,10 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import {
+  Box,
+  Flex,
   InputGroup,
   InputLeftElement,
+  Image,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { useSearchOrgsLazyQuery } from "generated-graphql";
@@ -9,6 +12,7 @@ import React, { useEffect } from "react";
 import { AsyncSelect } from "chakra-react-select";
 import router, { useRouter } from "next/router";
 import Loader from "components/Loader";
+import SDGs from "lib/SDGs";
 
 export const SearchBar = ({
   value,
@@ -37,16 +41,34 @@ export const SearchBar = ({
       },
       ...data?.orgs?.map((org) => ({
         label: org.name,
-        value: org.slug,
+        value: { slug: org.slug, sdg: org.impacts?.[0]?.sdg },
       })),
     ];
   };
 
   const formatOptionLabel = ({ value, label }) => {
+    const sdg = SDGs.find((sdg) => sdg.id === value.sdg);
+    console.log({ SDGs, sdg, value });
     return (
-      <div style={{ display: "flex" }}>
-        <div>{label}</div>
-      </div>
+      <Flex>
+        <Flex
+          width={{ base: "30px", md: "40px" }}
+          // marginLeft={{ base: 1.5, md: 2 }}
+          backgroundColor={sdg?.color || "gray.50"}
+          height={"100%"}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box padding={{ base: 1, md: 2 }}>
+            {!sdg?.id ? (
+              <SearchIcon color="gray.300" />
+            ) : (
+              <Image src={`/images/sdg_trim/E-WEB-Goal-${sdg?.id}.png`} />
+            )}
+          </Box>
+        </Flex>
+        <Box>{label}</Box>
+      </Flex>
     );
   };
 
@@ -82,7 +104,7 @@ export const SearchBar = ({
           if (option.value === "@search") {
             router.push(`/search?q=${value}`);
           } else {
-            router.push(`/${option.value}`);
+            router.push(`/${option.value.slug}`);
           }
         }}
         onInputChange={(inputValue) => {

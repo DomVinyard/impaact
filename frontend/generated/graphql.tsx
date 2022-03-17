@@ -2609,16 +2609,7 @@ export type SearchOrgsQuery = {
     id: any;
     name: string;
     slug: string;
-    description?: string | undefined;
-    main_image?: string | undefined;
-    geography?: string | undefined;
-    impacts: Array<{
-      __typename?: "impact";
-      id: any;
-      value: number;
-      indicator: string;
-      sdg: string;
-    }>;
+    impacts: Array<{ __typename?: "impact"; id: any; sdg: string }>;
   }>;
 };
 
@@ -4309,13 +4300,8 @@ export const SearchOrgsDocument = gql`
       id
       name
       slug
-      description
-      main_image
-      geography
       impacts(order_by: { priority: asc }, limit: 1) {
         id
-        value
-        indicator
         sdg
       }
     }
