@@ -8,4 +8,5 @@ export default interface IOrg {
   description?: string;
   main_image?: string;
   geography?: string;
+  impacts?: any;
 }

@@ -82,7 +82,7 @@ const OrgCard = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
                     key={location}
                     size="normal"
                     location={location.trim()}
-                    color={main_impact_sdg?.color.replace("#", "0x")}
+                    color={main_impact_sdg?.color.replace("#", "0x") as any}
                   />
                 ))}
             </StaticGoogleMap>
