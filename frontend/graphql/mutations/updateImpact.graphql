@@ -1,10 +1,18 @@
-mutation updateImpact($id: uuid!, $value: numeric!, $sdg: String!) {
+mutation updateImpact(
+  $id: uuid!
+  $value: numeric!
+  $sdg: String!
+  $indicator: String!
+  $context: String
+) {
   update_impact_by_pk(
-    _set: { value: $value, sdg: $sdg }
+    _set: { value: $value, sdg: $sdg, indicator: $indicator, context: $context }
     pk_columns: { id: $id }
   ) {
     id
     value
     sdg
+    indicator
+    context
   }
 }

@@ -124,6 +124,7 @@ const ImpactModal = ({
     console.log({ isEditMode });
     if (isEditMode) {
       const updateVariables = { id: impact.id, ...values, org: org?.id };
+      console.log({ updateVariables });
       await updateImpact({ variables: updateVariables });
     } else {
       const insertVariables = { ...values, org: org?.id };
