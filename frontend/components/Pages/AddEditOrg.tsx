@@ -232,7 +232,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
               loadingText="Saving..."
               colorScheme={"gray"}
               minW={150}
-              onClick={handleSubmit}
+              onClick={(...args) => handleSubmit(args as any)}
               isLoading={isSubmitting}
               isDisabled={isValid && !isDirty && !simulateDirty}
               type={"submit"}

@@ -120,7 +120,7 @@ const OrgPageComponent = ({ org, loading }) => {
       acc[impact.sdg].impacts.push(impact);
       return acc;
     }, {})
-  );
+  ) as any;
 
   const {
     data: userData,

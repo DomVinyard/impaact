@@ -165,7 +165,7 @@ function SortableList({
 }
 
 export type Field = {
-  order: {
+  order?: {
     create: number | "hide";
     update: number | "hide";
   };
