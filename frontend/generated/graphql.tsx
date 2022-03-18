@@ -19,9 +19,9 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
   [SubKey in K]: Maybe<T[SubKey]>;
 };
-export type RequireFields<T, K extends keyof T> = {
-  [X in Exclude<keyof T, K>]?: T[X];
-} & { [P in K]-?: NonNullable<T[P]> };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & {
+  [P in K]-?: NonNullable<T[P]>;
+};
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
@@ -31,8 +31,22 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  numeric: number;
   timestamptz: string;
   uuid: any;
+};
+
+/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
+export type Boolean_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars["Boolean"]>;
+  _gt?: InputMaybe<Scalars["Boolean"]>;
+  _gte?: InputMaybe<Scalars["Boolean"]>;
+  _in?: InputMaybe<Array<Scalars["Boolean"]>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]>;
+  _lt?: InputMaybe<Scalars["Boolean"]>;
+  _lte?: InputMaybe<Scalars["Boolean"]>;
+  _neq?: InputMaybe<Scalars["Boolean"]>;
+  _nin?: InputMaybe<Array<Scalars["Boolean"]>>;
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
@@ -292,6 +306,379 @@ export enum Accounts_Update_Column {
   UserId = "user_id",
 }
 
+/** columns and relationships of "impact" */
+export type Impact = {
+  __typename?: "impact";
+  context?: Maybe<Scalars["String"]>;
+  id: Scalars["uuid"];
+  image?: Maybe<Scalars["String"]>;
+  indicator: Scalars["String"];
+  org: Scalars["uuid"];
+  /** An object relationship */
+  orgByOrg: Orgs;
+  prefix?: Maybe<Scalars["String"]>;
+  priority: Scalars["Int"];
+  sdg: Scalars["String"];
+  suffix?: Maybe<Scalars["String"]>;
+  value: Scalars["numeric"];
+};
+
+/** aggregated selection of "impact" */
+export type Impact_Aggregate = {
+  __typename?: "impact_aggregate";
+  aggregate?: Maybe<Impact_Aggregate_Fields>;
+  nodes: Array<Impact>;
+};
+
+/** aggregate fields of "impact" */
+export type Impact_Aggregate_Fields = {
+  __typename?: "impact_aggregate_fields";
+  avg?: Maybe<Impact_Avg_Fields>;
+  count: Scalars["Int"];
+  max?: Maybe<Impact_Max_Fields>;
+  min?: Maybe<Impact_Min_Fields>;
+  stddev?: Maybe<Impact_Stddev_Fields>;
+  stddev_pop?: Maybe<Impact_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Impact_Stddev_Samp_Fields>;
+  sum?: Maybe<Impact_Sum_Fields>;
+  var_pop?: Maybe<Impact_Var_Pop_Fields>;
+  var_samp?: Maybe<Impact_Var_Samp_Fields>;
+  variance?: Maybe<Impact_Variance_Fields>;
+};
+
+/** aggregate fields of "impact" */
+export type Impact_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Impact_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]>;
+};
+
+/** order by aggregate values of table "impact" */
+export type Impact_Aggregate_Order_By = {
+  avg?: InputMaybe<Impact_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Impact_Max_Order_By>;
+  min?: InputMaybe<Impact_Min_Order_By>;
+  stddev?: InputMaybe<Impact_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Impact_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Impact_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Impact_Sum_Order_By>;
+  var_pop?: InputMaybe<Impact_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Impact_Var_Samp_Order_By>;
+  variance?: InputMaybe<Impact_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "impact" */
+export type Impact_Arr_Rel_Insert_Input = {
+  data: Array<Impact_Insert_Input>;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<Impact_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Impact_Avg_Fields = {
+  __typename?: "impact_avg_fields";
+  priority?: Maybe<Scalars["Float"]>;
+  value?: Maybe<Scalars["Float"]>;
+};
+
+/** order by avg() on columns of table "impact" */
+export type Impact_Avg_Order_By = {
+  priority?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "impact". All fields are combined with a logical 'AND'. */
+export type Impact_Bool_Exp = {
+  _and?: InputMaybe<Array<Impact_Bool_Exp>>;
+  _not?: InputMaybe<Impact_Bool_Exp>;
+  _or?: InputMaybe<Array<Impact_Bool_Exp>>;
+  context?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  image?: InputMaybe<String_Comparison_Exp>;
+  indicator?: InputMaybe<String_Comparison_Exp>;
+  org?: InputMaybe<Uuid_Comparison_Exp>;
+  orgByOrg?: InputMaybe<Orgs_Bool_Exp>;
+  prefix?: InputMaybe<String_Comparison_Exp>;
+  priority?: InputMaybe<Int_Comparison_Exp>;
+  sdg?: InputMaybe<String_Comparison_Exp>;
+  suffix?: InputMaybe<String_Comparison_Exp>;
+  value?: InputMaybe<Numeric_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "impact" */
+export enum Impact_Constraint {
+  /** unique or primary key constraint */
+  ImpactPkey = "impact_pkey",
+}
+
+/** input type for incrementing numeric columns in table "impact" */
+export type Impact_Inc_Input = {
+  priority?: InputMaybe<Scalars["Int"]>;
+  value?: InputMaybe<Scalars["numeric"]>;
+};
+
+/** input type for inserting data into table "impact" */
+export type Impact_Insert_Input = {
+  context?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["uuid"]>;
+  image?: InputMaybe<Scalars["String"]>;
+  indicator?: InputMaybe<Scalars["String"]>;
+  org?: InputMaybe<Scalars["uuid"]>;
+  orgByOrg?: InputMaybe<Orgs_Obj_Rel_Insert_Input>;
+  prefix?: InputMaybe<Scalars["String"]>;
+  priority?: InputMaybe<Scalars["Int"]>;
+  sdg?: InputMaybe<Scalars["String"]>;
+  suffix?: InputMaybe<Scalars["String"]>;
+  value?: InputMaybe<Scalars["numeric"]>;
+};
+
+/** aggregate max on columns */
+export type Impact_Max_Fields = {
+  __typename?: "impact_max_fields";
+  context?: Maybe<Scalars["String"]>;
+  id?: Maybe<Scalars["uuid"]>;
+  image?: Maybe<Scalars["String"]>;
+  indicator?: Maybe<Scalars["String"]>;
+  org?: Maybe<Scalars["uuid"]>;
+  prefix?: Maybe<Scalars["String"]>;
+  priority?: Maybe<Scalars["Int"]>;
+  sdg?: Maybe<Scalars["String"]>;
+  suffix?: Maybe<Scalars["String"]>;
+  value?: Maybe<Scalars["numeric"]>;
+};
+
+/** order by max() on columns of table "impact" */
+export type Impact_Max_Order_By = {
+  context?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  image?: InputMaybe<Order_By>;
+  indicator?: InputMaybe<Order_By>;
+  org?: InputMaybe<Order_By>;
+  prefix?: InputMaybe<Order_By>;
+  priority?: InputMaybe<Order_By>;
+  sdg?: InputMaybe<Order_By>;
+  suffix?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Impact_Min_Fields = {
+  __typename?: "impact_min_fields";
+  context?: Maybe<Scalars["String"]>;
+  id?: Maybe<Scalars["uuid"]>;
+  image?: Maybe<Scalars["String"]>;
+  indicator?: Maybe<Scalars["String"]>;
+  org?: Maybe<Scalars["uuid"]>;
+  prefix?: Maybe<Scalars["String"]>;
+  priority?: Maybe<Scalars["Int"]>;
+  sdg?: Maybe<Scalars["String"]>;
+  suffix?: Maybe<Scalars["String"]>;
+  value?: Maybe<Scalars["numeric"]>;
+};
+
+/** order by min() on columns of table "impact" */
+export type Impact_Min_Order_By = {
+  context?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  image?: InputMaybe<Order_By>;
+  indicator?: InputMaybe<Order_By>;
+  org?: InputMaybe<Order_By>;
+  prefix?: InputMaybe<Order_By>;
+  priority?: InputMaybe<Order_By>;
+  sdg?: InputMaybe<Order_By>;
+  suffix?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "impact" */
+export type Impact_Mutation_Response = {
+  __typename?: "impact_mutation_response";
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"];
+  /** data from the rows affected by the mutation */
+  returning: Array<Impact>;
+};
+
+/** on conflict condition type for table "impact" */
+export type Impact_On_Conflict = {
+  constraint: Impact_Constraint;
+  update_columns?: Array<Impact_Update_Column>;
+  where?: InputMaybe<Impact_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "impact". */
+export type Impact_Order_By = {
+  context?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  image?: InputMaybe<Order_By>;
+  indicator?: InputMaybe<Order_By>;
+  org?: InputMaybe<Order_By>;
+  orgByOrg?: InputMaybe<Orgs_Order_By>;
+  prefix?: InputMaybe<Order_By>;
+  priority?: InputMaybe<Order_By>;
+  sdg?: InputMaybe<Order_By>;
+  suffix?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: impact */
+export type Impact_Pk_Columns_Input = {
+  id: Scalars["uuid"];
+};
+
+/** select columns of table "impact" */
+export enum Impact_Select_Column {
+  /** column name */
+  Context = "context",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Image = "image",
+  /** column name */
+  Indicator = "indicator",
+  /** column name */
+  Org = "org",
+  /** column name */
+  Prefix = "prefix",
+  /** column name */
+  Priority = "priority",
+  /** column name */
+  Sdg = "sdg",
+  /** column name */
+  Suffix = "suffix",
+  /** column name */
+  Value = "value",
+}
+
+/** input type for updating data in table "impact" */
+export type Impact_Set_Input = {
+  context?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["uuid"]>;
+  image?: InputMaybe<Scalars["String"]>;
+  indicator?: InputMaybe<Scalars["String"]>;
+  org?: InputMaybe<Scalars["uuid"]>;
+  prefix?: InputMaybe<Scalars["String"]>;
+  priority?: InputMaybe<Scalars["Int"]>;
+  sdg?: InputMaybe<Scalars["String"]>;
+  suffix?: InputMaybe<Scalars["String"]>;
+  value?: InputMaybe<Scalars["numeric"]>;
+};
+
+/** aggregate stddev on columns */
+export type Impact_Stddev_Fields = {
+  __typename?: "impact_stddev_fields";
+  priority?: Maybe<Scalars["Float"]>;
+  value?: Maybe<Scalars["Float"]>;
+};
+
+/** order by stddev() on columns of table "impact" */
+export type Impact_Stddev_Order_By = {
+  priority?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Impact_Stddev_Pop_Fields = {
+  __typename?: "impact_stddev_pop_fields";
+  priority?: Maybe<Scalars["Float"]>;
+  value?: Maybe<Scalars["Float"]>;
+};
+
+/** order by stddev_pop() on columns of table "impact" */
+export type Impact_Stddev_Pop_Order_By = {
+  priority?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Impact_Stddev_Samp_Fields = {
+  __typename?: "impact_stddev_samp_fields";
+  priority?: Maybe<Scalars["Float"]>;
+  value?: Maybe<Scalars["Float"]>;
+};
+
+/** order by stddev_samp() on columns of table "impact" */
+export type Impact_Stddev_Samp_Order_By = {
+  priority?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Impact_Sum_Fields = {
+  __typename?: "impact_sum_fields";
+  priority?: Maybe<Scalars["Int"]>;
+  value?: Maybe<Scalars["numeric"]>;
+};
+
+/** order by sum() on columns of table "impact" */
+export type Impact_Sum_Order_By = {
+  priority?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** update columns of table "impact" */
+export enum Impact_Update_Column {
+  /** column name */
+  Context = "context",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Image = "image",
+  /** column name */
+  Indicator = "indicator",
+  /** column name */
+  Org = "org",
+  /** column name */
+  Prefix = "prefix",
+  /** column name */
+  Priority = "priority",
+  /** column name */
+  Sdg = "sdg",
+  /** column name */
+  Suffix = "suffix",
+  /** column name */
+  Value = "value",
+}
+
+/** aggregate var_pop on columns */
+export type Impact_Var_Pop_Fields = {
+  __typename?: "impact_var_pop_fields";
+  priority?: Maybe<Scalars["Float"]>;
+  value?: Maybe<Scalars["Float"]>;
+};
+
+/** order by var_pop() on columns of table "impact" */
+export type Impact_Var_Pop_Order_By = {
+  priority?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Impact_Var_Samp_Fields = {
+  __typename?: "impact_var_samp_fields";
+  priority?: Maybe<Scalars["Float"]>;
+  value?: Maybe<Scalars["Float"]>;
+};
+
+/** order by var_samp() on columns of table "impact" */
+export type Impact_Var_Samp_Order_By = {
+  priority?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Impact_Variance_Fields = {
+  __typename?: "impact_variance_fields";
+  priority?: Maybe<Scalars["Float"]>;
+  value?: Maybe<Scalars["Float"]>;
+};
+
+/** order by variance() on columns of table "impact" */
+export type Impact_Variance_Order_By = {
+  priority?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
 /** mutation root */
 export type Mutation_Root = {
   __typename?: "mutation_root";
@@ -299,6 +686,10 @@ export type Mutation_Root = {
   delete_accounts?: Maybe<Accounts_Mutation_Response>;
   /** delete single row from the table: "accounts" */
   delete_accounts_by_pk?: Maybe<Accounts>;
+  /** delete data from the table: "impact" */
+  delete_impact?: Maybe<Impact_Mutation_Response>;
+  /** delete single row from the table: "impact" */
+  delete_impact_by_pk?: Maybe<Impact>;
   /** delete data from the table: "orgs" */
   delete_orgs?: Maybe<Orgs_Mutation_Response>;
   /** delete single row from the table: "orgs" */
@@ -319,6 +710,10 @@ export type Mutation_Root = {
   insert_accounts?: Maybe<Accounts_Mutation_Response>;
   /** insert a single row into the table: "accounts" */
   insert_accounts_one?: Maybe<Accounts>;
+  /** insert data into the table: "impact" */
+  insert_impact?: Maybe<Impact_Mutation_Response>;
+  /** insert a single row into the table: "impact" */
+  insert_impact_one?: Maybe<Impact>;
   /** insert data into the table: "orgs" */
   insert_orgs?: Maybe<Orgs_Mutation_Response>;
   /** insert a single row into the table: "orgs" */
@@ -339,6 +734,10 @@ export type Mutation_Root = {
   update_accounts?: Maybe<Accounts_Mutation_Response>;
   /** update single row of the table: "accounts" */
   update_accounts_by_pk?: Maybe<Accounts>;
+  /** update data of the table: "impact" */
+  update_impact?: Maybe<Impact_Mutation_Response>;
+  /** update single row of the table: "impact" */
+  update_impact_by_pk?: Maybe<Impact>;
   /** update data of the table: "orgs" */
   update_orgs?: Maybe<Orgs_Mutation_Response>;
   /** update single row of the table: "orgs" */
@@ -364,6 +763,16 @@ export type Mutation_RootDelete_AccountsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Accounts_By_PkArgs = {
+  id: Scalars["uuid"];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_ImpactArgs = {
+  where: Impact_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Impact_By_PkArgs = {
   id: Scalars["uuid"];
 };
 
@@ -417,6 +826,18 @@ export type Mutation_RootInsert_AccountsArgs = {
 export type Mutation_RootInsert_Accounts_OneArgs = {
   object: Accounts_Insert_Input;
   on_conflict?: InputMaybe<Accounts_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_ImpactArgs = {
+  objects: Array<Impact_Insert_Input>;
+  on_conflict?: InputMaybe<Impact_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Impact_OneArgs = {
+  object: Impact_Insert_Input;
+  on_conflict?: InputMaybe<Impact_On_Conflict>;
 };
 
 /** mutation root */
@@ -480,6 +901,20 @@ export type Mutation_RootUpdate_Accounts_By_PkArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootUpdate_ImpactArgs = {
+  _inc?: InputMaybe<Impact_Inc_Input>;
+  _set?: InputMaybe<Impact_Set_Input>;
+  where: Impact_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Impact_By_PkArgs = {
+  _inc?: InputMaybe<Impact_Inc_Input>;
+  _set?: InputMaybe<Impact_Set_Input>;
+  pk_columns: Impact_Pk_Columns_Input;
+};
+
+/** mutation root */
 export type Mutation_RootUpdate_OrgsArgs = {
   _set?: InputMaybe<Orgs_Set_Input>;
   where: Orgs_Bool_Exp;
@@ -529,6 +964,19 @@ export type Mutation_RootUpdate_Verification_Requests_By_PkArgs = {
   pk_columns: Verification_Requests_Pk_Columns_Input;
 };
 
+/** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
+export type Numeric_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars["numeric"]>;
+  _gt?: InputMaybe<Scalars["numeric"]>;
+  _gte?: InputMaybe<Scalars["numeric"]>;
+  _in?: InputMaybe<Array<Scalars["numeric"]>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]>;
+  _lt?: InputMaybe<Scalars["numeric"]>;
+  _lte?: InputMaybe<Scalars["numeric"]>;
+  _neq?: InputMaybe<Scalars["numeric"]>;
+  _nin?: InputMaybe<Array<Scalars["numeric"]>>;
+};
+
 /** column ordering options */
 export enum Order_By {
   /** in ascending order, nulls last */
@@ -553,10 +1001,40 @@ export type Orgs = {
   author_id: Scalars["uuid"];
   created_at: Scalars["timestamptz"];
   description?: Maybe<Scalars["String"]>;
+  founded_at?: Maybe<Scalars["String"]>;
+  geography?: Maybe<Scalars["String"]>;
   id: Scalars["uuid"];
+  /** An array relationship */
+  impacts: Array<Impact>;
+  /** An aggregate relationship */
+  impacts_aggregate: Impact_Aggregate;
+  is_test_data?: Maybe<Scalars["Boolean"]>;
+  link_financials?: Maybe<Scalars["String"]>;
+  link_processes?: Maybe<Scalars["String"]>;
+  long_description?: Maybe<Scalars["String"]>;
+  main_image?: Maybe<Scalars["String"]>;
   name: Scalars["String"];
+  size?: Maybe<Scalars["String"]>;
   slug: Scalars["String"];
   updated_at: Scalars["timestamptz"];
+};
+
+/** columns and relationships of "orgs" */
+export type OrgsImpactsArgs = {
+  distinct_on?: InputMaybe<Array<Impact_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
+  order_by?: InputMaybe<Array<Impact_Order_By>>;
+  where?: InputMaybe<Impact_Bool_Exp>;
+};
+
+/** columns and relationships of "orgs" */
+export type OrgsImpacts_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Impact_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
+  order_by?: InputMaybe<Array<Impact_Order_By>>;
+  where?: InputMaybe<Impact_Bool_Exp>;
 };
 
 /** aggregated selection of "orgs" */
@@ -603,8 +1081,17 @@ export type Orgs_Bool_Exp = {
   author_id?: InputMaybe<Uuid_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
+  founded_at?: InputMaybe<String_Comparison_Exp>;
+  geography?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  impacts?: InputMaybe<Impact_Bool_Exp>;
+  is_test_data?: InputMaybe<Boolean_Comparison_Exp>;
+  link_financials?: InputMaybe<String_Comparison_Exp>;
+  link_processes?: InputMaybe<String_Comparison_Exp>;
+  long_description?: InputMaybe<String_Comparison_Exp>;
+  main_image?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  size?: InputMaybe<String_Comparison_Exp>;
   slug?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
@@ -623,8 +1110,17 @@ export type Orgs_Insert_Input = {
   author_id?: InputMaybe<Scalars["uuid"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   description?: InputMaybe<Scalars["String"]>;
+  founded_at?: InputMaybe<Scalars["String"]>;
+  geography?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["uuid"]>;
+  impacts?: InputMaybe<Impact_Arr_Rel_Insert_Input>;
+  is_test_data?: InputMaybe<Scalars["Boolean"]>;
+  link_financials?: InputMaybe<Scalars["String"]>;
+  link_processes?: InputMaybe<Scalars["String"]>;
+  long_description?: InputMaybe<Scalars["String"]>;
+  main_image?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
+  size?: InputMaybe<Scalars["String"]>;
   slug?: InputMaybe<Scalars["String"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
 };
@@ -635,8 +1131,15 @@ export type Orgs_Max_Fields = {
   author_id?: Maybe<Scalars["uuid"]>;
   created_at?: Maybe<Scalars["timestamptz"]>;
   description?: Maybe<Scalars["String"]>;
+  founded_at?: Maybe<Scalars["String"]>;
+  geography?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["uuid"]>;
+  link_financials?: Maybe<Scalars["String"]>;
+  link_processes?: Maybe<Scalars["String"]>;
+  long_description?: Maybe<Scalars["String"]>;
+  main_image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
+  size?: Maybe<Scalars["String"]>;
   slug?: Maybe<Scalars["String"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
@@ -646,8 +1149,15 @@ export type Orgs_Max_Order_By = {
   author_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
+  founded_at?: InputMaybe<Order_By>;
+  geography?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  link_financials?: InputMaybe<Order_By>;
+  link_processes?: InputMaybe<Order_By>;
+  long_description?: InputMaybe<Order_By>;
+  main_image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  size?: InputMaybe<Order_By>;
   slug?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -658,8 +1168,15 @@ export type Orgs_Min_Fields = {
   author_id?: Maybe<Scalars["uuid"]>;
   created_at?: Maybe<Scalars["timestamptz"]>;
   description?: Maybe<Scalars["String"]>;
+  founded_at?: Maybe<Scalars["String"]>;
+  geography?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["uuid"]>;
+  link_financials?: Maybe<Scalars["String"]>;
+  link_processes?: Maybe<Scalars["String"]>;
+  long_description?: Maybe<Scalars["String"]>;
+  main_image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
+  size?: Maybe<Scalars["String"]>;
   slug?: Maybe<Scalars["String"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
@@ -669,8 +1186,15 @@ export type Orgs_Min_Order_By = {
   author_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
+  founded_at?: InputMaybe<Order_By>;
+  geography?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  link_financials?: InputMaybe<Order_By>;
+  link_processes?: InputMaybe<Order_By>;
+  long_description?: InputMaybe<Order_By>;
+  main_image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  size?: InputMaybe<Order_By>;
   slug?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -682,6 +1206,13 @@ export type Orgs_Mutation_Response = {
   affected_rows: Scalars["Int"];
   /** data from the rows affected by the mutation */
   returning: Array<Orgs>;
+};
+
+/** input type for inserting object relation for remote table "orgs" */
+export type Orgs_Obj_Rel_Insert_Input = {
+  data: Orgs_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<Orgs_On_Conflict>;
 };
 
 /** on conflict condition type for table "orgs" */
@@ -697,8 +1228,17 @@ export type Orgs_Order_By = {
   author_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
+  founded_at?: InputMaybe<Order_By>;
+  geography?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  impacts_aggregate?: InputMaybe<Impact_Aggregate_Order_By>;
+  is_test_data?: InputMaybe<Order_By>;
+  link_financials?: InputMaybe<Order_By>;
+  link_processes?: InputMaybe<Order_By>;
+  long_description?: InputMaybe<Order_By>;
+  main_image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  size?: InputMaybe<Order_By>;
   slug?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -717,9 +1257,25 @@ export enum Orgs_Select_Column {
   /** column name */
   Description = "description",
   /** column name */
+  FoundedAt = "founded_at",
+  /** column name */
+  Geography = "geography",
+  /** column name */
   Id = "id",
   /** column name */
+  IsTestData = "is_test_data",
+  /** column name */
+  LinkFinancials = "link_financials",
+  /** column name */
+  LinkProcesses = "link_processes",
+  /** column name */
+  LongDescription = "long_description",
+  /** column name */
+  MainImage = "main_image",
+  /** column name */
   Name = "name",
+  /** column name */
+  Size = "size",
   /** column name */
   Slug = "slug",
   /** column name */
@@ -731,8 +1287,16 @@ export type Orgs_Set_Input = {
   author_id?: InputMaybe<Scalars["uuid"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   description?: InputMaybe<Scalars["String"]>;
+  founded_at?: InputMaybe<Scalars["String"]>;
+  geography?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["uuid"]>;
+  is_test_data?: InputMaybe<Scalars["Boolean"]>;
+  link_financials?: InputMaybe<Scalars["String"]>;
+  link_processes?: InputMaybe<Scalars["String"]>;
+  long_description?: InputMaybe<Scalars["String"]>;
+  main_image?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
+  size?: InputMaybe<Scalars["String"]>;
   slug?: InputMaybe<Scalars["String"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
 };
@@ -746,9 +1310,25 @@ export enum Orgs_Update_Column {
   /** column name */
   Description = "description",
   /** column name */
+  FoundedAt = "founded_at",
+  /** column name */
+  Geography = "geography",
+  /** column name */
   Id = "id",
   /** column name */
+  IsTestData = "is_test_data",
+  /** column name */
+  LinkFinancials = "link_financials",
+  /** column name */
+  LinkProcesses = "link_processes",
+  /** column name */
+  LongDescription = "long_description",
+  /** column name */
+  MainImage = "main_image",
+  /** column name */
   Name = "name",
+  /** column name */
+  Size = "size",
   /** column name */
   Slug = "slug",
   /** column name */
@@ -763,6 +1343,12 @@ export type Query_Root = {
   accounts_aggregate: Accounts_Aggregate;
   /** fetch data from the table: "accounts" using primary key columns */
   accounts_by_pk?: Maybe<Accounts>;
+  /** fetch data from the table: "impact" */
+  impact: Array<Impact>;
+  /** fetch aggregated fields from the table: "impact" */
+  impact_aggregate: Impact_Aggregate;
+  /** fetch data from the table: "impact" using primary key columns */
+  impact_by_pk?: Maybe<Impact>;
   /** fetch data from the table: "orgs" */
   orgs: Array<Orgs>;
   /** An aggregate relationship */
@@ -806,6 +1392,26 @@ export type Query_RootAccounts_AggregateArgs = {
 };
 
 export type Query_RootAccounts_By_PkArgs = {
+  id: Scalars["uuid"];
+};
+
+export type Query_RootImpactArgs = {
+  distinct_on?: InputMaybe<Array<Impact_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
+  order_by?: InputMaybe<Array<Impact_Order_By>>;
+  where?: InputMaybe<Impact_Bool_Exp>;
+};
+
+export type Query_RootImpact_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Impact_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
+  order_by?: InputMaybe<Array<Impact_Order_By>>;
+  where?: InputMaybe<Impact_Bool_Exp>;
+};
+
+export type Query_RootImpact_By_PkArgs = {
   id: Scalars["uuid"];
 };
 
@@ -1125,6 +1731,12 @@ export type Subscription_Root = {
   accounts_aggregate: Accounts_Aggregate;
   /** fetch data from the table: "accounts" using primary key columns */
   accounts_by_pk?: Maybe<Accounts>;
+  /** fetch data from the table: "impact" */
+  impact: Array<Impact>;
+  /** fetch aggregated fields from the table: "impact" */
+  impact_aggregate: Impact_Aggregate;
+  /** fetch data from the table: "impact" using primary key columns */
+  impact_by_pk?: Maybe<Impact>;
   /** fetch data from the table: "orgs" */
   orgs: Array<Orgs>;
   /** An aggregate relationship */
@@ -1168,6 +1780,26 @@ export type Subscription_RootAccounts_AggregateArgs = {
 };
 
 export type Subscription_RootAccounts_By_PkArgs = {
+  id: Scalars["uuid"];
+};
+
+export type Subscription_RootImpactArgs = {
+  distinct_on?: InputMaybe<Array<Impact_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
+  order_by?: InputMaybe<Array<Impact_Order_By>>;
+  where?: InputMaybe<Impact_Bool_Exp>;
+};
+
+export type Subscription_RootImpact_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Impact_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
+  order_by?: InputMaybe<Array<Impact_Order_By>>;
+  where?: InputMaybe<Impact_Bool_Exp>;
+};
+
+export type Subscription_RootImpact_By_PkArgs = {
   id: Scalars["uuid"];
 };
 
@@ -1272,6 +1904,8 @@ export type Users = {
   email_verified?: Maybe<Scalars["timestamptz"]>;
   id: Scalars["uuid"];
   image?: Maybe<Scalars["String"]>;
+  is_admin?: Maybe<Scalars["String"]>;
+  is_user_admin: Scalars["Boolean"];
   name?: Maybe<Scalars["String"]>;
   /** fetch data from the table: "orgs" */
   orgs: Array<Orgs>;
@@ -1329,6 +1963,8 @@ export type Users_Bool_Exp = {
   email_verified?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   image?: InputMaybe<String_Comparison_Exp>;
+  is_admin?: InputMaybe<String_Comparison_Exp>;
+  is_user_admin?: InputMaybe<Boolean_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   orgs?: InputMaybe<Orgs_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -1336,6 +1972,8 @@ export type Users_Bool_Exp = {
 
 /** unique or primary key constraints on table "users" */
 export enum Users_Constraint {
+  /** unique or primary key constraint */
+  UsersEmailKey = "users_email_key",
   /** unique or primary key constraint */
   UsersPkey = "users_pkey",
 }
@@ -1347,6 +1985,8 @@ export type Users_Insert_Input = {
   email_verified?: InputMaybe<Scalars["timestamptz"]>;
   id?: InputMaybe<Scalars["uuid"]>;
   image?: InputMaybe<Scalars["String"]>;
+  is_admin?: InputMaybe<Scalars["String"]>;
+  is_user_admin?: InputMaybe<Scalars["Boolean"]>;
   name?: InputMaybe<Scalars["String"]>;
   orgs?: InputMaybe<Orgs_Arr_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
@@ -1360,6 +2000,7 @@ export type Users_Max_Fields = {
   email_verified?: Maybe<Scalars["timestamptz"]>;
   id?: Maybe<Scalars["uuid"]>;
   image?: Maybe<Scalars["String"]>;
+  is_admin?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
@@ -1372,6 +2013,7 @@ export type Users_Min_Fields = {
   email_verified?: Maybe<Scalars["timestamptz"]>;
   id?: Maybe<Scalars["uuid"]>;
   image?: Maybe<Scalars["String"]>;
+  is_admin?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
@@ -1406,6 +2048,8 @@ export type Users_Order_By = {
   email_verified?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
+  is_admin?: InputMaybe<Order_By>;
+  is_user_admin?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   orgs_aggregate?: InputMaybe<Orgs_Aggregate_Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -1429,6 +2073,10 @@ export enum Users_Select_Column {
   /** column name */
   Image = "image",
   /** column name */
+  IsAdmin = "is_admin",
+  /** column name */
+  IsUserAdmin = "is_user_admin",
+  /** column name */
   Name = "name",
   /** column name */
   UpdatedAt = "updated_at",
@@ -1441,6 +2089,8 @@ export type Users_Set_Input = {
   email_verified?: InputMaybe<Scalars["timestamptz"]>;
   id?: InputMaybe<Scalars["uuid"]>;
   image?: InputMaybe<Scalars["String"]>;
+  is_admin?: InputMaybe<Scalars["String"]>;
+  is_user_admin?: InputMaybe<Scalars["Boolean"]>;
   name?: InputMaybe<Scalars["String"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]>;
 };
@@ -1457,6 +2107,10 @@ export enum Users_Update_Column {
   Id = "id",
   /** column name */
   Image = "image",
+  /** column name */
+  IsAdmin = "is_admin",
+  /** column name */
+  IsUserAdmin = "is_user_admin",
   /** column name */
   Name = "name",
   /** column name */
@@ -1632,6 +2286,15 @@ export enum Verification_Requests_Update_Column {
   UpdatedAt = "updated_at",
 }
 
+export type DeleteImpactMutationVariables = Exact<{
+  id: Scalars["uuid"];
+}>;
+
+export type DeleteImpactMutation = {
+  __typename?: "mutation_root";
+  delete_impact_by_pk?: { __typename?: "impact"; id: any } | undefined;
+};
+
 export type DeleteOrgMutationVariables = Exact<{
   id: Scalars["uuid"];
 }>;
@@ -1639,19 +2302,26 @@ export type DeleteOrgMutationVariables = Exact<{
 export type DeleteOrgMutation = {
   __typename?: "mutation_root";
   delete_orgs_by_pk?:
+    | { __typename?: "orgs"; id: any; created_at: string; name: string }
+    | undefined;
+};
+
+export type InsertImpactMutationVariables = Exact<{
+  indicator: Scalars["String"];
+  value: Scalars["numeric"];
+  sdg: Scalars["String"];
+  org: Scalars["uuid"];
+}>;
+
+export type InsertImpactMutation = {
+  __typename?: "mutation_root";
+  insert_impact_one?:
     | {
-        __typename?: "orgs";
+        __typename?: "impact";
         id: any;
-        created_at: string;
-        name: string;
-        author?:
-          | {
-              __typename?: "users";
-              id: any;
-              name?: string | undefined;
-              image?: string | undefined;
-            }
-          | undefined;
+        indicator: string;
+        value: number;
+        sdg: string;
       }
     | undefined;
 };
@@ -1661,6 +2331,13 @@ export type InsertOrgMutationVariables = Exact<{
   name: Scalars["String"];
   slug: Scalars["String"];
   description?: InputMaybe<Scalars["String"]>;
+  long_description?: InputMaybe<Scalars["String"]>;
+  main_image: Scalars["String"];
+  geography?: InputMaybe<Scalars["String"]>;
+  size?: InputMaybe<Scalars["String"]>;
+  founded_at?: InputMaybe<Scalars["String"]>;
+  link_processes?: InputMaybe<Scalars["String"]>;
+  link_financials?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type InsertOrgMutation = {
@@ -1673,15 +2350,39 @@ export type InsertOrgMutation = {
         name: string;
         slug: string;
         description?: string | undefined;
-        author?:
-          | {
-              __typename?: "users";
-              id: any;
-              name?: string | undefined;
-              image?: string | undefined;
-            }
-          | undefined;
+        long_description?: string | undefined;
+        main_image?: string | undefined;
+        geography?: string | undefined;
+        size?: string | undefined;
+        founded_at?: string | undefined;
+        link_processes?: string | undefined;
+        link_financials?: string | undefined;
       }
+    | undefined;
+};
+
+export type UpdateImpactMutationVariables = Exact<{
+  id: Scalars["uuid"];
+  value: Scalars["numeric"];
+  sdg: Scalars["String"];
+}>;
+
+export type UpdateImpactMutation = {
+  __typename?: "mutation_root";
+  update_impact_by_pk?:
+    | { __typename?: "impact"; id: any; value: number; sdg: string }
+    | undefined;
+};
+
+export type UpdateImpactPriorityMutationVariables = Exact<{
+  impactID: Scalars["uuid"];
+  priority: Scalars["Int"];
+}>;
+
+export type UpdateImpactPriorityMutation = {
+  __typename?: "mutation_root";
+  update_impact_by_pk?:
+    | { __typename?: "impact"; id: any; priority: number }
     | undefined;
 };
 
@@ -1690,6 +2391,13 @@ export type UpdateOrgMutationVariables = Exact<{
   name?: InputMaybe<Scalars["String"]>;
   slug: Scalars["String"];
   description?: InputMaybe<Scalars["String"]>;
+  long_description?: InputMaybe<Scalars["String"]>;
+  main_image: Scalars["String"];
+  geography?: InputMaybe<Scalars["String"]>;
+  size?: InputMaybe<Scalars["String"]>;
+  founded_at?: InputMaybe<Scalars["String"]>;
+  link_processes?: InputMaybe<Scalars["String"]>;
+  link_financials?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type UpdateOrgMutation = {
@@ -1702,14 +2410,13 @@ export type UpdateOrgMutation = {
         name: string;
         slug: string;
         description?: string | undefined;
-        author?:
-          | {
-              __typename?: "users";
-              id: any;
-              name?: string | undefined;
-              image?: string | undefined;
-            }
-          | undefined;
+        long_description?: string | undefined;
+        main_image?: string | undefined;
+        geography?: string | undefined;
+        size?: string | undefined;
+        founded_at?: string | undefined;
+        link_processes?: string | undefined;
+        link_financials?: string | undefined;
       }
     | undefined;
 };
@@ -1758,6 +2465,15 @@ export type FetchFeaturedQuery = {
     name: string;
     slug: string;
     description?: string | undefined;
+    main_image?: string | undefined;
+    geography?: string | undefined;
+    impacts: Array<{
+      __typename?: "impact";
+      id: any;
+      value: number;
+      indicator: string;
+      sdg: string;
+    }>;
   }>;
 };
 
@@ -1774,6 +2490,15 @@ export type FetchLatestQuery = {
     name: string;
     slug: string;
     description?: string | undefined;
+    main_image?: string | undefined;
+    geography?: string | undefined;
+    impacts: Array<{
+      __typename?: "impact";
+      id: any;
+      value: number;
+      indicator: string;
+      sdg: string;
+    }>;
   }>;
 };
 
@@ -1791,6 +2516,21 @@ export type FetchOrgQuery = {
     author_id: any;
     slug: string;
     description?: string | undefined;
+    long_description?: string | undefined;
+    main_image?: string | undefined;
+    geography?: string | undefined;
+    founded_at?: string | undefined;
+    size?: string | undefined;
+    link_processes?: string | undefined;
+    link_financials?: string | undefined;
+    impacts: Array<{
+      __typename?: "impact";
+      id: any;
+      value: number;
+      indicator: string;
+      sdg: string;
+      context?: string | undefined;
+    }>;
   }>;
 };
 
@@ -1805,18 +2545,25 @@ export type FetchOrgsQuery = {
     name: string;
     slug: string;
     description?: string | undefined;
+    main_image?: string | undefined;
+    geography?: string | undefined;
+    impacts: Array<{
+      __typename?: "impact";
+      id: any;
+      value: number;
+      indicator: string;
+      sdg: string;
+    }>;
   }>;
 };
 
 export type FetchUserQueryVariables = Exact<{
-  userId: Scalars["uuid"];
+  userEmail: Scalars["String"];
 }>;
 
 export type FetchUserQuery = {
   __typename?: "query_root";
-  users_by_pk?:
-    | { __typename?: "users"; id: any; name?: string | undefined }
-    | undefined;
+  users: Array<{ __typename?: "users"; is_user_admin: boolean }>;
 };
 
 export type MyOrgsQueryVariables = Exact<{
@@ -1837,14 +2584,15 @@ export type MyOrgsQuery = {
           name: string;
           slug: string;
           description?: string | undefined;
-          author?:
-            | {
-                __typename?: "users";
-                id: any;
-                name?: string | undefined;
-                image?: string | undefined;
-              }
-            | undefined;
+          main_image?: string | undefined;
+          geography?: string | undefined;
+          impacts: Array<{
+            __typename?: "impact";
+            id: any;
+            value: number;
+            indicator: string;
+            sdg: string;
+          }>;
         }>;
       }
     | undefined;
@@ -1861,21 +2609,115 @@ export type SearchOrgsQuery = {
     id: any;
     name: string;
     slug: string;
-    description?: string | undefined;
+    impacts: Array<{ __typename?: "impact"; id: any; sdg: string }>;
   }>;
 };
 
+export const DeleteImpactDocument = gql`
+  mutation deleteImpact($id: uuid!) {
+    delete_impact_by_pk(id: $id) {
+      id
+    }
+  }
+`;
+export type DeleteImpactMutationFn = Apollo.MutationFunction<
+  DeleteImpactMutation,
+  DeleteImpactMutationVariables
+>;
+export type DeleteImpactComponentProps = Omit<
+  ApolloReactComponents.MutationComponentOptions<
+    DeleteImpactMutation,
+    DeleteImpactMutationVariables
+  >,
+  "mutation"
+>;
+
+export const DeleteImpactComponent = (props: DeleteImpactComponentProps) => (
+  <ApolloReactComponents.Mutation<
+    DeleteImpactMutation,
+    DeleteImpactMutationVariables
+  >
+    mutation={DeleteImpactDocument}
+    {...props}
+  />
+);
+
+export type DeleteImpactProps<
+  TChildProps = {},
+  TDataName extends string = "mutate"
+> = {
+  [key in TDataName]: Apollo.MutationFunction<
+    DeleteImpactMutation,
+    DeleteImpactMutationVariables
+  >;
+} & TChildProps;
+export function withDeleteImpact<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = "mutate"
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    DeleteImpactMutation,
+    DeleteImpactMutationVariables,
+    DeleteImpactProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    DeleteImpactMutation,
+    DeleteImpactMutationVariables,
+    DeleteImpactProps<TChildProps, TDataName>
+  >(DeleteImpactDocument, {
+    alias: "deleteImpact",
+    ...operationOptions,
+  });
+}
+
+/**
+ * __useDeleteImpactMutation__
+ *
+ * To run a mutation, you first call `useDeleteImpactMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteImpactMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteImpactMutation, { data, loading, error }] = useDeleteImpactMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteImpactMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DeleteImpactMutation,
+    DeleteImpactMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    DeleteImpactMutation,
+    DeleteImpactMutationVariables
+  >(DeleteImpactDocument, options);
+}
+export type DeleteImpactMutationHookResult = ReturnType<
+  typeof useDeleteImpactMutation
+>;
+export type DeleteImpactMutationResult =
+  Apollo.MutationResult<DeleteImpactMutation>;
+export type DeleteImpactMutationOptions = Apollo.BaseMutationOptions<
+  DeleteImpactMutation,
+  DeleteImpactMutationVariables
+>;
 export const DeleteOrgDocument = gql`
   mutation deleteOrg($id: uuid!) {
     delete_orgs_by_pk(id: $id) {
       id
       created_at
       name
-      author {
-        id
-        name
-        image
-      }
     }
   }
 `;
@@ -1967,12 +2809,131 @@ export type DeleteOrgMutationOptions = Apollo.BaseMutationOptions<
   DeleteOrgMutation,
   DeleteOrgMutationVariables
 >;
+export const InsertImpactDocument = gql`
+  mutation insertImpact(
+    $indicator: String!
+    $value: numeric!
+    $sdg: String!
+    $org: uuid!
+  ) {
+    insert_impact_one(
+      object: { indicator: $indicator, value: $value, sdg: $sdg, org: $org }
+    ) {
+      id
+      indicator
+      value
+      sdg
+    }
+  }
+`;
+export type InsertImpactMutationFn = Apollo.MutationFunction<
+  InsertImpactMutation,
+  InsertImpactMutationVariables
+>;
+export type InsertImpactComponentProps = Omit<
+  ApolloReactComponents.MutationComponentOptions<
+    InsertImpactMutation,
+    InsertImpactMutationVariables
+  >,
+  "mutation"
+>;
+
+export const InsertImpactComponent = (props: InsertImpactComponentProps) => (
+  <ApolloReactComponents.Mutation<
+    InsertImpactMutation,
+    InsertImpactMutationVariables
+  >
+    mutation={InsertImpactDocument}
+    {...props}
+  />
+);
+
+export type InsertImpactProps<
+  TChildProps = {},
+  TDataName extends string = "mutate"
+> = {
+  [key in TDataName]: Apollo.MutationFunction<
+    InsertImpactMutation,
+    InsertImpactMutationVariables
+  >;
+} & TChildProps;
+export function withInsertImpact<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = "mutate"
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    InsertImpactMutation,
+    InsertImpactMutationVariables,
+    InsertImpactProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    InsertImpactMutation,
+    InsertImpactMutationVariables,
+    InsertImpactProps<TChildProps, TDataName>
+  >(InsertImpactDocument, {
+    alias: "insertImpact",
+    ...operationOptions,
+  });
+}
+
+/**
+ * __useInsertImpactMutation__
+ *
+ * To run a mutation, you first call `useInsertImpactMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertImpactMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertImpactMutation, { data, loading, error }] = useInsertImpactMutation({
+ *   variables: {
+ *      indicator: // value for 'indicator'
+ *      value: // value for 'value'
+ *      sdg: // value for 'sdg'
+ *      org: // value for 'org'
+ *   },
+ * });
+ */
+export function useInsertImpactMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    InsertImpactMutation,
+    InsertImpactMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    InsertImpactMutation,
+    InsertImpactMutationVariables
+  >(InsertImpactDocument, options);
+}
+export type InsertImpactMutationHookResult = ReturnType<
+  typeof useInsertImpactMutation
+>;
+export type InsertImpactMutationResult =
+  Apollo.MutationResult<InsertImpactMutation>;
+export type InsertImpactMutationOptions = Apollo.BaseMutationOptions<
+  InsertImpactMutation,
+  InsertImpactMutationVariables
+>;
 export const InsertOrgDocument = gql`
   mutation insertOrg(
     $author_id: uuid!
     $name: String!
     $slug: String!
     $description: String
+    $long_description: String
+    $main_image: String!
+    $geography: String
+    $size: String
+    $founded_at: String
+    $link_processes: String
+    $link_financials: String
   ) {
     insert_orgs_one(
       object: {
@@ -1980,6 +2941,13 @@ export const InsertOrgDocument = gql`
         name: $name
         slug: $slug
         description: $description
+        long_description: $long_description
+        main_image: $main_image
+        geography: $geography
+        size: $size
+        founded_at: $founded_at
+        link_processes: $link_processes
+        link_financials: $link_financials
       }
     ) {
       id
@@ -1987,11 +2955,13 @@ export const InsertOrgDocument = gql`
       name
       slug
       description
-      author {
-        id
-        name
-        image
-      }
+      long_description
+      main_image
+      geography
+      size
+      founded_at
+      link_processes
+      link_financials
     }
   }
 `;
@@ -2063,6 +3033,13 @@ export function withInsertOrg<
  *      name: // value for 'name'
  *      slug: // value for 'slug'
  *      description: // value for 'description'
+ *      long_description: // value for 'long_description'
+ *      main_image: // value for 'main_image'
+ *      geography: // value for 'geography'
+ *      size: // value for 'size'
+ *      founded_at: // value for 'founded_at'
+ *      link_processes: // value for 'link_processes'
+ *      link_financials: // value for 'link_financials'
  *   },
  * });
  */
@@ -2086,15 +3063,245 @@ export type InsertOrgMutationOptions = Apollo.BaseMutationOptions<
   InsertOrgMutation,
   InsertOrgMutationVariables
 >;
+export const UpdateImpactDocument = gql`
+  mutation updateImpact($id: uuid!, $value: numeric!, $sdg: String!) {
+    update_impact_by_pk(
+      _set: { value: $value, sdg: $sdg }
+      pk_columns: { id: $id }
+    ) {
+      id
+      value
+      sdg
+    }
+  }
+`;
+export type UpdateImpactMutationFn = Apollo.MutationFunction<
+  UpdateImpactMutation,
+  UpdateImpactMutationVariables
+>;
+export type UpdateImpactComponentProps = Omit<
+  ApolloReactComponents.MutationComponentOptions<
+    UpdateImpactMutation,
+    UpdateImpactMutationVariables
+  >,
+  "mutation"
+>;
+
+export const UpdateImpactComponent = (props: UpdateImpactComponentProps) => (
+  <ApolloReactComponents.Mutation<
+    UpdateImpactMutation,
+    UpdateImpactMutationVariables
+  >
+    mutation={UpdateImpactDocument}
+    {...props}
+  />
+);
+
+export type UpdateImpactProps<
+  TChildProps = {},
+  TDataName extends string = "mutate"
+> = {
+  [key in TDataName]: Apollo.MutationFunction<
+    UpdateImpactMutation,
+    UpdateImpactMutationVariables
+  >;
+} & TChildProps;
+export function withUpdateImpact<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = "mutate"
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    UpdateImpactMutation,
+    UpdateImpactMutationVariables,
+    UpdateImpactProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    UpdateImpactMutation,
+    UpdateImpactMutationVariables,
+    UpdateImpactProps<TChildProps, TDataName>
+  >(UpdateImpactDocument, {
+    alias: "updateImpact",
+    ...operationOptions,
+  });
+}
+
+/**
+ * __useUpdateImpactMutation__
+ *
+ * To run a mutation, you first call `useUpdateImpactMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateImpactMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateImpactMutation, { data, loading, error }] = useUpdateImpactMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      value: // value for 'value'
+ *      sdg: // value for 'sdg'
+ *   },
+ * });
+ */
+export function useUpdateImpactMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateImpactMutation,
+    UpdateImpactMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateImpactMutation,
+    UpdateImpactMutationVariables
+  >(UpdateImpactDocument, options);
+}
+export type UpdateImpactMutationHookResult = ReturnType<
+  typeof useUpdateImpactMutation
+>;
+export type UpdateImpactMutationResult =
+  Apollo.MutationResult<UpdateImpactMutation>;
+export type UpdateImpactMutationOptions = Apollo.BaseMutationOptions<
+  UpdateImpactMutation,
+  UpdateImpactMutationVariables
+>;
+export const UpdateImpactPriorityDocument = gql`
+  mutation UpdateImpactPriority($impactID: uuid!, $priority: Int!) {
+    update_impact_by_pk(
+      pk_columns: { id: $impactID }
+      _set: { priority: $priority }
+    ) {
+      id
+      priority
+    }
+  }
+`;
+export type UpdateImpactPriorityMutationFn = Apollo.MutationFunction<
+  UpdateImpactPriorityMutation,
+  UpdateImpactPriorityMutationVariables
+>;
+export type UpdateImpactPriorityComponentProps = Omit<
+  ApolloReactComponents.MutationComponentOptions<
+    UpdateImpactPriorityMutation,
+    UpdateImpactPriorityMutationVariables
+  >,
+  "mutation"
+>;
+
+export const UpdateImpactPriorityComponent = (
+  props: UpdateImpactPriorityComponentProps
+) => (
+  <ApolloReactComponents.Mutation<
+    UpdateImpactPriorityMutation,
+    UpdateImpactPriorityMutationVariables
+  >
+    mutation={UpdateImpactPriorityDocument}
+    {...props}
+  />
+);
+
+export type UpdateImpactPriorityProps<
+  TChildProps = {},
+  TDataName extends string = "mutate"
+> = {
+  [key in TDataName]: Apollo.MutationFunction<
+    UpdateImpactPriorityMutation,
+    UpdateImpactPriorityMutationVariables
+  >;
+} & TChildProps;
+export function withUpdateImpactPriority<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = "mutate"
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    UpdateImpactPriorityMutation,
+    UpdateImpactPriorityMutationVariables,
+    UpdateImpactPriorityProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    UpdateImpactPriorityMutation,
+    UpdateImpactPriorityMutationVariables,
+    UpdateImpactPriorityProps<TChildProps, TDataName>
+  >(UpdateImpactPriorityDocument, {
+    alias: "updateImpactPriority",
+    ...operationOptions,
+  });
+}
+
+/**
+ * __useUpdateImpactPriorityMutation__
+ *
+ * To run a mutation, you first call `useUpdateImpactPriorityMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateImpactPriorityMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateImpactPriorityMutation, { data, loading, error }] = useUpdateImpactPriorityMutation({
+ *   variables: {
+ *      impactID: // value for 'impactID'
+ *      priority: // value for 'priority'
+ *   },
+ * });
+ */
+export function useUpdateImpactPriorityMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateImpactPriorityMutation,
+    UpdateImpactPriorityMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateImpactPriorityMutation,
+    UpdateImpactPriorityMutationVariables
+  >(UpdateImpactPriorityDocument, options);
+}
+export type UpdateImpactPriorityMutationHookResult = ReturnType<
+  typeof useUpdateImpactPriorityMutation
+>;
+export type UpdateImpactPriorityMutationResult =
+  Apollo.MutationResult<UpdateImpactPriorityMutation>;
+export type UpdateImpactPriorityMutationOptions = Apollo.BaseMutationOptions<
+  UpdateImpactPriorityMutation,
+  UpdateImpactPriorityMutationVariables
+>;
 export const UpdateOrgDocument = gql`
   mutation updateOrg(
     $id: uuid!
     $name: String
     $slug: String!
     $description: String
+    $long_description: String
+    $main_image: String!
+    $geography: String
+    $size: String
+    $founded_at: String
+    $link_processes: String
+    $link_financials: String
   ) {
     update_orgs_by_pk(
-      _set: { name: $name, slug: $slug, description: $description }
+      _set: {
+        name: $name
+        slug: $slug
+        description: $description
+        long_description: $long_description
+        main_image: $main_image
+        geography: $geography
+        size: $size
+        founded_at: $founded_at
+        link_processes: $link_processes
+        link_financials: $link_financials
+      }
       pk_columns: { id: $id }
     ) {
       id
@@ -2102,11 +3309,13 @@ export const UpdateOrgDocument = gql`
       name
       slug
       description
-      author {
-        id
-        name
-        image
-      }
+      long_description
+      main_image
+      geography
+      size
+      founded_at
+      link_processes
+      link_financials
     }
   }
 `;
@@ -2178,6 +3387,13 @@ export function withUpdateOrg<
  *      name: // value for 'name'
  *      slug: // value for 'slug'
  *      description: // value for 'description'
+ *      long_description: // value for 'long_description'
+ *      main_image: // value for 'main_image'
+ *      geography: // value for 'geography'
+ *      size: // value for 'size'
+ *      founded_at: // value for 'founded_at'
+ *      link_processes: // value for 'link_processes'
+ *      link_financials: // value for 'link_financials'
  *   },
  * });
  */
@@ -2406,12 +3622,28 @@ export type CountOrgsQueryResult = Apollo.QueryResult<
 >;
 export const FetchFeaturedDocument = gql`
   query fetchFeatured($top: Int) {
-    orgs(order_by: { name: asc }, limit: $top) {
+    orgs(
+      order_by: { name: asc }
+      limit: $top
+      where: {
+        main_image: { _is_null: false }
+        geography: { _is_null: false }
+        impacts: { id: { _is_null: false } }
+      }
+    ) {
       id
       created_at
       name
       slug
       description
+      main_image
+      geography
+      impacts(order_by: { priority: asc }, limit: 1) {
+        id
+        value
+        indicator
+        sdg
+      }
     }
   }
 `;
@@ -2520,6 +3752,14 @@ export const FetchLatestDocument = gql`
       name
       slug
       description
+      main_image
+      geography
+      impacts(order_by: { priority: asc }, limit: 1) {
+        id
+        value
+        indicator
+        sdg
+      }
     }
   }
 `;
@@ -2627,6 +3867,20 @@ export const FetchOrgDocument = gql`
       author_id
       slug
       description
+      long_description
+      main_image
+      geography
+      founded_at
+      size
+      link_processes
+      link_financials
+      impacts(order_by: { priority: asc }) {
+        id
+        value
+        indicator
+        sdg
+        context
+      }
     }
   }
 `;
@@ -2730,6 +3984,14 @@ export const FetchOrgsDocument = gql`
       name
       slug
       description
+      main_image
+      geography
+      impacts(order_by: { priority: asc }, limit: 1) {
+        id
+        value
+        indicator
+        sdg
+      }
     }
   }
 `;
@@ -2825,10 +4087,9 @@ export type FetchOrgsQueryResult = Apollo.QueryResult<
   FetchOrgsQueryVariables
 >;
 export const FetchUserDocument = gql`
-  query fetchUser($userId: uuid!) {
-    users_by_pk(id: $userId) {
-      id
-      name
+  query fetchUser($userEmail: String!) {
+    users(where: { email: { _eq: $userEmail } }) {
+      is_user_admin
     }
   }
 `;
@@ -2892,7 +4153,7 @@ export function withFetchUser<
  * @example
  * const { data, loading, error } = useFetchUserQuery({
  *   variables: {
- *      userId: // value for 'userId'
+ *      userEmail: // value for 'userEmail'
  *   },
  * });
  */
@@ -2936,10 +4197,13 @@ export const MyOrgsDocument = gql`
         name
         slug
         description
-        author {
+        main_image
+        geography
+        impacts(order_by: { priority: asc }, limit: 1) {
           id
-          name
-          image
+          value
+          indicator
+          sdg
         }
       }
     }
@@ -3036,7 +4300,10 @@ export const SearchOrgsDocument = gql`
       id
       name
       slug
-      description
+      impacts(order_by: { priority: asc }, limit: 1) {
+        id
+        sdg
+      }
     }
   }
 `;
@@ -3244,6 +4511,7 @@ export type DirectiveResolverFn<
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
+  Boolean_comparison_exp: Boolean_Comparison_Exp;
   Float: ResolverTypeWrapper<Scalars["Float"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]>;
   Int_comparison_exp: Int_Comparison_Exp;
@@ -3264,7 +4532,45 @@ export type ResolversTypes = {
   accounts_select_column: Accounts_Select_Column;
   accounts_set_input: Accounts_Set_Input;
   accounts_update_column: Accounts_Update_Column;
+  impact: ResolverTypeWrapper<Impact>;
+  impact_aggregate: ResolverTypeWrapper<Impact_Aggregate>;
+  impact_aggregate_fields: ResolverTypeWrapper<Impact_Aggregate_Fields>;
+  impact_aggregate_order_by: Impact_Aggregate_Order_By;
+  impact_arr_rel_insert_input: Impact_Arr_Rel_Insert_Input;
+  impact_avg_fields: ResolverTypeWrapper<Impact_Avg_Fields>;
+  impact_avg_order_by: Impact_Avg_Order_By;
+  impact_bool_exp: Impact_Bool_Exp;
+  impact_constraint: Impact_Constraint;
+  impact_inc_input: Impact_Inc_Input;
+  impact_insert_input: Impact_Insert_Input;
+  impact_max_fields: ResolverTypeWrapper<Impact_Max_Fields>;
+  impact_max_order_by: Impact_Max_Order_By;
+  impact_min_fields: ResolverTypeWrapper<Impact_Min_Fields>;
+  impact_min_order_by: Impact_Min_Order_By;
+  impact_mutation_response: ResolverTypeWrapper<Impact_Mutation_Response>;
+  impact_on_conflict: Impact_On_Conflict;
+  impact_order_by: Impact_Order_By;
+  impact_pk_columns_input: Impact_Pk_Columns_Input;
+  impact_select_column: Impact_Select_Column;
+  impact_set_input: Impact_Set_Input;
+  impact_stddev_fields: ResolverTypeWrapper<Impact_Stddev_Fields>;
+  impact_stddev_order_by: Impact_Stddev_Order_By;
+  impact_stddev_pop_fields: ResolverTypeWrapper<Impact_Stddev_Pop_Fields>;
+  impact_stddev_pop_order_by: Impact_Stddev_Pop_Order_By;
+  impact_stddev_samp_fields: ResolverTypeWrapper<Impact_Stddev_Samp_Fields>;
+  impact_stddev_samp_order_by: Impact_Stddev_Samp_Order_By;
+  impact_sum_fields: ResolverTypeWrapper<Impact_Sum_Fields>;
+  impact_sum_order_by: Impact_Sum_Order_By;
+  impact_update_column: Impact_Update_Column;
+  impact_var_pop_fields: ResolverTypeWrapper<Impact_Var_Pop_Fields>;
+  impact_var_pop_order_by: Impact_Var_Pop_Order_By;
+  impact_var_samp_fields: ResolverTypeWrapper<Impact_Var_Samp_Fields>;
+  impact_var_samp_order_by: Impact_Var_Samp_Order_By;
+  impact_variance_fields: ResolverTypeWrapper<Impact_Variance_Fields>;
+  impact_variance_order_by: Impact_Variance_Order_By;
   mutation_root: ResolverTypeWrapper<{}>;
+  numeric: ResolverTypeWrapper<Scalars["numeric"]>;
+  numeric_comparison_exp: Numeric_Comparison_Exp;
   order_by: Order_By;
   orgs: ResolverTypeWrapper<Orgs>;
   orgs_aggregate: ResolverTypeWrapper<Orgs_Aggregate>;
@@ -3279,6 +4585,7 @@ export type ResolversTypes = {
   orgs_min_fields: ResolverTypeWrapper<Orgs_Min_Fields>;
   orgs_min_order_by: Orgs_Min_Order_By;
   orgs_mutation_response: ResolverTypeWrapper<Orgs_Mutation_Response>;
+  orgs_obj_rel_insert_input: Orgs_Obj_Rel_Insert_Input;
   orgs_on_conflict: Orgs_On_Conflict;
   orgs_order_by: Orgs_Order_By;
   orgs_pk_columns_input: Orgs_Pk_Columns_Input;
@@ -3351,6 +4658,7 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
+  Boolean_comparison_exp: Boolean_Comparison_Exp;
   Float: Scalars["Float"];
   Int: Scalars["Int"];
   Int_comparison_exp: Int_Comparison_Exp;
@@ -3368,7 +4676,42 @@ export type ResolversParentTypes = {
   accounts_order_by: Accounts_Order_By;
   accounts_pk_columns_input: Accounts_Pk_Columns_Input;
   accounts_set_input: Accounts_Set_Input;
+  impact: Impact;
+  impact_aggregate: Impact_Aggregate;
+  impact_aggregate_fields: Impact_Aggregate_Fields;
+  impact_aggregate_order_by: Impact_Aggregate_Order_By;
+  impact_arr_rel_insert_input: Impact_Arr_Rel_Insert_Input;
+  impact_avg_fields: Impact_Avg_Fields;
+  impact_avg_order_by: Impact_Avg_Order_By;
+  impact_bool_exp: Impact_Bool_Exp;
+  impact_inc_input: Impact_Inc_Input;
+  impact_insert_input: Impact_Insert_Input;
+  impact_max_fields: Impact_Max_Fields;
+  impact_max_order_by: Impact_Max_Order_By;
+  impact_min_fields: Impact_Min_Fields;
+  impact_min_order_by: Impact_Min_Order_By;
+  impact_mutation_response: Impact_Mutation_Response;
+  impact_on_conflict: Impact_On_Conflict;
+  impact_order_by: Impact_Order_By;
+  impact_pk_columns_input: Impact_Pk_Columns_Input;
+  impact_set_input: Impact_Set_Input;
+  impact_stddev_fields: Impact_Stddev_Fields;
+  impact_stddev_order_by: Impact_Stddev_Order_By;
+  impact_stddev_pop_fields: Impact_Stddev_Pop_Fields;
+  impact_stddev_pop_order_by: Impact_Stddev_Pop_Order_By;
+  impact_stddev_samp_fields: Impact_Stddev_Samp_Fields;
+  impact_stddev_samp_order_by: Impact_Stddev_Samp_Order_By;
+  impact_sum_fields: Impact_Sum_Fields;
+  impact_sum_order_by: Impact_Sum_Order_By;
+  impact_var_pop_fields: Impact_Var_Pop_Fields;
+  impact_var_pop_order_by: Impact_Var_Pop_Order_By;
+  impact_var_samp_fields: Impact_Var_Samp_Fields;
+  impact_var_samp_order_by: Impact_Var_Samp_Order_By;
+  impact_variance_fields: Impact_Variance_Fields;
+  impact_variance_order_by: Impact_Variance_Order_By;
   mutation_root: {};
+  numeric: Scalars["numeric"];
+  numeric_comparison_exp: Numeric_Comparison_Exp;
   orgs: Orgs;
   orgs_aggregate: Orgs_Aggregate;
   orgs_aggregate_fields: Orgs_Aggregate_Fields;
@@ -3381,6 +4724,7 @@ export type ResolversParentTypes = {
   orgs_min_fields: Orgs_Min_Fields;
   orgs_min_order_by: Orgs_Min_Order_By;
   orgs_mutation_response: Orgs_Mutation_Response;
+  orgs_obj_rel_insert_input: Orgs_Obj_Rel_Insert_Input;
   orgs_on_conflict: Orgs_On_Conflict;
   orgs_order_by: Orgs_Order_By;
   orgs_pk_columns_input: Orgs_Pk_Columns_Input;
@@ -3506,7 +4850,7 @@ export type Accounts_Aggregate_FieldsResolvers<
     ResolversTypes["Int"],
     ParentType,
     ContextType,
-    RequireFields<Accounts_Aggregate_FieldsCountArgs, never>
+    Partial<Accounts_Aggregate_FieldsCountArgs>
   >;
   max?: Resolver<
     Maybe<ResolversTypes["accounts_max_fields"]>,
@@ -3642,6 +4986,227 @@ export type Accounts_Mutation_ResponseResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ImpactResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["impact"] = ResolversParentTypes["impact"]
+> = {
+  context?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  indicator?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  org?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  orgByOrg?: Resolver<ResolversTypes["orgs"], ParentType, ContextType>;
+  prefix?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  priority?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  sdg?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  suffix?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  value?: Resolver<ResolversTypes["numeric"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Impact_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["impact_aggregate"] = ResolversParentTypes["impact_aggregate"]
+> = {
+  aggregate?: Resolver<
+    Maybe<ResolversTypes["impact_aggregate_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  nodes?: Resolver<Array<ResolversTypes["impact"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Impact_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["impact_aggregate_fields"] = ResolversParentTypes["impact_aggregate_fields"]
+> = {
+  avg?: Resolver<
+    Maybe<ResolversTypes["impact_avg_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  count?: Resolver<
+    ResolversTypes["Int"],
+    ParentType,
+    ContextType,
+    Partial<Impact_Aggregate_FieldsCountArgs>
+  >;
+  max?: Resolver<
+    Maybe<ResolversTypes["impact_max_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  min?: Resolver<
+    Maybe<ResolversTypes["impact_min_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  stddev?: Resolver<
+    Maybe<ResolversTypes["impact_stddev_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  stddev_pop?: Resolver<
+    Maybe<ResolversTypes["impact_stddev_pop_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  stddev_samp?: Resolver<
+    Maybe<ResolversTypes["impact_stddev_samp_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  sum?: Resolver<
+    Maybe<ResolversTypes["impact_sum_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  var_pop?: Resolver<
+    Maybe<ResolversTypes["impact_var_pop_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  var_samp?: Resolver<
+    Maybe<ResolversTypes["impact_var_samp_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  variance?: Resolver<
+    Maybe<ResolversTypes["impact_variance_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Impact_Avg_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["impact_avg_fields"] = ResolversParentTypes["impact_avg_fields"]
+> = {
+  priority?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Impact_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["impact_max_fields"] = ResolversParentTypes["impact_max_fields"]
+> = {
+  context?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  indicator?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  org?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  prefix?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  priority?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  sdg?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  suffix?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes["numeric"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Impact_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["impact_min_fields"] = ResolversParentTypes["impact_min_fields"]
+> = {
+  context?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  indicator?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  org?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  prefix?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  priority?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  sdg?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  suffix?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes["numeric"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Impact_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["impact_mutation_response"] = ResolversParentTypes["impact_mutation_response"]
+> = {
+  affected_rows?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  returning?: Resolver<
+    Array<ResolversTypes["impact"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Impact_Stddev_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["impact_stddev_fields"] = ResolversParentTypes["impact_stddev_fields"]
+> = {
+  priority?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Impact_Stddev_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["impact_stddev_pop_fields"] = ResolversParentTypes["impact_stddev_pop_fields"]
+> = {
+  priority?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Impact_Stddev_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["impact_stddev_samp_fields"] = ResolversParentTypes["impact_stddev_samp_fields"]
+> = {
+  priority?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Impact_Sum_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["impact_sum_fields"] = ResolversParentTypes["impact_sum_fields"]
+> = {
+  priority?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes["numeric"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Impact_Var_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["impact_var_pop_fields"] = ResolversParentTypes["impact_var_pop_fields"]
+> = {
+  priority?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Impact_Var_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["impact_var_samp_fields"] = ResolversParentTypes["impact_var_samp_fields"]
+> = {
+  priority?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Impact_Variance_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["impact_variance_fields"] = ResolversParentTypes["impact_variance_fields"]
+> = {
+  priority?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Mutation_RootResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["mutation_root"] = ResolversParentTypes["mutation_root"]
@@ -3657,6 +5222,18 @@ export type Mutation_RootResolvers<
     ParentType,
     ContextType,
     RequireFields<Mutation_RootDelete_Accounts_By_PkArgs, "id">
+  >;
+  delete_impact?: Resolver<
+    Maybe<ResolversTypes["impact_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_ImpactArgs, "where">
+  >;
+  delete_impact_by_pk?: Resolver<
+    Maybe<ResolversTypes["impact"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Impact_By_PkArgs, "id">
   >;
   delete_orgs?: Resolver<
     Maybe<ResolversTypes["orgs_mutation_response"]>,
@@ -3718,6 +5295,18 @@ export type Mutation_RootResolvers<
     ContextType,
     RequireFields<Mutation_RootInsert_Accounts_OneArgs, "object">
   >;
+  insert_impact?: Resolver<
+    Maybe<ResolversTypes["impact_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_ImpactArgs, "objects">
+  >;
+  insert_impact_one?: Resolver<
+    Maybe<ResolversTypes["impact"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Impact_OneArgs, "object">
+  >;
   insert_orgs?: Resolver<
     Maybe<ResolversTypes["orgs_mutation_response"]>,
     ParentType,
@@ -3778,6 +5367,18 @@ export type Mutation_RootResolvers<
     ContextType,
     RequireFields<Mutation_RootUpdate_Accounts_By_PkArgs, "pk_columns">
   >;
+  update_impact?: Resolver<
+    Maybe<ResolversTypes["impact_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_ImpactArgs, "where">
+  >;
+  update_impact_by_pk?: Resolver<
+    Maybe<ResolversTypes["impact"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Impact_By_PkArgs, "pk_columns">
+  >;
   update_orgs?: Resolver<
     Maybe<ResolversTypes["orgs_mutation_response"]>,
     ParentType,
@@ -3831,6 +5432,11 @@ export type Mutation_RootResolvers<
   >;
 };
 
+export interface NumericScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["numeric"], any> {
+  name: "numeric";
+}
+
 export type OrgsResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["orgs"] = ResolversParentTypes["orgs"]
@@ -3843,8 +5449,56 @@ export type OrgsResolvers<
     ParentType,
     ContextType
   >;
+  founded_at?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  geography?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  impacts?: Resolver<
+    Array<ResolversTypes["impact"]>,
+    ParentType,
+    ContextType,
+    Partial<OrgsImpactsArgs>
+  >;
+  impacts_aggregate?: Resolver<
+    ResolversTypes["impact_aggregate"],
+    ParentType,
+    ContextType,
+    Partial<OrgsImpacts_AggregateArgs>
+  >;
+  is_test_data?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  link_financials?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  link_processes?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  long_description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  main_image?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  size?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -3871,7 +5525,7 @@ export type Orgs_Aggregate_FieldsResolvers<
     ResolversTypes["Int"],
     ParentType,
     ContextType,
-    RequireFields<Orgs_Aggregate_FieldsCountArgs, never>
+    Partial<Orgs_Aggregate_FieldsCountArgs>
   >;
   max?: Resolver<
     Maybe<ResolversTypes["orgs_max_fields"]>,
@@ -3901,8 +5555,39 @@ export type Orgs_Max_FieldsResolvers<
     ParentType,
     ContextType
   >;
+  founded_at?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  geography?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  link_financials?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  link_processes?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  long_description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  main_image?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  size?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   updated_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,
@@ -3927,8 +5612,39 @@ export type Orgs_Min_FieldsResolvers<
     ParentType,
     ContextType
   >;
+  founded_at?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  geography?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  link_financials?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  link_processes?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  long_description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  main_image?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  size?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   updated_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,
@@ -3955,13 +5671,13 @@ export type Query_RootResolvers<
     Array<ResolversTypes["accounts"]>,
     ParentType,
     ContextType,
-    RequireFields<Query_RootAccountsArgs, never>
+    Partial<Query_RootAccountsArgs>
   >;
   accounts_aggregate?: Resolver<
     ResolversTypes["accounts_aggregate"],
     ParentType,
     ContextType,
-    RequireFields<Query_RootAccounts_AggregateArgs, never>
+    Partial<Query_RootAccounts_AggregateArgs>
   >;
   accounts_by_pk?: Resolver<
     Maybe<ResolversTypes["accounts"]>,
@@ -3969,17 +5685,35 @@ export type Query_RootResolvers<
     ContextType,
     RequireFields<Query_RootAccounts_By_PkArgs, "id">
   >;
+  impact?: Resolver<
+    Array<ResolversTypes["impact"]>,
+    ParentType,
+    ContextType,
+    Partial<Query_RootImpactArgs>
+  >;
+  impact_aggregate?: Resolver<
+    ResolversTypes["impact_aggregate"],
+    ParentType,
+    ContextType,
+    Partial<Query_RootImpact_AggregateArgs>
+  >;
+  impact_by_pk?: Resolver<
+    Maybe<ResolversTypes["impact"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootImpact_By_PkArgs, "id">
+  >;
   orgs?: Resolver<
     Array<ResolversTypes["orgs"]>,
     ParentType,
     ContextType,
-    RequireFields<Query_RootOrgsArgs, never>
+    Partial<Query_RootOrgsArgs>
   >;
   orgs_aggregate?: Resolver<
     ResolversTypes["orgs_aggregate"],
     ParentType,
     ContextType,
-    RequireFields<Query_RootOrgs_AggregateArgs, never>
+    Partial<Query_RootOrgs_AggregateArgs>
   >;
   orgs_by_pk?: Resolver<
     Maybe<ResolversTypes["orgs"]>,
@@ -3991,13 +5725,13 @@ export type Query_RootResolvers<
     Array<ResolversTypes["sessions"]>,
     ParentType,
     ContextType,
-    RequireFields<Query_RootSessionsArgs, never>
+    Partial<Query_RootSessionsArgs>
   >;
   sessions_aggregate?: Resolver<
     ResolversTypes["sessions_aggregate"],
     ParentType,
     ContextType,
-    RequireFields<Query_RootSessions_AggregateArgs, never>
+    Partial<Query_RootSessions_AggregateArgs>
   >;
   sessions_by_pk?: Resolver<
     Maybe<ResolversTypes["sessions"]>,
@@ -4009,13 +5743,13 @@ export type Query_RootResolvers<
     Array<ResolversTypes["users"]>,
     ParentType,
     ContextType,
-    RequireFields<Query_RootUsersArgs, never>
+    Partial<Query_RootUsersArgs>
   >;
   users_aggregate?: Resolver<
     ResolversTypes["users_aggregate"],
     ParentType,
     ContextType,
-    RequireFields<Query_RootUsers_AggregateArgs, never>
+    Partial<Query_RootUsers_AggregateArgs>
   >;
   users_by_pk?: Resolver<
     Maybe<ResolversTypes["users"]>,
@@ -4027,13 +5761,13 @@ export type Query_RootResolvers<
     Array<ResolversTypes["verification_requests"]>,
     ParentType,
     ContextType,
-    RequireFields<Query_RootVerification_RequestsArgs, never>
+    Partial<Query_RootVerification_RequestsArgs>
   >;
   verification_requests_aggregate?: Resolver<
     ResolversTypes["verification_requests_aggregate"],
     ParentType,
     ContextType,
-    RequireFields<Query_RootVerification_Requests_AggregateArgs, never>
+    Partial<Query_RootVerification_Requests_AggregateArgs>
   >;
   verification_requests_by_pk?: Resolver<
     Maybe<ResolversTypes["verification_requests"]>,
@@ -4083,7 +5817,7 @@ export type Sessions_Aggregate_FieldsResolvers<
     ResolversTypes["Int"],
     ParentType,
     ContextType,
-    RequireFields<Sessions_Aggregate_FieldsCountArgs, never>
+    Partial<Sessions_Aggregate_FieldsCountArgs>
   >;
   max?: Resolver<
     Maybe<ResolversTypes["sessions_max_fields"]>,
@@ -4287,14 +6021,14 @@ export type Subscription_RootResolvers<
     "accounts",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootAccountsArgs, never>
+    Partial<Subscription_RootAccountsArgs>
   >;
   accounts_aggregate?: SubscriptionResolver<
     ResolversTypes["accounts_aggregate"],
     "accounts_aggregate",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootAccounts_AggregateArgs, never>
+    Partial<Subscription_RootAccounts_AggregateArgs>
   >;
   accounts_by_pk?: SubscriptionResolver<
     Maybe<ResolversTypes["accounts"]>,
@@ -4303,19 +6037,40 @@ export type Subscription_RootResolvers<
     ContextType,
     RequireFields<Subscription_RootAccounts_By_PkArgs, "id">
   >;
+  impact?: SubscriptionResolver<
+    Array<ResolversTypes["impact"]>,
+    "impact",
+    ParentType,
+    ContextType,
+    Partial<Subscription_RootImpactArgs>
+  >;
+  impact_aggregate?: SubscriptionResolver<
+    ResolversTypes["impact_aggregate"],
+    "impact_aggregate",
+    ParentType,
+    ContextType,
+    Partial<Subscription_RootImpact_AggregateArgs>
+  >;
+  impact_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes["impact"]>,
+    "impact_by_pk",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootImpact_By_PkArgs, "id">
+  >;
   orgs?: SubscriptionResolver<
     Array<ResolversTypes["orgs"]>,
     "orgs",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootOrgsArgs, never>
+    Partial<Subscription_RootOrgsArgs>
   >;
   orgs_aggregate?: SubscriptionResolver<
     ResolversTypes["orgs_aggregate"],
     "orgs_aggregate",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootOrgs_AggregateArgs, never>
+    Partial<Subscription_RootOrgs_AggregateArgs>
   >;
   orgs_by_pk?: SubscriptionResolver<
     Maybe<ResolversTypes["orgs"]>,
@@ -4329,14 +6084,14 @@ export type Subscription_RootResolvers<
     "sessions",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootSessionsArgs, never>
+    Partial<Subscription_RootSessionsArgs>
   >;
   sessions_aggregate?: SubscriptionResolver<
     ResolversTypes["sessions_aggregate"],
     "sessions_aggregate",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootSessions_AggregateArgs, never>
+    Partial<Subscription_RootSessions_AggregateArgs>
   >;
   sessions_by_pk?: SubscriptionResolver<
     Maybe<ResolversTypes["sessions"]>,
@@ -4350,14 +6105,14 @@ export type Subscription_RootResolvers<
     "users",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootUsersArgs, never>
+    Partial<Subscription_RootUsersArgs>
   >;
   users_aggregate?: SubscriptionResolver<
     ResolversTypes["users_aggregate"],
     "users_aggregate",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootUsers_AggregateArgs, never>
+    Partial<Subscription_RootUsers_AggregateArgs>
   >;
   users_by_pk?: SubscriptionResolver<
     Maybe<ResolversTypes["users"]>,
@@ -4371,14 +6126,14 @@ export type Subscription_RootResolvers<
     "verification_requests",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootVerification_RequestsArgs, never>
+    Partial<Subscription_RootVerification_RequestsArgs>
   >;
   verification_requests_aggregate?: SubscriptionResolver<
     ResolversTypes["verification_requests_aggregate"],
     "verification_requests_aggregate",
     ParentType,
     ContextType,
-    RequireFields<Subscription_RootVerification_Requests_AggregateArgs, never>
+    Partial<Subscription_RootVerification_Requests_AggregateArgs>
   >;
   verification_requests_by_pk?: SubscriptionResolver<
     Maybe<ResolversTypes["verification_requests"]>,
@@ -4407,18 +6162,20 @@ export type UsersResolvers<
   >;
   id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  is_admin?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  is_user_admin?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   orgs?: Resolver<
     Array<ResolversTypes["orgs"]>,
     ParentType,
     ContextType,
-    RequireFields<UsersOrgsArgs, never>
+    Partial<UsersOrgsArgs>
   >;
   orgs_aggregate?: Resolver<
     ResolversTypes["orgs_aggregate"],
     ParentType,
     ContextType,
-    RequireFields<UsersOrgs_AggregateArgs, never>
+    Partial<UsersOrgs_AggregateArgs>
   >;
   updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -4445,7 +6202,7 @@ export type Users_Aggregate_FieldsResolvers<
     ResolversTypes["Int"],
     ParentType,
     ContextType,
-    RequireFields<Users_Aggregate_FieldsCountArgs, never>
+    Partial<Users_Aggregate_FieldsCountArgs>
   >;
   max?: Resolver<
     Maybe<ResolversTypes["users_max_fields"]>,
@@ -4477,6 +6234,7 @@ export type Users_Max_FieldsResolvers<
   >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  is_admin?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   updated_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,
@@ -4503,6 +6261,7 @@ export type Users_Min_FieldsResolvers<
   >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  is_admin?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   updated_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,
@@ -4564,7 +6323,7 @@ export type Verification_Requests_Aggregate_FieldsResolvers<
     ResolversTypes["Int"],
     ParentType,
     ContextType,
-    RequireFields<Verification_Requests_Aggregate_FieldsCountArgs, never>
+    Partial<Verification_Requests_Aggregate_FieldsCountArgs>
   >;
   max?: Resolver<
     Maybe<ResolversTypes["verification_requests_max_fields"]>,
@@ -4657,7 +6416,22 @@ export type Resolvers<ContextType = any> = {
   accounts_max_fields?: Accounts_Max_FieldsResolvers<ContextType>;
   accounts_min_fields?: Accounts_Min_FieldsResolvers<ContextType>;
   accounts_mutation_response?: Accounts_Mutation_ResponseResolvers<ContextType>;
+  impact?: ImpactResolvers<ContextType>;
+  impact_aggregate?: Impact_AggregateResolvers<ContextType>;
+  impact_aggregate_fields?: Impact_Aggregate_FieldsResolvers<ContextType>;
+  impact_avg_fields?: Impact_Avg_FieldsResolvers<ContextType>;
+  impact_max_fields?: Impact_Max_FieldsResolvers<ContextType>;
+  impact_min_fields?: Impact_Min_FieldsResolvers<ContextType>;
+  impact_mutation_response?: Impact_Mutation_ResponseResolvers<ContextType>;
+  impact_stddev_fields?: Impact_Stddev_FieldsResolvers<ContextType>;
+  impact_stddev_pop_fields?: Impact_Stddev_Pop_FieldsResolvers<ContextType>;
+  impact_stddev_samp_fields?: Impact_Stddev_Samp_FieldsResolvers<ContextType>;
+  impact_sum_fields?: Impact_Sum_FieldsResolvers<ContextType>;
+  impact_var_pop_fields?: Impact_Var_Pop_FieldsResolvers<ContextType>;
+  impact_var_samp_fields?: Impact_Var_Samp_FieldsResolvers<ContextType>;
+  impact_variance_fields?: Impact_Variance_FieldsResolvers<ContextType>;
   mutation_root?: Mutation_RootResolvers<ContextType>;
+  numeric?: GraphQLScalarType;
   orgs?: OrgsResolvers<ContextType>;
   orgs_aggregate?: Orgs_AggregateResolvers<ContextType>;
   orgs_aggregate_fields?: Orgs_Aggregate_FieldsResolvers<ContextType>;

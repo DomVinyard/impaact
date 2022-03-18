@@ -24,13 +24,14 @@ insert_permissions:
 select_permissions:
 - permission:
     columns:
-    - id
     - created_at
-    - email_verified
-    - updated_at
     - email
+    - email_verified
+    - id
     - image
+    - is_user_admin
     - name
+    - updated_at
     filter: {}
   role: user
 update_permissions:

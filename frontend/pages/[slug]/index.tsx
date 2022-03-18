@@ -5,7 +5,7 @@ import { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/client";
 import AccessDeniedIndicator from "components/AccessDeniedIndicator";
 import ISession from "types/session";
-import Org from "components/Pages/Org";
+import Org from "components/Pages/Org/OrgMain";
 import { initializeApollo } from "lib/apolloClient";
 import { FetchOrgDocument } from "generated-graphql";
 import { useRouter } from "next/router";
@@ -13,15 +13,16 @@ import { useRouter } from "next/router";
 interface IProps {
   session: ISession;
   org: any;
+  loading: boolean;
 }
 
-const OrgPage: NextPage<IProps> = ({ org }) => {
+const OrgPage: NextPage<IProps> = ({ org, loading }) => {
   return (
     <>
       <Head>
         <title>{org?.name || "org"}</title>
       </Head>
-      <Org org={org} />
+      <Org org={org} loading={loading} />
     </>
   );
 };
@@ -32,14 +33,14 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const session = await getSession({ req });
   const apolloClient = initializeApollo({}, session?.token);
-  const { data } = await apolloClient.query({
+  const { data, loading } = await apolloClient.query({
     query: FetchOrgDocument,
     variables: {
       slug: query.slug,
     },
   });
   const [org] = data?.orgs || [];
-  return { props: { session, org } };
+  return { props: { session, org, loading } };
 };
 
 export default OrgPage;

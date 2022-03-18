@@ -20,7 +20,7 @@ const AboutUsComponent = () => {
   return (
     <Box background={"brand.900"} overflow={"none"}>
       <Box
-        pt={{ base: 24, md: 24 }}
+        pt={{ base: 24, md: 32 }}
         pb={{ base: 24, md: 32 }}
         width={"100%"}
         backgroundImage="url(https://github.githubassets.com/images/modules/site/home/hero-glow.svg)"
@@ -64,7 +64,7 @@ const AboutUsComponent = () => {
                       </Text>
                       <Text
                         fontSize={{ base: 17, md: 24 }}
-                        mt={{ base: 0, md: 12 }}
+                        mt={{ base: 0, md: 8 }}
                       >
                         Aliquam erat volutpat. Aenean euismod lacus vel interdum
                         volutpat. Quisque aliquet elit in dui egestas dictum.
@@ -79,13 +79,12 @@ const AboutUsComponent = () => {
                     pt={{ base: 12, md: 8 }}
                     pb={{ base: 6, md: 8 }}
                   >
-                    {/* <Link href="/orgs"> */}
-                    <AddOrgButton
-                      onClick={() => alert("coming soon")}
-                      cursor={"pointer"}
-                      children={"Learn more"}
-                    />
-                    {/* </Link> */}
+                    <Link href="/about">
+                      <AddOrgButton
+                        cursor={"pointer"}
+                        children={"Learn more"}
+                      />
+                    </Link>
                   </Flex>
                 </Box>
               </Stack>

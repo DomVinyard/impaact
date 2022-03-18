@@ -29,30 +29,30 @@ const OrgsCountComponent = () => {
         color={"white"}
       >
         <Content>
-          <Link href={"/browse"}>
-            <Flex
-              cursor={"pointer"}
-              justifyContent={{ base: "center", md: "left" }}
-              _hover={{ color: "white !important" }}
-              alignItems="center"
+          {/* <Link href={"/browse"}> */}
+          <Flex
+            // cursor={"pointer"}
+            justifyContent={{ base: "center", md: "left" }}
+            _hover={{ color: "white !important" }}
+            alignItems="center"
+          >
+            <Text
+              fontSize={{ base: 44, md: 58 }}
+              fontFamily={"VT323"}
+              paddingRight={2}
             >
-              <Text
-                fontSize={{ base: 44, md: 58 }}
-                fontFamily={"VT323"}
-                paddingRight={2}
-              >
-                {`${total}`.padStart(3, "0")}
-              </Text>{" "}
-              <Heading
-                color={"rgba(255,255,255,1)"}
-                fontWeight={800}
-                // fontSize={{ base: 21, md: 24 }}
-              >
-                organisations
-                <ChevronRightIcon />
-              </Heading>
-            </Flex>
-          </Link>
+              {`${total}`.padStart(3, "0")}
+            </Text>{" "}
+            <Heading
+              color={"rgba(255,255,255,1)"}
+              fontWeight={800}
+              // fontSize={{ base: 21, md: 24 }}
+            >
+              organisations
+              {/* <ChevronRightIcon /> */}
+            </Heading>
+          </Flex>
+          {/* </Link> */}
         </Content>
       </Box>
     </Skeleton>

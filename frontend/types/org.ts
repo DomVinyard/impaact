@@ -6,4 +6,6 @@ export default interface IOrg {
   name: string;
   slug: string;
   description?: string;
+  main_image?: string;
+  geography?: string;
 }

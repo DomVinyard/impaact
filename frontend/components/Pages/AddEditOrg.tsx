@@ -8,37 +8,54 @@ import {
   CloseButton,
   Flex,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Heading,
-  Input,
   Stack,
   Text,
-  Textarea,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import AccessDeniedIndicator from "components/AccessDeniedIndicator";
 import {
   useDeleteOrgMutation,
   useInsertOrgMutation,
+  useUpdateImpactPriorityMutation,
   useUpdateOrgMutation,
 } from "generated-graphql";
 import { useSession } from "next-auth/client";
-import React, { ChangeEvent, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Content from "components/Content";
 import { useFetchOrgQuery } from "generated-graphql";
 import router, { useRouter } from "next/router";
 import { DeleteIcon } from "@chakra-ui/icons";
 import slugify from "../../lib/slugify";
 import Loader from "components/Loader";
+import { useForm } from "react-hook-form";
+import FIELDS from "./AddEditOrg.form";
 
-const AddEditOrgForm = ({ org }) => {
-  const [name, setName] = useState(org?.name || "");
-  const [slug, setSlug] = useState(org?.slug || "");
-  const [isSubmitted, setIsSubmitted] = useState("");
+const AddEditOrgForm = ({ org, refetch, isLoading }) => {
+  // console.log("initial", org);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors, isSubmitting, isDirty, isValid },
+  } = useForm({ defaultValues: { ...org, main_image: "" } });
+
+  const router = useRouter();
+
+  const [updateImpactPriority, { error, loading }] =
+    useUpdateImpactPriorityMutation();
+  useEffect(() => !isLoading && reset(org), [isLoading]);
+  const values = watch();
+  // const [isSubmitted, setIsSubmitted] = useState("");
   const isMobile = useBreakpointValue({ base: true, md: false });
-  const [description, setDescription] = useState(org?.description || "");
   const [session] = useSession();
+  const [simulateDirty, setSimulateDirty] = useState(false);
   const isEditMode = !!org;
+  const isNewImpactMode = router.query.mode === "impact";
+  // console.log({ values });
 
   const [insertOrg, { loading: insertOrgFetching, error: insertOrgError }] =
     useInsertOrgMutation();
@@ -47,52 +64,55 @@ const AddEditOrgForm = ({ org }) => {
   const [deleteOrg, { loading: deleteOrgFetching, error: deleteOrgError }] =
     useDeleteOrgMutation({ variables: { id: org?.id } });
 
-  if (!session) {
-    return (
-      <AccessDeniedIndicator message="You need to be signed in to add a new org!" />
-    );
-  }
+  if (!session) return <AccessDeniedIndicator message="Please sign in" />;
 
-  const isFetching =
+  const isUpdating =
     insertOrgFetching || updateOrgFetching || deleteOrgFetching;
 
+  // if (insertOrgError || updateOrgError || deleteOrgError) {
+  // console.error({ insertOrgError, updateOrgError, deleteOrgError });
+  // }
   const handleDelete = async () => {
-    setIsSubmitted("deleting");
+    if (!confirm("Are you sure you want to delete this org?")) return;
+    // setIsSubmitted("deleting");
     await deleteOrg();
     router.push(`/orgs`);
   };
 
-  const handleSubmit = async () => {
-    const fields = {
-      name,
-      slug,
-      description,
-    };
-    setIsSubmitted(isEditMode ? "Updating report" : "Creating report");
-    if (isEditMode) {
-      await updateOrg({
-        variables: {
-          id: org.id,
-          ...fields,
-        },
-      });
-    } else {
-      await insertOrg({
-        variables: {
-          author_id: session.id,
-          ...fields,
-        },
-      });
+  const onSubmit = async (values) => {
+    values.slug = slugify(values.name);
+    // setIsSubmitted(isEditMode ? "Updating report" : "Creating report");
+    try {
+      if (isEditMode) {
+        await updateOrg({
+          variables: {
+            id: org.id,
+            ...values,
+          },
+        });
+
+        values.impacts.forEach(async (item, index) => {
+          // set the index in the db
+          const variables = { impactID: item.id, priority: index };
+          try {
+            // console.log({ variables });
+            updateImpactPriority({ variables });
+          } catch (error) {
+            console.error(error);
+          }
+        });
+        router.push(`/${values.slug}`);
+      } else {
+        await insertOrg({ variables: { author_id: session.id, ...values } });
+        router.push(`/${values.slug}/edit?mode=impact`);
+      }
+    } catch (e) {
+      console.log(e);
     }
-    console.log("set name");
-    router.push(`/${slug}`);
   };
 
   const errorNode = () => {
-    if (!insertOrgError) {
-      return false;
-    }
-
+    if (!insertOrgError) return false;
     return (
       <Alert status="error">
         <AlertIcon />
@@ -101,105 +121,141 @@ const AddEditOrgForm = ({ org }) => {
       </Alert>
     );
   };
-
-  if (isFetching || isSubmitted) return <Loader message={isSubmitted} />;
-  const linkText = isEditMode ? "Link: " : "Your report will be at: ";
-  console.log({ org, isEditMode, name });
+  const mode = isEditMode ? "update" : "create";
 
   return (
-    <Stack spacing={4}>
-      {errorNode()}
-      <Box p={4} shadow="lg" rounded="lg">
-        <Stack spacing={4}>
-          <FormControl isRequired>
-            <Heading mt={6} mb={12}>
-              {isEditMode ? "Edit" : "Add"} Organisation
-            </Heading>
-            <Box>
-              <FormLabel>Organisation Name</FormLabel>
-              <Input
-                id="name"
-                value={name}
-                placeholder="Org X"
-                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                  setName(e.currentTarget.value);
-                  setSlug(slugify(e.currentTarget.value));
-                }}
-                isDisabled={isEditMode ? updateOrgFetching : insertOrgFetching}
-              />
-            </Box>
-            <Text color={"blue"} fontSize={12} pt={1}>
-              <strong>{linkText}</strong>
-              <span>
-                https://impact.ooo/{slugify(`${name}`, { lower: true })}
-              </span>
-            </Text>
-            <Box my={6}>
-              <FormLabel>Short description</FormLabel>
-              <Textarea
-                id="description"
-                value={description}
-                placeholder="A short description of this organsiation"
-                onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-                  setDescription(e.currentTarget.value)
-                }
-                isDisabled={isEditMode ? updateOrgFetching : insertOrgFetching}
-              />
-            </Box>
-          </FormControl>
-          <FormControl>
-            {/* <ButtonGroup> */}
-            <Flex mt={6} justifyContent={"space-between"}>
-              <ButtonGroup>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Stack spacing={4} my={28}>
+        {errorNode()}
+        <Box maxW={760}>
+          <Stack spacing={4}>
+            {mode === "update" && (
+              <Heading size="lg">Editing {values.name}</Heading>
+            )}
+            {/* Fields */}
+            {FIELDS?.filter(({ order }) => order[mode] !== "hide")
+              .filter((field) =>
+                isNewImpactMode ? field.id === "impacts" : true
+              )
+              .sort((a, b) => {
+                if (a.order[mode] > b.order[mode]) return 1;
+                if (a.order[mode] < b.order[mode]) return -1;
+                return 0;
+              })
+              .map((field) => (
+                <Box key={field.id} paddingBottom={8}>
+                  <FormControl isInvalid={errors[field.id]}>
+                    {field.before && (
+                      <field.before values={values} isEditMode={isEditMode} />
+                    )}
+                    <FormLabel
+                      style={{ fontSize: 22 }}
+                      htmlFor={errors[field.id]}
+                    >
+                      {field.label}
+                    </FormLabel>
+                    {field.custom ? (
+                      <field.custom
+                        id={field.id}
+                        values={values}
+                        isEditMode={isEditMode}
+                        isMobile={isMobile}
+                        org={org}
+                        refetch={refetch}
+                        setSimulateDirty={setSimulateDirty}
+                        {...register(field.id, field.validation)}
+                      />
+                    ) : (
+                      <field.element
+                        org={org}
+                        autoComplate="off"
+                        id={field.id}
+                        placeholder={field.placeholder}
+                        {...register(field.id, field.validation)}
+                      />
+                    )}
+                    <FormErrorMessage>
+                      {errors[field.id] && errors[field.id].message}
+                    </FormErrorMessage>
+                    {field.after && (
+                      <field.after values={values} isEditMode={isEditMode} />
+                    )}
+                  </FormControl>
+                </Box>
+              ))}
+
+            {isEditMode && !isNewImpactMode && (
+              <Box paddingBottom={32}>
+                <Text style={{ fontSize: 22, color: "firebrick" }}>
+                  Danger Zone
+                </Text>
                 <Button
-                  onClick={() => {
-                    router.push(`/${slug}`);
-                  }}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  loadingText="Posting..."
-                  colorScheme={"blue"}
-                  onClick={handleSubmit}
-                  isLoading={isEditMode ? updateOrgFetching : insertOrgFetching}
-                  isDisabled={!name.trim()}
-                >
-                  {isEditMode ? "Save" : "Add"}
-                </Button>
-              </ButtonGroup>
-              {isEditMode && (
-                <Button
-                  marginLeft={"auto"}
+                  marginRight={"auto"}
                   colorScheme="red"
+                  variant="outline"
                   leftIcon={<DeleteIcon />}
                   onClick={handleDelete}
                 >
-                  Delete{!isMobile && " Organisation"}
+                  Delete{!isMobile ? " Organisation" : " Org"}
                 </Button>
-              )}
-            </Flex>
-            {/* </ButtonGroup> */}
-          </FormControl>
-        </Stack>
-      </Box>
-    </Stack>
+              </Box>
+            )}
+          </Stack>
+        </Box>
+      </Stack>
+      {/* Buttons */}
+      <FormControl
+        position="fixed"
+        zIndex={1}
+        background={"black"}
+        left={0}
+        top={{ base: 0, md: 0 }}
+        // bottom={{ base: "auto", md: 0 }}
+        p={6}
+      >
+        <Content isFull>
+          <Flex
+            maxW={760}
+            justifyContent={isDirty ? "flex-end" : "space-between"}
+          >
+            <Button
+              variant={isDirty ? "outline" : "ghost"}
+              colorScheme="gray"
+              color={"gray"}
+              onClick={() =>
+                isEditMode ? router.push(`/${org.slug}`) : router.back()
+              }
+            >
+              Cancel
+            </Button>
+            <Button
+              loadingText="Saving..."
+              colorScheme={"gray"}
+              minW={150}
+              onClick={handleSubmit}
+              isLoading={isSubmitting}
+              isDisabled={isValid && !isDirty && !simulateDirty}
+              type={"submit"}
+              ml={3}
+            >
+              {isEditMode ? "Save" : isNewImpactMode ? "Add" : "Next"}
+            </Button>
+          </Flex>
+        </Content>
+      </FormControl>
+    </form>
   );
 };
 
 const AddEditOrgPage = () => {
   const router = useRouter();
-  const { data, error, loading } = useFetchOrgQuery({
+  const { data, error, loading, refetch } = useFetchOrgQuery({
     variables: { slug: `${router?.query.slug}` },
   });
   const [org] = data?.orgs || [];
-
-  if (loading) {
-    return <Loader />;
-  }
   return (
     <Content>
-      <AddEditOrgForm org={org} />
+      <AddEditOrgForm org={org} refetch={refetch} isLoading={loading} />
     </Content>
   );
 };

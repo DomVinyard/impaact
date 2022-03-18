@@ -8,10 +8,13 @@ query myOrgs($userId: uuid!) {
       name
       slug
       description
-      author {
+      main_image
+      geography
+      impacts(order_by: { priority: asc }, limit: 1) {
         id
-        name
-        image
+        value
+        indicator
+        sdg
       }
     }
   }

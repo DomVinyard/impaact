@@ -6,7 +6,9 @@
   "scripts": {
     "bootstrap": "node scripts/generate-keys.ts && yarn install && cd frontend && yarn install",
     "dev": "docker-compose up",
-    "release": "release-it"
+    "data": "hasura console",
+    "release": "release-it",
+    "seed": "npx ts-node ./backend/seeds/seed.ts && cd backend && hasura seed apply --file seed.sql --database-name default"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^4.1.0",
@@ -24,5 +26,11 @@
     "*.{js,json,css,md,tsx,ts}": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "-": "^0.0.1",
+    "@faker-js/faker": "^6.0.0-beta.0",
+    "@types/uuid": "^8.3.4",
+    "uuid": "^8.3.2"
   }
 }

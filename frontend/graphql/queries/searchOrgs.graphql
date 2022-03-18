@@ -3,6 +3,9 @@ query searchOrgs($q: String) {
     id
     name
     slug
-    description
+    impacts(order_by: { priority: asc }, limit: 1) {
+      id
+      sdg
+    }
   }
 }

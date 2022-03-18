@@ -34,7 +34,10 @@ const Model = ({ latestKeypress, baseSpeed = 0.0002 }) => {
     const loader = new GLTFLoader();
     loader.load("3d/scene.gltf", async (gltf) => {
       const nodes = await gltf.parser.getDependencies("node");
-      setModel(nodes[0]);
+      const group = new THREE.Group();
+      nodes.forEach((node) => group.add(node));
+      // console.log(nodes);
+      setModel(group);
     });
   }, []);
 

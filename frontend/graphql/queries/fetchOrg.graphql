@@ -6,5 +6,19 @@ query fetchOrg($slug: String) {
     author_id
     slug
     description
+    long_description
+    main_image
+    geography
+    founded_at
+    size
+    link_processes
+    link_financials
+    impacts(order_by: { priority: asc }) {
+      id
+      value
+      indicator
+      sdg
+      context
+    }
   }
 }
