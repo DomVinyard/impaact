@@ -21,7 +21,7 @@ import { AddOrgButton } from "components/Navbar";
 import Link from "next/link";
 import AboutUsComponent from "components/AboutUs";
 
-const IS_CLOSED = true;
+const IS_CLOSED = false;
 
 const HomePageComponent = () => {
   const [query, setQuery] = React.useState("");
