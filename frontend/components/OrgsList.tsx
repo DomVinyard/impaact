@@ -69,7 +69,7 @@ const OrgCard = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
           </Text>
         </Flex>
         <Flex background="#aaa">
-          {org?.geography && (
+          {/* {org?.geography && (
             <StaticGoogleMap
               size={`${mapWidth}x${mapHeight}`}
               apiKey="AIzaSyAEsz877McL_8NQD7sRqiz420HjW4XHjIs"
@@ -86,7 +86,7 @@ const OrgCard = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
                   />
                 ))}
             </StaticGoogleMap>
-          )}
+          )} */}
           <Box
             backgroundImage={`url(${org.main_image})`}
             backgroundSize="cover"

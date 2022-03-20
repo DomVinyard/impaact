@@ -292,6 +292,7 @@ const OrgPageComponent = ({ org, loading }) => {
                                 textTransform="uppercase"
                                 textAlign="left"
                                 maxWidth={"150px"}
+                                opacity={0.5}
                                 fontSize={
                                   i === 0
                                     ? { base: "1.3em", md: "1.6em" }
