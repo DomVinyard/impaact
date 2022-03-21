@@ -268,7 +268,7 @@ const OrgPageComponent = ({ org, loading }) => {
                           borderLeft={sdgBorder}
                           alignItems="flex-start"
                           py={{ base: 8, md: i === 0 ? 12 : 6 }}
-                          px={{ base: 1, md: 4 }}
+                          px={{ base: 2, md: 4 }}
                           textAlign="left"
                         >
                           <Stack flex={1} ml={2}>
@@ -305,16 +305,18 @@ const OrgPageComponent = ({ org, loading }) => {
                             </Flex>
                             {i === 0 && (
                               <Box>
+                                {/* {!isMobile && ( */}
                                 <Text
                                   mt={{ base: 2, md: 4 }}
                                   opacity={0.6}
-                                  fontSize={{ base: "1em", md: "1.2em" }}
+                                  fontSize={{ base: "0.9em", md: "1.2em" }}
                                   fontWeight="600"
                                   pr={4}
                                   maxWidth="300px"
                                 >
                                   {sdg.description}
                                 </Text>
+                                {/* )} */}
                                 <Link href={`/${org.slug}/impact`}>
                                   <Button
                                     marginTop={{ base: 4, md: 8 }}
@@ -326,7 +328,9 @@ const OrgPageComponent = ({ org, loading }) => {
                                       backgroundColor: "white",
                                     }}
                                   >
-                                    {isMobile ? `Context →` : "View context →"}
+                                    {isMobile
+                                      ? `View Data →`
+                                      : "View Impact Data →"}
                                   </Button>
                                 </Link>
                               </Box>
@@ -365,7 +369,16 @@ const OrgPageComponent = ({ org, loading }) => {
                                   </Text>
                                   <Box px={{ base: 2, md: 3 }}>
                                     <Text
-                                      fontSize={{ base: "0.8em", md: "0.9em" }}
+                                      fontSize={
+                                        i === 0 && j === 0
+                                          ? { base: "1em", md: "1.2em" }
+                                          : { base: "0.8em", md: "0.9em" }
+                                      }
+                                      lineHeight={
+                                        i === 0 && j === 0
+                                          ? { base: "1.1em", md: "1.3em" }
+                                          : { base: "0.9em", md: "1em" }
+                                      }
                                     >
                                       {impact.indicator}
                                     </Text>
