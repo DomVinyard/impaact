@@ -3,13 +3,24 @@ mutation insertImpact(
   $value: numeric!
   $sdg: String!
   $org: uuid!
+  $prefix: String
+  $suffix: String
 ) {
   insert_impact_one(
-    object: { indicator: $indicator, value: $value, sdg: $sdg, org: $org }
+    object: {
+      indicator: $indicator
+      value: $value
+      sdg: $sdg
+      org: $org
+      prefix: $prefix
+      suffix: $suffix
+    }
   ) {
     id
     indicator
     value
     sdg
+    prefix
+    suffix
   }
 }

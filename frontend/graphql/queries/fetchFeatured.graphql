@@ -20,6 +20,8 @@ query fetchFeatured($top: Int) {
       value
       indicator
       sdg
+      prefix
+      suffix
     }
   }
 }

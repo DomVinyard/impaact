@@ -266,7 +266,7 @@ const OrgPageComponent = ({ org, loading }) => {
                           background={sdg?.color}
                           minHeight={i === 0 ? 180 : 120}
                           borderLeft={sdgBorder}
-                          alignItems="center"
+                          alignItems="flex-start"
                           py={{ base: 8, md: i === 0 ? 12 : 6 }}
                           px={{ base: 1, md: 4 }}
                           textAlign="left"
@@ -305,14 +305,22 @@ const OrgPageComponent = ({ org, loading }) => {
                             </Flex>
                             {i === 0 && (
                               <Box>
-                                <Text opacity={0.8} pr={4} maxWidth="300px">
+                                <Text
+                                  mt={{ base: 2, md: 4 }}
+                                  opacity={0.6}
+                                  fontSize={{ base: "1em", md: "1.2em" }}
+                                  fontWeight="600"
+                                  pr={4}
+                                  maxWidth="300px"
+                                >
                                   {sdg.description}
                                 </Text>
                                 <Link href={`/${org.slug}/impact`}>
                                   <Button
-                                    marginTop={{ base: 2, md: 4 }}
-                                    width={{ base: 140, md: 180 }}
+                                    marginTop={{ base: 4, md: 8 }}
+                                    // width={{ base: 140, md: 180 }}
                                     variant="outline"
+                                    size="sm"
                                     _hover={{
                                       color: sdg?.color,
                                       backgroundColor: "white",
@@ -333,26 +341,35 @@ const OrgPageComponent = ({ org, loading }) => {
                           >
                             {[...impacts]
                               .slice(0, impactCount)
-                              .map((impact) => (
+                              .map((impact, j) => (
                                 <Box
                                   backgroundColor="rgba(0,0,0,0.1)"
                                   textAlign="center"
-                                  py={2}
+                                  pt={{ base: 2, md: 3 }}
+                                  pb={{ base: 3, md: 5 }}
                                   key={`impact_${impact.id}`}
                                 >
                                   <Text
                                     fontFamily="Oswald"
                                     fontWeight="600"
-                                    fontSize={{ base: "1.4em", md: "1.8em" }}
+                                    fontSize={
+                                      i === 0 && j === 0
+                                        ? { base: "2.5em", md: "3.2em" }
+                                        : { base: "1.4em", md: "1.8em" }
+                                    }
                                     lineHeight={{ base: 1.2, md: 1.4 }}
                                   >
+                                    {impact.prefix}
                                     {impact.value}
+                                    {impact.suffix}
                                   </Text>
-                                  <Text
-                                    fontSize={{ base: "0.8em", md: "0.9em" }}
-                                  >
-                                    {impact.indicator}
-                                  </Text>
+                                  <Box px={{ base: 2, md: 3 }}>
+                                    <Text
+                                      fontSize={{ base: "0.8em", md: "0.9em" }}
+                                    >
+                                      {impact.indicator}
+                                    </Text>
+                                  </Box>
                                 </Box>
                               ))}
                           </Stack>

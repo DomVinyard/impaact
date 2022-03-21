@@ -44,35 +44,39 @@ const AboutUsComponent = () => {
               <Image
                 width={"100%"}
                 maxWidth={"600px"}
-                height="380px"
-                mt={{ base: 4, md: 6 }}
-                src="images/video_placeholder.png"
+                height={{ base: "auto", md: "320px" }}
+                mt={{ base: 4, md: 8 }}
+                src="images/pps.png"
               />
               <Stack
                 color={"white"}
                 padding={{ base: 0, md: 8 }}
                 alignItems="center"
                 justifyContent={"center"}
+                px={{ base: 6, md: "auto" }}
               >
                 <Box width={"100%"}>
-                  {!isMobile && (
-                    <>
-                      <Text fontSize={{ base: 17, md: 24 }} fontWeight="bold">
-                        Pellentesque ligula arcu, mollis at turpis vel, cursus
-                        dignissim lorem. Curabitur porta ut velit eget mattis
-                        velit eget mattis.
-                      </Text>
-                      <Text
-                        fontSize={{ base: 17, md: 24 }}
-                        mt={{ base: 0, md: 8 }}
-                      >
-                        Aliquam erat volutpat. Aenean euismod lacus vel interdum
-                        volutpat. Quisque aliquet elit in dui egestas dictum.
-                        Donec eu risus volutpat velit eget mattis. velit eget
-                        mattis. velit eget mattis.
-                      </Text>
-                    </>
-                  )}
+                  {/* {!isMobile && ( */}
+                  <>
+                    <Text
+                      mt={{ base: 8, md: 0 }}
+                      fontSize={{ base: 20, md: 24 }}
+                      fontWeight="bold"
+                    >
+                      Pellentesque ligula arcu, mollis at turpis vel, cursus
+                      dignissim lorem. Curabitur porta ut.
+                    </Text>
+                    <Text
+                      fontSize={{ base: 20, md: 24 }}
+                      mt={{ base: 6, md: 8 }}
+                    >
+                      Aliquam erat volutpat. Aenean euismod lacus vel interdum
+                      volutpat. Quisque aliquet elit in dui egestas dictum.
+                      Donec eu risus volutpat velit eget mattis. velit eget
+                      mattis. velit eget mattis.
+                    </Text>
+                  </>
+                  {/* )} */}
                   <Flex
                     justifyContent={{ base: "center", md: "flex-start" }}
                     width={"100%"}

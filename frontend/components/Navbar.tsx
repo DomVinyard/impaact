@@ -149,6 +149,9 @@ const Navbar: NextComponentType = () => {
                       </MenuItem>
                     </Link>
                     <MenuDivider />
+                    <Link href="/orgs/add">
+                      <MenuItem>Add Organisation</MenuItem>
+                    </Link>
                     <Link href="/orgs">
                       <MenuItem>Your Organisations</MenuItem>
                     </Link>

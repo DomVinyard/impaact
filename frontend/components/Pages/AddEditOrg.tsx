@@ -41,7 +41,12 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
     watch,
     reset,
     formState: { errors, isSubmitting, isDirty, isValid },
-  } = useForm({ defaultValues: { ...org, main_image: "" } });
+  } = useForm({
+    defaultValues: {
+      ...org,
+      main_image: "",
+    },
+  });
 
   const router = useRouter();
 

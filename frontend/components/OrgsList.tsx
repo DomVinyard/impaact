@@ -118,7 +118,9 @@ const OrgCard = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
                 borderRight={"1px solid rgba(255,255,255,0.9)"}
                 paddingRight={3}
               >
+                {main_impact?.prefix}
                 {main_impact?.value}
+                {main_impact?.suffix}
               </Text>
               <Text
                 flexGrow="1"
@@ -172,7 +174,8 @@ const OrgsList = ({ orgs, loading, after }: ListProps) => {
               rowSpan={1}
               colSpan={1}
               height={"100%"}
-              borderTop={{ base: "16px solid #eee", md: "none" }}
+              borderTop={{ base: "4px solid #eee", md: "none" }}
+              borderBottom={{ base: "4px solid #eee", md: "none" }}
             >
               <Link key={index} href={`/${org.slug}`}>
                 <Box

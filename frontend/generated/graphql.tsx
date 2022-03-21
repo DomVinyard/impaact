@@ -2311,6 +2311,8 @@ export type InsertImpactMutationVariables = Exact<{
   value: Scalars["numeric"];
   sdg: Scalars["String"];
   org: Scalars["uuid"];
+  prefix?: InputMaybe<Scalars["String"]>;
+  suffix?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type InsertImpactMutation = {
@@ -2322,6 +2324,8 @@ export type InsertImpactMutation = {
         indicator: string;
         value: number;
         sdg: string;
+        prefix?: string | undefined;
+        suffix?: string | undefined;
       }
     | undefined;
 };
@@ -2365,12 +2369,25 @@ export type UpdateImpactMutationVariables = Exact<{
   id: Scalars["uuid"];
   value: Scalars["numeric"];
   sdg: Scalars["String"];
+  indicator: Scalars["String"];
+  context?: InputMaybe<Scalars["String"]>;
+  prefix?: InputMaybe<Scalars["String"]>;
+  suffix?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type UpdateImpactMutation = {
   __typename?: "mutation_root";
   update_impact_by_pk?:
-    | { __typename?: "impact"; id: any; value: number; sdg: string }
+    | {
+        __typename?: "impact";
+        id: any;
+        value: number;
+        sdg: string;
+        indicator: string;
+        context?: string | undefined;
+        prefix?: string | undefined;
+        suffix?: string | undefined;
+      }
     | undefined;
 };
 
@@ -2473,6 +2490,8 @@ export type FetchFeaturedQuery = {
       value: number;
       indicator: string;
       sdg: string;
+      prefix?: string | undefined;
+      suffix?: string | undefined;
     }>;
   }>;
 };
@@ -2498,6 +2517,8 @@ export type FetchLatestQuery = {
       value: number;
       indicator: string;
       sdg: string;
+      prefix?: string | undefined;
+      suffix?: string | undefined;
     }>;
   }>;
 };
@@ -2530,6 +2551,8 @@ export type FetchOrgQuery = {
       indicator: string;
       sdg: string;
       context?: string | undefined;
+      prefix?: string | undefined;
+      suffix?: string | undefined;
     }>;
   }>;
 };
@@ -2553,6 +2576,8 @@ export type FetchOrgsQuery = {
       value: number;
       indicator: string;
       sdg: string;
+      prefix?: string | undefined;
+      suffix?: string | undefined;
     }>;
   }>;
 };
@@ -2592,6 +2617,8 @@ export type MyOrgsQuery = {
             value: number;
             indicator: string;
             sdg: string;
+            prefix?: string | undefined;
+            suffix?: string | undefined;
           }>;
         }>;
       }
@@ -2815,14 +2842,25 @@ export const InsertImpactDocument = gql`
     $value: numeric!
     $sdg: String!
     $org: uuid!
+    $prefix: String
+    $suffix: String
   ) {
     insert_impact_one(
-      object: { indicator: $indicator, value: $value, sdg: $sdg, org: $org }
+      object: {
+        indicator: $indicator
+        value: $value
+        sdg: $sdg
+        org: $org
+        prefix: $prefix
+        suffix: $suffix
+      }
     ) {
       id
       indicator
       value
       sdg
+      prefix
+      suffix
     }
   }
 `;
@@ -2897,6 +2935,8 @@ export function withInsertImpact<
  *      value: // value for 'value'
  *      sdg: // value for 'sdg'
  *      org: // value for 'org'
+ *      prefix: // value for 'prefix'
+ *      suffix: // value for 'suffix'
  *   },
  * });
  */
@@ -3064,14 +3104,33 @@ export type InsertOrgMutationOptions = Apollo.BaseMutationOptions<
   InsertOrgMutationVariables
 >;
 export const UpdateImpactDocument = gql`
-  mutation updateImpact($id: uuid!, $value: numeric!, $sdg: String!) {
+  mutation updateImpact(
+    $id: uuid!
+    $value: numeric!
+    $sdg: String!
+    $indicator: String!
+    $context: String
+    $prefix: String
+    $suffix: String
+  ) {
     update_impact_by_pk(
-      _set: { value: $value, sdg: $sdg }
+      _set: {
+        value: $value
+        sdg: $sdg
+        indicator: $indicator
+        context: $context
+        prefix: $prefix
+        suffix: $suffix
+      }
       pk_columns: { id: $id }
     ) {
       id
       value
       sdg
+      indicator
+      context
+      prefix
+      suffix
     }
   }
 `;
@@ -3145,6 +3204,10 @@ export function withUpdateImpact<
  *      id: // value for 'id'
  *      value: // value for 'value'
  *      sdg: // value for 'sdg'
+ *      indicator: // value for 'indicator'
+ *      context: // value for 'context'
+ *      prefix: // value for 'prefix'
+ *      suffix: // value for 'suffix'
  *   },
  * });
  */
@@ -3643,6 +3706,8 @@ export const FetchFeaturedDocument = gql`
         value
         indicator
         sdg
+        prefix
+        suffix
       }
     }
   }
@@ -3759,6 +3824,8 @@ export const FetchLatestDocument = gql`
         value
         indicator
         sdg
+        prefix
+        suffix
       }
     }
   }
@@ -3880,6 +3947,8 @@ export const FetchOrgDocument = gql`
         indicator
         sdg
         context
+        prefix
+        suffix
       }
     }
   }
@@ -3991,6 +4060,8 @@ export const FetchOrgsDocument = gql`
         value
         indicator
         sdg
+        prefix
+        suffix
       }
     }
   }
@@ -4204,6 +4275,8 @@ export const MyOrgsDocument = gql`
           value
           indicator
           sdg
+          prefix
+          suffix
         }
       }
     }

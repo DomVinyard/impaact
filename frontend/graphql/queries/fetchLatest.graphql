@@ -12,6 +12,8 @@ query fetchLatest($top: Int) {
       value
       indicator
       sdg
+      prefix
+      suffix
     }
   }
 }

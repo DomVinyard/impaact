@@ -12,6 +12,8 @@ query fetchOrgs {
       value
       indicator
       sdg
+      prefix
+      suffix
     }
   }
 }

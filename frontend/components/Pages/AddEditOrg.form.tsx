@@ -87,7 +87,9 @@ export function ImpactCard({ id, item, onEdit, isMobile }) {
               fontWeight="900"
               color={SDG?.color}
             >
+              {item.prefix}
               {item.value}
+              {item.suffix}
             </Text>
             <Text fontSize={16}>{item.indicator}</Text>
           </Stack>

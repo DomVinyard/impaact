@@ -19,6 +19,8 @@ query fetchOrg($slug: String) {
       indicator
       sdg
       context
+      prefix
+      suffix
     }
   }
 }

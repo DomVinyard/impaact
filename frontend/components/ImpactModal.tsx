@@ -55,6 +55,7 @@ const ImpactModal = ({
   refetchList,
 }: ImpactModelType) => {
   const isEditMode = !!impact?.id;
+  const valueRegex = /(\D*?)([\d|,|.|e|E|\+]+)(\D*)/g;
   const FIELDS: Field[] = [
     {
       id: "indicator",
@@ -64,9 +65,11 @@ const ImpactModal = ({
     },
     {
       id: "value",
-      label: isEditMode ? impact.indicator : "Total",
+      label: "Total",
       element: Input,
-      validation: {},
+      validation: {
+        pattern: valueRegex,
+      },
     },
     {
       id: "context",
@@ -75,7 +78,13 @@ const ImpactModal = ({
       validation: {},
     },
   ].filter(Boolean);
-  // console.log({ impact });
+  console.log({ impact });
+  const impactValue =
+    (impact?.prefix || "") + (impact?.value || "") + (impact?.suffix || "");
+  const defaultImpact = {
+    ...impact,
+    value: impactValue,
+  };
   const {
     register,
     handleSubmit,
@@ -83,11 +92,9 @@ const ImpactModal = ({
     reset,
     formState: { errors, isSubmitting, isDirty, isValid },
   } = useForm({
-    defaultValues: {
-      ...impact,
-    },
+    defaultValues: defaultImpact,
   });
-  useEffect(() => reset(impact), [impact]);
+  useEffect(() => reset(defaultImpact), [impact]);
   const values = watch();
   const isMobile = useBreakpointValue({ base: true, md: false });
   const [session] = useSession();
@@ -102,6 +109,7 @@ const ImpactModal = ({
     updateImpact,
     { loading: updateImpactFetching, error: updateImpactError },
   ] = useUpdateImpactMutation();
+  if (updateImpactError) console.error(updateImpactError);
   const [
     deleteImpact,
     { loading: deleteImpactFetching, error: deleteImpactError },
@@ -121,16 +129,31 @@ const ImpactModal = ({
   };
 
   const onSubmit = async (values, e) => {
-    console.log({ isEditMode });
-    if (isEditMode) {
-      const updateVariables = { id: impact.id, ...values, org: org?.id };
-      console.log({ updateVariables });
-      await updateImpact({ variables: updateVariables });
-    } else {
-      const insertVariables = { ...values, org: org?.id };
-      await insertImpact({ variables: insertVariables });
+    try {
+      // console.log({ isEditMode });
+      if (isEditMode) {
+        const updateVariables = { id: impact.id, ...values, org: org?.id };
+        const [str, prefix, number, suffix] = valueRegex.exec(
+          updateVariables.value
+        );
+        updateVariables.value = +number;
+        updateVariables.prefix = prefix;
+        updateVariables.suffix = suffix;
+        await updateImpact({ variables: updateVariables });
+      } else {
+        const insertVariables = { ...values, org: org?.id };
+        const [str, prefix, number, suffix] = valueRegex.exec(
+          insertVariables.value
+        );
+        insertVariables.value = +number;
+        insertVariables.prefix = prefix;
+        insertVariables.suffix = suffix;
+        await insertImpact({ variables: insertVariables });
+      }
+      await closeForm();
+    } catch (err) {
+      console.error(err);
     }
-    await closeForm();
   };
 
   const errorNode = () => {

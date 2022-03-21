@@ -4,9 +4,18 @@ mutation updateImpact(
   $sdg: String!
   $indicator: String!
   $context: String
+  $prefix: String
+  $suffix: String
 ) {
   update_impact_by_pk(
-    _set: { value: $value, sdg: $sdg, indicator: $indicator, context: $context }
+    _set: {
+      value: $value
+      sdg: $sdg
+      indicator: $indicator
+      context: $context
+      prefix: $prefix
+      suffix: $suffix
+    }
     pk_columns: { id: $id }
   ) {
     id
@@ -14,5 +23,7 @@ mutation updateImpact(
     sdg
     indicator
     context
+    prefix
+    suffix
   }
 }
