@@ -38,13 +38,12 @@ const Footer: NextComponentType = () => {
           <Image
             src="/images/logo.png"
             alt="PPS"
-            height={"18px"}
-            width={"28px"}
+            height={"22px"}
+            // width={"28px"}
             pl={"8px"}
-            mr={2}
+            mr={1}
           />
           <Text color={"rgb(140, 140, 172)"}>
-            <strong>Impact PPS</strong>
             {!isMobile ? <>. Made with 💜 by </> : " 💜 by "}
             <a
               href="https://insaangroup.org"

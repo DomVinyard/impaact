@@ -134,9 +134,12 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
         {errorNode()}
         <Box maxW={760}>
           <Stack spacing={4}>
-            {mode === "update" && (
-              <Heading size="lg">Editing {values.name}</Heading>
-            )}
+            {mode === "update" &&
+              (isNewImpactMode ? (
+                <Heading size="lg">What impact have you made?</Heading>
+              ) : (
+                <Heading size="lg">Editing {values.name}</Heading>
+              ))}
             {/* Fields */}
             {FIELDS?.filter(({ order }) => order[mode] !== "hide")
               .filter((field) =>

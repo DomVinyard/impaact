@@ -48,11 +48,12 @@ export const SearchBar = ({
 
   const formatOptionLabel = ({ value, label }) => {
     const sdg = SDGs.find((sdg) => sdg.id === value.sdg);
-    console.log({ SDGs, sdg, value });
     return (
       <Flex>
         <Flex
-          width={{ base: "30px", md: "40px" }}
+          width={
+            mini ? { base: "20px", md: "30px" } : { base: "30px", md: "40px" }
+          }
           // marginLeft={{ base: 1.5, md: 2 }}
           backgroundColor={sdg?.color || "gray.50"}
           height={"100%"}
@@ -67,7 +68,9 @@ export const SearchBar = ({
             )}
           </Box>
         </Flex>
-        <Box>{label}</Box>
+        <Flex alignItems={"center"} ml={mini ? 2 : 3}>
+          {label}
+        </Flex>
       </Flex>
     );
   };
@@ -156,7 +159,7 @@ export const SearchBar = ({
         size={mini ? "sm" : "lg"}
         placeholder={
           mini || (isMobile && isSearchFocusMobile)
-            ? "Search"
+            ? "Search charity or org"
             : "Search charity or org"
         }
         // autoFocus={!mini && !isMobile}

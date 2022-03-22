@@ -141,7 +141,12 @@ function SortableList({
   }
 
   if (!items?.length)
-    return <Box>Impacts (with description of what to do)</Box>;
+    return (
+      <Box>
+        Tell us the things you have done that have made an impact. Click the
+        'add impact' button bellow to record your first impact.
+      </Box>
+    );
   return (
     <DndContext
       sensors={sensors}

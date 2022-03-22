@@ -148,13 +148,14 @@ const Navbar: NextComponentType = () => {
                         {session?.user?.name}
                       </MenuItem>
                     </Link>
-                    <MenuDivider />
+                    {/* <MenuDivider /> */}
                     <Link href="/orgs/add">
                       <MenuItem>Add Organisation</MenuItem>
                     </Link>
                     <Link href="/orgs">
                       <MenuItem>Your Organisations</MenuItem>
                     </Link>
+                    <MenuDivider />
                     <MenuItem
                       onClick={(e) => {
                         e.preventDefault();

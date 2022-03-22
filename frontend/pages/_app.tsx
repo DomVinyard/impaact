@@ -3,7 +3,7 @@ import { useApollo } from "lib/apolloClient";
 import { Provider as NextAuthProvider } from "next-auth/client";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import ISession from "types/session";
 
 import { Box, ChakraProvider, Stack, theme } from "@chakra-ui/react";
@@ -11,9 +11,12 @@ import Navbar from "components/Navbar";
 import Footer, { footerHeight } from "components/Footer";
 import { extendTheme } from "@chakra-ui/react";
 import NextNProgress from "nextjs-progressbar";
+import * as ga from "../lib/ga";
+import { useRouter } from "next/router";
 
 const Layout: FC = ({ children }) => {
   // 2. Call `extendTheme` and pass your custom values
+  const router = useRouter();
   const theme = extendTheme({
     colors: {
       brand: {
@@ -29,6 +32,19 @@ const Layout: FC = ({ children }) => {
       minHeight: "100vh",
     },
   };
+
+  useEffect(() => {
+    const handleRouteChange = (url) => ga.pageview(url);
+    //When the component is mounted, subscribe to router changes
+    //and log those page views
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
   return (
     <>
       <NextNProgress color="#b0d8eb" height={6} />
@@ -63,6 +79,23 @@ const App = ({ Component, pageProps }: AppProps) => {
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Satisfy&family=VT323&family=Oswald:wght@500;600&display=swap"
           rel="stylesheet"
         ></link>
+        {/* Global Site Tag (gtag.js) - Google Analytics */}
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+              page_path: window.location.pathname,
+            });
+          `,
+          }}
+        />
       </Head>
       <NextAuthProvider session={session}>
         <ApolloProvider client={apolloClient}>

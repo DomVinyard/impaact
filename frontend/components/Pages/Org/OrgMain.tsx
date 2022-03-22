@@ -32,7 +32,7 @@ const MyOrgBar = ({ isAdmin }) => {
     >
       <Link href={`/${router?.query.slug}/edit`}>
         <Button leftIcon={<EditIcon />} colorScheme="gray" w="120px" mt={3}>
-          {isAdmin ? "Edit" : `Edit`}
+          {isAdmin ? "Admin" : `Edit`}
         </Button>
       </Link>
     </Flex>
@@ -266,7 +266,7 @@ const OrgPageComponent = ({ org, loading }) => {
                           background={sdg?.color}
                           minHeight={i === 0 ? 180 : 120}
                           borderLeft={sdgBorder}
-                          alignItems="flex-start"
+                          alignItems={i === 0 ? "flex-start" : "center"}
                           py={{ base: 8, md: i === 0 ? 12 : 6 }}
                           px={{ base: 2, md: 4 }}
                           textAlign="left"
@@ -358,8 +358,8 @@ const OrgPageComponent = ({ org, loading }) => {
                                     fontWeight="600"
                                     fontSize={
                                       i === 0 && j === 0
-                                        ? { base: "2.5em", md: "3.2em" }
-                                        : { base: "1.4em", md: "1.8em" }
+                                        ? { base: "2.5rem", md: "3.2rem" }
+                                        : { base: "1.4rem", md: "1.8rem" }
                                     }
                                     lineHeight={{ base: 1.2, md: 1.4 }}
                                   >
@@ -371,13 +371,13 @@ const OrgPageComponent = ({ org, loading }) => {
                                     <Text
                                       fontSize={
                                         i === 0 && j === 0
-                                          ? { base: "1em", md: "1.2em" }
-                                          : { base: "0.8em", md: "0.9em" }
+                                          ? { base: "1.1rem", md: "1.2rem" }
+                                          : { base: "0.8rem", md: "0.9em" }
                                       }
                                       lineHeight={
                                         i === 0 && j === 0
-                                          ? { base: "1.1em", md: "1.3em" }
-                                          : { base: "0.9em", md: "1em" }
+                                          ? { base: "1.4rem", md: "1.3rem" }
+                                          : { base: "1rem", md: "1.2rem" }
                                       }
                                     >
                                       {impact.indicator}

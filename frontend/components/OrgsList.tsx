@@ -31,7 +31,7 @@ const OrgCard = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
     <Skeleton isLoaded={!loading} height={"100%"}>
       <Stack
         // backgroundColor={main_impact_sdg?.color}
-        borderTop={{ base: `1px solid ${main_impact_sdg?.color}`, md: "none" }}
+        borderTop={{ base: `3px solid ${main_impact_sdg?.color}`, md: "none" }}
         marginBottom={{ base: 4, md: 0 }}
         textAlign="center"
         // color="white"
@@ -112,8 +112,8 @@ const OrgCard = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
               <Text
                 fontFamily="Oswald"
                 fontWeight="600"
-                fontSize={{ base: "1.4em", md: "1.8em" }}
-                lineHeight={{ base: 1.2, md: 1.4 }}
+                fontSize={{ base: "1.4rem", md: "1.8rem" }}
+                lineHeight={{ base: "1.6rem", md: "2rem" }}
                 marginRight={3}
                 borderRight={"1px solid rgba(255,255,255,0.9)"}
                 paddingRight={3}
@@ -174,8 +174,8 @@ const OrgsList = ({ orgs, loading, after }: ListProps) => {
               rowSpan={1}
               colSpan={1}
               height={"100%"}
-              borderTop={{ base: "4px solid #eee", md: "none" }}
-              borderBottom={{ base: "4px solid #eee", md: "none" }}
+              borderTop={{ base: "5px solid #eee", md: "none" }}
+              borderBottom={{ base: "5px solid #eee", md: "none" }}
             >
               <Link key={index} href={`/${org.slug}`}>
                 <Box

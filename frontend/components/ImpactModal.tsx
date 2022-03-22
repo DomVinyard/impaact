@@ -7,6 +7,7 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
+  Image,
   ModalFooter,
   ModalCloseButton,
   Input,
@@ -199,27 +200,27 @@ const ImpactModal = ({
                 </FormControl>
               );
             })}
-            {!isEditMode && (
-              <FormControl isInvalid={errors["sdg"]}>
-                <FormLabel style={{ fontSize: 22 }} htmlFor={errors["sdg"]}>
-                  Global Goal
-                </FormLabel>
+            {/* {!isEditMode && ( */}
+            <FormControl isInvalid={errors["sdg"]}>
+              <FormLabel style={{ fontSize: 22 }} htmlFor={errors["sdg"]}>
+                Global Goal
+              </FormLabel>
 
-                <Select {...register("sdg", {})}>
-                  <option value="">Select an SDG</option>
-                  {SDG.map((sdg) => {
-                    return (
-                      <option key={sdg.id} value={sdg.id}>
-                        {sdg.goal}
-                      </option>
-                    );
-                  })}
-                </Select>
-                <FormErrorMessage>
-                  {errors.sdg && errors.sdg.message}
-                </FormErrorMessage>
-              </FormControl>
-            )}
+              <Select {...register("sdg", {})}>
+                <option value="">Select a goal</option>
+                {SDG.map((sdg) => {
+                  return (
+                    <option key={sdg.id} value={sdg.id}>
+                      {sdg.goal}
+                    </option>
+                  );
+                })}
+              </Select>
+              <FormErrorMessage>
+                {errors.sdg && errors.sdg.message}
+              </FormErrorMessage>
+            </FormControl>
+            {/* )} */}
 
             <ModalFooter p={0}>
               <FormControl>
