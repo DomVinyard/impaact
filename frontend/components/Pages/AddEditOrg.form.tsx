@@ -389,8 +389,8 @@ const FIELDS: Field[] = [
 
   // Links
   {
-    id: "link_processes",
-    label: "Link to Processes",
+    id: "link_website",
+    label: "Link to Website",
     element: Input,
     validation: {},
     order: {
@@ -401,6 +401,16 @@ const FIELDS: Field[] = [
   {
     id: "link_financials",
     label: "Link to Financials",
+    element: Input,
+    validation: {},
+    order: {
+      create: 9,
+      update: 9,
+    },
+  },
+  {
+    id: "link_annual_report",
+    label: "Link to Annual Report",
     element: Input,
     validation: {},
     order: {

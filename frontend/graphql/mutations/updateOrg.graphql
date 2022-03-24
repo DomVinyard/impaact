@@ -8,7 +8,8 @@ mutation updateOrg(
   $geography: String
   $size: String
   $founded_at: String
-  $link_processes: String
+  $link_website: String
+  $link_annual_report: String
   $link_financials: String
 ) {
   update_orgs_by_pk(
@@ -21,8 +22,9 @@ mutation updateOrg(
       geography: $geography
       size: $size
       founded_at: $founded_at
-      link_processes: $link_processes
+      link_website: $link_website
       link_financials: $link_financials
+      link_annual_report: $link_annual_report
     }
     pk_columns: { id: $id }
   ) {
@@ -36,7 +38,8 @@ mutation updateOrg(
     geography
     size
     founded_at
-    link_processes
+    link_website
+    link_annual_report
     link_financials
   }
 }

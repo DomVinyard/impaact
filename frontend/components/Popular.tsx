@@ -109,20 +109,22 @@ const Controls = ({
       <Flex
         fontSize={19}
         display={{ base: "flex", md: "none" }}
-        background={"#aaa"}
+        background={"#eee"}
         borderBottom={"4px solid #eee"}
         fontWeight={300}
       >
-        {tabs.map((tab) => {
+        {tabs.map((tab, i) => {
           const isSelected = tab.id === popularFilter;
           console.log("build tab", tab.id, "is it selected?", !!tab.isSelected);
           return (
             <Box
               onClick={() => handleSelectTab(tab.id)}
-              background={isSelected ? "#eee" : "#ddd"}
+              background={isSelected ? "#eee" : "#bbb"}
               margin={0}
               mb={0}
-              opacity={isSelected ? 1 : 0.4}
+              opacity={isSelected ? 1 : 1}
+              borderBottomRightRadius={!isSelected && i === 0 ? 16 : 0}
+              borderBottomLeftRadius={!isSelected && i === 1 ? 16 : 0}
               py={6}
               flex={1}
               key={tab.id}

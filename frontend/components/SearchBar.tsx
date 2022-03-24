@@ -126,7 +126,7 @@ export const SearchBar = ({
           input: (provided) => ({
             width: "100%",
             background: "none",
-            marginLeft: mini ? 0 : "1.5rem",
+            marginLeft: mini ? 0 : "16px",
             outline: "none",
             type: "search",
             enterKeyHint: "search",

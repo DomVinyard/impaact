@@ -46,7 +46,7 @@ const AboutUsComponent = () => {
                 maxWidth={"600px"}
                 height={{ base: "auto", md: "320px" }}
                 mt={{ base: 4, md: 8 }}
-                src="images/pps.png"
+                src="images/pps_thumb.png"
               />
               <Stack
                 color={"white"}
@@ -63,17 +63,17 @@ const AboutUsComponent = () => {
                       fontSize={{ base: 20, md: 24 }}
                       fontWeight="bold"
                     >
-                      Pellentesque ligula arcu, mollis at turpis vel, cursus
-                      dignissim lorem. Curabitur porta ut.
+                      We are building a transparent and accountable architecture
+                      for good.
                     </Text>
                     <Text
                       fontSize={{ base: 20, md: 24 }}
                       mt={{ base: 6, md: 8 }}
                     >
-                      Aliquam erat volutpat. Aenean euismod lacus vel interdum
-                      volutpat. Quisque aliquet elit in dui egestas dictum.
-                      Donec eu risus volutpat velit eget mattis. velit eget
-                      mattis. velit eget mattis.
+                      We want to attract more philanthropic capital through
+                      authentication and verification of impact. Join us in
+                      providing more transparency to stakeholders and embedding
+                      the voice of the world’s most in need.
                     </Text>
                   </>
                   {/* )} */}

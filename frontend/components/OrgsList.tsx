@@ -31,7 +31,7 @@ const OrgCard = ({ org, loading }: { org: IOrg; loading?: boolean }) => {
     <Skeleton isLoaded={!loading} height={"100%"}>
       <Stack
         // backgroundColor={main_impact_sdg?.color}
-        borderTop={{ base: `3px solid ${main_impact_sdg?.color}`, md: "none" }}
+        borderTop={{ base: `1px solid ${main_impact_sdg?.color}`, md: "none" }}
         marginBottom={{ base: 4, md: 0 }}
         textAlign="center"
         // color="white"

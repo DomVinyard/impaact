@@ -11,7 +11,7 @@ import { useSession } from "next-auth/client";
 import React from "react";
 import { useRouter } from "next/router";
 
-export const footerHeight = { base: "33vh", md: "200px" };
+export const footerHeight = { base: "33vh", md: "300px" };
 const Footer: NextComponentType = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
 
@@ -41,10 +41,10 @@ const Footer: NextComponentType = () => {
             height={"22px"}
             // width={"28px"}
             pl={"8px"}
-            mr={1}
+            mr={2}
           />
           <Text color={"rgb(140, 140, 172)"}>
-            {!isMobile ? <>. Made with 💜 by </> : " 💜 by "}
+            {!isMobile ? <>Developed with 💜 by </> : " 💜 by "}
             <a
               href="https://insaangroup.org"
               style={{ textDecoration: "underline" }}

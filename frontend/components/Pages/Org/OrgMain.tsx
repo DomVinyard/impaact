@@ -9,6 +9,7 @@ import {
   Image,
   Text,
   useBreakpointValue,
+  ButtonGroup,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import Content from "components/Content";
@@ -19,80 +20,123 @@ import { useRouter } from "next/router";
 import React from "react";
 import { StaticGoogleMap, Marker, Path } from "react-static-google-map";
 import { BsPeopleFill, BsCalendar2CheckFill } from "react-icons/bs";
-import { FaFlag, FaCheck } from "react-icons/fa";
+import { FaFlag, FaCheck, FaKey } from "react-icons/fa";
+import { AiOutlineLineChart } from "react-icons/ai";
 import { useFetchUserQuery } from "generated-graphql";
 
-const MyOrgBar = ({ isAdmin }) => {
+const MyOrgBar = ({ isAdmin, color, isMobile, companyName }) => {
   const router = useRouter();
   return (
     <Flex
       justifyContent={"flex-end"}
       alignItems={"center"}
-      pr={{ base: 3, md: 0 }}
+      // pr={{ base: 3, md: 0 }}
+      mt={3}
+      mr={3}
     >
-      <Link href={`/${router?.query.slug}/edit`}>
-        <Button leftIcon={<EditIcon />} colorScheme="gray" w="120px" mt={3}>
-          {isAdmin ? "Admin" : `Edit`}
-        </Button>
-      </Link>
+      <ButtonGroup isAttached variant="outline" spacing="6">
+        {isAdmin && (
+          <Button mr={2} leftIcon={<AiOutlineLineChart />}>
+            {isMobile ? "000" : "000 views/month"}
+          </Button>
+        )}
+        <Link href={`/${router?.query.slug}/edit`}>
+          <Button
+            leftIcon={isAdmin ? <FaKey /> : <EditIcon />}
+            _hover={{ color: "black", background: "none" }}
+            color="white"
+            background={color}
+          >
+            Edit
+          </Button>
+        </Link>
+      </ButtonGroup>
     </Flex>
   );
 };
 
+const Metric = ({ icon, label, value }) => (
+  <Flex
+    // mb={1}
+    flex={1}
+    padding={{ base: 1, md: 2 }}
+    justifyContent="space-between"
+  >
+    <Flex flex={1} alignItems={"center"}>
+      <Box w={8}>{icon}</Box>
+      <Text pl={2}>{label}</Text>
+    </Flex>
+    <OpsMetric
+      background="#ddd"
+      justifyContent="center"
+      flex={1}
+      py={2}
+      textAlign="center"
+      ml={8}
+    >
+      {value}
+    </OpsMetric>
+  </Flex>
+);
+
 const Operations = ({ org }) => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
   return (
-    <Stack width={"100%"} background={"#eee"}>
-      <Flex paddingX={2} paddingY={8} paddingBottom={6}>
-        {/* <Stack flex={1} alignItems="flex-start" justifyContent="center">
-        <Link href={`/${org.slug}/operations`}>
-          <Button variant="outline" ml={6} colorScheme="blue">
-            View operations →
-          </Button>
-        </Link>
-      </Stack> */}
-        <Flex mr={6} flexGrow={1} mx={{ base: 2, md: 3 }} textAlign="center">
-          {org.size && (
-            <Stack flex={1}>
-              <OpsTitle>Team size</OpsTitle>
-              <Flex justifyContent="center">
-                <BsPeopleFill size={30} />
-              </Flex>
-              <OpsMetric>{org.size}</OpsMetric>
-            </Stack>
-          )}
-          {org?.founded_at && (
-            <Stack flex={1}>
-              <OpsTitle>Established</OpsTitle>
-              <Flex justifyContent="center">
-                <FaFlag size={30} />
-              </Flex>
-              <OpsMetric>{org.founded_at}</OpsMetric>
-            </Stack>
-          )}
-          {/* <Stack flex={1}>
-            <OpsTitle>Policies</OpsTitle>
-            <Flex justifyContent="center">
-              <FaCheck size={30} />
-            </Flex>
-            <OpsMetric>Good</OpsMetric>
-          </Stack> */}
-        </Flex>
-      </Flex>
-      {org.link_financials && (
-        <Flex alignItems={"center"} justifyContent="center" pb={12}>
-          <a href={org.link_financials} target="_blank">
-            <Button borderColor={"#555"} variant="outline">
-              Explore financials
-            </Button>
-          </a>
-          <a href={org.link_processes} target="_blank">
-            <Button background={"#444"} colorScheme={"blue"} ml={3}>
-              Visit Website →
-            </Button>
-          </a>
-        </Flex>
+    <Box width={"100%"} background={"#eee"} px={8} py={16}>
+      {org.size && (
+        <Metric
+          icon={<BsPeopleFill size={30} />}
+          label="Team size"
+          value={org.size}
+        />
       )}
-    </Stack>
+
+      {org?.founded_at && (
+        <Metric
+          icon={<FaFlag size={26} />}
+          label="Established"
+          value={org.founded_at}
+        />
+      )}
+      <Flex justifyContent={"space-between"} pr={3}>
+        {org.link_annual_report ? (
+          <a href={org.link_annual_report} target="_blank">
+            <Button
+              marginTop={{ base: 4, md: 8 }}
+              variant="outline"
+              borderColor={"black"}
+              size="sm"
+              _hover={{
+                backgroundColor: "white",
+              }}
+              mr={1}
+            >
+              {isMobile ? `Annual report` : "View annual report"}
+            </Button>
+          </a>
+        ) : (
+          <Box></Box>
+        )}
+        {org.link_website && (
+          <a href={org.link_website} target="_blank">
+            <Text
+              marginTop={{ base: 4, md: 8 }}
+              // width={{ base: 140, md: 180 }}
+              // variant="outline"
+              borderColor={"black"}
+              fontSize="lg"
+              // color="white"
+              // _hover={{
+              //   // color: sdg?.color,
+              //   backgroundColor: "#000",
+              // }}
+            >
+              {`${org.link_website}  →`.replace(/^https?:\/\//, "")}
+            </Text>
+          </a>
+        )}
+      </Flex>
+    </Box>
   );
 };
 
@@ -130,9 +174,7 @@ const OrgPageComponent = ({ org, loading }) => {
     variables: { userEmail: session?.user?.email },
   });
 
-  const showOps =
-    org.link_financials || org.link_processes || org.size || org.founded_at;
-
+  const showOps = true;
   const topGoalColour = sdgs[0]?.sdg?.color || "#777";
   const sdgBorder = {
     base: `8px solid ${topGoalColour}`,
@@ -167,8 +209,15 @@ const OrgPageComponent = ({ org, loading }) => {
       <Box textAlign={{ base: "center", md: "left" }} pb={{ base: 0, md: 160 }}>
         <Content isFull>
           <Stack>
+            {(isMyOrg || isAdmin) && (
+              <MyOrgBar
+                isMobile={isMobile}
+                color={topGoalColour}
+                isAdmin={isAdmin}
+                companyName={org.name}
+              />
+            )}
             <Box maxW={760}>
-              {(isMyOrg || isAdmin) && <MyOrgBar isAdmin={isAdmin} />}
               <Stack
                 px={{ base: 5, md: 0 }}
                 mb={10}
@@ -309,7 +358,7 @@ const OrgPageComponent = ({ org, loading }) => {
                                 <Text
                                   mt={{ base: 2, md: 4 }}
                                   opacity={0.6}
-                                  fontSize={{ base: "0.9em", md: "1.2em" }}
+                                  fontSize={{ base: "0.9em", md: "1em" }}
                                   fontWeight="600"
                                   pr={4}
                                   maxWidth="300px"
@@ -329,8 +378,8 @@ const OrgPageComponent = ({ org, loading }) => {
                                     }}
                                   >
                                     {isMobile
-                                      ? `View Data →`
-                                      : "View Impact Data →"}
+                                      ? `View data`
+                                      : "View impact data"}
                                   </Button>
                                 </Link>
                               </Box>
@@ -367,7 +416,7 @@ const OrgPageComponent = ({ org, loading }) => {
                                     {impact.value}
                                     {impact.suffix}
                                   </Text>
-                                  <Box px={{ base: 2, md: 3 }}>
+                                  <Box px={{ base: 2, md: 8 }}>
                                     <Text
                                       fontSize={
                                         i === 0 && j === 0
@@ -401,10 +450,11 @@ const OrgPageComponent = ({ org, loading }) => {
                     borderLeft={sdgs.length && sdgBorder}
                     spacing={0}
                   >
-                    {sdgs.length && (
+                    {/* {sdgs.length && (
                       <SectionHeading>Operations & Financials</SectionHeading>
-                    )}
+                    )} */}
                     <Operations org={org} />
+                    <Box>{/* )} */}</Box>
                   </Stack>
                 )}
               </Skeleton>

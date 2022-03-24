@@ -1009,8 +1009,9 @@ export type Orgs = {
   /** An aggregate relationship */
   impacts_aggregate: Impact_Aggregate;
   is_test_data?: Maybe<Scalars["Boolean"]>;
+  link_annual_report?: Maybe<Scalars["String"]>;
   link_financials?: Maybe<Scalars["String"]>;
-  link_processes?: Maybe<Scalars["String"]>;
+  link_website?: Maybe<Scalars["String"]>;
   long_description?: Maybe<Scalars["String"]>;
   main_image?: Maybe<Scalars["String"]>;
   name: Scalars["String"];
@@ -1086,8 +1087,9 @@ export type Orgs_Bool_Exp = {
   id?: InputMaybe<Uuid_Comparison_Exp>;
   impacts?: InputMaybe<Impact_Bool_Exp>;
   is_test_data?: InputMaybe<Boolean_Comparison_Exp>;
+  link_annual_report?: InputMaybe<String_Comparison_Exp>;
   link_financials?: InputMaybe<String_Comparison_Exp>;
-  link_processes?: InputMaybe<String_Comparison_Exp>;
+  link_website?: InputMaybe<String_Comparison_Exp>;
   long_description?: InputMaybe<String_Comparison_Exp>;
   main_image?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
@@ -1115,8 +1117,9 @@ export type Orgs_Insert_Input = {
   id?: InputMaybe<Scalars["uuid"]>;
   impacts?: InputMaybe<Impact_Arr_Rel_Insert_Input>;
   is_test_data?: InputMaybe<Scalars["Boolean"]>;
+  link_annual_report?: InputMaybe<Scalars["String"]>;
   link_financials?: InputMaybe<Scalars["String"]>;
-  link_processes?: InputMaybe<Scalars["String"]>;
+  link_website?: InputMaybe<Scalars["String"]>;
   long_description?: InputMaybe<Scalars["String"]>;
   main_image?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
@@ -1134,8 +1137,9 @@ export type Orgs_Max_Fields = {
   founded_at?: Maybe<Scalars["String"]>;
   geography?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["uuid"]>;
+  link_annual_report?: Maybe<Scalars["String"]>;
   link_financials?: Maybe<Scalars["String"]>;
-  link_processes?: Maybe<Scalars["String"]>;
+  link_website?: Maybe<Scalars["String"]>;
   long_description?: Maybe<Scalars["String"]>;
   main_image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
@@ -1152,8 +1156,9 @@ export type Orgs_Max_Order_By = {
   founded_at?: InputMaybe<Order_By>;
   geography?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  link_annual_report?: InputMaybe<Order_By>;
   link_financials?: InputMaybe<Order_By>;
-  link_processes?: InputMaybe<Order_By>;
+  link_website?: InputMaybe<Order_By>;
   long_description?: InputMaybe<Order_By>;
   main_image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
@@ -1171,8 +1176,9 @@ export type Orgs_Min_Fields = {
   founded_at?: Maybe<Scalars["String"]>;
   geography?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["uuid"]>;
+  link_annual_report?: Maybe<Scalars["String"]>;
   link_financials?: Maybe<Scalars["String"]>;
-  link_processes?: Maybe<Scalars["String"]>;
+  link_website?: Maybe<Scalars["String"]>;
   long_description?: Maybe<Scalars["String"]>;
   main_image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
@@ -1189,8 +1195,9 @@ export type Orgs_Min_Order_By = {
   founded_at?: InputMaybe<Order_By>;
   geography?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  link_annual_report?: InputMaybe<Order_By>;
   link_financials?: InputMaybe<Order_By>;
-  link_processes?: InputMaybe<Order_By>;
+  link_website?: InputMaybe<Order_By>;
   long_description?: InputMaybe<Order_By>;
   main_image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
@@ -1233,8 +1240,9 @@ export type Orgs_Order_By = {
   id?: InputMaybe<Order_By>;
   impacts_aggregate?: InputMaybe<Impact_Aggregate_Order_By>;
   is_test_data?: InputMaybe<Order_By>;
+  link_annual_report?: InputMaybe<Order_By>;
   link_financials?: InputMaybe<Order_By>;
-  link_processes?: InputMaybe<Order_By>;
+  link_website?: InputMaybe<Order_By>;
   long_description?: InputMaybe<Order_By>;
   main_image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
@@ -1265,9 +1273,11 @@ export enum Orgs_Select_Column {
   /** column name */
   IsTestData = "is_test_data",
   /** column name */
+  LinkAnnualReport = "link_annual_report",
+  /** column name */
   LinkFinancials = "link_financials",
   /** column name */
-  LinkProcesses = "link_processes",
+  LinkWebsite = "link_website",
   /** column name */
   LongDescription = "long_description",
   /** column name */
@@ -1291,8 +1301,9 @@ export type Orgs_Set_Input = {
   geography?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["uuid"]>;
   is_test_data?: InputMaybe<Scalars["Boolean"]>;
+  link_annual_report?: InputMaybe<Scalars["String"]>;
   link_financials?: InputMaybe<Scalars["String"]>;
-  link_processes?: InputMaybe<Scalars["String"]>;
+  link_website?: InputMaybe<Scalars["String"]>;
   long_description?: InputMaybe<Scalars["String"]>;
   main_image?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
@@ -1318,9 +1329,11 @@ export enum Orgs_Update_Column {
   /** column name */
   IsTestData = "is_test_data",
   /** column name */
+  LinkAnnualReport = "link_annual_report",
+  /** column name */
   LinkFinancials = "link_financials",
   /** column name */
-  LinkProcesses = "link_processes",
+  LinkWebsite = "link_website",
   /** column name */
   LongDescription = "long_description",
   /** column name */
@@ -2340,7 +2353,8 @@ export type InsertOrgMutationVariables = Exact<{
   geography?: InputMaybe<Scalars["String"]>;
   size?: InputMaybe<Scalars["String"]>;
   founded_at?: InputMaybe<Scalars["String"]>;
-  link_processes?: InputMaybe<Scalars["String"]>;
+  link_website?: InputMaybe<Scalars["String"]>;
+  link_annual_report?: InputMaybe<Scalars["String"]>;
   link_financials?: InputMaybe<Scalars["String"]>;
 }>;
 
@@ -2359,8 +2373,9 @@ export type InsertOrgMutation = {
         geography?: string | undefined;
         size?: string | undefined;
         founded_at?: string | undefined;
-        link_processes?: string | undefined;
+        link_website?: string | undefined;
         link_financials?: string | undefined;
+        link_annual_report?: string | undefined;
       }
     | undefined;
 };
@@ -2413,7 +2428,8 @@ export type UpdateOrgMutationVariables = Exact<{
   geography?: InputMaybe<Scalars["String"]>;
   size?: InputMaybe<Scalars["String"]>;
   founded_at?: InputMaybe<Scalars["String"]>;
-  link_processes?: InputMaybe<Scalars["String"]>;
+  link_website?: InputMaybe<Scalars["String"]>;
+  link_annual_report?: InputMaybe<Scalars["String"]>;
   link_financials?: InputMaybe<Scalars["String"]>;
 }>;
 
@@ -2432,7 +2448,8 @@ export type UpdateOrgMutation = {
         geography?: string | undefined;
         size?: string | undefined;
         founded_at?: string | undefined;
-        link_processes?: string | undefined;
+        link_website?: string | undefined;
+        link_annual_report?: string | undefined;
         link_financials?: string | undefined;
       }
     | undefined;
@@ -2542,7 +2559,8 @@ export type FetchOrgQuery = {
     geography?: string | undefined;
     founded_at?: string | undefined;
     size?: string | undefined;
-    link_processes?: string | undefined;
+    link_website?: string | undefined;
+    link_annual_report?: string | undefined;
     link_financials?: string | undefined;
     impacts: Array<{
       __typename?: "impact";
@@ -2972,7 +2990,8 @@ export const InsertOrgDocument = gql`
     $geography: String
     $size: String
     $founded_at: String
-    $link_processes: String
+    $link_website: String
+    $link_annual_report: String
     $link_financials: String
   ) {
     insert_orgs_one(
@@ -2986,8 +3005,9 @@ export const InsertOrgDocument = gql`
         geography: $geography
         size: $size
         founded_at: $founded_at
-        link_processes: $link_processes
+        link_website: $link_website
         link_financials: $link_financials
+        link_annual_report: $link_annual_report
       }
     ) {
       id
@@ -3000,8 +3020,9 @@ export const InsertOrgDocument = gql`
       geography
       size
       founded_at
-      link_processes
+      link_website
       link_financials
+      link_annual_report
     }
   }
 `;
@@ -3078,7 +3099,8 @@ export function withInsertOrg<
  *      geography: // value for 'geography'
  *      size: // value for 'size'
  *      founded_at: // value for 'founded_at'
- *      link_processes: // value for 'link_processes'
+ *      link_website: // value for 'link_website'
+ *      link_annual_report: // value for 'link_annual_report'
  *      link_financials: // value for 'link_financials'
  *   },
  * });
@@ -3349,7 +3371,8 @@ export const UpdateOrgDocument = gql`
     $geography: String
     $size: String
     $founded_at: String
-    $link_processes: String
+    $link_website: String
+    $link_annual_report: String
     $link_financials: String
   ) {
     update_orgs_by_pk(
@@ -3362,8 +3385,9 @@ export const UpdateOrgDocument = gql`
         geography: $geography
         size: $size
         founded_at: $founded_at
-        link_processes: $link_processes
+        link_website: $link_website
         link_financials: $link_financials
+        link_annual_report: $link_annual_report
       }
       pk_columns: { id: $id }
     ) {
@@ -3377,7 +3401,8 @@ export const UpdateOrgDocument = gql`
       geography
       size
       founded_at
-      link_processes
+      link_website
+      link_annual_report
       link_financials
     }
   }
@@ -3455,7 +3480,8 @@ export function withUpdateOrg<
  *      geography: // value for 'geography'
  *      size: // value for 'size'
  *      founded_at: // value for 'founded_at'
- *      link_processes: // value for 'link_processes'
+ *      link_website: // value for 'link_website'
+ *      link_annual_report: // value for 'link_annual_report'
  *      link_financials: // value for 'link_financials'
  *   },
  * });
@@ -3939,7 +3965,8 @@ export const FetchOrgDocument = gql`
       geography
       founded_at
       size
-      link_processes
+      link_website
+      link_annual_report
       link_financials
       impacts(order_by: { priority: asc }) {
         id
@@ -5550,12 +5577,17 @@ export type OrgsResolvers<
     ParentType,
     ContextType
   >;
+  link_annual_report?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   link_financials?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
     ContextType
   >;
-  link_processes?: Resolver<
+  link_website?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
     ContextType
@@ -5639,12 +5671,17 @@ export type Orgs_Max_FieldsResolvers<
     ContextType
   >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  link_annual_report?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   link_financials?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
     ContextType
   >;
-  link_processes?: Resolver<
+  link_website?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
     ContextType
@@ -5696,12 +5733,17 @@ export type Orgs_Min_FieldsResolvers<
     ContextType
   >;
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  link_annual_report?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   link_financials?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
     ContextType
   >;
-  link_processes?: Resolver<
+  link_website?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
     ContextType

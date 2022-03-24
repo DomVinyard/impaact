@@ -11,7 +11,8 @@ query fetchOrg($slug: String) {
     geography
     founded_at
     size
-    link_processes
+    link_website
+    link_annual_report
     link_financials
     impacts(order_by: { priority: asc }) {
       id

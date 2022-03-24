@@ -8,7 +8,8 @@ mutation insertOrg(
   $geography: String
   $size: String
   $founded_at: String
-  $link_processes: String
+  $link_website: String
+  $link_annual_report: String
   $link_financials: String
 ) {
   insert_orgs_one(
@@ -22,8 +23,9 @@ mutation insertOrg(
       geography: $geography
       size: $size
       founded_at: $founded_at
-      link_processes: $link_processes
+      link_website: $link_website
       link_financials: $link_financials
+      link_annual_report: $link_annual_report
     }
   ) {
     id
@@ -36,7 +38,8 @@ mutation insertOrg(
     geography
     size
     founded_at
-    link_processes
+    link_website
     link_financials
+    link_annual_report
   }
 }

@@ -28,8 +28,9 @@ insert_permissions:
     - description
     - founded_at
     - geography
+    - link_annual_report
     - link_financials
-    - link_processes
+    - link_website
     - long_description
     - main_image
     - name
@@ -46,8 +47,9 @@ select_permissions:
     - founded_at
     - geography
     - id
+    - link_annual_report
     - link_financials
-    - link_processes
+    - link_website
     - long_description
     - main_image
     - name
@@ -65,8 +67,9 @@ select_permissions:
     - founded_at
     - geography
     - id
+    - link_annual_report
     - link_financials
-    - link_processes
+    - link_website
     - long_description
     - main_image
     - name
@@ -82,8 +85,9 @@ update_permissions:
     - description
     - founded_at
     - geography
+    - link_annual_report
     - link_financials
-    - link_processes
+    - link_website
     - long_description
     - main_image
     - name

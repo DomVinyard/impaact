@@ -30,7 +30,7 @@ const OrgsPageComponent = ({ userId }) => {
   const orgs = data?.users_by_pk?.orgs || [];
   return (
     <Content isFull={isMobile}>
-      <Stack spacing={8}>
+      <Stack spacing={8} mb={{ base: 2, md: 64 }}>
         {/* <Box> */}
         <Link href={"/orgs/add"}>
           <Button
@@ -43,7 +43,10 @@ const OrgsPageComponent = ({ userId }) => {
             Add{!isMobile && " Organisation"}
           </Button>
         </Link>
-        <Heading textAlign={{ base: "center", md: "left" }}>
+        <Heading
+          textAlign={{ base: "center", md: "left" }}
+          pt={{ base: 8, md: 16 }}
+        >
           Your Organisations
         </Heading>
         {<OrgsList orgs={orgs} loading={loading} />}
