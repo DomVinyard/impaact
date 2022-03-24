@@ -174,8 +174,7 @@ const OrgsList = ({ orgs, loading, after }: ListProps) => {
               rowSpan={1}
               colSpan={1}
               height={"100%"}
-              borderTop={{ base: "5px solid #eee", md: "none" }}
-              borderBottom={{ base: "5px solid #eee", md: "none" }}
+              borderBottom={{ base: "8px solid #eee", md: "none" }}
             >
               <Link key={index} href={`/${org.slug}`}>
                 <Box

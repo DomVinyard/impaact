@@ -7,8 +7,7 @@
     "bootstrap": "node scripts/generate-keys.ts && yarn install && cd frontend && yarn install",
     "dev": "docker-compose up",
     "data": "hasura console",
-    "release": "release-it",
-    "seed": "npx ts-node ./backend/seeds/seed.ts && cd backend && hasura seed apply --file seed.sql --database-name default"
+    "release": "release-it"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^4.1.0",
