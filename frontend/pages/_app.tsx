@@ -75,7 +75,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Satisfy&family=VT323&family=Oswald:wght@500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Roboto+Slab:wght@200&family=Satisfy&family=VT323&family=Oswald:wght@500;600&display=swap"
           rel="stylesheet"
         ></link>
         {/* Global Site Tag (gtag.js) - Google Analytics */}

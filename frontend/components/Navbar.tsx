@@ -29,7 +29,9 @@ export const AddOrgButton = (additionalProps) => {
       _hover={{ bg: "#555" }}
       _active={{ bg: "#555" }}
       color="#fff"
-      children={"Add your organisation"}
+      children={
+        additionalProps.short ? "Add organisation" : "Add your organisation"
+      }
       {...additionalProps}
     />
   );
@@ -49,7 +51,18 @@ const Navbar: NextComponentType = () => {
   };
 
   const signInButtonNode = () => {
-    if (session) return false;
+    if (session)
+      return (
+        <Link href="/orgs/add">
+          <AddOrgButton
+            short
+            display={{
+              base: router.pathname === "/" ? "inline-block" : "none",
+              md: "none",
+            }}
+          />
+        </Link>
+      );
     return (
       <Box>
         <Button

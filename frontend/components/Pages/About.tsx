@@ -25,11 +25,7 @@ import IOrg from "types/org";
 const copy = [
   {
     type: "paragraph",
-    text: "We are delighted to share the Philanthropic Performance Statement.",
-  },
-  {
-    type: "paragraph",
-    text: "This report is in fact a prototype of what philanthropic reporting could look like. Our aim is to test, iterate, develop this philanthropic performance tool into an end-user centric, digital product that could enhance the accountability, trust and impact of philanthropy globally. PPS builds on the work of Insaan, and its partners and experts across the globe, on the Code of Practice for Non-Profits, developed and published with the support of Insaan donors and first launched as an idea at President Macron’s Paris Peace Forum in 2018.",
+    text: "This report is a prototype of what philanthropic reporting could look like. Our aim is to test, iterate, develop this philanthropic performance tool into an end-user centric, digital product that CAN enhance the accountability, trust and impact of philanthropy globally. PPS builds on the work of Insaan, and its partners and experts across the globe, on the Code of Practice for Non-Profits, developed and published with the support of Insaan donors and first launched as an idea at President Macron’s Paris Peace Forum in 2018.",
   },
   {
     type: "paragraph",
@@ -79,7 +75,7 @@ const OrgsPageComponent = () => {
       <Flex
         alignItems={"flex-end"}
         background="#E6F2F4"
-        height={"calc(100vh - 64px)"}
+        height={{ base: "50vh", md: "calc(100vh - 64px)" }}
       >
         <Content isFull={isMobile}>
           <Flex
@@ -99,10 +95,10 @@ const OrgsPageComponent = () => {
       <Flex
         background="linear-gradient(180deg, rgba(66,66,66,1) 0%, rgba(6,13,32,1) 100%)"
         color="#fff"
-        py={128}
+        py={{ base: 16, md: 128 }}
       >
-        <Content isFull={isMobile} py={8}>
-          <Flex justifyContent={"center"}>
+        <Content isFull={isMobile}>
+          <Flex justifyContent={"center"} px={{ base: 12, md: 0 }}>
             <Box maxW={680}>
               {copy.map(({ type, text }) => {
                 if (type === "title") {
@@ -119,7 +115,13 @@ const OrgsPageComponent = () => {
                 }
                 if (type === "paragraph") {
                   return (
-                    <Text fontSize={"xl"} mt={5} textAlign="justify">
+                    <Text
+                      fontFamily={"Roboto Slab"}
+                      fontSize={"xl"}
+                      fontWeight={500}
+                      mt={5}
+                      textAlign="justify"
+                    >
                       {text}
                     </Text>
                   );

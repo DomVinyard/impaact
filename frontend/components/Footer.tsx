@@ -44,7 +44,7 @@ const Footer: NextComponentType = () => {
             mr={2}
           />
           <Text color={"rgb(140, 140, 172)"}>
-            {!isMobile ? <>Developed with 💜 by </> : " 💜 by "}
+            {!isMobile ? <>Developed with 💜 by </> : "Made with 💜 by "}
             <a
               href="https://insaangroup.org"
               style={{ textDecoration: "underline" }}
