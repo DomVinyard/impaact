@@ -246,7 +246,9 @@ const OrgPageComponent = ({ org, loading }) => {
                               setShowMoreDescription(!showMoreDescription)
                             }
                           >
-                            {!showMoreDescription ? `Read more →` : `close`}
+                            {!showMoreDescription
+                              ? `Theory of change →`
+                              : `close`}
                           </Button>
                         </Box>
                       )}

@@ -346,7 +346,7 @@ const FIELDS: Field[] = [
       update: 4.5,
     },
     id: "long_description",
-    label: "Long Description",
+    label: "Theory of Change",
     element: Textarea,
     validation: {},
   },

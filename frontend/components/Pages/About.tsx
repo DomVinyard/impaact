@@ -25,7 +25,7 @@ import IOrg from "types/org";
 const copy = [
   {
     type: "paragraph",
-    text: "This report is a prototype of what philanthropic reporting could look like. Our aim is to test, iterate, develop this philanthropic performance tool into an end-user centric, digital product that CAN enhance the accountability, trust and impact of philanthropy globally. PPS builds on the work of Insaan, and its partners and experts across the globe, on the Code of Practice for Non-Profits, developed and published with the support of Insaan donors and first launched as an idea at President Macron’s Paris Peace Forum in 2018.",
+    text: "This is a prototype of what philanthropic reporting could look like. Our aim is to test, iterate, develop this philanthropic performance tool into an end-user centric, digital product that CAN enhance the accountability, trust and impact of philanthropy globally. PPS builds on the work of Insaan, and its partners and experts across the globe, on the Code of Practice for Non-Profits, developed and published with the support of Insaan donors and first launched as an idea at President Macron’s Paris Peace Forum in 2018.",
   },
   {
     type: "paragraph",
