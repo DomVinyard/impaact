@@ -203,6 +203,11 @@ const OrgPageComponent = ({ org, loading }) => {
   const mapHeight = isMobile ? 240 : 300;
 
   const isAdmin = userData?.users?.[0]?.is_user_admin;
+  const sortedSDGS = sdgs.sort((a, b) => {
+    const lowestA = Math.min(...a.impacts.map(({ priority }) => priority));
+    const lowestB = Math.min(...b.impacts.map(({ priority }) => priority));
+    return lowestA - lowestB;
+  });
 
   return (
     <>
@@ -307,7 +312,7 @@ const OrgPageComponent = ({ org, loading }) => {
                   />
                 </Flex>
                 <Box color={"#777"} background={"#ddd"}>
-                  {sdgs.map(({ sdg, impacts }: any, i) => {
+                  {sortedSDGS.map(({ sdg, impacts }: any, i) => {
                     const impactCount = i === 0 ? 3 : 1;
                     return (
                       <Box key={`sdg_${sdg.id}`}>
@@ -404,6 +409,7 @@ const OrgPageComponent = ({ org, loading }) => {
                                   pb={{ base: 3, md: 5 }}
                                   key={`impact_${impact.id}`}
                                 >
+                                  {/* {impact.priority} */}
                                   <Text
                                     fontFamily="Oswald"
                                     fontWeight="600"

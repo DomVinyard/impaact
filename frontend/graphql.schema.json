@@ -3160,6 +3160,18 @@
             "deprecationReason": null
           },
           {
+            "name": "test_col",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "value",
             "description": null,
             "args": [],
@@ -3847,6 +3859,18 @@
             "deprecationReason": null
           },
           {
+            "name": "test_col",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "value",
             "description": null,
             "type": {
@@ -4042,6 +4066,18 @@
             "deprecationReason": null
           },
           {
+            "name": "test_col",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "value",
             "description": null,
             "type": {
@@ -4161,6 +4197,18 @@
           },
           {
             "name": "suffix",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "test_col",
             "description": null,
             "args": [],
             "type": {
@@ -4304,6 +4352,18 @@
             "deprecationReason": null
           },
           {
+            "name": "test_col",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "value",
             "description": null,
             "type": {
@@ -4423,6 +4483,18 @@
           },
           {
             "name": "suffix",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "test_col",
             "description": null,
             "args": [],
             "type": {
@@ -4555,6 +4627,18 @@
           },
           {
             "name": "suffix",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "test_col",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -4823,6 +4907,18 @@
             "deprecationReason": null
           },
           {
+            "name": "test_col",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "value",
             "description": null,
             "type": {
@@ -4924,6 +5020,12 @@
           },
           {
             "name": "suffix",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "test_col",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -5041,6 +5143,18 @@
           },
           {
             "name": "suffix",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "test_col",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -5406,6 +5520,12 @@
           },
           {
             "name": "suffix",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "test_col",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null

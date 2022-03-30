@@ -320,6 +320,7 @@ export type Impact = {
   priority: Scalars["Int"];
   sdg: Scalars["String"];
   suffix?: Maybe<Scalars["String"]>;
+  test_col?: Maybe<Scalars["String"]>;
   value: Scalars["numeric"];
 };
 
@@ -402,6 +403,7 @@ export type Impact_Bool_Exp = {
   priority?: InputMaybe<Int_Comparison_Exp>;
   sdg?: InputMaybe<String_Comparison_Exp>;
   suffix?: InputMaybe<String_Comparison_Exp>;
+  test_col?: InputMaybe<String_Comparison_Exp>;
   value?: InputMaybe<Numeric_Comparison_Exp>;
 };
 
@@ -429,6 +431,7 @@ export type Impact_Insert_Input = {
   priority?: InputMaybe<Scalars["Int"]>;
   sdg?: InputMaybe<Scalars["String"]>;
   suffix?: InputMaybe<Scalars["String"]>;
+  test_col?: InputMaybe<Scalars["String"]>;
   value?: InputMaybe<Scalars["numeric"]>;
 };
 
@@ -444,6 +447,7 @@ export type Impact_Max_Fields = {
   priority?: Maybe<Scalars["Int"]>;
   sdg?: Maybe<Scalars["String"]>;
   suffix?: Maybe<Scalars["String"]>;
+  test_col?: Maybe<Scalars["String"]>;
   value?: Maybe<Scalars["numeric"]>;
 };
 
@@ -458,6 +462,7 @@ export type Impact_Max_Order_By = {
   priority?: InputMaybe<Order_By>;
   sdg?: InputMaybe<Order_By>;
   suffix?: InputMaybe<Order_By>;
+  test_col?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
@@ -473,6 +478,7 @@ export type Impact_Min_Fields = {
   priority?: Maybe<Scalars["Int"]>;
   sdg?: Maybe<Scalars["String"]>;
   suffix?: Maybe<Scalars["String"]>;
+  test_col?: Maybe<Scalars["String"]>;
   value?: Maybe<Scalars["numeric"]>;
 };
 
@@ -487,6 +493,7 @@ export type Impact_Min_Order_By = {
   priority?: InputMaybe<Order_By>;
   sdg?: InputMaybe<Order_By>;
   suffix?: InputMaybe<Order_By>;
+  test_col?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
@@ -518,6 +525,7 @@ export type Impact_Order_By = {
   priority?: InputMaybe<Order_By>;
   sdg?: InputMaybe<Order_By>;
   suffix?: InputMaybe<Order_By>;
+  test_col?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
@@ -547,6 +555,8 @@ export enum Impact_Select_Column {
   /** column name */
   Suffix = "suffix",
   /** column name */
+  TestCol = "test_col",
+  /** column name */
   Value = "value",
 }
 
@@ -561,6 +571,7 @@ export type Impact_Set_Input = {
   priority?: InputMaybe<Scalars["Int"]>;
   sdg?: InputMaybe<Scalars["String"]>;
   suffix?: InputMaybe<Scalars["String"]>;
+  test_col?: InputMaybe<Scalars["String"]>;
   value?: InputMaybe<Scalars["numeric"]>;
 };
 
@@ -636,6 +647,8 @@ export enum Impact_Update_Column {
   Sdg = "sdg",
   /** column name */
   Suffix = "suffix",
+  /** column name */
+  TestCol = "test_col",
   /** column name */
   Value = "value",
 }
@@ -2326,6 +2339,8 @@ export type InsertImpactMutationVariables = Exact<{
   org: Scalars["uuid"];
   prefix?: InputMaybe<Scalars["String"]>;
   suffix?: InputMaybe<Scalars["String"]>;
+  context?: InputMaybe<Scalars["String"]>;
+  priority?: InputMaybe<Scalars["Int"]>;
 }>;
 
 export type InsertImpactMutation = {
@@ -2339,6 +2354,8 @@ export type InsertImpactMutation = {
         sdg: string;
         prefix?: string | undefined;
         suffix?: string | undefined;
+        context?: string | undefined;
+        priority: number;
       }
     | undefined;
 };
@@ -2402,6 +2419,7 @@ export type UpdateImpactMutation = {
         context?: string | undefined;
         prefix?: string | undefined;
         suffix?: string | undefined;
+        priority: number;
       }
     | undefined;
 };
@@ -2569,6 +2587,7 @@ export type FetchOrgQuery = {
       indicator: string;
       sdg: string;
       context?: string | undefined;
+      priority: number;
       prefix?: string | undefined;
       suffix?: string | undefined;
     }>;
@@ -2862,6 +2881,8 @@ export const InsertImpactDocument = gql`
     $org: uuid!
     $prefix: String
     $suffix: String
+    $context: String
+    $priority: Int
   ) {
     insert_impact_one(
       object: {
@@ -2871,6 +2892,8 @@ export const InsertImpactDocument = gql`
         org: $org
         prefix: $prefix
         suffix: $suffix
+        context: $context
+        priority: $priority
       }
     ) {
       id
@@ -2879,6 +2902,8 @@ export const InsertImpactDocument = gql`
       sdg
       prefix
       suffix
+      context
+      priority
     }
   }
 `;
@@ -2955,6 +2980,8 @@ export function withInsertImpact<
  *      org: // value for 'org'
  *      prefix: // value for 'prefix'
  *      suffix: // value for 'suffix'
+ *      context: // value for 'context'
+ *      priority: // value for 'priority'
  *   },
  * });
  */
@@ -3153,6 +3180,7 @@ export const UpdateImpactDocument = gql`
       context
       prefix
       suffix
+      priority
     }
   }
 `;
@@ -3974,6 +4002,7 @@ export const FetchOrgDocument = gql`
         indicator
         sdg
         context
+        priority
         prefix
         suffix
       }
@@ -5100,6 +5129,7 @@ export type ImpactResolvers<
   priority?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   sdg?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   suffix?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  test_col?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   value?: Resolver<ResolversTypes["numeric"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -5206,6 +5236,7 @@ export type Impact_Max_FieldsResolvers<
   priority?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
   sdg?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   suffix?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  test_col?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   value?: Resolver<Maybe<ResolversTypes["numeric"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -5227,6 +5258,7 @@ export type Impact_Min_FieldsResolvers<
   priority?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
   sdg?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   suffix?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  test_col?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   value?: Resolver<Maybe<ResolversTypes["numeric"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };

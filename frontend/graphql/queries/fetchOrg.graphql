@@ -20,6 +20,7 @@ query fetchOrg($slug: String) {
       indicator
       sdg
       context
+      priority
       prefix
       suffix
     }

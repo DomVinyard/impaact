@@ -34,7 +34,7 @@ import { useForm } from "react-hook-form";
 import FIELDS from "./AddEditOrg.form";
 
 const AddEditOrgForm = ({ org, refetch, isLoading }) => {
-  // console.log("initial", org);
+  console.log("initial", org);
   const {
     register,
     handleSubmit,
@@ -89,24 +89,24 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
     // setIsSubmitted(isEditMode ? "Updating report" : "Creating report");
     try {
       if (isEditMode) {
+        for (const [index, item] of (values.impacts || []).entries()) {
+          // values.impacts.forEach(async (item, index) => {
+          // set the index in the db
+          const variables = { impactID: item.id, priority: index };
+          try {
+            await updateImpactPriority({ variables });
+          } catch (error) {
+            console.error(error);
+          }
+        }
         await updateOrg({
           variables: {
             id: org.id,
             ...values,
           },
         });
-
-        values.impacts.forEach(async (item, index) => {
-          // set the index in the db
-          const variables = { impactID: item.id, priority: index };
-          try {
-            // console.log({ variables });
-            updateImpactPriority({ variables });
-          } catch (error) {
-            console.error(error);
-          }
-        });
-        router.push(`/${values.slug}`);
+        router.reload();
+        // router.push(`/${values.slug}`);
       } else {
         await insertOrg({ variables: { author_id: session.id, ...values } });
         router.push(`/${values.slug}/edit?mode=impact`);
@@ -127,6 +127,10 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
     );
   };
   const mode = isEditMode ? "update" : "create";
+
+  // if (isSubmitting || isUpdating) {
+  //   return <Loader />;
+  // }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -234,7 +238,7 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
                 isEditMode ? router.push(`/${org.slug}`) : router.back()
               }
             >
-              Cancel
+              {!isEditMode || isDirty ? "Cancel" : "← Back to report"}
             </Button>
             <Button
               loadingText="Saving..."

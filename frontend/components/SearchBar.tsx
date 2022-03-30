@@ -28,6 +28,7 @@ export const SearchBar = ({
   const isMobile = useBreakpointValue({ base: true, md: false });
   const router = useRouter();
   useEffect(() => setIsSelected(false), [value]);
+  // useEffect(() => onBlur(), []);
 
   const getAsyncOptions = async (inputValue) => {
     const { data, error } = await searchOrgs({
