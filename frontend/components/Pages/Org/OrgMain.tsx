@@ -36,7 +36,7 @@ const MyOrgBar = ({ isAdmin, color, isMobile, companyName }) => {
     >
       <ButtonGroup isAttached variant="outline" spacing="6">
         {isAdmin && (
-          <Button mr={2} leftIcon={<AiOutlineLineChart />}>
+          <Button mr={1} leftIcon={<AiOutlineLineChart />}>
             {isMobile ? "000" : "000 views/month"}
           </Button>
         )}
