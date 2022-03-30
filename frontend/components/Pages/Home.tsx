@@ -85,10 +85,8 @@ const HomePageComponent = () => {
             >
               <Stack lineHeight={"1"}>
                 <>
-                  <Box fontSize={{ base: "3xl", md: "5xl" }} opacity="0.4">
-                    PPS
-                  </Box>
-                  <Box>Global Good Lab</Box>
+                  <Box>Measuring</Box>
+                  <Box>Global Good</Box>
                 </>
                 <Flex pt={5}>
                   {isSearchFocusMobile && (
@@ -122,7 +120,16 @@ const HomePageComponent = () => {
               </Stack>
             </Box>
           </Box>
-          <Globe latestKeypress={latestKeypress} />
+          <Flex justifyContent={{ base: "center", md: "flex-end" }}>
+            <Image
+              width={{ base: 600, md: 800 }}
+              padding={16}
+              paddingRight={{ base: 16, md: 32 }}
+              paddingTop={{ base: "400px", md: "160px" }}
+              src="/images/HANDSDARK.png"
+            ></Image>
+          </Flex>
+          {/* <Globe latestKeypress={latestKeypress} /> */}
           <OrgsCountComponent />
         </Stack>
       </Stack>

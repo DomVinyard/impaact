@@ -112,17 +112,17 @@ const Navbar: NextComponentType = () => {
                       maxW={"36px"}
                       pl={"8px"}
                     />
-                    {!isMobile && (
+                    {!isMobile && router.pathname == "/" && (
                       <Text
                         color="#fff"
-                        size="3-xl"
-                        ml={2}
+                        size="1-xl"
+                        ml={2.5}
                         fontFamily={"Montserrat"}
                         fontWeight={700}
-                        opacity={0.8}
-                        letterSpacing={1}
+                        opacity={0.6}
+                        // letterSpacing={1}
                       >
-                        Insaan
+                        Insaan PPS
                       </Text>
                     )}
                   </Flex>
