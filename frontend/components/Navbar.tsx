@@ -10,6 +10,7 @@ import {
   MenuItem,
   Image,
   MenuDivider,
+  Text,
   Flex,
   useBreakpointValue,
 } from "@chakra-ui/react";
@@ -100,16 +101,31 @@ const Navbar: NextComponentType = () => {
             <Flex>
               <Stack isInline spacing={4} align="center" fontWeight="semibold">
                 <Link href="/">
-                  <Image
-                    cursor={"pointer"}
-                    src="/images/logo.png"
-                    alt="PPS"
-                    height={"27px"}
-                    width={"36px"}
-                    minW={"36px"}
-                    maxW={"36px"}
-                    pl={"8px"}
-                  />
+                  <Flex>
+                    <Image
+                      cursor={"pointer"}
+                      src="/images/logo.png"
+                      alt="PPS"
+                      height={"27px"}
+                      width={"36px"}
+                      minW={"36px"}
+                      maxW={"36px"}
+                      pl={"8px"}
+                    />
+                    {!isMobile && (
+                      <Text
+                        color="#fff"
+                        size="3-xl"
+                        ml={2}
+                        fontFamily={"Montserrat"}
+                        fontWeight={700}
+                        opacity={0.8}
+                        letterSpacing={1}
+                      >
+                        Insaan
+                      </Text>
+                    )}
+                  </Flex>
                 </Link>
               </Stack>
               <Box
