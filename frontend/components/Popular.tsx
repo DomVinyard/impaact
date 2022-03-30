@@ -107,7 +107,6 @@ const Controls = ({
 
       {/* Mobile */}
       <Flex
-        fontSize={19}
         display={{ base: "flex", md: "none" }}
         background={"#eee"}
         borderBottom={"4px solid #eee"}
@@ -123,12 +122,15 @@ const Controls = ({
               margin={0}
               mb={0}
               opacity={isSelected ? 1 : 1}
-              borderBottomRightRadius={!isSelected && i === 0 ? 16 : 0}
-              borderBottomLeftRadius={!isSelected && i === 1 ? 16 : 0}
+              borderBottomRightRadius={!isSelected && i === 0 ? 3 : 0}
+              borderBottomLeftRadius={!isSelected && i === 1 ? 3 : 0}
               py={6}
               flex={1}
+              fontSize={16}
+              textTransform="uppercase"
               key={tab.id}
               textAlign={"center"}
+              color="gray.800"
             >
               {tab.label}
             </Box>
