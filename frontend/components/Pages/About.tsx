@@ -46,7 +46,7 @@ const copy2 = [
   },
   {
     type: "title",
-    text: "Welcome to PPS Version 1",
+    text: "Welcome to the PPS Development Preview",
   },
   {
     type: "paragraph",
