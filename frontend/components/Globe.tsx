@@ -13,10 +13,10 @@ const ROTATION_SPEED = 0.0005;
 const incrementSpeed = 0.001;
 const maxSpeed = 0.01;
 
-const SHOW_GLOBE = true;
 const ROTATE_GLOBE = true;
 
 const Model = ({ latestKeypress, baseSpeed = 0.0002 }) => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
   const group: group = useRef();
   const [model, setModel] = useState<Object3D | null>(null);
   const [rotateAt, setRotateAt] = useState(baseSpeed);
@@ -85,7 +85,7 @@ const Globe = ({ latestKeypress }) => {
   return (
     <Flex style={{ minHeight: "600px", height: "80vh", width: "100%" }}>
       <Canvas
-        style={{ height: "100%", opacity: SHOW_GLOBE ? 1 : 0 }}
+        style={{ height: "100%", opacity: !isMobile ? 1 : 0 }}
         colorManagement
         camera={{ position: isMobile ? [0, 1.75, 5] : [-1, -0.25, 4.5] }}
       >
