@@ -85,8 +85,10 @@ const HomePageComponent = () => {
             >
               <Stack lineHeight={"1"}>
                 <>
-                  <Box>Measuring</Box>
-                  <Box>positive impact</Box>
+                  <Box fontSize={{ base: "3xl", md: "5xl" }} opacity="0.4">
+                    PPS
+                  </Box>
+                  <Box>Global Good Lab</Box>
                 </>
                 <Flex pt={5}>
                   {isSearchFocusMobile && (
