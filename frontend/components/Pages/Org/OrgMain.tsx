@@ -174,8 +174,14 @@ const OrgPageComponent = ({ org, loading }) => {
     variables: { userEmail: session?.user?.email },
   });
 
+  const sortedSDGS = sdgs.sort((a, b) => {
+    const lowestA = Math.min(...a.impacts.map(({ priority }) => priority));
+    const lowestB = Math.min(...b.impacts.map(({ priority }) => priority));
+    return lowestA - lowestB;
+  });
+
   const showOps = true;
-  const topGoalColour = sdgs[0]?.sdg?.color || "#777";
+  const topGoalColour = sortedSDGS[0]?.sdg?.color || "#777";
   const sdgBorder = {
     base: `8px solid ${topGoalColour}`,
     md: `16px solid ${topGoalColour}`,
@@ -203,11 +209,6 @@ const OrgPageComponent = ({ org, loading }) => {
   const mapHeight = isMobile ? 240 : 300;
 
   const isAdmin = userData?.users?.[0]?.is_user_admin;
-  const sortedSDGS = sdgs.sort((a, b) => {
-    const lowestA = Math.min(...a.impacts.map(({ priority }) => priority));
-    const lowestB = Math.min(...b.impacts.map(({ priority }) => priority));
-    return lowestA - lowestB;
-  });
 
   return (
     <>

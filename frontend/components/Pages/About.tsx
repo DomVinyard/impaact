@@ -17,35 +17,6 @@ import React from "react";
 const copy2 = [
   {
     type: "title",
-    text: "Why PPS? What problem is it solving?",
-  },
-  {
-    type: "paragraph",
-    text: "There is simply no philanthropic performance statement or comprehensive, efficient, snapshot-like tool in the current philanthropic market to guide giving, and in particular intelligent or impactful giving, in the context of a rising number of donors globally, and particularly younger generations (Generations X, Y and Z).",
-  },
-  {
-    type: "paragraph",
-    text: "Information about non-profits or charitable entities, generally found on charitable rating sites, is:",
-  },
-  {
-    type: "list",
-    items: [
-      "Heavily biased towards basic legal requirements and disclosures – and rarely covers overall performance",
-      "Tends to over-simplify and de-contextualize financial metrics – thereby giving an erroneous rating of noon-profits, and encouraging the reporting of, and over-scrutiny of questionable data on actual overheads;",
-      "Tends to over-simplify overall philanthropic performance with grades or star systems – which generally only apply to larger non-profits (leaving some 70% of non-profits out);",
-      "Requires a fee from non-profits and or users of information/donors to access deeper, impact-driven data – inherently creating a conflict of interest through this pay-to-play model;",
-      "Generally, leaves end-users / beneficiaries out of the performance systems;",
-      "Generally, have not reconciled qualitative and quantitative data;",
-      "The current systems do not aggregate impact data or use standardized indicators (such as SDGs) to improve the alignment, coherence, and overall performance of the philanthropic ecosystem;",
-      "Ease of search, donor preference matching, link to valid Big Data (for better decision-making) and ways to immediately multiply impact are non-existent. The customization of relevant information and knowledge for higher philanthropic performance does not exist in philanthropy, as it does in other industries such as retail or news.",
-    ],
-  },
-  {
-    type: "paragraph",
-    text: "We can do better. We must do better.",
-  },
-  {
-    type: "title",
     text: "Welcome to the PPS Development Preview",
   },
   {
@@ -75,6 +46,35 @@ const copy2 = [
   {
     type: "paragraph",
     text: "The impact data is linked by the organizations to common metrics such as UN Sustainable Development Goals (SDGs), with potential for collaborative aggregation and systematic analysis of compounded impact in the philanthropic space.",
+  },
+  {
+    type: "title",
+    text: "Why PPS? What problem is it solving?",
+  },
+  {
+    type: "paragraph",
+    text: "There is simply no philanthropic performance statement or comprehensive, efficient, snapshot-like tool in the current philanthropic market to guide giving, and in particular intelligent or impactful giving, in the context of a rising number of donors globally, and particularly younger generations (Generations X, Y and Z).",
+  },
+  {
+    type: "paragraph",
+    text: "Information about non-profits or charitable entities, generally found on charitable rating sites, is:",
+  },
+  {
+    type: "list",
+    items: [
+      "Heavily biased towards basic legal requirements and disclosures – and rarely covers overall performance",
+      "Tends to over-simplify and de-contextualize financial metrics – thereby giving an erroneous rating of noon-profits, and encouraging the reporting of, and over-scrutiny of questionable data on actual overheads;",
+      "Tends to over-simplify overall philanthropic performance with grades or star systems – which generally only apply to larger non-profits (leaving some 70% of non-profits out);",
+      "Requires a fee from non-profits and or users of information/donors to access deeper, impact-driven data – inherently creating a conflict of interest through this pay-to-play model;",
+      "Generally, leaves end-users / beneficiaries out of the performance systems;",
+      "Generally, have not reconciled qualitative and quantitative data;",
+      "The current systems do not aggregate impact data or use standardized indicators (such as SDGs) to improve the alignment, coherence, and overall performance of the philanthropic ecosystem;",
+      "Ease of search, donor preference matching, link to valid Big Data (for better decision-making) and ways to immediately multiply impact are non-existent. The customization of relevant information and knowledge for higher philanthropic performance does not exist in philanthropy, as it does in other industries such as retail or news.",
+    ],
+  },
+  {
+    type: "paragraph",
+    text: "We can do better. We must do better.",
   },
 ];
 
@@ -120,7 +120,7 @@ const OrgsPageComponent = () => {
                           fontSize={"xl"}
                           fontWeight={500}
                           mt={5}
-                          textAlign="justify"
+                          // textAlign="justify"
                         >
                           {item}
                         </ListItem>
