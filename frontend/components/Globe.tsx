@@ -82,10 +82,11 @@ const Lights = () => {
 
 const Globe = ({ latestKeypress }) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
+  const SHOW_GLOBE = false; // !isMobile;
   return (
     <Flex style={{ minHeight: "600px", height: "80vh", width: "100%" }}>
       <Canvas
-        style={{ height: "100%", opacity: !isMobile ? 1 : 0 }}
+        style={{ height: "100%", opacity: SHOW_GLOBE ? 1 : 0 }}
         colorManagement
         camera={{ position: isMobile ? [0, 1.75, 5] : [-1, -0.25, 4.5] }}
       >
