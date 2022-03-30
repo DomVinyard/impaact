@@ -7,7 +7,6 @@ import IUser from "types/user";
 import iToken from "types/token";
 
 const jwtSecret = JSON.parse(process.env.AUTH_PRIVATE_KEY);
-
 const options = {
   providers: [
     Providers.Google({
