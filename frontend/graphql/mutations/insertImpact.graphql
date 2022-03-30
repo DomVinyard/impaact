@@ -5,6 +5,8 @@ mutation insertImpact(
   $org: uuid!
   $prefix: String
   $suffix: String
+  $context: String
+  $priority: Int
 ) {
   insert_impact_one(
     object: {
@@ -14,6 +16,8 @@ mutation insertImpact(
       org: $org
       prefix: $prefix
       suffix: $suffix
+      context: $context
+      priority: $priority
     }
   ) {
     id
@@ -22,5 +26,7 @@ mutation insertImpact(
     sdg
     prefix
     suffix
+    context
+    priority
   }
 }

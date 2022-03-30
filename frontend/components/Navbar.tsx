@@ -11,6 +11,7 @@ import {
   Image,
   MenuDivider,
   Flex,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { NextComponentType } from "next";
 import { signIn, signOut, useSession } from "next-auth/client";
@@ -29,9 +30,7 @@ export const AddOrgButton = (additionalProps) => {
       _hover={{ bg: "#555" }}
       _active={{ bg: "#555" }}
       color="#fff"
-      children={
-        additionalProps.short ? "Add organisation" : "Add your organisation"
-      }
+      children={additionalProps.short ? "Add org" : "Add your organisation"}
       {...additionalProps}
     />
   );
@@ -42,6 +41,7 @@ const Navbar: NextComponentType = () => {
   const router = useRouter();
   const { q } = router.query;
   const [query, setQuery] = React.useState(q);
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
   useEffect(() => setQuery(router.query.q), [router]);
 
@@ -74,6 +74,7 @@ const Navbar: NextComponentType = () => {
           children="Sign In"
         />
         <AddOrgButton
+          short={isMobile}
           display={{
             base: router.pathname === "/" ? "inline-block" : "none",
             md: "inline-block",

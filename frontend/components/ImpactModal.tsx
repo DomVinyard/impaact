@@ -149,6 +149,7 @@ const ImpactModal = ({
         insertVariables.value = +number;
         insertVariables.prefix = prefix;
         insertVariables.suffix = suffix;
+        insertVariables.priority = org.impact.length + 1;
         await insertImpact({ variables: insertVariables });
       }
       await closeForm();
