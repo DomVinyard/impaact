@@ -120,7 +120,7 @@ const HomePageComponent = () => {
               </Stack>
             </Box>
           </Box>
-          <Flex justifyContent={{ base: "center", md: "flex-end" }}>
+          {/* <Flex justifyContent={{ base: "center", md: "flex-end" }}>
             <Image
               width={{ base: 600, md: 800 }}
               padding={16}
@@ -128,8 +128,8 @@ const HomePageComponent = () => {
               paddingTop={{ base: "400px", md: "160px" }}
               src="/images/HANDSDARK.png"
             ></Image>
-          </Flex>
-          {/* <Globe latestKeypress={latestKeypress} /> */}
+          </Flex> */}
+          <Globe latestKeypress={latestKeypress} />
           <OrgsCountComponent />
         </Stack>
       </Stack>

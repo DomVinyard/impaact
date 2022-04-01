@@ -146,7 +146,7 @@ const OrgsPageComponent = () => {
                       fontSize={"xl"}
                       fontWeight={500}
                       mt={5}
-                      textAlign="justify"
+                      // textAlign="justify"
                     >
                       {text}
                     </Text>

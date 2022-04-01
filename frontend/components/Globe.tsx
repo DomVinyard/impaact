@@ -82,13 +82,13 @@ const Lights = () => {
 
 const Globe = ({ latestKeypress }) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
-  const SHOW_GLOBE = false; // !isMobile;
+  const SHOW_GLOBE = true; //!isMobile;
   return (
     <Flex style={{ minHeight: "600px", height: "80vh", width: "100%" }}>
       <Canvas
         style={{ height: "100%", opacity: SHOW_GLOBE ? 1 : 0 }}
         colorManagement
-        camera={{ position: isMobile ? [0, 1.75, 5] : [-1, -0.25, 4.5] }}
+        camera={{ position: isMobile ? [0, 1.75, 5] : [-1.5, -0.25, 4] }}
       >
         <Lights />
         <Model latestKeypress={latestKeypress} baseSpeed={ROTATION_SPEED} />
