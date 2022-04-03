@@ -109,18 +109,20 @@ const Navbar: NextComponentType = () => {
                       width={"38px"}
                       pl={"8px"}
                     />
-                    <Text
-                      fontFamily="Oswald"
-                      fontWeight="600"
-                      fontSize={{ base: "1.1rem", md: "1.2rem" }}
-                      color="#fff"
-                      marginLeft={1.5}
-                      marginRight={1}
-                      // marginTop={{ base: -0.5, md: -0.5 }}
-                      opacity={0.9}
-                    >
-                      IMPACT
-                    </Text>
+                    {router.pathname === "/" && (
+                      <Text
+                        fontFamily="Oswald"
+                        fontWeight="600"
+                        fontSize={{ base: "1.1rem", md: "1.2rem" }}
+                        color="#fff"
+                        marginLeft={1.5}
+                        marginRight={1}
+                        // marginTop={{ base: -0.5, md: -0.5 }}
+                        opacity={0.9}
+                      >
+                        IMPACT
+                      </Text>
+                    )}
                   </Flex>
                 </Link>
               </Stack>
