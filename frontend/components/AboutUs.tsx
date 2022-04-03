@@ -41,19 +41,25 @@ const AboutUsComponent = () => {
               </Box>
             </Box>
             <Flex direction={{ base: "column", md: "row" }}>
-              <Image
-                width={"100%"}
-                maxWidth={"700px"}
-                height={{ base: "auto", md: "290px" }}
-                mt={{ base: 4, md: 8 }}
-                src="images/pps.png"
-              />
+              <Box
+                // background={"#eee"}
+                maxWidth={{ base: "100%", md: "480px" }}
+                flex={1}
+              >
+                <Image
+                  width={"100%"}
+                  // mt={{ base: 4, md: 8 }}
+                  src="images/pps.png"
+                  // height="100%"
+                />
+              </Box>
               <Stack
                 color={"white"}
                 padding={{ base: 0, md: 8 }}
                 alignItems="center"
                 justifyContent={"center"}
                 px={{ base: 6, md: "auto" }}
+                flex={1}
               >
                 <Box width={"100%"}>
                   {/* {!isMobile && ( */}
@@ -63,7 +69,7 @@ const AboutUsComponent = () => {
                       fontSize={{ base: 20, md: 24 }}
                       fontWeight="bold"
                     >
-                      We are building a transparent and accountable architecture
+                      We're building a transparent and accountable architecture
                       for good.
                     </Text>
                     <Text
@@ -87,6 +93,7 @@ const AboutUsComponent = () => {
                       <AddOrgButton
                         cursor={"pointer"}
                         children={"Learn more"}
+                        size="lg"
                       />
                     </Link>
                   </Flex>
