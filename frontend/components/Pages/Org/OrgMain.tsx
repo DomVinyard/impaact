@@ -362,18 +362,18 @@ const OrgPageComponent = ({ org, loading }) => {
                             </Flex>
                             {i === 0 && (
                               <Box>
-                                {/* {!isMobile && ( */}
-                                <Text
-                                  mt={{ base: 2, md: 4 }}
-                                  opacity={0.6}
-                                  fontSize={{ base: "0.9em", md: "1em" }}
-                                  fontWeight="600"
-                                  pr={4}
-                                  maxWidth="300px"
-                                >
-                                  {sdg.description}
-                                </Text>
-                                {/* )} */}
+                                {!isMobile && (
+                                  <Text
+                                    mt={{ base: 2, md: 4 }}
+                                    opacity={0.6}
+                                    fontSize={{ base: "0.9em", md: "1em" }}
+                                    fontWeight="600"
+                                    pr={4}
+                                    maxWidth="300px"
+                                  >
+                                    {sdg.description}
+                                  </Text>
+                                )}
                                 <Link href={`/${org.slug}/impact`}>
                                   <Button
                                     marginTop={{ base: 4, md: 8 }}
@@ -386,7 +386,7 @@ const OrgPageComponent = ({ org, loading }) => {
                                     }}
                                   >
                                     {isMobile
-                                      ? `View data`
+                                      ? `View data →`
                                       : "View impact data"}
                                   </Button>
                                 </Link>
