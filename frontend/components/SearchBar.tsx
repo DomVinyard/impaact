@@ -91,13 +91,14 @@ export const SearchBar = ({
       maxW={{ base: 400, md: 800 }}
       margin={{ base: "auto", md: 0 }}
     >
-      {!mini && (
-        <InputLeftElement
-          pointerEvents="none"
-          top={1}
-          children={<SearchIcon color="gray.300" />}
-        />
-      )}
+      {/* {!mini && ( */}
+      <InputLeftElement
+        pointerEvents="none"
+        top={mini ? -1 : 1}
+        paddingLeft={mini ? 2 : 0}
+        children={<SearchIcon color="gray.300" />}
+      />
+      {/* )} */}
       <AsyncSelect
         formatOptionLabel={formatOptionLabel}
         instanceId={mini ? "nav" : "splash"}
@@ -127,7 +128,7 @@ export const SearchBar = ({
           input: (provided) => ({
             width: "100%",
             background: "none",
-            marginLeft: mini ? 0 : "16px",
+            marginLeft: mini ? 2 : "16px",
             outline: "none",
             type: "search",
             enterKeyHint: "search",
@@ -136,7 +137,7 @@ export const SearchBar = ({
           inputContainer: (provided) => ({
             width: "100%",
             maxW: "440px",
-            marginLeft: mini ? 0 : 0,
+            marginLeft: mini ? 2 : 0,
           }),
           container: (provided) => ({
             width: "100%",
@@ -147,7 +148,7 @@ export const SearchBar = ({
           }),
           placeholder: (provided) => ({
             ...provided,
-            marginLeft: mini ? 0 : "1.5rem",
+            marginLeft: mini ? 4 : "1.5rem",
           }),
           menu: (provided) => ({
             ...provided,

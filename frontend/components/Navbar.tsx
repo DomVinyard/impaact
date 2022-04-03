@@ -101,9 +101,8 @@ const Navbar: NextComponentType = () => {
             <Flex>
               <Stack isInline spacing={4} align="center" fontWeight="semibold">
                 <Link href="/">
-                  <Flex>
+                  <Flex cursor="pointer">
                     <Image
-                      cursor={"pointer"}
                       src="/images/logo.png"
                       alt="PPS"
                       height={"27px"}
@@ -112,6 +111,18 @@ const Navbar: NextComponentType = () => {
                       maxW={"36px"}
                       pl={"8px"}
                     />
+                    <Text
+                      fontFamily="Oswald"
+                      fontWeight="600"
+                      fontSize={{ base: "1.1rem", md: "1.2rem" }}
+                      color="#fff"
+                      marginLeft={2}
+                      marginRight={1}
+                      marginTop={{ base: -0.5, md: -0.5 }}
+                      opacity={0.9}
+                    >
+                      IMPACT
+                    </Text>
                   </Flex>
                 </Link>
               </Stack>
