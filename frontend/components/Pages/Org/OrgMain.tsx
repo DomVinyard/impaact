@@ -314,7 +314,7 @@ const OrgPageComponent = ({ org, loading }) => {
                 </Flex>
                 <Box color={"#777"} background={"#ddd"}>
                   {sortedSDGS.map(({ sdg, impacts }: any, i) => {
-                    const impactCount = i === 0 ? 3 : 1;
+                    const impactCount = i === 0 ? (isMobile ? 2 : 3) : 1;
                     return (
                       <Box key={`sdg_${sdg.id}`}>
                         <Flex
@@ -323,7 +323,13 @@ const OrgPageComponent = ({ org, loading }) => {
                           background={sdg?.color}
                           minHeight={i === 0 ? 180 : 120}
                           borderLeft={sdgBorder}
-                          alignItems={i === 0 ? "flex-start" : "center"}
+                          alignItems={
+                            i === 0
+                              ? isMobile
+                                ? "center"
+                                : "flex-start"
+                              : "center"
+                          }
                           py={{ base: 8, md: i === 0 ? 12 : 6 }}
                           px={{ base: 2, md: 4 }}
                           textAlign="left"
