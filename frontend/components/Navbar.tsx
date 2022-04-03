@@ -112,7 +112,7 @@ const Navbar: NextComponentType = () => {
                     {router.pathname === "/" && (
                       <Text
                         fontFamily="Oswald"
-                        fontWeight="600"
+                        fontWeight="300"
                         fontSize={{ base: "1.1rem", md: "1.2rem" }}
                         color="#fff"
                         marginLeft={1.5}
@@ -120,7 +120,7 @@ const Navbar: NextComponentType = () => {
                         // marginTop={{ base: -0.5, md: -0.5 }}
                         opacity={0.9}
                       >
-                        IMPACT
+                        GLOBAL GOOD LAB
                       </Text>
                     )}
                   </Flex>
