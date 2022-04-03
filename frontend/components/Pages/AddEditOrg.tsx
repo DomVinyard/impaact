@@ -216,9 +216,10 @@ const AddEditOrgForm = ({ org, refetch, isLoading }) => {
         </Box>
       </Stack>
       {/* Buttons */}
+
       <FormControl
         position="fixed"
-        zIndex={1}
+        zIndex={3}
         background={"black"}
         left={0}
         top={{ base: 0, md: 0 }}
