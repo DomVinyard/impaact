@@ -18,7 +18,7 @@ const IndexPage: NextPage<IProps> = ({ session }) => {
   return hasAccess ? (
     <>
       <Head>
-        <title>Impact | Measuring Global Good</title>
+        <title>Global Good Lab</title>
       </Head>
       <Home />
     </>
