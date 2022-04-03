@@ -103,12 +103,10 @@ const Navbar: NextComponentType = () => {
                 <Link href="/">
                   <Flex cursor="pointer">
                     <Image
-                      src="/images/logo.png"
+                      src="/images/hand.png"
                       alt="PPS"
                       height={"27px"}
-                      width={"36px"}
-                      minW={"36px"}
-                      maxW={"36px"}
+                      width={"38px"}
                       pl={"8px"}
                     />
                     <Text
@@ -116,9 +114,9 @@ const Navbar: NextComponentType = () => {
                       fontWeight="600"
                       fontSize={{ base: "1.1rem", md: "1.2rem" }}
                       color="#fff"
-                      marginLeft={2}
+                      marginLeft={1.5}
                       marginRight={1}
-                      marginTop={{ base: -0.5, md: -0.5 }}
+                      // marginTop={{ base: -0.5, md: -0.5 }}
                       opacity={0.9}
                     >
                       IMPACT
