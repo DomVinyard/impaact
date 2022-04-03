@@ -43,10 +43,10 @@ const AboutUsComponent = () => {
             <Flex direction={{ base: "column", md: "row" }}>
               <Image
                 width={"100%"}
-                maxWidth={"600px"}
-                height={{ base: "auto", md: "320px" }}
+                maxWidth={"700px"}
+                height={{ base: "auto", md: "290px" }}
                 mt={{ base: 4, md: 8 }}
-                src="images/pps_thumb.png"
+                src="images/pps.png"
               />
               <Stack
                 color={"white"}
