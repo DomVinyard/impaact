@@ -109,7 +109,7 @@ const Navbar: NextComponentType = () => {
                       width={"38px"}
                       pl={"8px"}
                     />
-                    {router.pathname === "/" && (
+                    {router.pathname === "/" && !isMobile && (
                       <Text
                         fontFamily="Oswald"
                         fontWeight="300"
