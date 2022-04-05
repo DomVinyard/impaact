@@ -264,7 +264,7 @@ const FIELDS: Field[] = [
       const linkText = isEditMode
         ? "Share Link: "
         : "Your report will be created at: ";
-      const linkURL = `https://impact.ooo/${slugify(`${values.name}`, {
+      const linkURL = `https://globalgood.dev/${slugify(`${values.name}`, {
         lower: true,
       })}`;
       if (!values.name?.length) return null;

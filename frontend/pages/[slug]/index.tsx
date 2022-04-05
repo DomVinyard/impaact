@@ -20,7 +20,7 @@ const OrgPage: NextPage<IProps> = ({ org, loading }) => {
   return (
     <>
       <Head>
-        <title>{org?.name || "org"}</title>
+        <title>{org?.name || "org"} | Global Good Lab</title>
       </Head>
       <Org org={org} loading={loading} />
     </>
