@@ -128,6 +128,7 @@ const HomePageComponent = () => {
             <Flex justifyContent={{ base: "center", md: "flex-end" }}>
               <Image
                 width={{ base: 600, md: 800 }}
+                marginTop={{ base: 260, md: 0 }}
                 padding={16}
                 src="/images/HANDSDARK.png"
               ></Image>
