@@ -34,7 +34,7 @@ const HomePageComponent = () => {
   >();
 
   const router = useRouter();
-  const hideGlobe = router.query.example_brand_identity === "true";
+  const hideGlobe = isMobile || router.query.example_brand_identity === "true";
 
   const handleCloseMobileSearch = () => {
     setQuery("");
