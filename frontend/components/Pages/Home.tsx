@@ -20,6 +20,7 @@ import OrgsCountComponent from "components/OrgsCount";
 import { AddOrgButton } from "components/Navbar";
 import Link from "next/link";
 import AboutUsComponent from "components/AboutUs";
+import { useRouter } from "next/router";
 
 const IS_CLOSED = false;
 
@@ -31,6 +32,9 @@ const HomePageComponent = () => {
   const [latestKeypress, setLatestKeypress] = React.useState<
     Date | undefined
   >();
+
+  const router = useRouter();
+  const hideGlobe = router.query.example_brand_identity === "true";
 
   const handleCloseMobileSearch = () => {
     setQuery("");
@@ -120,16 +124,17 @@ const HomePageComponent = () => {
               </Stack>
             </Box>
           </Box>
-          {/* <Flex justifyContent={{ base: "center", md: "flex-end" }}>
-            <Image
-              width={{ base: 600, md: 800 }}
-              padding={16}
-              paddingRight={{ base: 16, md: 32 }}
-              paddingTop={{ base: "400px", md: "160px" }}
-              src="/images/HANDSDARK.png"
-            ></Image>
-          </Flex> */}
-          <Globe latestKeypress={latestKeypress} />
+          {hideGlobe ? (
+            <Flex justifyContent={{ base: "center", md: "flex-end" }}>
+              <Image
+                width={{ base: 600, md: 800 }}
+                padding={16}
+                src="/images/HANDSDARK.png"
+              ></Image>
+            </Flex>
+          ) : (
+            <Globe latestKeypress={latestKeypress} />
+          )}
           <OrgsCountComponent />
         </Stack>
       </Stack>
