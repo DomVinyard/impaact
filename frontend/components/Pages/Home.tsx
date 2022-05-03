@@ -34,7 +34,7 @@ const HomePageComponent = () => {
   >();
 
   const router = useRouter();
-  const hideGlobe = isMobile || router.query.example_brand_identity === "true";
+  const theme = localStorage.getItem("theme") || "hands";
 
   const handleCloseMobileSearch = () => {
     setQuery("");
@@ -124,7 +124,7 @@ const HomePageComponent = () => {
               </Stack>
             </Box>
           </Box>
-          {hideGlobe ? (
+          {theme === "hands" ? (
             <Flex justifyContent={{ base: "center", md: "flex-end" }}>
               <Image
                 width={{ base: 600, md: 800 }}
